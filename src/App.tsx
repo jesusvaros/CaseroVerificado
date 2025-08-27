@@ -3,6 +3,8 @@ import { Toaster } from 'react-hot-toast';
 
 // Import our components
 import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import HowItWorksSection from './components/HowItWorksSection';
 import InputSection from './components/InputSection';
 import ChromeStoreSection from './components/ChromeStoreSection';
 import PictureSection from './components/PictureSection';
@@ -71,6 +73,8 @@ function App() {
             path="/"
             element={
               <>
+                <HeroSection />
+                <HowItWorksSection />
                 <InputSection />
                 <ChromeStoreSection />
                 <PictureSection />
