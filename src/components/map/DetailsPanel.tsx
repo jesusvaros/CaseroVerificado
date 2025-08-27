@@ -12,8 +12,15 @@ export default function DetailsPanel({ review, onClose }: Props) {
   return (
     <div className="flex flex-col max-h-[70vh]">
       {/* Header colored based on recommendation */}
-      <div className={`${headerClass} text-white px-4 py-3 flex items-start justify-between`}>
-        <h3 className="text-sm font-semibold">Detalles del piso</h3>
+      <div
+        className={`${headerClass} text-white px-4 py-3 flex items-center justify-between gap-2`}
+      >
+        <span className="flex items-center gap-2 truncate text-sm font-semibold">
+          <span>{recommended ? '👍' : '👎'}</span>
+          <span className="truncate">
+            {review?.full_address ?? 'Detalles'}
+          </span>
+        </span>
         {review && (
           <button
             type="button"
@@ -27,35 +34,13 @@ export default function DetailsPanel({ review, onClose }: Props) {
       </div>
 
       {/* Body */}
-      <div className="p-4 overflow-auto space-y-4 bg-white">
+      <div className="p-4 overflow-auto bg-white">
         {review ? (
-          <>
-            {/* Sección: Dirección */}
-            {review.full_address && (
-              <section>
-                <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
-                  Dirección
-                </h4>
-                <p className="mt-1 text-sm text-gray-800 whitespace-normal break-words">
-                  {review.full_address}
-                </p>
-              </section>
-            )}
-
-            <hr className="border-t" />
-
-            {/* Sección: Opinión del propietario */}
-            {review.owner_opinion && (
-              <section>
-                <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
-                  Opinión del propietario
-                </h4>
-                <p className="mt-1 text-sm text-gray-800 whitespace-pre-line break-words">
-                  {review.owner_opinion}
-                </p>
-              </section>
-            )}
-          </>
+          review.owner_opinion ? (
+            <p className="text-sm text-gray-800 whitespace-pre-line break-words">
+              {review.owner_opinion}
+            </p>
+          ) : null
         ) : (
           <p className="text-sm text-gray-500">
             Selecciona un punto del mapa o un item de la lista.

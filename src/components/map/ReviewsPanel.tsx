@@ -42,7 +42,9 @@ const ReviewsPanel: React.FC<ReviewsPanelProps> = ({
               const id = r.id ?? `${r.lat}-${r.lng}`;
               const address = r.texto ?? '—';
               const opinion = r.comment ?? 'Sin comentario';
-              const createdAt = r.created_at ? new Date(r.created_at).toLocaleDateString() : '';
+              const createdAt = r.created_at
+                ? new Date(r.created_at).toLocaleDateString()
+                : '';
               const recommended = (r.would_recommend ?? 0) >= 1;
               const headerClass = recommended ? 'bg-green-600' : 'bg-red-600';
               return (
@@ -57,15 +59,18 @@ const ReviewsPanel: React.FC<ReviewsPanelProps> = ({
                   <div
                     className={`${headerClass} text-white px-3 py-2 text-sm font-semibold flex items-center justify-between`}
                   >
-                    <span>Opinión</span>
-                    {createdAt && <span className="text-xs opacity-90">{createdAt}</span>}
+                    <span className="flex items-center gap-1 truncate">
+                      <span>{recommended ? '👍' : '👎'}</span>
+                      <span className="truncate">{address}</span>
+                    </span>
+                    {createdAt && (
+                      <span className="text-xs opacity-90 shrink-0 ml-2">
+                        {createdAt}
+                      </span>
+                    )}
                   </div>
                   {/* Body */}
                   <div className="px-3 py-3 bg-white">
-                    <p className="text-gray-800 text-sm md:text-base whitespace-normal break-words">
-                      {address}
-                    </p>
-                    <hr className="my-3 border-t" />
                     <p className="text-gray-700 text-sm whitespace-pre-line break-words">
                       {opinion}
                     </p>
