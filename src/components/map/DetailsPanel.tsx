@@ -1,9 +1,10 @@
 import type { PublicReview } from '../../services/supabase/publicReviews';
 import { Link } from 'react-router-dom';
 import OpinionSection from '../review/OpinionSection';
-import { ChatBubbleLeftRightIcon, StarIcon as StarIconOutline, MapPinIcon } from '@heroicons/react/24/outline';
-import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
+import { MapPinIcon } from '@heroicons/react/24/outline';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
 import { umamiEventProps } from '../../utils/analytics';
+import { getExperienceMeta, getHangarVisualMeta } from './reviewVisuals';
 
 type Props = {
   review: PublicReview | null;
@@ -11,18 +12,8 @@ type Props = {
 };
 
 export default function DetailsPanel({ review, onClose }: Props) {
-  const wr = typeof review?.would_recommend === 'number' ? review.would_recommend : undefined;
-  const headerClass = wr === undefined
-    ? 'bg-gray-600'
-    : wr > 3
-      ? 'bg-green-600'
-      : wr < 3
-        ? 'bg-red-600'
-        : 'bg-gray-600';
-  const wouldRecommendStr =
-    typeof wr === 'number'
-      ? (String(Math.min(5, Math.max(1, wr))) as '1' | '2' | '3' | '4' | '5')
-      : undefined;
+  const hangarMeta = getHangarVisualMeta(review?.useHangar ?? null, review?.hangarStatus ?? null);
+  const experienceMeta = getExperienceMeta(review?.would_recommend);
 
   // Trim very long opinions for compact panel; full text is in the review page
   const truncate = (text: string | null | undefined, max = 280) => {
@@ -34,24 +25,16 @@ export default function DetailsPanel({ review, onClose }: Props) {
 
   return (
     <div className="flex flex-col max-h-full bg-white">
-      {/* Header replaced: show opinions + stars to save space */}
-      <div className={`${headerClass} text-white px-4 py-2.5 flex items-center justify-between`}>
-        <div className="flex items-center gap-2">
-          <ChatBubbleLeftRightIcon className="h-5 w-5 text-white" />
-          <h3 className="text-sm font-semibold">Opiniones</h3>
-          {review && wouldRecommendStr && (
-            <div className="ml-1 flex items-center" aria-label={`Recomendación ${wouldRecommendStr} de 5`}>
-              {[1,2,3,4,5].map((i) => (
-                <span key={i} className="mr-0.5">
-                  {i <= Number(wouldRecommendStr) ? (
-                    <StarIconSolid className="h-4 w-4 text-yellow-300" />
-                  ) : (
-                    <StarIconOutline className="h-4 w-4 text-white/60" />
-                  )}
-                </span>
-              ))}
-            </div>
-          )}
+      {/* Header with hangar status */}
+      <div className={`${hangarMeta.headerClass} text-white px-4 py-3 flex items-start justify-between gap-3`}>
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
+            <hangarMeta.Icon className="h-6 w-6 text-white" aria-hidden />
+          </div>
+          <div className="space-y-0.5">
+            <h3 className="text-sm font-semibold leading-tight">{hangarMeta.label}</h3>
+            <p className="text-xs text-white/80 leading-snug">{hangarMeta.description}</p>
+          </div>
         </div>
         {review && (
           <button
@@ -70,6 +53,16 @@ export default function DetailsPanel({ review, onClose }: Props) {
       <div className="p-4 overflow-auto space-y-4">
         {review ? (
           <>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${experienceMeta.badgeClass}`}>
+                <experienceMeta.Icon className="h-4 w-4" aria-hidden />
+                {experienceMeta.label}
+              </span>
+              <span className="text-xs text-gray-500">
+                {experienceMeta.description}
+              </span>
+            </div>
+
             {/* Dirección */}
             {review.full_address && (
               <section>
@@ -98,7 +91,7 @@ export default function DetailsPanel({ review, onClose }: Props) {
                 propertyOpinion={undefined}
                 communityOpinion={undefined}
                 ownerOpinion={truncate(review.owner_opinion, 200)}
-                wouldRecommend={wouldRecommendStr}
+                wouldRecommend={undefined}
                 showHeader={false}
               />
             </div>
@@ -108,11 +101,11 @@ export default function DetailsPanel({ review, onClose }: Props) {
               <div className="sticky bottom-0 left-0 right-0 -mx-4 border-t bg-white/95 px-4 py-3 backdrop-blur md:static md:m-0 md:border-0 md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-0">
                 <Link
                   to={`/review/${review.id}`}
-                  className="inline-flex items-center gap-1 text-[rgb(74,94,50)] hover:underline"
+                  className="inline-flex items-center gap-1 text-sky-700 hover:text-sky-800 hover:underline"
                   {...umamiEventProps('map:details-view-review', { hasOpinion: Boolean(review.owner_opinion) })}
                 >
                   Ver detalles completos
-                  <span aria-hidden>→</span>
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
             )}

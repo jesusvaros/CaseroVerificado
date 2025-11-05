@@ -272,6 +272,8 @@ const MapView = ({
                     texto: r.full_address ?? '—',
                     comment: r.owner_opinion ?? undefined,
                     would_recommend: r.would_recommend ?? undefined,
+                    useHangar: r.useHangar ?? null,
+                    hangarStatus: r.hangarStatus ?? null,
                   }))}
                   hoveredId={hoveredId}
                   setHoveredId={setHoveredId}
@@ -463,6 +465,8 @@ const MapView = ({
                             texto: r.full_address ?? '—',
                             comment: r.owner_opinion ?? undefined,
                             would_recommend: r.would_recommend ?? undefined,
+                            useHangar: r.useHangar ?? null,
+                            hangarStatus: r.hangarStatus ?? null,
                           }))}
                           hoveredId={hoveredId}
                           setHoveredId={setHoveredId}

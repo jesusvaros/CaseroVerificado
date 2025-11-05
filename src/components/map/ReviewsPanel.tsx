@@ -1,4 +1,7 @@
 import React from 'react';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+
+import { getExperienceMeta, getHangarVisualMeta } from './reviewVisuals';
 
 export type ReviewListItem = {
   id: string | number;
@@ -7,6 +10,8 @@ export type ReviewListItem = {
   would_recommend?: number;
   texto?: string;
   comment?: string;
+  useHangar?: boolean | null;
+  hangarStatus?: 'active' | 'waitlist' | 'unknown' | null;
 };
 
 interface ReviewsPanelProps {
@@ -25,21 +30,6 @@ const ReviewsPanel: React.FC<ReviewsPanelProps> = ({
   selectedId,
 }) => {
 
-  const definecolor = (recommendation: number) => {
-    if (!recommendation) {
-      return 'bg-gray-600';
-    }
-    if (recommendation > 3) {
-      return 'bg-green-600';
-    } 
-    if (recommendation < 3 ) {
-      return 'bg-red-600';
-    }
-    return 'bg-gray-600';
-  };
-
-  
-
   return (
     <div className="h-full min-h-0 flex flex-col p-1">
       {reviews.length === 0 ? (
@@ -53,35 +43,60 @@ const ReviewsPanel: React.FC<ReviewsPanelProps> = ({
         </div>
       ) : (
         <>
-          <ul className="space-y-2 flex-1 overflow-auto p-1 ">  
+          <ul className="space-y-2 flex-1 overflow-auto p-1 ">
             {reviews.map(r => {
               const id = r.id ?? `${r.lat}-${r.lng}`;
               const address = r.texto ?? '—';
               const opinion = r.comment ?? 'Sin comentario';
-              const headerClass = definecolor(r.would_recommend ?? 0);
               const isSelected = String(selectedId ?? '') === String(id);
+              const hangarMeta = getHangarVisualMeta(r.useHangar, r.hangarStatus ?? null);
+              const experienceMeta = getExperienceMeta(r.would_recommend);
               return (
                 <li
                   key={id}
                   onMouseEnter={() => setHoveredId(id)}
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => onSelect(r)}
-                  className={`cursor-pointer rounded-xl overflow-hidden border transition ${hoveredId === id ? 'ring-1 ring-amber-200' : ''} ${isSelected ? 'ring-2 ring-green-600 bg-emerald-50' : ''}`}
+                  className={`relative cursor-pointer rounded-2xl overflow-hidden border border-gray-200 bg-white transition shadow-sm hover:shadow-md ${hoveredId === id ? 'ring-1 ring-amber-200' : ''} ${isSelected ? 'ring-2 ring-offset-2 ring-sky-500' : ''}`}
                 >
-                  {/* Header */}
-                  <div
-                    className={`${headerClass} text-white px-3 py-2 text-sm font-semibold flex items-center justify-between`}
-                  >
-                  </div>
-                  {/* Body */}
-                  <div className="px-3 py-3 bg-white">
-                    <p className="text-gray-800 text-sm md:text-base whitespace-normal break-words">
-                      {address}
-                    </p>
-                    <hr className="my-3 border-t" />
-                    <p className="text-gray-700 text-sm whitespace-pre-line break-words max-h-[100px] overflow-y-auto">
-                      {opinion}
-                    </p>
+                  <span
+                    className={`absolute left-0 top-0 h-full w-1 ${hangarMeta.accentBarClass}`}
+                    aria-hidden
+                  />
+                  <div className="px-4 py-3 space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className={`mt-1 flex h-10 w-10 items-center justify-center rounded-xl ${hangarMeta.iconContainerClass}`}>
+                        <hangarMeta.Icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex flex-wrap items-center gap-2 justify-between">
+                          <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide ${hangarMeta.badgeClass}`}>
+                            {hangarMeta.label}
+                          </span>
+                          <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${experienceMeta.badgeClass}`}>
+                            <experienceMeta.Icon className="h-4 w-4" aria-hidden />
+                            {experienceMeta.label}
+                          </span>
+                        </div>
+                        <p className="text-[13px] leading-5 text-gray-500">
+                          {hangarMeta.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-gray-900 text-sm md:text-base font-medium leading-5">
+                        {address}
+                      </p>
+                      <p className="text-gray-700 text-sm whitespace-pre-line break-words max-h-[120px] overflow-y-auto leading-relaxed">
+                        {opinion}
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-end text-xs font-medium text-sky-700">
+                      <span className="inline-flex items-center gap-1">
+                        Ver detalles
+                        <ArrowRightIcon className="h-3.5 w-3.5" aria-hidden />
+                      </span>
+                    </div>
                   </div>
                 </li>
               );
