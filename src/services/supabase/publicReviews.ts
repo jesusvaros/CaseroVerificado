@@ -1,6 +1,8 @@
 import { supabaseWrapper } from './client';
 import { slugify } from '../../utils/slugify';
 
+export type HangarStatus = 'active' | 'waitlist' | 'unknown';
+
 export type PublicReview = {
   id: string | number;
   full_address: string | null;
@@ -13,6 +15,8 @@ export type PublicReview = {
   state: string | null;
   postal_code: string | null;
   street: string | null;
+  useHangar: boolean | null;
+  hangarStatus: HangarStatus | null;
 };
 
 export async function getPublicReviews(): Promise<PublicReview[]> {
@@ -21,7 +25,7 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
 
   const { data, error } = await client
     .from('public_reviews')
-    .select('id, address_details, owner_opinion, would_recommend')
+    .select('id, address_details, owner_opinion, would_recommend, use_hangar, hangar_status')
     .eq('is_public', true);
 
   if (error || !data) return [];
@@ -57,6 +61,10 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
     address_details?: AddressDetails;
     owner_opinion?: string | null;
     would_recommend?: number | string | null;
+    use_hangar?: boolean | null;
+    useHangar?: boolean | null;
+    hangar_status?: string | null;
+    hangarStatus?: string | null;
   };
 
   const rows = data as unknown as Row[];
@@ -95,6 +103,30 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
     const wouldRecommend =
       review.would_recommend != null ? Number(review.would_recommend) : null;
 
+    const rawUseHangar =
+      typeof review.useHangar === 'boolean'
+        ? review.useHangar
+        : typeof review.use_hangar === 'boolean'
+          ? review.use_hangar
+          : null;
+
+    const rawHangarStatus =
+      review.hangarStatus ?? review.hangar_status ?? null;
+
+    let hangarStatus: HangarStatus | null = null;
+    if (typeof rawHangarStatus === 'string') {
+      const normalized = rawHangarStatus.toLowerCase();
+      if (normalized.includes('wait')) {
+        hangarStatus = 'waitlist';
+      } else if (normalized.includes('active') || normalized.includes('uso')) {
+        hangarStatus = 'active';
+      } else {
+        hangarStatus = 'unknown';
+      }
+    } else if (typeof rawUseHangar === 'boolean') {
+      hangarStatus = rawUseHangar ? 'active' : 'waitlist';
+    }
+
     return {
       id: review.id,
       full_address: fullAddress,
@@ -107,6 +139,8 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
       state: state ?? null,
       postal_code: postalCode ?? null,
       street: street ?? null,
+      useHangar: rawUseHangar,
+      hangarStatus,
     } satisfies PublicReview;
   });
 

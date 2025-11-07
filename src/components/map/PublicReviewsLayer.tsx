@@ -2,7 +2,8 @@ import { Marker } from 'react-leaflet';
 import type { PublicReview } from '../../services/supabase/publicReviews';
 
 import { svgToIcon } from './svgIcon';
-import { faceBubbleSVG } from './heroPin';
+import { hangarStatusBubbleSVG } from './heroPin';
+import type { HangarStatus } from '../../services/supabase/publicReviews';
 
 interface Props {
   reviews: PublicReview[];
@@ -10,11 +11,20 @@ interface Props {
   onSelect?: (review: PublicReview) => void;
 }
 
-// Helper to create icons based on would_recommend and recommendation
-function buildIcon(color: string, size: number, would_recommend: number) {
-  const face = would_recommend <= 2 ? 'sad' : would_recommend === 3 ? 'neutral' : 'happy';
+function buildIcon(status: HangarStatus, size: number, isSelected: boolean) {
+  const palette: Record<HangarStatus, { base: string; selected: string; symbol: 'bike' | 'clock' | 'question' }> = {
+    active: { base: '#0EA5E9', selected: '#0369A1', symbol: 'bike' },
+    waitlist: { base: '#F97316', selected: '#C2410C', symbol: 'clock' },
+    unknown: { base: '#6B7280', selected: '#374151', symbol: 'question' },
+  };
+
+  const colors = palette[status] ?? palette.unknown;
   return svgToIcon(
-    faceBubbleSVG({ fill: color, stroke: 'none', size, face }),
+    hangarStatusBubbleSVG({
+      fill: isSelected ? colors.selected : colors.base,
+      size,
+      symbol: colors.symbol,
+    }),
     [size, size],
     [size / 2, size]
   );
@@ -32,24 +42,9 @@ export default function PublicReviewsLayer({ reviews, selectedId, onSelect }: Pr
         )
         .map(r => {
           const isSelected = String(r.id) === String(selectedId ?? '');
-          const wr = typeof r.would_recommend === 'number' ? r.would_recommend : undefined;
-          const color = wr === undefined
-            ? '#4B5563' // gray-600
-            : wr > 3
-              ? '#22C55E' // green-500
-              : wr < 3
-                ? '#EF4444' // red-500
-                : '#4B5563'; // gray-600
-          const selectedColor = wr === undefined
-            ? '#374151' // gray-700
-            : wr > 3
-              ? '#15803D' // green-700
-              : wr < 3
-                ? '#B91C1C' // red-700
-                : '#374151'; // gray-700
           const size = isSelected ? 52 : 42;
-          const would_recommend = typeof wr === 'number' ? wr : 3;
-          const icon = buildIcon(isSelected ? selectedColor : color, size, would_recommend);
+          const status: HangarStatus = r.hangarStatus ?? (r.useHangar === false ? 'waitlist' : r.useHangar === true ? 'active' : 'unknown');
+          const icon = buildIcon(status, size, isSelected);
           const zIndexOffset = isSelected ? 1200 : 400; // keep selected above others
 
           return (
