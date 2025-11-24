@@ -124,4 +124,4 @@ npm run preview
 ## Soporte
 
 - Web: https://caserook.com
-- Email de contacto: rume@e-mobilityproject.com
+- Email de contacto: caserook@gmail.com

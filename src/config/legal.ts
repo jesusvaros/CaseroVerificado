@@ -2,7 +2,7 @@
 export const LEGAL_META = {
   ownerName: 'CaseroOk',
   cityCountry: 'Sevilla, España',
-  contactEmail: 'rume@e-mobilityproject.com',
+  contactEmail: 'caserook@gmail.com',
   siteName: 'CaseroOk',
   projectName: 'CaseroOk',
   jurisdictionCity: 'Sevilla',
