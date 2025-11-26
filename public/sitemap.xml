@@ -2,69 +2,141 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://caserook.com/</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://caserook.com/map</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://caserook.com/opiniones</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/add-review</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://caserook.com/aviso-legal</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/politica-privacidad</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/cookies</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/condiciones-uso</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/buenas-practicas</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/terminosycondiciones</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/ayuda-de-480-para-amas-de-casa-clave-para-inquilinos-vulnerables</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/casas-prefabricadas-una-esperanza-para-inquilinos-vulnerables</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/casas-prefabricadas-una-esperanza-real-para-inquilinos-vulnerables</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/empadronamiento-clave-para-proteger-tus-derechos-como-inquilino</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/faltan-casas-o-sobran-derechos-lo-que-debes-saber-inquilino</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/foro-retos-una-esperanza-para-inquilinos-en-crisis-de-vivienda</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/inquilinos-para-siempre-como-proteger-tus-derechos-y-ahorrar-en-alquiler</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/inquilinos-protegidos-que-cambia-la-nueva-ley-de-alquileres</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/protege-tu-alquiler-derechos-y-ahorro-para-inquilinos-vulnerables</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/que-significa-el-fracaso-de-la-ley-de-alquileres-temporales-para-ti</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/vivienda-asequible-o-engano-protege-tus-derechos-como-inquilino</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/vivir-seguro-en-tu-alquiler-derechos-y-proteccion-para-inquilinos</loc>
+    <lastmod>2025-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog/alquiler-en-cordoba-que-significa-para-ti-como-inquilino</loc>
@@ -261,12 +333,6 @@
   <url>
     <loc>https://caserook.com/blog/vivienda-en-sevilla-claves-para-inquilinos-ante-nuevos-pisos-caros</loc>
     <lastmod>2025-11-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://caserook.com/blog/casas-prefabricadas-una-esperanza-real-para-inquilinos-vulnerables</loc>
-    <lastmod>2025-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
