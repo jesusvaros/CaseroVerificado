@@ -56,8 +56,54 @@ export default function BlogListPage() {
 
   const handlePageChange = (page: number) => {
     setSearchParams({ page: page.toString() });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to recent articles section
+    const recentSection = document.getElementById('articulos-recientes');
+    if (recentSection) {
+      recentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
+
+  // Generate page numbers with ellipsis
+  const generatePageNumbers = () => {
+    const pages: (number | 'ellipsis')[] = [];
+    const delta = 4; // Show 4 pages before and after current page
+    
+    if (totalPages <= 10) {
+      // If 10 or fewer pages, show all
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    
+    // Always show first page
+    pages.push(1);
+    
+    // Calculate range around current page
+    const rangeStart = Math.max(2, currentPage - delta);
+    const rangeEnd = Math.min(totalPages - 1, currentPage + delta);
+    
+    // Add ellipsis after first page if needed
+    if (rangeStart > 2) {
+      pages.push('ellipsis');
+    }
+    
+    // Add pages around current page
+    for (let i = rangeStart; i <= rangeEnd; i++) {
+      pages.push(i);
+    }
+    
+    // Add ellipsis before last page if needed
+    if (rangeEnd < totalPages - 1) {
+      pages.push('ellipsis');
+    }
+    
+    // Always show last page
+    if (totalPages > 1) {
+      pages.push(totalPages);
+    }
+    
+    return pages;
+  };
+
+  const pageNumbers = generatePageNumbers();
 
   return (
     <>
@@ -90,7 +136,7 @@ export default function BlogListPage() {
               className="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="grid gap-0 md:grid-cols-2">
-                <div className="relative h-64 md:h-auto">
+                <div className="relative h-64 md:h-auto md:max-h-[500px]">
                   <img
                     src={heroPost.heroImageUrl ?? fallbackImageUrl}
                     alt={heroPost.title}
@@ -128,7 +174,7 @@ export default function BlogListPage() {
         )}
 
         {secondaryPosts.length > 0 && (
-          <section>
+          <section id="articulos-recientes">
             <h2 className="mb-6 text-2xl font-semibold text-gray-900">
               Artículos recientes
               {totalPages > 1 && (
@@ -197,19 +243,28 @@ export default function BlogListPage() {
                   </button>
 
                   {/* Page numbers */}
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                    <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
-                      className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                        page === currentPage
-                          ? 'bg-emerald-600 text-white'
-                          : 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  ))}
+                  {pageNumbers.map((page, index) => {
+                    if (page === 'ellipsis') {
+                      return (
+                        <span key={`ellipsis-${index}`} className="px-2 text-gray-500">
+                          ...
+                        </span>
+                      );
+                    }
+                    return (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+                          page === currentPage
+                            ? 'bg-emerald-600 text-white'
+                            : 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    );
+                  })}
 
                   {/* Next button */}
                   <button

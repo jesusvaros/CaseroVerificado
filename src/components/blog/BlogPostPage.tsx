@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PageSEO from '../../seo/PageSEO';
 import {
@@ -22,25 +23,66 @@ function formatDate(dateString: string | null) {
 }
 
 type ContentBlock = {
-  type: 'paragraph' | 'heading' | 'list';
+  type: 'paragraph' | 'heading' | 'list' | 'ordered-list';
   level?: 2 | 3 | 4;
   content: string[];
 };
+
+// Process inline markdown (bold, etc.)
+function processInlineMarkdown(text: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  let currentText = text;
+  let key = 0;
+
+  while (currentText.length > 0) {
+    // Match bold text (**text**)
+    const boldMatch = currentText.match(/\*\*(.+?)\*\*/);
+    if (boldMatch && boldMatch.index !== undefined) {
+      // Add text before bold
+      if (boldMatch.index > 0) {
+        parts.push(currentText.substring(0, boldMatch.index));
+      }
+      // Add bold text
+      parts.push(<strong key={`bold-${key++}`}>{boldMatch[1]}</strong>);
+      currentText = currentText.substring(boldMatch.index + boldMatch[0].length);
+    } else {
+      // No more bold text, add remaining
+      parts.push(currentText);
+      break;
+    }
+  }
+
+  return parts;
+}
 
 function parseContent(raw: string): ContentBlock[] {
   const blocks = raw.split(/\n{2,}/).map(block => block.trim()).filter(Boolean);
   const result: ContentBlock[] = [];
 
   blocks.forEach(block => {
-    if (/^#{2,6}\s/.test(block)) {
+    // Check for headings
+    if (/^#{1,6}\s/.test(block)) {
       const hashes = block.match(/^#+/);
-      const level = Math.min(hashes ? hashes[0].length + 1 : 2, 4) as 2 | 3 | 4;
+      const level = Math.min(hashes ? hashes[0].length : 2, 4) as 2 | 3 | 4;
       const text = block.replace(/^#{1,6}\s+/, '').trim();
       result.push({ type: 'heading', level, content: [text] });
       return;
     }
 
-    if (/^-\s+/m.test(block)) {
+    // Check for ordered lists (1. item)
+    if (/^\d+\.\s+/m.test(block)) {
+      const items = block
+        .split(/\n+/)
+        .map(line => line.replace(/^\d+\.\s+/, '').trim())
+        .filter(Boolean);
+      if (items.length > 0) {
+        result.push({ type: 'ordered-list', content: items });
+        return;
+      }
+    }
+
+    // Check for unordered lists (- item or * item)
+    if (/^[-*]\s+/m.test(block)) {
       const items = block
         .split(/\n+/)
         .map(line => line.replace(/^[-*]\s+/, '').trim())
@@ -152,22 +194,31 @@ export default function BlogPostPage() {
                             : 'mt-6 text-xl font-semibold text-gray-900'
                       }
                     >
-                      {block.content[0]}
+                      {processInlineMarkdown(block.content[0])}
                     </Tag>
+                  );
+                }
+                if (block.type === 'ordered-list') {
+                  return (
+                    <ol key={`ordered-list-${index}`} className="my-6 list-decimal pl-6 text-gray-800">
+                      {block.content.map((item, idx) => (
+                        <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
+                      ))}
+                    </ol>
                   );
                 }
                 if (block.type === 'list') {
                   return (
                     <ul key={`list-${index}`} className="my-6 list-disc pl-6 text-gray-800">
                       {block.content.map((item, idx) => (
-                        <li key={idx}>{item}</li>
+                        <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
                       ))}
                     </ul>
                   );
                 }
                 return block.content.map((paragraph, idx) => (
                   <p key={`paragraph-${index}-${idx}`} className="mt-6 whitespace-pre-line">
-                    {paragraph}
+                    {processInlineMarkdown(paragraph)}
                   </p>
                 ));
               })}
