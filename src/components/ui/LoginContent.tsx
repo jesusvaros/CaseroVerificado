@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { User } from '@supabase/supabase-js';
 import { useFormContext } from '../../store/useFormContext';
 import { useAuth } from '../../store/auth/hooks';
 import { getSessionIdBack } from '../../services/sessionManager';
@@ -12,6 +13,8 @@ interface LoginContentProps {
   showTitle?: boolean;
   onLoginComplete?: (sessionId: string, userId: string) => void;
   showInfo?: boolean;
+  onUserLoggedIn?: (user: User) => void;
+  redirectToHomeIfNoSession?: boolean;
 }
 
 const LoginContent: React.FC<LoginContentProps> = ({ 
@@ -19,6 +22,8 @@ const LoginContent: React.FC<LoginContentProps> = ({
   showTitle = true,
   onLoginComplete,
   showInfo = true,
+  onUserLoggedIn,
+  redirectToHomeIfNoSession = true,
 }) => {
   const { formData, updateFormData } = useFormContext();
   const navigate = useNavigate();
@@ -28,6 +33,7 @@ const LoginContent: React.FC<LoginContentProps> = ({
   const [resendTimer, setResendTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [hasHandledLogin, setHasHandledLogin] = useState(false);
 
   useEffect(() => {
     if (status === 'link-sent' && resendTimer > 0) {
@@ -41,7 +47,7 @@ const LoginContent: React.FC<LoginContentProps> = ({
   // Check user from auth context and redirect to review page if user is already validated
   useEffect(() => {
     const checkUserSession = async () => {
-      if (!user) return;
+      if (!user || hasHandledLogin) return;
       
       // If we have a user from auth context, get the session ID and navigate
       const sessionId = await getSessionIdBack();
@@ -53,9 +59,20 @@ const LoginContent: React.FC<LoginContentProps> = ({
           navigate(`/`);
           if (onClose) onClose();
         }
+        setHasHandledLogin(true);
       } else {
-        navigate('/');
-        if (onClose) onClose();
+        if (onUserLoggedIn) {
+          onUserLoggedIn(user);
+          setHasHandledLogin(true);
+          if (onClose) onClose();
+          return;
+        }
+
+        if (redirectToHomeIfNoSession) {
+          navigate('/');
+          if (onClose) onClose();
+          setHasHandledLogin(true);
+        }
       }
     };
 
@@ -77,7 +94,13 @@ const LoginContent: React.FC<LoginContentProps> = ({
       window.removeEventListener('storage', handleStorageChange);
       clearInterval(interval);
     };
-  }, [navigate, user, onClose, onLoginComplete]);
+  }, [navigate, user, onClose, onLoginComplete, onUserLoggedIn, redirectToHomeIfNoSession, hasHandledLogin]);
+
+  useEffect(() => {
+    if (!user) {
+      setHasHandledLogin(false);
+    }
+  }, [user]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();

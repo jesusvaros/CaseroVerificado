@@ -6,6 +6,7 @@ import {
   computeReadingMinutes as estimateReadingMinutes,
   type StaticBlogPost,
 } from '../../blog/posts';
+import BlogCommentsSection from './BlogCommentsSection';
 
 function formatDate(dateString: string | null) {
   if (!dateString) return null;
@@ -223,6 +224,8 @@ export default function BlogPostPage() {
                 ));
               })}
             </section>
+
+            <BlogCommentsSection postSlug={post.slug} postTitle={post.title} />
 
             <footer className="mt-12 rounded-3xl bg-emerald-50 p-8 text-gray-800">
               <h2 className="text-xl font-semibold text-emerald-900">¿Quieres compartir tu experiencia?</h2>
