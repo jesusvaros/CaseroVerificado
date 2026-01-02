@@ -7,6 +7,8 @@ import {
   type StaticBlogPost,
 } from '../../blog/posts';
 import BlogCommentsSection from './BlogCommentsSection';
+import RelatedLinksCard from './RelatedLinksCard';
+import { getRelatedPostsBatch } from '../../blog/relatedPosts';
 
 function formatDate(dateString: string | null) {
   if (!dateString) return null;
@@ -105,6 +107,49 @@ function computeReadingMinutes(post: StaticBlogPost | null) {
   return estimateReadingMinutes(post.content, post.readingMinutes);
 }
 
+function renderBlock(block: ContentBlock, index: number) {
+  if (block.type === 'heading') {
+    const Tag = block.level === 2 ? 'h2' : block.level === 3 ? 'h3' : 'h4';
+    return (
+      <Tag
+        key={`heading-${index}`}
+        className={
+          block.level === 2
+            ? 'mt-10 text-3xl font-semibold text-gray-900'
+            : block.level === 3
+              ? 'mt-8 text-2xl font-semibold text-gray-900'
+              : 'mt-6 text-xl font-semibold text-gray-900'
+        }
+      >
+        {processInlineMarkdown(block.content[0])}
+      </Tag>
+    );
+  }
+  if (block.type === 'ordered-list') {
+    return (
+      <ol key={`ordered-list-${index}`} className="my-6 list-decimal pl-6 text-gray-800">
+        {block.content.map((item, idx) => (
+          <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
+        ))}
+      </ol>
+    );
+  }
+  if (block.type === 'list') {
+    return (
+      <ul key={`list-${index}`} className="my-6 list-disc pl-6 text-gray-800">
+        {block.content.map((item, idx) => (
+          <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
+        ))}
+      </ul>
+    );
+  }
+  return block.content.map((paragraph, idx) => (
+    <p key={`paragraph-${index}-${idx}`} className="mt-6 whitespace-pre-line">
+      {processInlineMarkdown(paragraph)}
+    </p>
+  ));
+}
+
 export default function BlogPostPage() {
   const { slug = '' } = useParams();
   const post = findBlogPostBySlug(slug) ?? null;
@@ -114,6 +159,13 @@ export default function BlogPostPage() {
   const blocks = post ? parseContent(post.content) : [];
   const seoTitle = post?.seoTitle ?? post?.title ?? 'Artículo del blog';
   const seoDescription = post?.seoDescription ?? post?.summary ?? undefined;
+
+  // Obtener posts relacionados para las tres secciones
+  const relatedPosts = post ? getRelatedPostsBatch(post, {
+    top: 3,      // 3 enlaces debajo del encabezado
+    middle: 3,   // 3 enlaces a mitad del texto
+    bottom: 6    // 6 enlaces debajo de los comentarios
+  }) : { top: [], middle: [], bottom: [] };
 
   const notFound = !post;
 
@@ -179,54 +231,39 @@ export default function BlogPostPage() {
               </figure>
             ) : null}
 
+            {/* 3 enlaces relacionados debajo del encabezado */}
+            <RelatedLinksCard 
+              posts={relatedPosts.top} 
+            />
+
             <section className="text-lg leading-relaxed text-gray-800">
               {post.summary ? <p className="text-xl leading-relaxed text-gray-600">{post.summary}</p> : null}
               {blocks.map((block, index) => {
-                if (block.type === 'heading') {
-                  const Tag = block.level === 2 ? 'h2' : block.level === 3 ? 'h3' : 'h4';
+                // Insertar 3 enlaces relacionados a mitad del contenido
+                if (index === Math.floor(blocks.length / 2)) {
                   return (
-                    <Tag
-                      key={`heading-${index}`}
-                      className={
-                        block.level === 2
-                          ? 'mt-10 text-3xl font-semibold text-gray-900'
-                          : block.level === 3
-                            ? 'mt-8 text-2xl font-semibold text-gray-900'
-                            : 'mt-6 text-xl font-semibold text-gray-900'
-                      }
-                    >
-                      {processInlineMarkdown(block.content[0])}
-                    </Tag>
+                    <React.Fragment key={`middle-related-${index}`}>
+                      <RelatedLinksCard 
+                        posts={relatedPosts.middle} 
+                        className="my-12"
+                      />
+                      {renderBlock(block, index)}
+                    </React.Fragment>
                   );
                 }
-                if (block.type === 'ordered-list') {
-                  return (
-                    <ol key={`ordered-list-${index}`} className="my-6 list-decimal pl-6 text-gray-800">
-                      {block.content.map((item, idx) => (
-                        <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
-                      ))}
-                    </ol>
-                  );
-                }
-                if (block.type === 'list') {
-                  return (
-                    <ul key={`list-${index}`} className="my-6 list-disc pl-6 text-gray-800">
-                      {block.content.map((item, idx) => (
-                        <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
-                      ))}
-                    </ul>
-                  );
-                }
-                return block.content.map((paragraph, idx) => (
-                  <p key={`paragraph-${index}-${idx}`} className="mt-6 whitespace-pre-line">
-                    {processInlineMarkdown(paragraph)}
-                  </p>
-                ));
+                
+                return renderBlock(block, index);
               })}
             </section>
 
             <BlogCommentsSection
               postSlug={post.slug}
+            />
+
+            {/* 6 enlaces relacionados debajo de los comentarios */}
+            <RelatedLinksCard 
+              posts={relatedPosts.bottom} 
+              className="mt-8"
             />
 
             <footer className="mt-12 rounded-3xl bg-emerald-50 p-8 text-gray-800">
