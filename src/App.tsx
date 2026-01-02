@@ -31,6 +31,7 @@ import BuenasPracticas from './pages/BuenasPracticas';
 import CityReviewsIndexPage from './pages/CityReviewsIndexPage';
 import CityReviewsPage from './pages/CityReviewsPage';
 import UmamiTracker from './components/analytics/UmamiTracker';
+import ScrollToTop from './components/ScrollToTop';
 
 // Import Providers
 import { FormProvider } from './store/FormContext';
@@ -61,6 +62,7 @@ function App() {
           }}
         />
         <Header />
+        <ScrollToTop />
 
         <Routes>
           <Route path="/auth/callback" element={
