@@ -26,7 +26,7 @@ function formatDate(dateString: string | null) {
 }
 
 type ContentBlock = {
-  type: 'paragraph' | 'heading' | 'list' | 'ordered-list';
+  type: 'paragraph' | 'heading' | 'list' | 'ordered-list' | 'divider';
   level?: 2 | 3 | 4;
   content: string[];
 };
@@ -63,6 +63,12 @@ function parseContent(raw: string): ContentBlock[] {
   const result: ContentBlock[] = [];
 
   blocks.forEach(block => {
+    // Check for horizontal dividers (--- or ***)
+    if (/^[-*]{3,}$/.test(block)) {
+      result.push({ type: 'divider', content: [] });
+      return;
+    }
+
     // Check for headings
     if (/^#{1,6}\s/.test(block)) {
       const hashes = block.match(/^#+/);
@@ -108,6 +114,12 @@ function computeReadingMinutes(post: StaticBlogPost | null) {
 }
 
 function renderBlock(block: ContentBlock, index: number) {
+  if (block.type === 'divider') {
+    return (
+      <hr key={`divider-${index}`} className="my-8 border-gray-300" />
+    );
+  }
+  
   if (block.type === 'heading') {
     const Tag = block.level === 2 ? 'h2' : block.level === 3 ? 'h3' : 'h4';
     return (
@@ -177,7 +189,7 @@ export default function BlogPostPage() {
         canonicalPath={post ? `/blog/${post.slug}` : `/blog/${slug}`}
         noindex={notFound}
       />
-      <main className="mx-auto mt-28 max-w-3xl px-6 pb-24">
+      <main className="mx-auto mt-28 max-w-3xl px-6 pb-0 sm:pb-24">
         <nav className="mb-6 text-sm text-gray-500">
           <Link to="/" className="text-gray-500 hover:text-gray-700">Inicio</Link>
           <span className="mx-2 text-gray-400">/</span>
@@ -231,22 +243,36 @@ export default function BlogPostPage() {
               </figure>
             ) : null}
 
-            {/* 3 enlaces relacionados debajo del encabezado */}
-            <RelatedLinksCard 
-              posts={relatedPosts.top} 
-            />
-
             <section className="text-lg leading-relaxed text-gray-800">
               {post.summary ? <p className="text-xl leading-relaxed text-gray-600">{post.summary}</p> : null}
+              
+              {/* Enlaces relacionados debajo del texto inicial - 2 en móvil, 3 en desktop */}
+              <RelatedLinksCard 
+                posts={relatedPosts.top} 
+                mobileOnly={true}
+              />
+              <div className="hidden sm:block">
+                <RelatedLinksCard 
+                  posts={relatedPosts.top} 
+                />
+              </div>
+              
               {blocks.map((block, index) => {
-                // Insertar 3 enlaces relacionados a mitad del contenido
+                // Insertar enlaces relacionados a mitad del contenido - encima de un título
                 if (index === Math.floor(blocks.length / 2)) {
                   return (
                     <React.Fragment key={`middle-related-${index}`}>
                       <RelatedLinksCard 
                         posts={relatedPosts.middle} 
                         className="my-12"
+                        mobileOnly={true}
                       />
+                      <div className="hidden sm:block">
+                        <RelatedLinksCard 
+                          posts={relatedPosts.middle} 
+                          className="my-12"
+                        />
+                      </div>
                       {renderBlock(block, index)}
                     </React.Fragment>
                   );
@@ -256,17 +282,19 @@ export default function BlogPostPage() {
               })}
             </section>
 
-            <BlogCommentsSection
-              postSlug={post.slug}
-            />
+            <div className="mt-16">
+              <BlogCommentsSection
+                postSlug={post.slug}
+              />
+            </div>
 
-            {/* 6 enlaces relacionados debajo de los comentarios */}
+            {/* 6 enlaces relacionados debajo de los comentarios - 6 en móvil y 6 en desktop */}
             <RelatedLinksCard 
               posts={relatedPosts.bottom} 
               className="mt-8"
             />
 
-            <footer className="mt-12 rounded-3xl bg-emerald-50 p-8 text-gray-800">
+            <footer className="mt-8 rounded-3xl bg-emerald-50 p-8 text-gray-800">
               <h2 className="text-xl font-semibold text-emerald-900">¿Quieres compartir tu experiencia?</h2>
               <p className="mt-2 text-gray-700">
                 En CaseroOk transformamos noticias y vivencias reales en recursos prácticos para inquilinos. Si quieres contribuir con tu historia, puedes publicar una opinión anónima en minutos.
