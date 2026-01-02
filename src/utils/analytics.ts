@@ -2,13 +2,16 @@ type EventData = Record<string, unknown>;
 
 declare global {
   interface Window {
-    umami?: (event: string, data?: EventData) => void;
+    umami?: {
+      track: (event: string, data?: EventData) => void;
+      identify: (userId: string) => void;
+    };
   }
 }
 
 export function trackUmamiEvent(event: string, data?: EventData) {
-  if (typeof window !== 'undefined' && typeof window.umami === 'function') {
-    window.umami(event, data);
+  if (typeof window !== 'undefined' && window.umami && typeof window.umami.track === 'function') {
+    window.umami.track(event, data);
   }
 }
 
