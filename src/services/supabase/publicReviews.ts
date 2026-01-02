@@ -13,6 +13,7 @@ export type PublicReview = {
   state: string | null;
   postal_code: string | null;
   street: string | null;
+  validated_at: string | null;
 };
 
 export async function getPublicReviews(): Promise<PublicReview[]> {
@@ -21,8 +22,9 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
 
   const { data, error } = await client
     .from('public_reviews')
-    .select('id, address_details, owner_opinion, would_recommend')
-    .eq('is_public', true);
+    .select('id, address_details, owner_opinion, would_recommend, validated_at')
+    .eq('is_public', true)
+    .order('validated_at', { ascending: false });
 
   if (error || !data) return [];
 
@@ -57,6 +59,7 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
     address_details?: AddressDetails;
     owner_opinion?: string | null;
     would_recommend?: number | string | null;
+    validated_at?: string | null;
   };
 
   const rows = data as unknown as Row[];
@@ -107,6 +110,7 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
       state: state ?? null,
       postal_code: postalCode ?? null,
       street: street ?? null,
+      validated_at: review.validated_at ?? null,
     } satisfies PublicReview;
   });
 
