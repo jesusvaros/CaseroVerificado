@@ -225,7 +225,9 @@ export default function BlogPostPage() {
               })}
             </section>
 
-            <BlogCommentsSection postSlug={post.slug} postTitle={post.title} />
+            <BlogCommentsSection
+              postSlug={post.slug}
+            />
 
             <footer className="mt-12 rounded-3xl bg-emerald-50 p-8 text-gray-800">
               <h2 className="text-xl font-semibold text-emerald-900">¿Quieres compartir tu experiencia?</h2>
