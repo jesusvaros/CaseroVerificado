@@ -42,7 +42,7 @@ const StepperBar: React.FC<StepperBarProps> = ({
         {/* Build circles and connector segments */}
         {steps.map((step, index) => {
           const isActive = index + 1 === currentStep;
-          const isCompleted = !!(index + 1 < currentStep || stepsCompleted[index]);
+          const isCompleted = !!(index + 1 < currentStep || (stepsCompleted[index] === true));
 
           // Circle element for the step
           return (

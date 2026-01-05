@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useFormContext } from '../store/useFormContext';
 import { useAuth } from '../store/auth/hooks';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -72,8 +72,12 @@ const AddReviewForm: React.FC = () => {
   
   // Use the auth context
   const { user } = useAuth();
+  
+  // Constants
+  const steps = ['Dirección', 'Estancia', 'Piso', 'Comunidad', 'Gestión'];
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
 
-  const errorsDefault = {
+  const errorsDefault = useMemo(() => ({
     1: { fields: { street: false, number: false } },
     2: { fields: { startDate: false, endDate: false, monthlyPrice: false } },
     3: {
@@ -87,7 +91,8 @@ const AddReviewForm: React.FC = () => {
     },
     4: { fields: { neighborTypes: false, communityEnvironment: false } },
     5: { fields: { owner: false } },
-  };
+  }), []);
+
   const [errors, setErrors] =
     useState<Record<number, { fields: Record<string, boolean> }>>(errorsDefault);
 
@@ -99,6 +104,7 @@ const AddReviewForm: React.FC = () => {
       setErrors(errorsDefault);
       setIsSubmitting(false);
       setIsModalOpen(false);
+      setSessionStatus(null); // Resetear el estado de la sesión también
     };
 
     window.addEventListener('resetReviewForm', handleResetEvent);
@@ -106,7 +112,7 @@ const AddReviewForm: React.FC = () => {
     return () => {
       window.removeEventListener('resetReviewForm', handleResetEvent);
     };
-  }, [resetForm]);
+  }, [resetForm, errorsDefault]);
 
   // No-op mobile padding logic removed (it set the same padding for both cases)
 
@@ -325,63 +331,87 @@ const AddReviewForm: React.FC = () => {
     }
   };
 
-  const steps = ['Dirección', 'Estancia', 'Piso', 'Comunidad', 'Gestión'];
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
-
   const handleStepClick = async (step: number) => {
+    console.log('📍 Stepper clicked:', step, 'from currentStep:', currentStep);
+    
     if (step >= currentStep + 1) {
-      setErrors(errorsDefault);
-      try {
-        const result = await validateAndSubmitStep(currentStep, formData, {
-          showToast: true,
-          isSubmitting: setIsSubmitting,
+      console.log('🔄 Validating and submitting current step before advancing');
+      
+      // Submit current step data before advancing
+      const result = await validateAndSubmitStep(currentStep, formData);
+      
+      // Update error state if needed
+      if (result.fieldErrors) {
+        setErrors(prev => ({
+          ...prev,
+          [currentStep]: {
+            fields: result.fieldErrors || {},
+          },
+        }));
+        
+        // Track validation error event for stepper navigation
+        trackEvent('review:step-error', { 
+          step: currentStep, 
+          targetStep: step,
+          errors: Object.keys(result.fieldErrors || {}),
+          errorCount: Object.keys(result.fieldErrors || {}).length,
+          navigationType: 'stepper'
         });
+      }
 
-        // Actualizar estado de errores
-        if (result.fieldErrors) {
-          setErrors(prev => ({
-            ...prev,
-            [currentStep]: {
-              fields: result.fieldErrors || {},
-            },
-          }));
+      // Avanzar si la validación es exitosa
+      if (result.isValid) {
+        console.log('✅ Validation successful, finding next incomplete step');
+        
+        // Optimistically mark current step as completed so Stepper UI and access checks stay in sync
+        setSessionStatus(prev => ({
+          ...(prev || {}),
+          step1_completed: currentStep === 1 ? true : prev?.step1_completed,
+          step2_completed: currentStep === 2 ? true : prev?.step2_completed,
+          step3_completed: currentStep === 3 ? true : prev?.step3_completed,
+          step4_completed: currentStep === 4 ? true : prev?.step4_completed,
+          step5_completed: currentStep === 5 ? true : prev?.step5_completed,
+        }));
+        
+        // Encontrar el siguiente paso no completado
+        const findNextIncompleteStep = () => {
+          const updatedStatus = {
+            step1_completed: currentStep === 1 ? true : sessionStatus?.step1_completed,
+            step2_completed: currentStep === 2 ? true : sessionStatus?.step2_completed,
+            step3_completed: currentStep === 3 ? true : sessionStatus?.step3_completed,
+            step4_completed: currentStep === 4 ? true : sessionStatus?.step4_completed,
+            step5_completed: currentStep === 5 ? true : sessionStatus?.step5_completed,
+          };
           
-          // Track validation error event for stepper navigation
-          trackEvent('review:step-error', { 
-            step: currentStep, 
-            targetStep: step,
-            errors: Object.keys(result.fieldErrors || {}),
-            errorCount: Object.keys(result.fieldErrors || {}).length,
-            navigationType: 'stepper'
-          });
-        }
-
-        // Avanzar si la validación es exitosa
-        if (result.isValid) {
-          console.log('✅ Validation successful, advancing to step:', step);
-          trackEvent('review:step-success', { 
-            step: currentStep, 
-            nextStep: step,
-            navigationType: 'stepper'
-          });
-          trackEvent('review:stepper-advance', { from: currentStep, to: step });
-          if (step === 6) {
-            trackEvent('review:login-modal-open');
-            setIsModalOpen(true);
-          } else {
-            console.log('🔄 Calling updateStep with force=true for step:', step);
-            updateStep(step, true); // Forzar el avance ya que la validación fue exitosa
-            window.scrollTo(0, 0);
-          }
+          const steps = [1, 2, 3, 4, 5];
+          const nextIncomplete = steps.find(step => !updatedStatus[`step${step}_completed` as keyof typeof updatedStatus]);
+          
+          return nextIncomplete || 6; // Todos los pasos completados, ir a login/submit
+        };
+        
+        const nextStep = findNextIncompleteStep();
+        console.log('🎯 Next incomplete step:', nextStep);
+        
+        trackEvent('review:step-success', { 
+          step: currentStep, 
+          nextStep: nextStep,
+          navigationType: 'stepper'
+        });
+        trackEvent('review:stepper-advance', { from: currentStep, to: nextStep });
+        
+        if (nextStep === 6) {
+          trackEvent('review:login-modal-open');
+          setIsModalOpen(true);
         } else {
-          console.log('❌ Validation failed, not advancing');
+          console.log('🔄 Calling updateStep with force=true for step:', nextStep);
+          updateStep(nextStep, true); // Forzar el avance ya que la validación fue exitosa
+          window.scrollTo(0, 0);
         }
-      } catch (error) {
-        console.error('Error validando paso 1:', error);
-        const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
-        showErrorToast(errorMessage);
+      } else {
+        console.log('❌ Validation failed, not advancing');
       }
     } else if (step <= currentStep) {
+      console.log('⬅️ Going back to step:', step);
       trackEvent('review:stepper-back', { from: currentStep, to: step });
       updateStep(step);
       window.scrollTo(0, 0);
