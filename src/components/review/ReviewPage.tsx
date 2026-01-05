@@ -7,6 +7,7 @@ import { getSessionStep2Data } from '../../services/supabase/GetSubmitStep2';
 import { getSessionStep3Data } from '../../services/supabase/GetSubmitStep3';
 import { getSessionStep4Data } from '../../services/supabase/GetSubmitStep4';
 import { getSessionStep5Data } from '../../services/supabase/GetSubmitStep5';
+import { trackEvent } from '../../utils/analytics';
 
 // Importar componentes de sección
 import LocationMap from '../ui/LocationMap';
@@ -70,6 +71,23 @@ const ReviewPage = () => {
   
   // Use the auth context
   const { user, isLoading } = useAuth();
+
+  // Detectar si viene de un submit nuevo (OAuth callback)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('sessionId');
+    
+    if (sessionId) {
+      trackEvent('review:submitted', {
+        authenticated: true,
+        reviewId: id, // el UUID de la review
+        sessionId: sessionId
+      });
+      
+      // Limpiar URL para no enviar el evento múltiples veces
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [id]);
 
     // Estados para cada paso
     const [step1Data, setStep1Data] = useState<Step1Data | null>(null);

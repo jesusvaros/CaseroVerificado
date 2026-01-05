@@ -430,7 +430,11 @@ const AddReviewForm: React.FC = () => {
     }
     setIsModalOpen(false);
     navigate(`/review/${sessionId}`);
-    trackEvent('review:submitted', { authenticated: true });
+    trackEvent('review:submitted', { 
+      authenticated: true,
+      reviewId: sessionId,
+      sessionId: sessionId
+    });
     resetForm();
     setCurrentStep(1);
     setErrors(errorsDefault);
