@@ -4,7 +4,6 @@ import { supabaseWrapper } from '../services/supabase/client';
 import { useAuth } from '../store/auth/hooks';
 import toast from 'react-hot-toast';
 import { getSessionIdBack } from '../services/sessionManager';
-import { trackEvent } from '../utils/analytics';
 
 /**
  * AuthCallback handles the redirection coming from Supabase OAuth / Magic-Link.
@@ -91,15 +90,6 @@ const AuthCallback = () => {
             
             // If all steps are completed, navigate to the review page
             if (step1_completed && step2_completed && step3_completed && step4_completed && step5_completed) {
-              // Enviar evento de submit - usuario viene de completar step 5 y está haciendo login
-              trackEvent('review:submitted', {
-                authenticated: true,
-                reviewId: sessionId,
-                sessionId: sessionId,
-                source: 'auth_callback',
-                allStepsCompleted: true
-              });
-              
               navigate(`/review/${sessionId}`);
               return;
             }

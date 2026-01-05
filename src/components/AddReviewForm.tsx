@@ -302,16 +302,9 @@ const AddReviewForm: React.FC = () => {
             trackEvent('review:login-modal-open');
             setIsModalOpen(true);
           }else{
-            // Usuario ya logueado - enviar evento de submit directamente
+            // Usuario ya logueado - ir directamente a la página de review
             const sessionId = await getSessionIdBack();
             if (sessionId) {
-              trackEvent('review:submitted', {
-                authenticated: true,
-                reviewId: sessionId,
-                sessionId: sessionId,
-                source: 'already_logged_in',
-                allStepsCompleted: true
-              });
               onloginComplete(sessionId, user.id);
             }
           }
