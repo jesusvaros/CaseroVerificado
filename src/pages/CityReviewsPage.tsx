@@ -194,9 +194,9 @@ export default function CityReviewsPage() {
                 <h2 className="text-lg font-semibold text-gray-900">
                   Qué opinan los inquilinos de {fallbackCityName}
                 </h2>
-                <p className="mt-3 text-sm text-gray-600">
+                <div className="flex items-center justify-between text-sm text-gray-600">
                   Seleccionamos testimonios reales para que puedas evaluar mejor el alquiler en esta zona.
-                </p>
+                </div>
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
                   {reviews.slice(0, Math.min(4, reviews.length)).map(review => (
                     <blockquote
@@ -206,7 +206,7 @@ export default function CityReviewsPage() {
                       <p className="text-sm text-gray-700">
                         {review.owner_opinion ?? 'Opinión pendiente de completar.'}
                       </p>
-                      <footer className="mt-4 text-xs font-medium uppercase tracking-wide text-gray-500">
+                      <footer className="mt-4 text-xs font-medium uppercase tracking-wide text-gray-600">
                         {review.full_address ?? fallbackCityName}
                       </footer>
                     </blockquote>

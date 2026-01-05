@@ -137,7 +137,7 @@ interface PeriodSectionProps {
 
 const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
   if (!periodData) {
-    return <p className="text-gray-500">Información no disponible</p>;
+    return <p className="text-gray-600">Información no disponible</p>;
   }
 
   // Obtener el año actual para la línea temporal
@@ -153,7 +153,7 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
         <div className="md:col-span-2 flex items-center gap-4 flex-wrap">
           {periodData.would_recommend && (
             <div className="flex items-center gap-2">
-              <span className="text-[16px] font-medium text-gray-500">Recomendación</span>
+              <span className="text-[16px] font-medium text-gray-600">Recomendación</span>
               <div className="ml-1 flex items-center" aria-label={`Recomendación ${periodData.would_recommend} de 5`}>
                 {[1,2,3,4,5].map((i) => (
                   <span key={i} className="mr-0.5">
@@ -169,7 +169,7 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
           )}
           {typeof periodData.deposit_returned !== 'undefined' && (
             <div className="flex items-center gap-2">
-              <span className="text-[16px] font-medium text-gray-500">Fianza devuelta</span>
+              <span className="text-[16px] font-medium text-gray-600">Fianza devuelta</span>
               {periodData.deposit_returned === 'true' ? (
                 <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-700 text-[14px]">Sí</span>
               ) : (
@@ -224,7 +224,7 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
 
       <div>
         <div className="flex items-center gap-1">
-          <p className="text-[16px] font-medium text-gray-500">Precio mensual</p>
+          <p className="text-[16px] font-medium text-gray-600">Precio mensual</p>
           <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
             <MoneyIcon />
           </div>
@@ -233,7 +233,7 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
       </div>
 
       <div className="md:col-span-2">
-        <p className="text-[16px] font-medium text-gray-500">Incluidos en el precio</p>
+        <p className="text-[16px] font-medium text-gray-600">Incluidos en el precio</p>
         <div className="mt-4 flex w-full justify-between">
           {/* Luz */}
           <div className="flex flex-col items-center">

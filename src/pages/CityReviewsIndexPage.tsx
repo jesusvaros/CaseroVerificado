@@ -137,14 +137,14 @@ export default function CityReviewsIndexPage() {
                   to={`/opiniones/${city.slug}`}
                   className="group flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <div className="flex items-center justify-between text-sm text-gray-500">
+                  <div className="flex items-center justify-between text-sm text-gray-600">
                     <span className="font-semibold uppercase tracking-wide text-emerald-700">
                       {city.count} {city.count === 1 ? 'opinión' : 'opiniones'}
                     </span>
                   </div>
                   <h2 className="mt-3 text-xl font-semibold text-gray-900 transition-colors group-hover:text-emerald-700">
                     {city.name}
-                    {city.state ? <span className="text-gray-500">, {city.state}</span> : null}
+                    {city.state ? <span className="text-gray-600">, {city.state}</span> : null}
                   </h2>
                   <p className="mt-3 text-sm text-gray-600">
                     Abre el mapa centrado en {city.name} y consulta las experiencias reales compartidas por

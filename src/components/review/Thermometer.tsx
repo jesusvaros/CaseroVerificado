@@ -24,7 +24,7 @@ const Thermometer: React.FC<ThermometerProps> = ({
 
   return (
     <div className="flex flex-col" style={{ alignItems: left ? 'flex-end' : 'flex-start' }}>
-      <p className="text-gray-500 pb-3" style={{ textAlign: left ? 'right' : 'left' }}>
+      <p className="text-gray-600 pb-3" style={{ textAlign: left ? 'right' : 'left' }}>
         {title}
       </p>
       <div className="relative w-5 h-36 bg-gray-200 rounded-full ">

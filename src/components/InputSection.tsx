@@ -205,14 +205,14 @@ const InputSection: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setMode('form')}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-100'}`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
               >
                 Escribir review
               </button>
               <button
                 type="button"
                 onClick={() => setMode('map')}
-                className={`ml-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-100'}`}
+                className={`ml-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
               >
                 Buscar en el mapa
               </button>
@@ -290,14 +290,14 @@ const InputSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setMode('form')}
-              className={`px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-100'}`}
+              className={`px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
             >
               Escribir review
             </button>
             <button
               type="button"
               onClick={() => setMode('map')}
-              className={`ml-2 px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-100'}`}
+              className={`ml-2 px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
             >
               Buscar en el mapa
             </button>
