@@ -7,7 +7,7 @@ import ErrorToast from './ErrorToast';
  */
 export const showErrorToast = (message: string) => {
   return toast.custom(t => <ErrorToast t={t} message={message} />, {
-    duration: 5000,
+    duration: 3000,
     position: 'bottom-left',
   });
 };
