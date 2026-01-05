@@ -334,7 +334,50 @@ const AddReviewForm: React.FC = () => {
   const handleStepClick = async (clickedStep: number) => {
     console.log('📍 Stepper clicked:', clickedStep, 'from currentStep:', currentStep);
     
-    // First, validate and submit the current step to push changes
+    // Always allow going back to previous steps
+    if (clickedStep < currentStep) {
+      console.log('⬅️ Going back to step:', clickedStep);
+      
+      // Try to push current step data, but don't block navigation if there's an error
+      try {
+        const result = await validateAndSubmitStep(currentStep, formData, {
+          showToast: false, // Don't show toast when going back
+          isSubmitting: setIsSubmitting,
+        });
+        
+        // Update error state if needed, but don't block navigation
+        if (result.fieldErrors) {
+          setErrors(prev => ({
+            ...prev,
+            [currentStep]: {
+              fields: result.fieldErrors || {},
+            },
+          }));
+        }
+        
+        // Optimistically mark current step as completed even if validation failed
+        if (result.isValid) {
+          setSessionStatus(prev => ({
+            ...(prev || {}),
+            step1_completed: currentStep === 1 ? true : prev?.step1_completed,
+            step2_completed: currentStep === 2 ? true : prev?.step2_completed,
+            step3_completed: currentStep === 3 ? true : prev?.step3_completed,
+            step4_completed: currentStep === 4 ? true : prev?.step4_completed,
+            step5_completed: currentStep === 5 ? true : prev?.step5_completed,
+          }));
+        }
+      } catch (error) {
+        console.log('⚠️ Error when trying to save current step, but allowing navigation:', error);
+        // Don't show error toast when going back
+      }
+      
+      trackEvent('review:stepper-back', { from: currentStep, to: clickedStep });
+      updateStep(clickedStep);
+      window.scrollTo(0, 0);
+      return;
+    }
+    
+    // For forward navigation, validate and submit the current step
     try {
       const result = await validateAndSubmitStep(currentStep, formData, {
         showToast: true,
@@ -423,7 +466,7 @@ const AddReviewForm: React.FC = () => {
         
         window.scrollTo(0, 0);
       } else {
-        console.log('❌ Validation failed, not moving');
+        console.log('❌ Validation failed, not moving forward');
       }
     } catch (error) {
       console.error(`Error validating step ${currentStep}:`, error);
