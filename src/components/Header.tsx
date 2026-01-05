@@ -5,6 +5,7 @@ import LoginContent from './ui/LoginContent';
 import logoUrl from '../assets/logo_coloreado.svg';
 import wordmarkUrl from '../assets/caserook_letras.svg';
 import { trackEvent } from '../utils/analytics';
+import toast from 'react-hot-toast';
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -200,6 +201,31 @@ const LoginDropdown: React.FC = () => {
     navigate('/');
   };
 
+  const handleResetForm = () => {
+    // Eliminar tokens del formulario del localStorage
+    localStorage.removeItem('reviewSessionId');
+    localStorage.removeItem('reviewSessionIdBack');
+    
+    // También eliminar cualquier token de usuario de review
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith('reviewUserId:')) {
+        localStorage.removeItem(key);
+      }
+    });
+    
+    // Trackear evento de reset
+    trackEvent('review:form-reset', {
+      authenticated: true,
+      userEmail: user?.email
+    });
+    
+    setIsDropdownOpen(false);
+    navigate('/add-review');
+    
+    // Mostrar toast de confirmación
+    toast.success('Formulario reiniciado. Puedes empezar una nueva review.');
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -240,6 +266,12 @@ const LoginDropdown: React.FC = () => {
               >
                 Mi Perfil
               </Link>
+              <button
+                onClick={handleResetForm}
+                className="mt-2 w-full rounded bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-orange-600"
+              >
+                Nueva Review
+              </button>
               <button
                 onClick={handleLogout}
                 className="mt-2 w-full rounded bg-[#4A5E32] px-4 py-2 text-white transition-colors hover:bg-[#5A6E42]"
