@@ -3,7 +3,6 @@ import Slider from '@mui/material/Slider';
 import { useFormContext } from '../../store/useFormContext';
 import CustomInput from '../ui/CustomInput';
 import SelectableTagGroup from '../ui/SelectableTagGroup';
-import { umamiEventProps } from '../../utils/analytics';
 
 interface Step2Props {
   onNext: () => void;
@@ -210,16 +209,13 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
           type="button"
           onClick={onPrevious}
           className="text-black hover:text-gray-800"
-          {...umamiEventProps('review:step2-previous')}
         >
           Anterior
         </button>
         <button
-          type="button"
           onClick={onNext}
           disabled={isSubmitting}
           className="rounded bg-[rgb(74,94,50)] px-6 py-2 text-white hover:bg-[rgb(60,76,40)]"
-          {...umamiEventProps('review:step2-next')}
         >
           {isSubmitting ? 'Enviando...' : 'Siguiente'}
         </button>

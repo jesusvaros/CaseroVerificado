@@ -4,7 +4,6 @@ import CustomTextarea from '../ui/CustomTextarea';
 import SelectableTagGroup from '../ui/SelectableTagGroup';
 import CustomCheckbox from '../ui/CustomCheckbox';
 import HashedContactInput from '../ui/HashedContactInput';
-import { umamiEventProps } from '../../utils/analytics';
 
 interface Step5OwnerProps {
   onNext: () => void;
@@ -143,16 +142,13 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
           type="button"
           onClick={onPrevious}
           className="text-black hover:text-gray-800"
-          {...umamiEventProps('review:step5-previous')}
         >
           Anterior
         </button>
         <button
-          type="button"
           onClick={onNext}
           disabled={isSubmitting}
           className="rounded bg-[rgb(74,94,50)] px-6 py-2 text-white hover:bg-[rgb(60,76,40)]"
-          {...umamiEventProps('review:step5-submit')}
         >
           {isSubmitting ? 'Enviando...' : 'Finalizar'}
         </button>

@@ -21,7 +21,7 @@ import { getSessionStep5Data } from '../services/supabase/GetSubmitStep5';
 import useMediaQuery from '../hooks/useMediaQuery';
 import { notifyReviewCompleted } from '../services/telegram';
 import { AnimatePresence, motion } from 'framer-motion';
-import { trackUmamiEvent } from '../utils/analytics';
+import { trackEvent } from '../utils/analytics';
 
 export interface SessionStatus {
   step1_completed?: boolean;
@@ -243,6 +243,13 @@ const AddReviewForm: React.FC = () => {
             fields: result.fieldErrors || {},
           },
         }));
+        
+        // Track validation error event
+        trackEvent('review:step-error', { 
+          step: currentStep, 
+          errors: Object.keys(result.fieldErrors || {}),
+          errorCount: Object.keys(result.fieldErrors || {}).length 
+        });
       }
       
       // Only proceed if validation is successful
@@ -257,7 +264,11 @@ const AddReviewForm: React.FC = () => {
           step5_completed: currentStep === 5 ? true : prev?.step5_completed,
         }));
 
-        trackUmamiEvent('review:step-next', { step: currentStep });
+        trackEvent('review:step-success', { 
+          step: currentStep, 
+          nextStep: currentStep < 5 ? currentStep + 1 : 'submit',
+          navigationType: 'button'
+        });
 
         if (currentStep < 5) {
           updateStep(currentStep + 1, true);
@@ -265,7 +276,7 @@ const AddReviewForm: React.FC = () => {
         } else {
           window.scrollTo(0, 0);
           if (!user) {
-            trackUmamiEvent('review:login-modal-open');
+            trackEvent('review:login-modal-open');
             setIsModalOpen(true);
           }else{
             const sessionId = await getSessionIdBack();
@@ -283,7 +294,7 @@ const AddReviewForm: React.FC = () => {
   };
   const handlePrevious = () => {
     if (currentStep > 1) {
-      trackUmamiEvent('review:step-prev', { from: currentStep, to: currentStep - 1 });
+      trackEvent('review:step-prev', { from: currentStep, to: currentStep - 1 });
       updateStep(currentStep - 1);
       window.scrollTo(0, 0);
     }
@@ -309,13 +320,27 @@ const AddReviewForm: React.FC = () => {
               fields: result.fieldErrors || {},
             },
           }));
+          
+          // Track validation error event for stepper navigation
+          trackEvent('review:step-error', { 
+            step: currentStep, 
+            targetStep: step,
+            errors: Object.keys(result.fieldErrors || {}),
+            errorCount: Object.keys(result.fieldErrors || {}).length,
+            navigationType: 'stepper'
+          });
         }
 
         // Avanzar si la validación es exitosa
         if (result.isValid) {
-          trackUmamiEvent('review:stepper-advance', { from: currentStep, to: step });
+          trackEvent('review:step-success', { 
+            step: currentStep, 
+            nextStep: step,
+            navigationType: 'stepper'
+          });
+          trackEvent('review:stepper-advance', { from: currentStep, to: step });
           if (step === 6) {
-            trackUmamiEvent('review:login-modal-open');
+            trackEvent('review:login-modal-open');
             setIsModalOpen(true);
           } else {
             updateStep(step);
@@ -328,7 +353,7 @@ const AddReviewForm: React.FC = () => {
         showErrorToast(errorMessage);
       }
     } else if (step <= currentStep) {
-      trackUmamiEvent('review:stepper-back', { from: currentStep, to: step });
+      trackEvent('review:stepper-back', { from: currentStep, to: step });
       updateStep(step);
       window.scrollTo(0, 0);
     }
@@ -405,7 +430,7 @@ const AddReviewForm: React.FC = () => {
     }
     setIsModalOpen(false);
     navigate(`/review/${sessionId}`);
-    trackUmamiEvent('review:submitted', { authenticated: true });
+    trackEvent('review:submitted', { authenticated: true });
     resetForm();
     setCurrentStep(1);
     setErrors(errorsDefault);
