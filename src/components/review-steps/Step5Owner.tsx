@@ -55,7 +55,7 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
             Datos {isOwnerTypeParticular ? 'del propietario' : 'de la agencia'}
           </h3>
           {isOwnerTypeParticular && (
-            <span className="ml-2 text-gray-500 text-sm mb-0.5">opcional</span>
+            <span className="ml-2 text-gray-600 text-sm mb-0.5">opcional</span>
           )}
         </div>
         <HashedContactInput
@@ -74,7 +74,7 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
         <div className="flex items-end mb-4">
           <h3 className=" text-lg font-medium text-black">Información de contacto</h3>
           {isOwnerTypeParticular && (
-            <span className="ml-2 text-gray-500 text-sm mb-0.5">opcional</span>
+            <span className="ml-2 text-gray-600 text-sm mb-0.5">opcional</span>
           )}
         </div>
 

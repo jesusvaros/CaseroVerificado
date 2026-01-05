@@ -5,7 +5,7 @@ export default function PoliticaPrivacidad() {
   return (
     <LegalContainer>
       <h1 className="text-4xl font-extrabold mb-2 text-gray-900">Política de privacidad</h1>
-      <p className="text-sm text-gray-500 mb-6">Última actualización: 19/08/2025</p>
+      <p className="text-sm text-gray-600 mb-6">Última actualización: 19/08/2025</p>
 
       <h2 className="text-xl font-semibold mb-2">1) Responsable del tratamiento</h2>
       <p className="text-gray-700 mb-6">{LEGAL_META.ownerName} – Contacto: {LEGAL_META.contactEmail}.</p>

@@ -131,7 +131,7 @@ function App() {
         </Routes>
 
 
-        <footer className="mx-auto mt-8 max-w-6xl py-6 text-center text-sm text-gray-500">
+        <footer className="mx-auto mt-8 max-w-6xl py-6 text-center text-sm text-gray-600">
           <nav className="mb-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <Link className="hover:text-gray-700" to="/blog" {...umamiEventProps('footer:blog')}>Blog</Link>
             <span className="text-gray-400">•</span>

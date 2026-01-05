@@ -245,7 +245,7 @@ const ProfilePage: React.FC = () => {
                 })}
               </div>
             ) : (
-              <p className="text-gray-500">No has creado ninguna reseña todavía.</p>
+              <p className="text-gray-600">No has creado ninguna reseña todavía.</p>
             )}
           </div>
           

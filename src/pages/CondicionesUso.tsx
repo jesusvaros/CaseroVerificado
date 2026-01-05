@@ -5,7 +5,7 @@ export default function CondicionesUso() {
   return (
     <LegalContainer>
       <h1 className="text-4xl font-extrabold mb-2 text-gray-900">Condiciones de uso</h1>
-      <p className="text-sm text-gray-500 mb-6">Última actualización: 19/08/2025</p>
+      <p className="text-sm text-gray-600 mb-6">Última actualización: 19/08/2025</p>
 
       <h2 className="text-xl font-semibold mb-2">1) Objeto</h2>
       <p className="text-gray-700 mb-6">Regular el acceso y uso de [Nombre/Proyecto], una plataforma/blog de reseñas anónimas sobre experiencias de alquiler.</p>

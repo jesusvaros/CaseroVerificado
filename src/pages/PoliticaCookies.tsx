@@ -5,7 +5,7 @@ export default function PoliticaCookies() {
   return (
     <LegalContainer>
       <h1 className="text-4xl font-extrabold mb-2 text-gray-900">Política de cookies</h1>
-      <p className="text-sm text-gray-500 mb-6">Última actualización: 19/08/2025</p>
+      <p className="text-sm text-gray-600 mb-6">Última actualización: 19/08/2025</p>
 
       <h2 className="text-xl font-semibold mb-2">¿Usamos cookies?</h2>
       <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-1">

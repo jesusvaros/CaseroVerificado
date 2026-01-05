@@ -29,7 +29,7 @@ const ChromeStoreSection: React.FC = () => {
       <div
         className="pointer-events-none select-none absolute left-1/2 top-52 z-[5] -translate-x-1/2 rotate-12"
         style={{ width: '120%' }}
-        aria-hidden
+        role="presentation"
       >
         <div
           className="w-full rounded-md shadow-md"
