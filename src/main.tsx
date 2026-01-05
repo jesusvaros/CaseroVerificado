@@ -9,6 +9,7 @@ import { PostHogProvider } from 'posthog-js/react';
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   defaults: '2025-11-30',
+  autocapture: false, // Disable autocapture to prevent duplicate events
 } as const
 
 // Inicializar PostHog
