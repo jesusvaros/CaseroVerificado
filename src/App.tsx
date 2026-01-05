@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, useLocation, Link } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';
@@ -38,10 +39,15 @@ import { FormProvider } from './store/FormContext';
 import { FormMessagesProvider } from './store/FormMessagesProvider';
 import { AuthProvider } from './store/auth';
 import { umamiEventProps } from './utils/analytics';
+import { trackEvent } from './utils/analytics';
 
 function App() {
   const location = useLocation();
   const isGrayPage = location.pathname === '/add-review' || location.pathname.includes('/review/') || location.pathname === '/profile' || location.pathname === '/map';
+
+  useEffect(() => {
+    trackEvent('app:loaded', { timestamp: new Date().toISOString() });
+  }, []);
 
   return (
     <AuthProvider>

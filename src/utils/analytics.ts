@@ -6,11 +6,7 @@ declare global {
       track: (event: string, data?: EventData) => void;
       identify: (userId: string) => void;
     };
-    posthog?: {
-      capture: (event: string, data?: EventData) => void;
-      identify: (userId: string) => void;
-      reset: () => void;
-    };
+    posthog?: any;
   }
 }
 
