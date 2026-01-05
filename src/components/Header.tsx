@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth/hooks';
 import LoginContent from './ui/LoginContent';
 import logoUrl from '../assets/logo_coloreado.svg';
@@ -8,9 +8,7 @@ import { umamiEventProps } from '../utils/analytics';
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [address, setAddress] = useState('');
   const location = useLocation();
-  const navigate = useNavigate();
 
   // Hide input on specific routes
   const isAddReviewPage = location.pathname === '/add-review';
@@ -34,12 +32,6 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled, isAddReviewPage]);
-
-  const handleStart = () => {
-    if (address.trim()) {
-      navigate(`/add-review?address=${encodeURIComponent(address)}`);
-    }
-  };
 
   // Show logo only after scrolling first section on home, or on non-home pages
   const showLogo = !isHomePage || scrolled || isAddReviewPage;
@@ -99,35 +91,31 @@ const Header: React.FC = () => {
         <div className="flex flex-1 justify-center">
           {showHeaderSearch && (
             <>
-              {/* Desktop input and button */}
-              <div className="hidden w-full max-w-xl md:flex">
-                <input
-                  type="text"
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
-                  placeholder="Dirección de la vivienda"
-                  className="flex-grow rounded-l-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button
-                  onClick={handleStart}
-                  className="whitespace-nowrap rounded-r-lg bg-[#F97316] px-8 py-3 text-lg font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              {/* Desktop 'Escribir opinión' button */}
+              <div className="hidden md:block">
+                <Link
+                  to="/add-review"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-[#4A5E32] px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#3B4C28] focus:outline-none focus:ring-2 focus:ring-[#4A5E32]"
                   {...umamiEventProps('header:start-review')}
                 >
-                  Empezar
-                </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                  Escribir opinión
+                </Link>
               </div>
 
-              {/* Mobile 'Add a review' button */}
+              {/* Mobile 'Escribir opinión' button */}
               <div className="md:hidden">
                 <Link
                   to="/add-review"
-                  className="mx-2 flex min-w-[120px] items-center justify-center gap-2 rounded-lg bg-[#F97316] px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-gray-700"
+                  className="mx-2 flex min-w-[120px] items-center justify-center gap-2 rounded-lg bg-[#4A5E32] px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-gray-700"
                   {...umamiEventProps('header:start-review-mobile')}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
-                  Opina
+                  Escribir opinión
                 </Link>
               </div>
             </>
