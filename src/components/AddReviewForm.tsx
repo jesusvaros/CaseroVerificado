@@ -539,13 +539,6 @@ const AddReviewForm: React.FC = () => {
 
     setIsModalOpen(false);
     navigate(`/review/${sessionId}`);
-    trackEvent('review:submitted', { 
-      authenticated: true,
-      reviewId: sessionId,
-      sessionId: sessionId,
-      source: 'modal_login',
-      allStepsCompleted: true
-    });
     
     // Clear localStorage after navigation to ensure we have the sessionId for the URL
     try {

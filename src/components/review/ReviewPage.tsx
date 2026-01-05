@@ -7,6 +7,7 @@ import { getSessionStep2Data } from '../../services/supabase/GetSubmitStep2';
 import { getSessionStep3Data } from '../../services/supabase/GetSubmitStep3';
 import { getSessionStep4Data } from '../../services/supabase/GetSubmitStep4';
 import { getSessionStep5Data } from '../../services/supabase/GetSubmitStep5';
+import { trackEvent } from '../../utils/analytics';
 
 // Importar componentes de sección
 import LocationMap from '../ui/LocationMap';
@@ -237,6 +238,26 @@ const ReviewPage = () => {
   
       fetchAllData();
     }, [id, navigate, user?.id,isLoading]);
+  
+  // Fire review:submitted event only once when landing on review page
+  useEffect(() => {
+    if (!id) return;
+    
+    // Check if this is from OAuth flow (has sessionId in URL params)
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasSessionId = urlParams.has('sessionId');
+    
+    // Only fire event if NOT from OAuth flow (avoids duplicates)
+    if (!hasSessionId) {
+      trackEvent('review:submitted', {
+        authenticated: !!user,
+        reviewId: id,
+        sessionId: id,
+        source: 'review_page',
+        allStepsCompleted: true
+      });
+    }
+  }, [id, user]);
   
   const MobileView = () => (
     <div className="space-y-6">
