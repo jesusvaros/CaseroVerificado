@@ -331,14 +331,15 @@ const AddReviewForm: React.FC = () => {
     }
   };
 
-  const handleStepClick = async (step: number) => {
-    console.log('📍 Stepper clicked:', step, 'from currentStep:', currentStep);
+  const handleStepClick = async (clickedStep: number) => {
+    console.log('📍 Stepper clicked:', clickedStep, 'from currentStep:', currentStep);
     
-    if (step >= currentStep + 1) {
-      console.log('🔄 Validating and submitting current step before advancing');
-      
-      // Submit current step data before advancing
-      const result = await validateAndSubmitStep(currentStep, formData);
+    // First, validate and submit the current step to push changes
+    try {
+      const result = await validateAndSubmitStep(currentStep, formData, {
+        showToast: true,
+        isSubmitting: setIsSubmitting,
+      });
       
       // Update error state if needed
       if (result.fieldErrors) {
@@ -349,21 +350,18 @@ const AddReviewForm: React.FC = () => {
           },
         }));
         
-        // Track validation error event for stepper navigation
         trackEvent('review:step-error', { 
           step: currentStep, 
-          targetStep: step,
+          targetStep: clickedStep,
           errors: Object.keys(result.fieldErrors || {}),
           errorCount: Object.keys(result.fieldErrors || {}).length,
           navigationType: 'stepper'
         });
       }
-
-      // Avanzar si la validación es exitosa
+      
+      // Only proceed if validation is successful
       if (result.isValid) {
-        console.log('✅ Validation successful, finding next incomplete step');
-        
-        // Optimistically mark current step as completed so Stepper UI and access checks stay in sync
+        // Optimistically mark current step as completed
         setSessionStatus(prev => ({
           ...(prev || {}),
           step1_completed: currentStep === 1 ? true : prev?.step1_completed,
@@ -373,8 +371,8 @@ const AddReviewForm: React.FC = () => {
           step5_completed: currentStep === 5 ? true : prev?.step5_completed,
         }));
         
-        // Encontrar el siguiente paso no completado
-        const findNextIncompleteStep = () => {
+        // Find the first uncompleted step
+        const findFirstUncompletedStep = () => {
           const updatedStatus = {
             step1_completed: currentStep === 1 ? true : sessionStatus?.step1_completed,
             step2_completed: currentStep === 2 ? true : sessionStatus?.step2_completed,
@@ -383,38 +381,54 @@ const AddReviewForm: React.FC = () => {
             step5_completed: currentStep === 5 ? true : sessionStatus?.step5_completed,
           };
           
-          const steps = [1, 2, 3, 4, 5];
-          const nextIncomplete = steps.find(step => !updatedStatus[`step${step}_completed` as keyof typeof updatedStatus]);
-          
-          return nextIncomplete || 6; // Todos los pasos completados, ir a login/submit
+          for (let i = 1; i <= 5; i++) {
+            if (!updatedStatus[`step${i}_completed` as keyof typeof updatedStatus]) {
+              return i;
+            }
+          }
+          return 6; // All steps completed
         };
         
-        const nextStep = findNextIncompleteStep();
-        console.log('🎯 Next incomplete step:', nextStep);
+        const firstUncompletedStep = findFirstUncompletedStep();
         
-        trackEvent('review:step-success', { 
-          step: currentStep, 
-          nextStep: nextStep,
-          navigationType: 'stepper'
-        });
-        trackEvent('review:stepper-advance', { from: currentStep, to: nextStep });
+        // Check if the clicked step is unfinished and not the first uncompleted
+        const isClickedStepUnfinished = clickedStep <= 5 && !sessionStatus?.[`step${clickedStep}_completed` as keyof SessionStatus];
         
-        if (nextStep === 6) {
-          trackEvent('review:login-modal-open');
-          setIsModalOpen(true);
+        if (isClickedStepUnfinished && clickedStep !== firstUncompletedStep) {
+          // Redirect to the first uncompleted step
+          console.log('🔄 Redirecting to first uncompleted step:', firstUncompletedStep);
+          trackEvent('review:stepper-redirect', { 
+            from: currentStep, 
+            targetStep: clickedStep, 
+            redirectedTo: firstUncompletedStep 
+          });
+          updateStep(firstUncompletedStep, true);
         } else {
-          console.log('🔄 Calling updateStep with force=true for step:', nextStep);
-          updateStep(nextStep, true); // Forzar el avance ya que la validación fue exitosa
-          window.scrollTo(0, 0);
+          // Move to the clicked step
+          console.log('✅ Moving to clicked step:', clickedStep);
+          trackEvent('review:step-success', { 
+            step: currentStep, 
+            nextStep: clickedStep,
+            navigationType: 'stepper'
+          });
+          
+          if (clickedStep === 6) {
+            // All steps completed, show login modal
+            trackEvent('review:login-modal-open');
+            setIsModalOpen(true);
+          } else {
+            updateStep(clickedStep, true);
+          }
         }
+        
+        window.scrollTo(0, 0);
       } else {
-        console.log('❌ Validation failed, not advancing');
+        console.log('❌ Validation failed, not moving');
       }
-    } else if (step <= currentStep) {
-      console.log('⬅️ Going back to step:', step);
-      trackEvent('review:stepper-back', { from: currentStep, to: step });
-      updateStep(step);
-      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error(`Error validating step ${currentStep}:`, error);
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      showErrorToast(errorMessage);
     }
   };
 
