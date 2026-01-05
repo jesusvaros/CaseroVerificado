@@ -253,7 +253,6 @@ const ReviewPage = () => {
       try {
         localStorage.removeItem('reviewSessionId');
         localStorage.removeItem('reviewSessionIdBack');
-        console.log('✅ localStorage cleared for matching review:', id);
       } catch {
         // noop - storage may be unavailable
       }

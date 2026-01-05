@@ -43,8 +43,6 @@ export const validateStep2 = (context: FormDataType): ValidationResult => {
       fieldErrors: { ...fieldErrors, wouldRecommend: true },
     };
   }
-  console.log(depositReturned);
-  console.log(endYear);
   if(depositReturned === undefined && endYear !== undefined){
     return {
       isValid: false,
