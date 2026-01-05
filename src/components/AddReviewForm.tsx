@@ -91,6 +91,23 @@ const AddReviewForm: React.FC = () => {
   const [errors, setErrors] =
     useState<Record<number, { fields: Record<string, boolean> }>>(errorsDefault);
 
+  useEffect(() => {
+    const handleResetEvent = () => {
+      console.log('🔄 Reset event received in AddReviewForm');
+      resetForm();
+      setCurrentStep(1);
+      setErrors(errorsDefault);
+      setIsSubmitting(false);
+      setIsModalOpen(false);
+    };
+
+    window.addEventListener('resetReviewForm', handleResetEvent);
+    
+    return () => {
+      window.removeEventListener('resetReviewForm', handleResetEvent);
+    };
+  }, [resetForm]);
+
   // No-op mobile padding logic removed (it set the same padding for both cases)
 
   //fetch step 1 data
@@ -341,6 +358,7 @@ const AddReviewForm: React.FC = () => {
 
         // Avanzar si la validación es exitosa
         if (result.isValid) {
+          console.log('✅ Validation successful, advancing to step:', step);
           trackEvent('review:step-success', { 
             step: currentStep, 
             nextStep: step,
@@ -351,9 +369,12 @@ const AddReviewForm: React.FC = () => {
             trackEvent('review:login-modal-open');
             setIsModalOpen(true);
           } else {
-            updateStep(step);
+            console.log('🔄 Calling updateStep with force=true for step:', step);
+            updateStep(step, true); // Forzar el avance ya que la validación fue exitosa
             window.scrollTo(0, 0);
           }
+        } else {
+          console.log('❌ Validation failed, not advancing');
         }
       } catch (error) {
         console.error('Error validando paso 1:', error);

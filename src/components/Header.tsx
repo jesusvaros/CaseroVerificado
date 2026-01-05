@@ -213,6 +213,16 @@ const LoginDropdown: React.FC = () => {
       }
     });
     
+    // Limpiar cualquier estado adicional del formulario en el storage
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith('form_') || key.startsWith('step_') || key.startsWith('review_') || key.startsWith('formData_')) {
+        localStorage.removeItem(key);
+      }
+    });
+    
+    // Enviar evento personalizado para que el formulario lo escuche y se resetee
+    window.dispatchEvent(new CustomEvent('resetReviewForm'));
+    
     // Trackear evento de reset
     trackEvent('review:form-reset', {
       authenticated: true,
