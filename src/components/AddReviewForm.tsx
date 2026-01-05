@@ -537,13 +537,6 @@ const AddReviewForm: React.FC = () => {
       console.warn('Failed to trigger Telegram notification', e);
     }
 
-    try {
-      localStorage.removeItem('reviewSessionId');
-      localStorage.removeItem('reviewSessionIdBack');
-      localStorage.setItem(`reviewUserId:${sessionId}`, userId);
-    } catch {
-      // noop - storage may be unavailable
-    }
     setIsModalOpen(false);
     navigate(`/review/${sessionId}`);
     trackEvent('review:submitted', { 
@@ -553,6 +546,16 @@ const AddReviewForm: React.FC = () => {
       source: 'modal_login',
       allStepsCompleted: true
     });
+    
+    // Clear localStorage after navigation to ensure we have the sessionId for the URL
+    try {
+      localStorage.removeItem('reviewSessionId');
+      localStorage.removeItem('reviewSessionIdBack');
+      localStorage.setItem(`reviewUserId:${sessionId}`, userId);
+    } catch {
+      // noop - storage may be unavailable
+    }
+    
     resetForm();
     setCurrentStep(1);
     setErrors(errorsDefault);
