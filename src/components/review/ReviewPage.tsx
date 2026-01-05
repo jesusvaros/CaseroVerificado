@@ -247,6 +247,18 @@ const ReviewPage = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const hasSessionId = urlParams.has('sessionId');
     
+    // Clear localStorage if this review matches the stored session
+    const storedSessionId = localStorage.getItem('reviewSessionIdBack');
+    if (storedSessionId === id) {
+      try {
+        localStorage.removeItem('reviewSessionId');
+        localStorage.removeItem('reviewSessionIdBack');
+        console.log('✅ localStorage cleared for matching review:', id);
+      } catch {
+        // noop - storage may be unavailable
+      }
+    }
+    
     // Only fire event if NOT from OAuth flow (avoids duplicates)
     if (!hasSessionId) {
       trackEvent('review:submitted', {

@@ -304,8 +304,13 @@ const AddReviewForm: React.FC = () => {
           }else{
             // Usuario ya logueado - ir directamente a la página de review
             const sessionId = await getSessionIdBack();
+            console.log('🔍 SessionId from getSessionIdBack:', sessionId);
             if (sessionId) {
+              console.log('✅ Calling onloginComplete with sessionId:', sessionId);
               onloginComplete(sessionId, user.id);
+            } else {
+              console.error('❌ No sessionId found, cannot redirect to review page');
+              showErrorToast('Error: No se pudo encontrar la sesión de la review');
             }
           }
         }
@@ -524,6 +529,8 @@ const AddReviewForm: React.FC = () => {
   // No direction needed for vertical slide (bottom to top)
 
   const onloginComplete = (sessionId: string, userId: string) => {
+    console.log('🚀 onloginComplete called with sessionId:', sessionId, 'userId:', userId);
+    
     try {
       void notifyReviewCompleted(sessionId, userId, formData);
     } catch (e) {
@@ -531,16 +538,8 @@ const AddReviewForm: React.FC = () => {
     }
 
     setIsModalOpen(false);
+    console.log('🔄 Navigating to /review/' + sessionId);
     navigate(`/review/${sessionId}`);
-    
-    // Clear localStorage after navigation to ensure we have the sessionId for the URL
-    try {
-      localStorage.removeItem('reviewSessionId');
-      localStorage.removeItem('reviewSessionIdBack');
-      localStorage.setItem(`reviewUserId:${sessionId}`, userId);
-    } catch {
-      // noop - storage may be unavailable
-    }
     
     resetForm();
     setCurrentStep(1);
