@@ -2,69 +2,165 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://caserook.com/</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://caserook.com/map</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://caserook.com/opiniones</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/add-review</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://caserook.com/aviso-legal</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/politica-privacidad</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/cookies</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/condiciones-uso</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/buenas-practicas</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/terminosycondiciones</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/alquiler-en-espana-como-proteger-tus-derechos-y-ahorrar-hoy</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/bonificacion-fiscal-a-caseros-como-afecta-a-inquilinos-vulnerables</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/como-la-politica-internacional-puede-proteger-tu-derecho-al-alquiler</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/como-proteger-tus-derechos-y-ahorrar-en-alquiler-guia-para-inquilinos</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/inquilinos-protegidos-como-evitar-alquileres-abusivos-y-ahorrar</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/la-paradoja-inmobiliaria-en-madrid-como-afecta-a-tu-alquiler</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/nuevo-barrio-en-sevilla-esperanza-para-inquilinos-vulnerables</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/nuevo-cambio-en-fianzas-de-alquiler-en-andalucia-lo-que-debes-saber</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/protege-tu-alquiler-como-vigilar-y-defender-tus-derechos</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/protege-tus-derechos-evita-clausulas-que-facilitan-el-desahucio</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/quien-paga-los-gastos-de-comunidad-protege-tu-bolsillo-en-el-alquiler</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/sabias-que-a-partir-de-65-anos-puedes-donar-tu-vivienda-sin-pagar-impuestos</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/sabias-que-vivir-anos-en-alquiler-puede-hacerte-dueno</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/subida-inesperada-del-alquiler-protege-tus-derechos-y-ahorra</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/vivienda-en-espana-que-significa-el-choque-psoe-sumar-para-ti</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/vivienda-y-alquiler-proteger-tus-derechos-y-ahorrar-en-tiempos-dificiles</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog/alquiler-en-la-coruna-que-significa-para-ti-la-nueva-ley-de-vivienda</loc>
@@ -2721,12 +2817,6 @@
   <url>
     <loc>https://caserook.com/blog/viviendas-protegidas-en-malaga-una-oportunidad-real-para-inquilinos-vulnerables</loc>
     <lastmod>2025-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://caserook.com/blog/alquiler-en-espana-como-proteger-tus-derechos-y-ahorrar-hoy</loc>
-    <lastmod>2025-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
