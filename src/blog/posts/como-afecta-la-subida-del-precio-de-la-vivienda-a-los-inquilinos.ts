@@ -1,62 +1,66 @@
 export const post = {
   slug: 'como-afecta-la-subida-del-precio-de-la-vivienda-a-los-inquilinos',
   title: '¿Cómo afecta la subida del precio de la vivienda a los inquilinos?',
-  summary: 'Descubre cómo la subida del precio de la vivienda impacta tu alquiler y aprende consejos prácticos para proteger tus derechos y ahorrar.',
-  publishedAt: '2025-11-10',
+  summary: 'Descubre cómo proteger tus derechos y ahorrar frente a la crisis del alquiler y la subida del precio de la vivienda.',
+  publishedAt: '2026-02-06',
   heroImageUrl: '/images/blog/como-afecta-la-subida-del-precio-de-la-vivienda-a-los-inquilinos.jpg',
-  seoTitle: 'Subida vivienda y derechos del inquilino: guía práctica',
-  seoDescription: 'Conoce el impacto de la subida de la vivienda en el alquiler y aprende consejos para proteger tus derechos y ahorrar en tu contrato de alquiler.',
-  sourceUrl: 'https://www.20minutos.es/vivienda/maria-matos-portavoz-fotocasa-precio-medio-vivienda-150-mil_6680962_0.html',
-  readingMinutes: 3,
-  content: `# ¿Cómo afecta la subida del precio de la vivienda a los inquilinos?
+  seoTitle: 'Subida vivienda 2025: consejos para inquilinos vulnerables',
+  seoDescription: 'La vivienda sube un 10% en 2025. Aprende a proteger tus derechos y ahorrar con consejos prácticos para inquilinos vulnerables.',
+  sourceUrl: 'https://elpais.com/expres/2026-02-06/comprar-una-vivienda-cada-vez-mas-cuesta-arriba-los-precios-subieron-un-10-en-2025.html',
+  readingMinutes: 4,
+  content: `# La subida del precio de la vivienda y su impacto en los inquilinos vulnerables
 
-La vivienda se ha convertido en uno de los principales problemas para muchas familias en España. Según datos recientes, el precio medio de la vivienda ha subido un 40% en los últimos cinco años, pasando de unos 150.000 euros a más de 210.000 euros. Esta escalada de precios afecta directamente a los inquilinos, quienes destinan entre el 70% y el 90% de sus ingresos al pago del alquiler, generando una situación de vulnerabilidad económica y social.
+La noticia reciente indica que en 2025 el precio medio de la vivienda en España ha subido un 9,6%, alcanzando un máximo histórico de 2.354 euros por metro cuadrado. Además, el importe medio de las hipotecas ha crecido un 63% en la última década, con precios especialmente altos en comunidades como Madrid, Baleares, País Vasco y Cataluña. Esta realidad afecta directamente a miles de personas que viven en alquiler, muchas de ellas en situación vulnerable, que destinan entre el 70% y el 90% de sus ingresos a pagar la renta mensual.
 
-## La realidad del mercado inmobiliario y su impacto en inquilinos
+## ¿Qué significa esta subida para los inquilinos?
 
-El desequilibrio entre oferta y demanda es la principal causa de esta subida. Actualmente, la demanda de viviendas supera en cuatro veces la oferta disponible, especialmente en ciudades como Madrid, Málaga, Baleares o San Sebastián. Esta presión provoca que los precios del alquiler también aumenten, encareciendo el acceso a una vivienda digna y asequible.
+Aunque el aumento del precio de la vivienda impacta principalmente a quienes desean comprar, también repercute en el mercado de alquiler. La presión sobre la compra incrementa la demanda de alquileres, lo que puede traducirse en subidas de precios y condiciones menos favorables para los inquilinos. Para quienes ya destinan gran parte de sus ingresos al alquiler, esta situación genera una vulnerabilidad económica que dificulta ahorrar y acceder a una vivienda propia.
 
-Para un inquilino en situación vulnerable, este contexto significa que cada vez es más difícil encontrar un alquiler que no consuma la mayor parte de sus ingresos, limitando su capacidad de ahorro y su estabilidad.
+Además, el aumento de precios puede propiciar abusos por parte de algunos arrendadores, como incrementos injustificados del alquiler o falta de mantenimiento, ante la poca regulación efectiva en algunas zonas.
 
-## ¿Qué derechos tienen los inquilinos para protegerse?
+## Derechos fundamentales de los inquilinos
 
-Aunque la situación es compleja, la ley ofrece herramientas para que los inquilinos puedan defender sus derechos y evitar abusos:
+Es fundamental que los inquilinos conozcan y ejerzan sus derechos para protegerse:
 
-- **Duración mínima del contrato:** El contrato de alquiler debe tener una duración mínima de 5 años (7 si el arrendador es persona jurídica), salvo que el inquilino decida marcharse antes.
+- **Duración del contrato:** La Ley de Arrendamientos Urbanos (LAU) establece que el contrato debe tener una duración mínima de 5 años si el arrendador es persona física, y 7 años si es persona jurídica. Esto ofrece una estabilidad que evita desalojos inesperados.
 
-- **Limitación a las subidas de renta:** Durante la vigencia del contrato, el arrendador solo puede aumentar la renta anualmente y conforme al índice de precios al consumo (IPC). No puede subir el alquiler arbitrariamente.
+- **Actualización del alquiler:** La subida del alquiler debe estar pactada en el contrato y usualmente se basa en el Índice de Precios al Consumo (IPC). Cualquier incremento fuera de estos parámetros puede ser ilegal.
 
-- **Protección contra desahucios:** En casos de impago, los inquilinos tienen derecho a un procedimiento judicial donde pueden presentar alegaciones. Además, existen ayudas sociales para evitar desalojos en situaciones de vulnerabilidad.
+- **Prohibición de cláusulas abusivas:** No pueden incluirse cláusulas que limiten derechos básicos, como la prohibición de visitas o subidas arbitrarias.
 
-- **Acceso a ayudas públicas:** El Gobierno y algunas comunidades autónomas ofrecen subvenciones y bonos para ayudar a pagar el alquiler en casos de bajos ingresos.
+- **Desahucio:** El desahucio debe seguir un proceso legal que garantiza el derecho a defensa y notificación adecuada. Ningún inquilino puede ser desalojado sin resolución judicial.
+
+## Cómo usar esta información para protegerse y ahorrar
+
+Conocer la realidad del mercado y los derechos permite actuar con mayor seguridad:
+
+- **Negociar con el arrendador:** Ante subidas frecuentes, negociar un contrato más largo con renta congelada o subida pactada puede evitar incrementos inesperados.
+
+- **Buscar ayudas y subvenciones:** Existen programas públicos y autonómicos para ayudar a inquilinos vulnerables con el pago del alquiler. Consultar en los servicios sociales o en la oficina de vivienda local es clave.
+
+- **Evitar abusos:** Si detectas cláusulas abusivas o subidas ilegales, puedes reclamar ante el Servicio de Consumo o acudir a asociaciones de defensa de inquilinos para asesoría y apoyo legal.
+
+- **Explorar alternativas:** En zonas con precios muy altos, valorar compartir vivienda o buscar alquileres sociales puede ser una opción para reducir gastos.
+
+## Datos sobre el mercado de alquiler en España
+
+Según el último informe del Ministerio de Transportes, Movilidad y Agenda Urbana, el precio medio del alquiler en España se ha incrementado un 7% en 2025, especialmente en grandes ciudades como Madrid y Barcelona. En estas zonas, el alquiler representa en promedio un 40-50% del salario medio, pero en hogares vulnerables puede superar el 70% o incluso el 90%, lo que dificulta cubrir otros gastos básicos.
 
 ## Consejos prácticos para inquilinos
 
-1. **Revisa bien tu contrato:** Asegúrate de que el contrato respete la duración mínima y las condiciones de subida de la renta. No firmes cláusulas abusivas.
+1. **Infórmate sobre tus derechos:** Consulta fuentes oficiales como el Portal de Vivienda del Gobierno o asociaciones especializadas para conocer qué puedes exigir y cómo actuar en caso de conflicto.
 
-2. **Controla los recibos y pagos:** Guarda todos los justificantes de pago para evitar conflictos y demostrar que estás al día.
+2. **Revisa bien el contrato:** Antes de firmar, asegúrate de que la duración, la actualización del alquiler y las cláusulas sean claras y justas. No dudes en pedir asesoría si tienes dudas.
 
-3. **Infórmate sobre ayudas:** Consulta en los servicios sociales municipales o autonómicos sobre posibles subvenciones para el alquiler.
+3. **Solicita ayudas públicas:** Infórmate sobre las ayudas al alquiler disponibles en tu comunidad autónoma y no dudes en solicitarlas si cumples los requisitos.
 
-4. **Negocia con el arrendador:** En situaciones difíciles, intenta negociar una reducción o aplazamiento temporal del alquiler.
+4. **Mantén comunicación con el arrendador:** Un diálogo abierto puede facilitar renegociar condiciones o resolver problemas antes de que escalen.
 
-5. **Busca asesoramiento legal:** Si enfrentas problemas como subidas abusivas o amenazas de desahucio, acude a asociaciones de defensa de inquilinos o servicios jurídicos gratuitos.
+5. **Controla tus gastos y busca ahorro:** Considera opciones como compartir vivienda, negociar servicios incluidos en el alquiler o reducir consumo energético para aliviar tu presupuesto.
 
-## Alternativas y soluciones para mejorar tu situación
+## Conclusión
 
-- **Compartir vivienda:** Si el alquiler es muy alto, compartir piso puede reducir gastos y aliviar la carga económica.
-
-- **Explorar zonas menos tensionadas:** Considera mudarte a barrios o municipios con precios más asequibles y buena comunicación.
-
-- **Planificación financiera:** Intenta establecer un presupuesto mensual que contemple ahorro, aunque sea pequeño, para emergencias.
-
-- **Participar en plataformas y asociaciones:** Formar parte de grupos de inquilinos ayuda a estar informado, recibir apoyo y fortalecer la voz colectiva.
-
-## Un mensaje de esperanza y acción
-
-Aunque el aumento del precio de la vivienda es un desafío real y preocupante, los inquilinos no están solos. Conocer y ejercer tus derechos, buscar apoyo y adoptar medidas prácticas pueden mejorar tu situación y protegerte de abusos. La vivienda es un derecho fundamental y juntos podemos trabajar para que sea accesible y digna para todos.
-
-Recuerda que la información y la organización son tus mejores aliados para enfrentar este momento complejo. No dudes en buscar ayuda y defender tu derecho a un hogar seguro y justo.`,
+La subida del precio de la vivienda en 2025 representa un desafío para los inquilinos vulnerables, pero conocer la situación y los derechos es el primer paso para protegerse. Con información, asesoría y acción, es posible mejorar las condiciones del alquiler, evitar abusos y encontrar alternativas que permitan vivir con mayor tranquilidad y dignidad. Recuerda que no estás solo y existen recursos y organizaciones dispuestas a ayudarte.`,
 };
 
 export default post;
