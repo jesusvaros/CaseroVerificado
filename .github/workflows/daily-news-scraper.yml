@@ -47,13 +47,13 @@ jobs:
             echo "✅ OPENAI_API_KEY is configured"
           fi
       
-      - name: Run daily blog automation
+      - name: Run daily blog automation (all countries)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          echo "🚀 Starting daily blog automation..."
-          npm run daily:blog
-          echo "✅ Daily blog automation completed"
+          echo "🚀 Starting daily blog automation for all configured countries..."
+          npm run daily:blog -- --country=ALL --everyDays=1
+          echo "✅ Daily blog automation completed for all configured countries"
       
       - name: Generate updated sitemap
         env:

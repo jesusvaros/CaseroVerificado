@@ -57,13 +57,13 @@ jobs:
           echo "[]" > data/processed-urls.json
           echo "✅ Processed URLs cleared"
       
-      - name: Run daily blog automation (TEST)
+      - name: Run daily blog automation (TEST, all countries)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          echo "🚀 Starting test blog automation..."
-          npm run daily:blog
-          echo "✅ Test blog automation completed"
+          echo "🚀 Starting test blog automation for all configured countries..."
+          npm run daily:blog -- --country=ALL --everyDays=1
+          echo "✅ Test blog automation completed for all configured countries"
       
       - name: Check results
         run: |
