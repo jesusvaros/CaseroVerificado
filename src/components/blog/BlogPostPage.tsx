@@ -6,7 +6,6 @@ import {
   type StaticBlogPost,
 } from '../../blog/posts';
 import {
-  getCountryDisplayLabel,
   normalizeBlogCountryCode,
 } from '../../blog/countryBlogs';
 import { getRelatedPostsBatch } from '../../blog/relatedPosts';
@@ -169,9 +168,6 @@ export default function BlogPostPage() {
   const detectedBlogCountryCode = normalizeBlogCountryCode(detectedCountryCode);
   const activeCountryCode =
     requestedCountryCode ?? detectedBlogCountryCode ?? 'ES';
-  const activeCountryLabel = activeCountryCode
-    ? getCountryDisplayLabel(activeCountryCode, locale)
-    : null;
   const isCountryPending = !requestedCountryCode && !countryResolved && !detectedBlogCountryCode;
 
   const post = isCountryPending
@@ -206,12 +202,6 @@ export default function BlogPostPage() {
         noindex={notFound}
       />
       <main className="mx-auto mt-28 max-w-3xl px-6 pb-0 sm:pb-24">
-        {activeCountryLabel ? (
-          <section className="mb-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-            <p className="text-sm text-gray-600">{t('blogList.countryScope', { country: activeCountryLabel })}</p>
-          </section>
-        ) : null}
-
         <nav className="mb-6 text-sm text-gray-500">
           <Link to="/" className="text-gray-500 hover:text-gray-700">{t('blogPost.breadcrumbHome')}</Link>
           <span className="mx-2 text-gray-400">/</span>
