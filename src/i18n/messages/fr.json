@@ -1,0 +1,568 @@
+{
+  "common": {
+    "language": "Langue",
+    "minutesShort": "min",
+    "languages": {
+      "es": "Espagnol",
+      "en": "Anglais",
+      "fr": "Français",
+      "de": "Allemand",
+      "pt": "Portugais"
+    }
+  },
+  "header": {
+    "writeReview": "Écrire un avis",
+    "blog": "Blog",
+    "blogAria": "Blog",
+    "userProfileAria": "Profil utilisateur",
+    "loginAria": "Se connecter",
+    "myProfile": "Mon profil",
+    "newReview": "Nouvel avis",
+    "logout": "Se déconnecter",
+    "resetFormSuccess": "Formulaire réinitialisé. Vous pouvez commencer un nouvel avis."
+  },
+  "footer": {
+    "blog": "Blog",
+    "opinionsByCity": "Avis par ville",
+    "termsAndConditions": "Conditions générales",
+    "legalNotice": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "cookiesPolicy": "Politique des cookies",
+    "termsOfUse": "Conditions d'utilisation",
+    "goodPractices": "Bonnes pratiques",
+    "disclaimer": "Tous les avis sont anonymes et reflètent des expériences personnelles, pas des faits ni des conseils juridiques."
+  },
+  "home": {
+    "hero": {
+      "subtitle": "Transparence du marché locatif : découvrez le comportement des propriétaires et partagez votre expérience.",
+      "cta": "Écrire un avis"
+    },
+    "input": {
+      "message1": "Tous les avis sont Anonymes",
+      "message2": "Vos avis aident à créer un marché locatif plus transparent",
+      "message3": "Partagez votre expérience avec d'autres locataires",
+      "message4": "Aidez à améliorer le marché immobilier",
+      "writeReview": "Écrire un avis",
+      "searchMap": "Rechercher sur la carte",
+      "propertyAddressPlaceholder": "Adresse du logement",
+      "start": "Commencer",
+      "search": "Rechercher",
+      "selectAddressError": "Veuillez sélectionner une adresse dans la liste pour continuer",
+      "genericError": "Une erreur s'est produite lors du traitement de votre demande"
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "step1Title": "Recherchez l'adresse",
+      "step1Text": "Saisissez l'adresse de l'annonce pour voir les avis.",
+      "step2Title": "Partagez votre expérience",
+      "step2Text": "Ajoutez un avis anonyme sur votre propriétaire.",
+      "step3Title": "Aidez la communauté",
+      "step3Text": "Votre avis guide les autres locataires."
+    },
+    "benefits": {
+      "title": "Pourquoi utiliser CaseroOk ?",
+      "item1Title": "Propriétaires vérifiés",
+      "item1Text": "Consultez de vrais avis avant de louer.",
+      "item2Title": "Gagnez du temps",
+      "item2Text": "Trouvez des informations fiables instantanément.",
+      "item3Title": "Communauté anonyme",
+      "item3Text": "Partagez vos expériences en toute sécurité.",
+      "item4Title": "Mises à jour immédiates",
+      "item4Text": "Les nouveaux avis sont publiés immédiatement."
+    },
+    "chromeExtension": {
+      "previewAlt": "Aperçu de l'extension",
+      "title": "Installez notre extension",
+      "description": "Vérifiez les propriétaires directement en naviguant sur des portails de location. Notre extension détecte le propriétaire et vous montre les avis sans quitter la page.",
+      "feature1": "Détecte automatiquement les coordonnées de l'annonce",
+      "feature2": "Vérifie s'il existe des avis précédents",
+      "feature3": "Partagez votre expérience en quelques secondes",
+      "installButton": "Installer l'extension"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Qu'est-ce que CaseroOk ?",
+      "a1": "CaseroOk est une plateforme où les locataires partagent anonymement leurs expériences avec des propriétaires pour aider d'autres personnes à prendre des décisions éclairées.",
+      "q2": "Les données personnelles des propriétaires sont-elles publiées ?",
+      "a2": "Non. Nous n'affichons jamais de noms, de téléphones ni d'e-mails. Nous ne conservons qu'un hash anonyme pour regrouper les avis du même propriétaire.",
+      "q3": "Les avis ont-ils une valeur juridique ?",
+      "a3": "Les avis sont des expériences subjectives de locataires et sont protégés par la liberté d'expression. Ils ne constituent ni des plaintes ni des déclarations juridiques.",
+      "q4": "Comment laisser mon avis ?",
+      "a4": "Recherchez l'adresse du logement et remplissez le formulaire. Vous pouvez aussi utiliser l'extension du navigateur qui détecte automatiquement les données de l'annonce.",
+      "q5": "Que se passe-t-il si je vois un contenu inapproprié ?",
+      "a5": "Nous avons une modération et des conditions d'utilisation qui interdisent les contenus diffamatoires ou illégaux. Si vous trouvez quelque chose de ce type, vous pouvez le signaler et nous l'examinerons."
+    }
+  },
+  "blogList": {
+    "seoTitle": "Blog CaseroOk",
+    "seoTitlePage": "Blog CaseroOk - Page {{page}}",
+    "seoDescription": "Guides et actualités sur la location sûre, le logement et les expériences des locataires en Espagne.",
+    "badge": "Blog",
+    "title": "Histoires et guides pour des locataires informés",
+    "intro": "Chaque semaine, nous analysons l'actualité du logement et la transformons en articles pratiques et originaux.",
+    "loading": "Chargement du blog par pays…",
+    "countryScope": "Affichage des articles du blog de {{country}}.",
+    "countrySwitcherLabel": "Changer de blog pays",
+    "emptyTitle": "Le premier article arrive bientôt",
+    "emptyDescription": "Nous préparons du contenu original sur la location, la cohabitation et les droits des locataires.",
+    "emptyByLanguageTitle": "Aucun article pour l'instant en {{language}}",
+    "emptyByLanguageDescription": "Les articles restent toujours dans leur langue d'origine. Changez de langue pour voir d'autres contenus disponibles.",
+    "featuredTitle": "Article à la une",
+    "featuredBadge": "À la une",
+    "recentArticles": "Articles récents",
+    "pageOf": "Page {{current}} sur {{total}}",
+    "readMore": "Lire la suite",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "blogPost": {
+    "seoFallbackTitle": "Article du blog",
+    "breadcrumbHome": "Accueil",
+    "breadcrumbBlog": "Blog",
+    "notFoundTitle": "Article introuvable",
+    "notFoundDescription": "Vérifiez l'URL ou revenez à la liste du blog pour continuer la lecture.",
+    "viewAllArticles": "Voir tous les articles",
+    "blogLabel": "Blog CaseroOk",
+    "publishedOn": "Publié le {{date}}",
+    "readingTime": "{{minutes}} min de lecture",
+    "originalSource": "Source originale",
+    "shareTitle": "Vous voulez partager votre expérience ?",
+    "shareDescription": "Chez CaseroOk, nous transformons l'actualité et les vécus réels en ressources pratiques pour les locataires. Si vous voulez contribuer avec votre histoire, vous pouvez publier un avis anonyme en quelques minutes.",
+    "shareCta": "Écrire un avis"
+  },
+  "addReview": {
+    "common": {
+      "close": "Close",
+      "next": "Next",
+      "previous": "Previous",
+      "sending": "Sending...",
+      "finish": "Finish",
+      "yes": "Yes",
+      "no": "No",
+      "optional": "Optional",
+      "chooseAtLeastOne": "Choose at least one option",
+      "selectOneOption": "Please select an option.",
+      "unknownError": "Unknown error",
+      "emDash": "—"
+    },
+    "steps": {
+      "address": "Address",
+      "stay": "Stay",
+      "property": "Property",
+      "community": "Community",
+      "management": "Management"
+    },
+    "stepper": {
+      "goToStepAria": "Go to step {{step}}: {{label}}"
+    },
+    "step1": {
+      "addressLabel": "Adresse",
+      "addressPlaceholder": "Rechercher une adresse...",
+      "streetNumberLabel": "Numéro",
+      "streetNumberPlaceholder": "Numéro",
+      "locateMeAria": "Me localiser",
+      "floorLabel": "Étage",
+      "floorPlaceholder": "Étage",
+      "doorLabel": "Porte",
+      "doorPlaceholder": "Porte"
+    },
+    "step2": {
+      "yearsQuestion": "How many years have you lived in this flat?",
+      "periodError": "Review the selected period.",
+      "currentlyLivingQuestion": "Are you still living in the flat?",
+      "depositReturnedQuestion": "Was your deposit returned?",
+      "monthlyRentLabel": "How much do you pay per month for rent? (€)",
+      "monthlyRentPlaceholder": "Ex: 800",
+      "includesLabel": "Includes:",
+      "serviceElectricity": "Electricity",
+      "serviceWater": "Water",
+      "serviceCommunity": "Community fees",
+      "serviceGas": "Gas",
+      "serviceGarage": "Garage",
+      "recommendQuestion": "Would you recommend this flat?"
+    },
+    "step3": {
+      "summerTemperatureLabel": "Summer temperature",
+      "winterTemperatureLabel": "Winter temperature",
+      "noiseLevelLabel": "Noise level",
+      "lightLevelLabel": "Natural light level",
+      "maintenanceStatusLabel": "Maintenance condition",
+      "propertyOpinionLabel": "Your opinion about the property",
+      "propertyOpinionPlaceholder": "Share your experience and opinion about the flat...",
+      "optionWellInsulated": "Well insulated",
+      "optionOkay": "Okay",
+      "optionHot": "Hot",
+      "optionCold": "Cold",
+      "optionQuiet": "Quiet",
+      "optionTolerable": "Tolerable",
+      "optionQuiteNoisy": "Quite noisy",
+      "optionVeryNoisy": "Very noisy",
+      "optionNoLight": "No light",
+      "optionLowLight": "Low light",
+      "optionBright": "Bright",
+      "optionVeryBright": "Very bright",
+      "optionLikeNew": "Like new",
+      "optionGood": "Good",
+      "optionAcceptable": "Acceptable",
+      "optionPoor": "Poor",
+      "optionBad": "Bad"
+    },
+    "step4": {
+      "neighborTypesLabel": "Neighbor types",
+      "touristApartmentsLabel": "Tourist flats in the building",
+      "buildingCleanlinessLabel": "Building cleanliness",
+      "communityEnvironmentLabel": "Neighborhood atmosphere",
+      "communitySecurityLabel": "Neighborhood safety",
+      "communityOpinionLabel": "Your opinion about the community and neighborhood",
+      "communityOpinionPlaceholder": "Share your experience and opinion about the community and neighborhood...",
+      "optionFamily": "Family",
+      "optionYoungCouples": "Young couples",
+      "optionStudentFlats": "Student flats",
+      "optionSharedFlats": "Shared flats",
+      "optionSeniors": "Seniors +75",
+      "optionYesTolerable": "Yes, tolerable",
+      "optionYesAnnoying": "Yes, annoying",
+      "optionNone": "None",
+      "optionVeryClean": "Very clean",
+      "optionGood": "Good",
+      "optionLow": "Low",
+      "optionNoCleaning": "No cleaning",
+      "optionQuiet": "Quiet",
+      "optionLeisureFestive": "Leisure/Festive",
+      "optionStudent": "Student",
+      "optionNightlife": "Nightlife",
+      "optionVerySafe": "Very safe",
+      "optionNoIssues": "No issues",
+      "optionCouldImprove": "Could improve",
+      "optionUnsafe": "Unsafe"
+    },
+    "step5": {
+      "ownerTypeLabel": "Owner type",
+      "ownerTypeError": "Please select the owner type.",
+      "ownerTypeOwner": "Owner",
+      "ownerTypeAgency": "Agency",
+      "ownerDataLabel": "Owner details",
+      "agencyDataLabel": "Agency details",
+      "fullNameLabel": "Full name",
+      "fullNamePlaceholder": "Full name",
+      "contactInfoLabel": "Contact information",
+      "phoneLabel": "Contact phone",
+      "phonePlaceholder": "Ex: 600123456",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "email@example.com",
+      "ownerOpinionLabel": "Your opinion about the owner",
+      "agencyOpinionLabel": "Your opinion about the agency",
+      "opinionPlaceholder": "Describe your experience honestly, respectfully, and based on real facts. Avoid personal data, insults, or threats.",
+      "acceptTermsPrefix": "I have read and accept the",
+      "termsAndConditions": "terms and conditions",
+      "privacyInfoAria": "Privacy information",
+      "privacyModalTitle": "How we store it",
+      "privacyModalDescription": "This is the hashed value stored in our database:"
+    },
+    "staticMessages": {
+      "step1Title": "Your opinion is anonymous",
+      "step1Message": "The information you share will not be shown exactly as entered.",
+      "step2Title": "Rental Period",
+      "step2Message": "Indicate the period you have lived or are living in the property to contextualize your opinion.",
+      "step3Title": "Property Condition",
+      "step3Message": "Evaluate the flat's condition to help future tenants make informed decisions.",
+      "step4Title": "Community and Neighborhood",
+      "step4Message": "Information about the building community and neighborhood is very valuable for future tenants.",
+      "step5Title": "Privacy",
+      "step5Message": "Personal data is processed with irreversible hashing only to associate opinions with owners. It is never stored in plain text or shared with third parties."
+    },
+    "login": {
+      "title": "Save and validate your review",
+      "infoTitle": "This information:",
+      "infoItem1": "Will only be used to validate your review",
+      "infoItem2": "Will always stay anonymous",
+      "infoItem3": "Will let you edit it if needed",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@email.com",
+      "validateByEmail": "Validate by email",
+      "invalidEmail": "Enter a valid email address.",
+      "sendLinkError": "Error sending the link",
+      "sendingLink": "Sending login link...",
+      "sendNewLink": "Send new link",
+      "linkSentPrefix": "📩 We sent a link to",
+      "changeEmail": "Change email",
+      "resendLink": "Resend link",
+      "resendIn": "Resend in {{seconds}}s",
+      "or": "or",
+      "continueWithGoogle": "Continue with Google"
+    },
+    "toast": {
+      "validationErrorTitle": "Validation error"
+    },
+    "validation": {
+      "common": {
+        "incompleteData": "Incomplete data",
+        "incompleteAddressData": "Incomplete address data",
+        "noValidSession": "No valid session was found",
+        "databaseSaveError": "Error saving data to the database",
+        "dataSaveError": "Error saving data",
+        "dataSubmissionError": "Error submitting data"
+      },
+      "step1": {
+        "missingAddressInfo": "No address information was provided",
+        "addressRequired": "Address is required",
+        "addressNumberRequired": "Address number is required",
+        "addressNumberReview": "Please review the address number",
+        "addressCoordinatesMissing": "Address coordinates could not be obtained"
+      },
+      "step2": {
+        "startYearRequired": "Start year is required",
+        "priceRequired": "Price is required",
+        "endYearAfterStartYear": "End year must be after start year",
+        "recommendationRequired": "Recommendation is required",
+        "depositReturnedRequired": "If you indicate that you no longer live in the flat, you must specify whether the deposit was returned"
+      },
+      "step3": {
+        "summerTemperatureRequired": "Summer temperature is required",
+        "winterTemperatureRequired": "Winter temperature is required",
+        "noiseLevelRequired": "Noise level is required",
+        "lightLevelRequired": "Light level is required",
+        "maintenanceStatusRequired": "Maintenance status is required"
+      },
+      "step4": {
+        "neighborTypesRequired": "Neighbor information is required",
+        "communityEnvironmentRequired": "Neighborhood environment information is required"
+      },
+      "step5": {
+        "ownerTypeRequired": "Owner information is required",
+        "acceptTermsRequired": "Accept the terms and conditions"
+      }
+    }
+  },
+  "cityReviews": {
+    "index": {
+      "seo": {
+        "title": "Avis de location par ville | CaseroOk",
+        "description": "Explorez des avis vérifiés de locataires classés par ville. Choisissez votre zone et consultez des expériences réelles avant de louer."
+      },
+      "hero": {
+        "badge": "Avis vérifiés",
+        "title": "Avis de location par ville",
+        "description": "Nous regroupons de vrais témoignages de locataires pour vous aider à trouver une location plus sûre. Consultez les villes disponibles et ouvrez la carte centrée sur votre zone."
+      },
+      "loading": "Chargement des villes avec avis…",
+      "empty": {
+        "title": "Aucun avis public par ville pour le moment",
+        "description": "Nous modérons de nouveaux avis. En attendant, visitez la carte pour voir toutes les expériences publiées à ce jour.",
+        "mapCta": "Ouvrir la carte des avis"
+      },
+      "stats": {
+        "citySingular": "{{count}} ville avec avis",
+        "cityPlural": "{{count}} villes avec avis",
+        "reviewSingular": "{{count}} avis publié",
+        "reviewPlural": "{{count}} avis publiés"
+      },
+      "card": {
+        "reviewSingular": "{{count}} avis",
+        "reviewPlural": "{{count}} avis",
+        "description": "Ouvrez la carte centrée sur {{city}} et consultez les expériences réelles partagées par d’autres locataires.",
+        "cta": "Voir les avis"
+      }
+    },
+    "city": {
+      "defaultCity": "Ville",
+      "badge": "Avis par ville",
+      "hero": {
+        "subtitleSingular": "Nous avons {{count}} avis publié sur la location à {{city}}.",
+        "subtitlePlural": "Nous avons {{count}} avis publiés sur la location à {{city}}."
+      },
+      "seo": {
+        "title": "Avis de location à {{city}} | CaseroOk",
+        "descriptionSingular": "Découvrez l’avis de locataire sur les propriétaires et logements à {{city}}{{state}}.",
+        "descriptionPlural": "Découvrez les {{count}} avis de locataires sur les propriétaires et logements à {{city}}{{state}}.",
+        "descriptionFallback": "Découvrez des avis de locataires sur les propriétaires et logements à {{city}}."
+      },
+      "loading": {
+        "title": "Avis de location à {{city}}",
+        "description": "Chargement des détails et de la carte…"
+      },
+      "notFound": {
+        "title": "Nous n’avons pas trouvé d’avis à {{city}}",
+        "description": "Nous n’avons pas encore d’avis publics pour cet emplacement. Vous pouvez explorer tous les avis sur la carte générale ou revenir à la liste des villes.",
+        "mapCta": "Voir la carte complète",
+        "citiesCta": "Voir les villes avec avis"
+      },
+      "ready": {
+        "title": "Avis de location à {{city}}",
+        "mapCta": "Voir la carte complète",
+        "citiesCta": "Voir toutes les villes"
+      },
+      "testimonials": {
+        "title": "Ce que disent les locataires de {{city}}",
+        "description": "Nous avons sélectionné des témoignages réels pour vous aider à mieux évaluer la location dans cette zone.",
+        "pending": "Avis en attente de finalisation."
+      },
+      "map": {
+        "title": "Carte des avis à {{city}}"
+      },
+      "mapUnavailable": {
+        "title": "Nous ne pouvons pas encore afficher la carte de {{city}}",
+        "description": "Les avis disponibles n’incluent pas encore de coordonnées précises. Consultez la carte générale pour voir tous les avis.",
+        "cta": "Ouvrir la carte générale"
+      }
+    }
+  },
+  "legalCommon": {
+    "lastUpdated": "Dernière mise à jour : 19/08/2025"
+  },
+  "legalHub": {
+    "seoTitle": "Conditions Générales | CaseroOk",
+    "seoDescription": "Documentation légale et conditions de CaseroOk.",
+    "title": "Conditions générales",
+    "description": "Documentation légale de {{siteName}}.",
+    "links": {
+      "legalNotice": "Mentions légales",
+      "privacyPolicy": "Politique de confidentialité",
+      "cookiesPolicy": "Politique des cookies",
+      "termsOfUse": "Conditions d’utilisation",
+      "goodPractices": "Protocole de bonnes pratiques",
+      "termsAndConditions": "Conditions générales"
+    }
+  },
+  "legalNotice": {
+    "seoTitle": "Mentions Légales | CaseroOk",
+    "seoDescription": "Informations légales de CaseroOk.",
+    "title": "Mentions légales",
+    "siteOwnerTitle": "Responsable du site",
+    "siteOwnerBody": "Ce site web appartient à {{ownerName}}, domicilié à {{cityCountry}}. Contact : {{contactEmail}}.",
+    "purposeTitle": "Objet",
+    "purposeBody": "Ce site propose un blog/plateforme d’avis de locataires sur les expériences de location, avec des fonctionnalités de publication et de consultation d’avis anonymes.",
+    "intellectualPropertyTitle": "Propriété intellectuelle",
+    "intellectualPropertyBody": "Les contenus propres (marque, logo, textes, code) appartiennent à {{projectName}} ou à leurs auteurs et sont protégés par la réglementation sur la propriété intellectuelle. L’utilisation du site ne concède aucune licence sur ces droits.",
+    "contentLiabilityTitle": "Responsabilité des contenus",
+    "contentLiabilityBody": "Les avis publiés relèvent de la seule responsabilité de leurs auteurs. {{projectName}} peut modérer ou retirer les contenus qui enfreignent ces conditions, la loi ou les principes de respect.",
+    "linksTitle": "Liens",
+    "linksBody": "Ce site peut inclure des liens vers des sites tiers sans que cela n’implique une responsabilité sur leurs contenus.",
+    "availabilityTitle": "Disponibilité",
+    "availabilityBody": "La continuité du service et l’absence d’erreurs ne sont pas garanties. Nous nous efforcerons de les corriger avec la plus grande diligence possible.",
+    "lawTitle": "Loi applicable et juridiction",
+    "lawBody": "Le droit espagnol s’applique. En cas de litige, les parties se soumettent aux tribunaux de {{jurisdictionCity}}, sauf disposition impérative contraire."
+  },
+  "privacyPolicy": {
+    "seoTitle": "Politique de Confidentialité | CaseroOk",
+    "seoDescription": "Comment nous traitons vos données personnelles chez CaseroOk.",
+    "title": "Politique de confidentialité",
+    "section1Title": "1) Responsable du traitement",
+    "section1Body": "{{ownerName}} - Contact : {{contactEmail}}.",
+    "section2Title": "2) Données que nous traitons",
+    "section2Lead1Strong": "Données fournies par les utilisateurs qui publient des avis :",
+    "section2Lead1": "texte de l’avis, note et métadonnées techniques minimales anti-spam (ex. IP/UA).",
+    "section2Lead2Strong": "Identifiants des propriétaires/gestionnaires pour dédupliquer et regrouper les avis :",
+    "section2Bullet1": "Nous ne stockons pas de données personnelles en clair (nom, téléphone, email).",
+    "section2Bullet2": "Nous stockons uniquement un hash irréversible (ex. SHA-256) de données normalisées (ex. téléphone ou email normalisé).",
+    "section2Bullet3": "Le hash est calculé sur votre appareil (frontend ou extension) et seul le hash est envoyé, jamais la donnée originale.",
+    "section2Lead3Strong": "Données d’usage/analytique (uniquement avec consentement) :",
+    "section2Lead3": "pages vues et événements agrégés.",
+    "section3Title": "3) Origine des données",
+    "section3Body1": "Contribution volontaire de l’utilisateur lors de la publication de son avis.",
+    "section3Body2": "Extension navigateur (Chrome/Firefox) : capte uniquement les informations visibles sur des pages comme Idealista ; calcule le hash localement et interroge le backend avec ce hash. Elle ne réalise pas de scraping massif ni de téléchargement de données personnelles en clair.",
+    "section4Title": "4) Finalités",
+    "section4Bullet1": "Publier et modérer les avis.",
+    "section4Bullet2": "Regrouper les avis par propriétaire/gestionnaire via des hashes afin d’éviter les doublons et améliorer la consultation.",
+    "section4Bullet3": "Prévention des abus et du spam (limitation de fréquence, signaux techniques).",
+    "section4Bullet4": "(Optionnel) Analytique pour améliorer le service.",
+    "section5Title": "5) Base juridique",
+    "section5Body1": "Consentement de l’utilisateur qui envoie l’avis.",
+    "section5Body2": "Intérêt légitime (art. 6.1.f RGPD) pour la modération, la sécurité, la déduplication par hash et le bon fonctionnement du service. Aucune décision automatisée avec effets juridiques n’est utilisée.",
+    "section6Title": "6) Destinataires et sous-traitants",
+    "section6Body": "Nous ne cédons pas de données à des tiers sauf obligation légale. Nous utilisons des prestataires d’infrastructure en tant que sous-traitants (ex. Supabase, {{hostingProvider}}), sous contrat conforme au RGPD. Des transferts internationaux peuvent exister ; dans ce cas, nous appliquons des garanties appropriées (Clauses Contractuelles Types de l’UE).",
+    "section7Title": "7) Durées de conservation",
+    "section7Bullet1": "Avis et hashes : tant que le service est actif ou jusqu’à demande de suppression/blocage.",
+    "section7Bullet2": "Logs techniques anti-spam : {{logsRetentionDays}}.",
+    "section8Title": "8) Droits",
+    "section8Body": "Vous pouvez demander l’accès, la rectification, la suppression, l’opposition, la limitation et la portabilité en écrivant à {{contactEmail}}. Concernant les hashes : comme la donnée originale n’est pas stockée, la suppression se fait en bloquant ou supprimant le hash associé. Si vous êtes un tiers concerné (ex. propriétaire) et pensez qu’une identification indirecte existe, contactez-nous pour blocage du hash et désindexation du regroupement.",
+    "section9Title": "9) Mineurs",
+    "section9Body": "Le service ne s’adresse pas aux mineurs de moins de 14 ans. Les envois de données par des mineurs ne sont pas acceptés.",
+    "section10Title": "10) Modifications",
+    "section10Body": "Nous pouvons mettre à jour cette politique. La version en vigueur sera publiée avec sa date de mise à jour."
+  },
+  "cookiesPolicy": {
+    "seoTitle": "Politique des Cookies | CaseroOk",
+    "seoDescription": "Informations sur l’utilisation des cookies chez CaseroOk.",
+    "title": "Politique des cookies",
+    "section1Title": "Utilisons-nous des cookies ?",
+    "section1Bullet1Strong": "Cookies techniques/nécessaires :",
+    "section1Bullet1": "indispensables au fonctionnement du site (session, sécurité, préférences de base).",
+    "section1Bullet2Strong": "Cookies d’analytique (optionnels) :",
+    "section1Bullet2": "uniquement si vous donnez votre consentement dans la bannière ; ils servent à mesurer l’usage et améliorer l’expérience.",
+    "section1Body": "Nous n’utilisons pas de cookies pour afficher des données personnelles.",
+    "section2Title": "Gestion du consentement",
+    "section2Prefix": "Lors de votre première visite, nous affichons une bannière pour accepter, refuser ou configurer les cookies non essentiels. Vous pouvez modifier votre choix dans",
+    "cookieSettingsLink": "Configurer les cookies",
+    "section3Title": "Comment gérer les cookies dans votre navigateur",
+    "section3Body": "Vous pouvez autoriser, bloquer ou supprimer les cookies depuis les paramètres de votre navigateur.",
+    "section4Title": "Fournisseurs",
+    "section4Body": "Si vous activez l’analytique, nous pourrons utiliser {{analyticsProvider}}."
+  },
+  "termsOfUse": {
+    "seoTitle": "Conditions d’utilisation | CaseroOk",
+    "seoDescription": "Conditions d’utilisation de CaseroOk.",
+    "title": "Conditions d’utilisation",
+    "section1Title": "1) Objet",
+    "section1Body": "Régir l’accès et l’utilisation de {{projectName}}, une plateforme/blog d’avis anonymes sur les expériences de location.",
+    "section2Title": "2) Inscription et publication",
+    "section2Body": "L’utilisateur est responsable de la véracité de ce qu’il publie et du respect de ces règles.",
+    "section3Title": "3) Interdictions (contenu)",
+    "section3Bullet1": "Il est strictement interdit de publier en texte libre des données personnelles de tiers en clair (nom complet, téléphone, email, adresse exacte ou autres identifiants).",
+    "section3Bullet2": "Langage injurieux, diffamatoire, incitation à la haine ou à la violence.",
+    "section3Bullet3": "Informations fausses ou portant atteinte aux droits de tiers.",
+    "section4Title": "4) Champ “identifiant” sécurisé (hash)",
+    "section4Body1": "Pour regrouper les avis du même propriétaire/gestionnaire et éviter les doublons, le système peut demander à l’utilisateur d’indiquer un téléphone ou email du propriétaire uniquement dans les champs prévus.",
+    "section4Body2": "Cette donnée n’est JAMAIS envoyée en clair : elle est normalisée et hashée localement (ex. SHA-256), et seul le hash est envoyé.",
+    "section4Body3": "Il est interdit de publier ces données dans le texte de l’avis ou dans d’autres champs visibles.",
+    "section4Body4": "L’utilisateur s’engage à ne pas tenter de réidentifier quiconque ni à utiliser les hashes à d’autres fins que la consultation au sein du service.",
+    "section5Title": "5) Extension de navigateur",
+    "section5BodyIntro": "L’extension officielle de {{projectName}} :",
+    "section5Bullet1": "Traite uniquement les informations visibles sur des sites comme Idealista.",
+    "section5Bullet2": "Calcule un hash local et interroge le backend avec ce hash pour afficher l’existence éventuelle d’avis associés.",
+    "section5Bullet3": "Ne télécharge ni ne stocke de données personnelles en clair.",
+    "section6Title": "6) Modération et retrait",
+    "section6Body": "Nous pouvons modérer, masquer ou supprimer les contenus qui enfreignent ces conditions ou la loi. Vous disposez de {{contactEmail}} pour signaler des abus ou demander une révision.",
+    "section7Title": "7) Responsabilité",
+    "section7Body": "Les avis relèvent de leurs auteurs. {{projectName}} ne garantit pas l’exactitude et n’assume pas de responsabilité pour les décisions prises sur la base des avis.",
+    "section8Title": "8) Propriété intellectuelle",
+    "section8Body": "L’utilisateur garantit disposer des droits nécessaires pour publier son contenu et accorde à {{projectName}} une licence non exclusive et gratuite pour l’héberger et l’afficher.",
+    "section9Title": "9) Résiliation",
+    "section9Body": "Nous pouvons suspendre des comptes ou publications en cas de manquements graves ou répétés.",
+    "section10Title": "10) Loi et juridiction",
+    "section10Body": "Loi espagnole ; juridiction de {{jurisdictionCity}}, sauf disposition impérative contraire."
+  },
+  "goodPractices": {
+    "seoTitle": "Bonnes Pratiques | CaseroOk",
+    "seoDescription": "Recommandations pour publier des avis responsables.",
+    "title": "Protocole de bonnes pratiques",
+    "introTitle": "Pour maintenir un espace utile et respectueux :",
+    "yesTitle": "Oui (recommandé)",
+    "yesBullet1": "Décrivez des faits concrets de votre expérience en tant que locataire.",
+    "yesBullet2": "Soyez honnête, respectueux et précis (dates approximatives, incidents objectifs).",
+    "yesBullet3Intro": "Si vous ajoutez le téléphone/email du propriétaire dans les champs prévus, rappelez-vous que :",
+    "yesBullet3a": "La donnée est normalisée et hashée (ex. SHA-256) sur votre appareil.",
+    "yesBullet3b": "La donnée originale n’est jamais stockée.",
+    "yesBullet3c": "Le hash sert uniquement à regrouper les avis et au matching avec des plateformes comme Idealista via l’extension navigateur.",
+    "noTitle": "Non (interdit)",
+    "noBullet1": "Inclure des données personnelles en clair dans le texte de l’avis.",
+    "noBullet2": "Insultes, dénigrements, rumeurs ou accusations sans fondement.",
+    "noBullet3": "Publicité, spam ou liens malveillants.",
+    "reportTitle": "Comment signaler",
+    "reportBody": "Si vous voyez un contenu qui enfreint ces règles, écrivez-nous à {{contactEmail}} en indiquant l’URL et le motif. Nous traitons ces signalements en priorité."
+  },
+  "seo": {
+    "authTitle": "Authentification | CaseroOk",
+    "authDescription": "Traitement de l'authentification sécurisée.",
+    "reviewTitle": "Avis | CaseroOk",
+    "reviewDescription": "Lisez des avis anonymes de locataires sur les logements et propriétaires.",
+    "mapTitle": "Carte des Avis | CaseroOk",
+    "mapDescription": "Explorez sur la carte des avis anonymes sur les logements et propriétaires.",
+    "profileTitle": "Profil | CaseroOk",
+    "profileDescription": "Gérez votre profil sur CaseroOk.",
+    "addReviewTitle": "Ajouter un Avis | CaseroOk",
+    "addReviewDescription": "Partagez un avis anonyme sur votre logement ou votre propriétaire.",
+    "homeTitle": "CaseroOk - Avis anonymes sur les logements et propriétaires",
+    "homeDescription": "Découvrez et partagez des avis anonymes sur les logements et propriétaires en Espagne."
+  }
+}
