@@ -7,7 +7,10 @@
       "en": "Inglês",
       "fr": "Francês",
       "de": "Alemão",
-      "pt": "Português"
+      "pt": "Português",
+      "it": "Italiano",
+      "nl": "Neerlandes",
+      "sv": "Sueco"
     }
   },
   "header": {
@@ -345,10 +348,14 @@
         "title": "Avaliações de arrendamento por cidade",
         "description": "Reunimos testemunhos reais de inquilinos para ajudar a encontrar arrendamentos mais seguros. Veja as cidades disponíveis e abra o mapa centrado na sua zona."
       },
+      "countryScope": "A mostrar avaliações de {{country}}.",
+      "countryLanguageScope": "A mostrar avaliações de {{country}} em {{language}}.",
       "loading": "A carregar cidades com avaliações…",
       "empty": {
         "title": "Ainda não existem avaliações públicas por cidade",
         "description": "Estamos a moderar novas avaliações. Entretanto, visite o mapa para ver todas as experiências publicadas até agora.",
+        "countryTitle": "Ainda não existem avaliações públicas em {{country}}",
+        "countryDescription": "Ainda não temos avaliações públicas para {{country}}. Pode abrir o mapa completo para ver todas as experiências publicadas.",
         "mapCta": "Abrir mapa de avaliações"
       },
       "stats": {

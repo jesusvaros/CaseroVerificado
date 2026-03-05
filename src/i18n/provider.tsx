@@ -69,10 +69,13 @@ function readManualLocaleFlag(): boolean {
 
 function hasForcedCountryOverride(): boolean {
   if (typeof window === 'undefined') return false;
-  const queryValue = new URLSearchParams(window.location.search).get('forceCountry');
+  const searchParams = new URLSearchParams(window.location.search);
+  const forceQueryValue = searchParams.get('forceCountry');
+  const countryQueryValue = searchParams.get('country');
   const storageValue = window.localStorage.getItem('forceCountry');
   return Boolean(
-    (queryValue && /^[a-zA-Z]{2}$/.test(queryValue.trim())) ||
+    (forceQueryValue && /^[a-zA-Z]{2}$/.test(forceQueryValue.trim())) ||
+    (countryQueryValue && /^[a-zA-Z]{2}$/.test(countryQueryValue.trim())) ||
     (storageValue && /^[a-zA-Z]{2}$/.test(storageValue.trim()))
   );
 }
@@ -122,7 +125,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [manualLocaleLocked, routeLocale, storedLocale]);
+  }, [location.search, manualLocaleLocked, routeLocale, storedLocale]);
 
   const setLocale = useCallback((nextLocale: Locale) => {
     setManualLocaleLocked(true);

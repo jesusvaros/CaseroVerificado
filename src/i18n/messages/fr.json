@@ -7,7 +7,10 @@
       "en": "Anglais",
       "fr": "Français",
       "de": "Allemand",
-      "pt": "Portugais"
+      "pt": "Portugais",
+      "it": "Italien",
+      "nl": "Neerlandais",
+      "sv": "Suedois"
     }
   },
   "header": {
@@ -345,10 +348,14 @@
         "title": "Avis de location par ville",
         "description": "Nous regroupons de vrais témoignages de locataires pour vous aider à trouver une location plus sûre. Consultez les villes disponibles et ouvrez la carte centrée sur votre zone."
       },
+      "countryScope": "Affichage des avis de {{country}}.",
+      "countryLanguageScope": "Affichage des avis de {{country}} en {{language}}.",
       "loading": "Chargement des villes avec avis…",
       "empty": {
         "title": "Aucun avis public par ville pour le moment",
         "description": "Nous modérons de nouveaux avis. En attendant, visitez la carte pour voir toutes les expériences publiées à ce jour.",
+        "countryTitle": "Aucun avis public en {{country}} pour le moment",
+        "countryDescription": "Nous n'avons pas encore d'avis publics pour {{country}}. Vous pouvez ouvrir la carte complète pour voir toutes les expériences publiées.",
         "mapCta": "Ouvrir la carte des avis"
       },
       "stats": {

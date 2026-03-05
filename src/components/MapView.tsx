@@ -17,7 +17,6 @@ import DetailsPanel from './map/DetailsPanel';
 import { useMap } from 'react-leaflet';
 import { trackUmamiEvent } from '../utils/analytics';
 import { detectUserCountryCode, onForcedCountryChange } from '../services/location/userCountry';
-import { countryNameMatchesCode } from '../utils/countryMatching';
 import { getCountryDefaultMapView } from '../services/location/countryMapDefaults';
 import { isCountryDebugLoggingEnabled } from '../utils/countryDebugLogging';
 import { getReviewsScopePreference, type ReviewsScope } from '../utils/reviewsScope';

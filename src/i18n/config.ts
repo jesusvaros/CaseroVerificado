@@ -1,4 +1,4 @@
-export const SUPPORTED_LOCALES = ['es', 'en', 'fr', 'de', 'pt'] as const;
+export const SUPPORTED_LOCALES = ['es', 'en', 'fr', 'de', 'pt', 'it', 'nl', 'sv'] as const;
 
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
@@ -10,6 +10,9 @@ export const DATE_LOCALE_BY_LANGUAGE: Record<Locale, string> = {
   fr: 'fr-FR',
   de: 'de-DE',
   pt: 'pt-PT',
+  it: 'it-IT',
+  nl: 'nl-NL',
+  sv: 'sv-SE',
 };
 
 export function isSupportedLocale(value: string | null | undefined): value is Locale {

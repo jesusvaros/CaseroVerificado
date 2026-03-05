@@ -6,6 +6,9 @@ const COUNTRY_LANGUAGE_TAG_BY_CODE: Record<string, string> = {
   FR: 'fr-FR',
   DE: 'de-DE',
   IT: 'it-IT',
+  NL: 'nl-NL',
+  CH: 'de-CH',
+  SE: 'sv-SE',
   PT: 'pt-PT',
 };
 
@@ -16,10 +19,10 @@ const COUNTRY_APP_LOCALE_BY_CODE: Record<string, string> = {
   US: 'en',
   FR: 'fr',
   DE: 'de',
-  IT: 'en',
-  NL: 'en',
-  CH: 'en',
-  SE: 'en',
+  IT: 'it',
+  NL: 'nl',
+  CH: 'de',
+  SE: 'sv',
   PT: 'pt',
 };
 

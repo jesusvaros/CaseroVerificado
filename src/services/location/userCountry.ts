@@ -10,6 +10,9 @@ const DOMAIN_SUFFIX_TO_COUNTRY_CODE: Array<{ suffix: string; countryCode: string
   { suffix: '.fr', countryCode: 'FR' },
   { suffix: '.it', countryCode: 'IT' },
   { suffix: '.de', countryCode: 'DE' },
+  { suffix: '.nl', countryCode: 'NL' },
+  { suffix: '.se', countryCode: 'SE' },
+  { suffix: '.ch', countryCode: 'CH' },
   { suffix: '.pt', countryCode: 'PT' },
   { suffix: '.ie', countryCode: 'IE' },
 ];
@@ -24,8 +27,12 @@ function readForcedCountryCode(): string | null {
   if (typeof window === 'undefined') return null;
 
   const searchParams = new URLSearchParams(window.location.search);
-  const fromQuery = normalizeCountryCode(searchParams.get('forceCountry'));
-  if (fromQuery) return fromQuery;
+  const fromForceQuery = normalizeCountryCode(searchParams.get('forceCountry'));
+  if (fromForceQuery) return fromForceQuery;
+
+  // `country` is used in blog routes and should also scope locale/country behavior.
+  const fromCountryQuery = normalizeCountryCode(searchParams.get('country'));
+  if (fromCountryQuery) return fromCountryQuery;
 
   const fromStorage = normalizeCountryCode(window.localStorage.getItem(FORCED_COUNTRY_STORAGE_KEY));
   if (fromStorage) return fromStorage;

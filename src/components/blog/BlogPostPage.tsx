@@ -241,7 +241,9 @@ export default function BlogPostPage() {
               {t('blogPost.viewAllArticles')}
             </Link>
           </section>
-        ) : (
+        ) : null}
+
+        {post ? (
           <article className="bg-white">
             <header className="mb-8">
               <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">{t('blogPost.blogLabel')}</p>
@@ -338,7 +340,7 @@ export default function BlogPostPage() {
               </Link>
             </footer>
           </article>
-        )}
+        ) : null}
       </main>
     </>
   );

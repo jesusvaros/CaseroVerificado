@@ -14,6 +14,8 @@ const POSTS_DIR = path.resolve(ROOT_DIR, 'src/blog/posts');
 const SITEMAP_PATH = path.resolve(ROOT_DIR, 'public/sitemap.xml');
 const ENV_PATH = path.resolve(ROOT_DIR, '.env');
 const require = createRequire(import.meta.url);
+const BLOG_COUNTRY_CODES = ['ES', 'GB', 'FR', 'DE', 'IT', 'NL', 'CH', 'SE', 'PT'];
+const BLOG_COUNTRY_CODE_SET = new Set(BLOG_COUNTRY_CODES);
 
 async function loadEnv() {
   try {
@@ -180,6 +182,26 @@ function formatDate(input) {
   }
 }
 
+function resolveSitemapCountryCode(value) {
+  if (!value || typeof value !== 'string') return 'ES';
+  const normalized = value.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(normalized)) return 'ES';
+  return BLOG_COUNTRY_CODE_SET.has(normalized) ? normalized : 'ES';
+}
+
+function dedupeEntries(entries) {
+  const seen = new Set();
+  const output = [];
+
+  for (const entry of entries) {
+    if (!entry?.loc || seen.has(entry.loc)) continue;
+    seen.add(entry.loc);
+    output.push(entry);
+  }
+
+  return output;
+}
+
 function renderSitemap(entries) {
   const urlset = entries
     .map(
@@ -224,13 +246,30 @@ async function generateSitemap() {
     lastmod: item.lastmod,
   }));
 
+  // Mantener España sin query y exponer blogs por país para indexación internacional.
+  const countryBlogListEntries = BLOG_COUNTRY_CODES
+    .filter(countryCode => countryCode !== 'ES')
+    .map(countryCode => ({
+      loc: buildUrl(baseUrl, `/blog?country=${countryCode}`),
+      changefreq: 'daily',
+      priority: '0.7',
+      lastmod: today,
+    }));
+
   const blogPosts = await loadBlogPosts();
-  const blogEntries = blogPosts.map(post => ({
-    loc: buildUrl(baseUrl, `/blog/${post.slug}`),
-    changefreq: 'weekly',
-    priority: '0.6',
-    lastmod: post.publishedAt ?? today,
-  }));
+  const blogEntries = blogPosts.map(post => {
+    const countryCode = resolveSitemapCountryCode(post.countryCode);
+    const scopedPath = countryCode === 'ES'
+      ? `/blog/${post.slug}`
+      : `/blog/${post.slug}?country=${countryCode}`;
+
+    return {
+      loc: buildUrl(baseUrl, scopedPath),
+      changefreq: 'weekly',
+      priority: '0.6',
+      lastmod: post.publishedAt ?? today,
+    };
+  });
 
   const citySummaries = await loadCitySummaries();
   const cityEntries = citySummaries.map(city => ({
@@ -240,13 +279,19 @@ async function generateSitemap() {
     lastmod: today,
   }));
 
-  const entries = [...staticEntries, ...blogEntries, ...cityEntries];
+  const entries = dedupeEntries([
+    ...staticEntries,
+    ...countryBlogListEntries,
+    ...blogEntries,
+    ...cityEntries,
+  ]);
 
   const xml = renderSitemap(entries);
   await fs.writeFile(SITEMAP_PATH, xml, 'utf8');
 
   console.log(`Sitemap actualizado en ${path.relative(ROOT_DIR, SITEMAP_PATH)}`);
   console.log(`• Rutas estáticas: ${staticEntries.length}`);
+  console.log(`• Blog por país: ${countryBlogListEntries.length}`);
   console.log(`• Posts del blog: ${blogEntries.length}`);
   console.log(`• Ciudades: ${cityEntries.length}`);
 }

@@ -7,7 +7,10 @@
       "en": "Englisch",
       "fr": "Französisch",
       "de": "Deutsch",
-      "pt": "Portugiesisch"
+      "pt": "Portugiesisch",
+      "it": "Italienisch",
+      "nl": "Niederlandisch",
+      "sv": "Schwedisch"
     }
   },
   "header": {
@@ -345,10 +348,14 @@
         "title": "Mietbewertungen nach Stadt",
         "description": "Wir sammeln echte Erfahrungsberichte von Mietern, damit du sicherer mieten kannst. Sieh verfügbare Städte an und öffne die Karte für deine Region."
       },
+      "countryScope": "Es werden Bewertungen aus {{country}} angezeigt.",
+      "countryLanguageScope": "Es werden Bewertungen aus {{country}} in {{language}} angezeigt.",
       "loading": "Städte mit Bewertungen werden geladen…",
       "empty": {
         "title": "Noch keine öffentlichen Bewertungen nach Stadt",
         "description": "Wir moderieren neue Bewertungen. In der Zwischenzeit kannst du auf der Karte alle bisher veröffentlichten Erfahrungen sehen.",
+        "countryTitle": "Noch keine öffentlichen Bewertungen in {{country}}",
+        "countryDescription": "Für {{country}} haben wir noch keine öffentlichen Bewertungen. Du kannst die vollständige Karte öffnen, um alle veröffentlichten Erfahrungen anzusehen.",
         "mapCta": "Bewertungskarte öffnen"
       },
       "stats": {

@@ -110,8 +110,10 @@ const Header: React.FC = () => {
   const handleCountryChange = (nextCountryCode: BlogCountryCode) => {
     setIsCountryMenuOpen(false);
     setForcedCountryCode(nextCountryCode);
-    const preferredLocale = resolveLocale(getPreferredLocaleByCountry(nextCountryCode) ?? 'en');
-    setLocale(preferredLocale);
+    const preferredLocale = getPreferredLocaleByCountry(nextCountryCode);
+    if (preferredLocale) {
+      setLocale(resolveLocale(preferredLocale));
+    }
 
     const isBlogPath = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
     if (!isBlogPath) return;
