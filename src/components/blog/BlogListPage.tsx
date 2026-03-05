@@ -5,7 +5,6 @@ import {
   type StaticBlogPost,
 } from '../../blog/posts';
 import {
-  getCountryDisplayLabel,
   normalizeBlogCountryCode,
 } from '../../blog/countryBlogs';
 import { resolveLocale } from '../../i18n/config';
@@ -78,8 +77,6 @@ export default function BlogListPage() {
 
   const heroReadingMinutes = heroPost ? computeReadingMinutes(heroPost) : null;
   const heroExcerpt = heroPost ? buildExcerpt(heroPost) : null;
-
-  const activeCountryLabel = activeCountryCode ? getCountryDisplayLabel(activeCountryCode, locale) : null;
 
   const canonicalParams = new URLSearchParams();
   if (activeCountryCode) canonicalParams.set('country', activeCountryCode);
@@ -156,11 +153,6 @@ export default function BlogListPage() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-700">{t('blogList.badge')}</p>
           <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl">{t('blogList.title')}</h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-gray-600">{t('blogList.intro')}</p>
-          {activeCountryLabel ? (
-            <p className="mt-3 text-sm font-medium text-gray-600">
-              {t('blogList.countryScope', { country: activeCountryLabel })}
-            </p>
-          ) : null}
         </header>
 
         {isLoading ? (
