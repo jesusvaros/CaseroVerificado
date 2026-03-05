@@ -5,6 +5,7 @@ import './index.css';
 import App from './App.tsx';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
+import { I18nProvider } from './i18n/provider';
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -22,7 +23,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <PostHogProvider client={posthogClient}>
       <BrowserRouter>
-        <App />
+        <I18nProvider>
+          <App />
+        </I18nProvider>
       </BrowserRouter>
     </PostHogProvider>
   </StrictMode>

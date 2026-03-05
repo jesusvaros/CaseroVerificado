@@ -1,5 +1,6 @@
 import type { FormDataType } from '../store/formTypes';
 import { submitSessionStep4 } from '../services/supabase/GetSubmitStep4';
+import { tRuntime } from '../i18n/runtime';
 
 export interface ValidationResult {
   isValid: boolean;
@@ -16,7 +17,7 @@ export const validateStep4 = (context: FormDataType): ValidationResult => {
   if (!neighborTypes || neighborTypes.length === 0) {
     return {
       isValid: false,
-      message: 'No se ha proporcionado información de los vecinos',
+      message: tRuntime('addReview.validation.step4.neighborTypesRequired'),
       fieldErrors: { ...fieldErrors, neighborTypes: true },
     };
   }
@@ -24,7 +25,7 @@ export const validateStep4 = (context: FormDataType): ValidationResult => {
   if (!communityEnvironment || communityEnvironment.length === 0) {
     return {
       isValid: false,
-      message: 'No se ha proporcionado información del ambiente del barrio',
+      message: tRuntime('addReview.validation.step4.communityEnvironmentRequired'),
       fieldErrors: { ...fieldErrors, communityEnvironment: true },
     };
   }
@@ -51,7 +52,7 @@ export const submitStep4 = async (
 
     // Basic check - validation should have already happened
     if (!neighborTypes || !communityEnvironment) {
-      return { success: false, message: 'Datos incompletos' };
+      return { success: false, message: tRuntime('addReview.validation.common.incompleteData') };
     }
 
     // Get the reviewSessionId from localStorage
@@ -60,7 +61,7 @@ export const submitStep4 = async (
     // If no sessionId exists, we can't proceed with submission
     if (!sessionId || sessionId === 'PENDING') {
       console.error('No valid review session ID found');
-      return { success: false, message: 'No se ha encontrado una sesión válida' };
+      return { success: false, message: tRuntime('addReview.validation.common.noValidSession') };
     }
 
     // Submit data using our Supabase client function with simplified payload
@@ -75,13 +76,13 @@ export const submitStep4 = async (
 
     return {
       success,
-      message: success ? null : 'Error al guardar los datos en la base de datos',
+      message: success ? null : tRuntime('addReview.validation.common.databaseSaveError'),
     };
   } catch (error) {
     console.error('Error submitting address data:', error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Error al guardar los datos',
+      message: error instanceof Error ? error.message : tRuntime('addReview.validation.common.dataSaveError'),
     };
   }
 };

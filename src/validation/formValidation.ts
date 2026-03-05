@@ -5,6 +5,7 @@ import { submitStep2, validateStep2 } from './validateStep2';
 import { submitStep3, validateStep3 } from './validateStep3';
 import { submitStep4, validateStep4 } from './validateStep4';
 import { submitStep5, validateStep5 } from './validateStep5';
+import { tRuntime } from '../i18n/runtime';
 
 /**
  * Result of step validation
@@ -95,7 +96,7 @@ export const validateAndSubmitStep = async (
       return {
         isValid: false,
         isSubmitted: false,
-        message: submissionResult.message || 'Error en el envío de datos',
+        message: submissionResult.message || tRuntime('addReview.validation.common.dataSubmissionError'),
         fieldErrors: {},
       };
     }
@@ -104,7 +105,7 @@ export const validateAndSubmitStep = async (
     return { isValid: true, isSubmitted: true, message: null };
   } catch (error) {
     console.error(`Error in step ${step}:`, error);
-    const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+    const errorMessage = error instanceof Error ? error.message : tRuntime('addReview.common.unknownError');
 
     if (showToast) showErrorToast(errorMessage);
 

@@ -4,6 +4,7 @@ import CustomTextarea from '../ui/CustomTextarea';
 import SelectableTagGroup from '../ui/SelectableTagGroup';
 import CustomCheckbox from '../ui/CustomCheckbox';
 import HashedContactInput from '../ui/HashedContactInput';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface Step5OwnerProps {
   onNext: () => void;
@@ -20,6 +21,7 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
   fieldErrors,
   isSubmitting,
 }) => {
+  const { t } = useTranslations();
   const { formData, updateFormData } = useFormContext();
 
   const isOwnerTypeParticular = formData.ownerType === 'Particular';
@@ -28,14 +30,18 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
     <div>
       {/* Sección: Tipo de propietario */}
       <div className="mb-8">
-        <h3 className="mb-4 text-lg font-medium text-black">Tipo de propietario</h3>
+        <h3 className="mb-4 text-lg font-medium text-black">{t('addReview.step5.ownerTypeLabel')}</h3>
         {fieldErrors?.ownerType && (
-          <p className="text-red-500">Por favor, selecciona el tipo de propietario.</p>
+          <p className="text-red-500">{t('addReview.step5.ownerTypeError')}</p>
         )}
 
         <SelectableTagGroup
           options={['Propietario', 'Agencia']}
           selectedOptions={[isOwnerTypeParticular ? 'Propietario' : 'Agencia']}
+          optionLabels={{
+            Propietario: t('addReview.step5.ownerTypeOwner'),
+            Agencia: t('addReview.step5.ownerTypeAgency'),
+          }}
           onChange={selected => {
             if (selected.length > 0) {
               updateFormData({
@@ -51,51 +57,51 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
       <div className="mb-8 ">
         <div className="flex items-end mb-4">
           <h3 className="text-lg font-medium text-black">
-            Datos {isOwnerTypeParticular ? 'del propietario' : 'de la agencia'}
+            {isOwnerTypeParticular ? t('addReview.step5.ownerDataLabel') : t('addReview.step5.agencyDataLabel')}
           </h3>
           {isOwnerTypeParticular && (
-            <span className="ml-2 text-gray-600 text-sm mb-0.5">opcional</span>
+            <span className="ml-2 text-gray-600 text-sm mb-0.5">{t('addReview.common.optional')}</span>
           )}
         </div>
         <HashedContactInput
           id="ownerName"
-          label="Nombre completo"
+          label={t('addReview.step5.fullNameLabel')}
           type="text"
           value={formData.ownerName || ''}
           hashValue={formData.ownerNameHash || ''}
           onChange={(value: string) => updateFormData({ ownerName: value })}
-          placeholder="Nombre completo"
+          placeholder={t('addReview.step5.fullNamePlaceholder')}
         />
       </div>
 
       {/* Sección: Información de contacto */}
       <div className="relative mb-8">
         <div className="flex items-end mb-4">
-          <h3 className=" text-lg font-medium text-black">Información de contacto</h3>
+          <h3 className=" text-lg font-medium text-black">{t('addReview.step5.contactInfoLabel')}</h3>
           {isOwnerTypeParticular && (
-            <span className="ml-2 text-gray-600 text-sm mb-0.5">opcional</span>
+            <span className="ml-2 text-gray-600 text-sm mb-0.5">{t('addReview.common.optional')}</span>
           )}
         </div>
 
         <HashedContactInput
           id="ownerPhone"
-          label="Teléfono de contacto"
+          label={t('addReview.step5.phoneLabel')}
           type="tel"
           value={formData.ownerPhone || ''}
           hashValue={formData.ownerPhoneHash || ''}
           onChange={(value: string) => updateFormData({ ownerPhone: value })}
-          placeholder="Ej: 600123456"
+          placeholder={t('addReview.step5.phonePlaceholder')}
         />
 
         <div className="mt-4">
           <HashedContactInput
             id="ownerEmail"
-            label="Correo electrónico"
+            label={t('addReview.step5.emailLabel')}
             type="email"
             value={formData.ownerEmail || ''}
             hashValue={formData.ownerEmailHash || ''}
             onChange={(value: string) => updateFormData({ ownerEmail: value })}
-            placeholder="correo@ejemplo.com"
+            placeholder={t('addReview.step5.emailPlaceholder')}
           />
         </div>
       </div>
@@ -103,14 +109,13 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
       {/* Opinión sobre el propietario/agencia */}
       <div className="relative mb-8">
         <h3 className="mb-4 text-lg font-medium text-black">
-          Tu opinión sobre {isOwnerTypeParticular ? 'el propietario' : 'la agencia'}
+          {isOwnerTypeParticular ? t('addReview.step5.ownerOpinionLabel') : t('addReview.step5.agencyOpinionLabel')}
         </h3>
         <CustomTextarea
           id="ownerOpinion"
           value={formData.ownerOpinion || ''}
           onChange={e => updateFormData({ ownerOpinion: e.target.value })}
-          placeholder={`Describe tu experiencia de manera honesta, respetuosa y basada en hechos reales. Evita incluir datos personales, insultos o amenazas.
-`}
+          placeholder={t('addReview.step5.opinionPlaceholder')}
           rows={5}
         />
 
@@ -119,14 +124,14 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
             id="checkboxReadTerms"
             label={
               <>
-                He leído y acepto los{' '}
+                {t('addReview.step5.acceptTermsPrefix')}{' '}
                 <a
                   href="/terminosCondiciones"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`underline hover:text-[rgb(60,76,40)] ${fieldErrors?.checkboxReadTerms ? 'text-red-500' : 'text-[rgb(74,94,50)]'}`}
                 >
-                  términos y condiciones
+                  {t('addReview.step5.termsAndConditions')}
                 </a>
               </>
             }
@@ -143,14 +148,14 @@ const Step5Owner: React.FC<Step5OwnerProps> = ({
           onClick={onPrevious}
           className="text-black hover:text-gray-800"
         >
-          Anterior
+          {t('addReview.common.previous')}
         </button>
         <button
           onClick={onNext}
           disabled={isSubmitting}
           className="rounded bg-[rgb(74,94,50)] px-6 py-2 text-white hover:bg-[rgb(60,76,40)]"
         >
-          {isSubmitting ? 'Enviando...' : 'Finalizar'}
+          {isSubmitting ? t('addReview.common.sending') : t('addReview.common.finish')}
         </button>
       </div>
     </div>

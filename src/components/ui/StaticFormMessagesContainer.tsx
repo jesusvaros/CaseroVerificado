@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import StaticFormMessage from './StaticFormMessage';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface StaticFormMessagesContainerProps {
   step: number;
@@ -11,6 +12,7 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
   step,
   isMobile = false,
 }) => {
+  const { t } = useTranslations();
   // Definir los mensajes para cada paso
   const getMessagesForStep = () => {
     switch (step) {
@@ -18,8 +20,8 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
         return [
           {
             id: 'step1-anonymous',
-            title: 'Tu opinión es anónima',
-            message: 'La información que compartas no se mostrará de forma exacta.',
+            title: t('addReview.staticMessages.step1Title'),
+            message: t('addReview.staticMessages.step1Message'),
             backgroundColor: 'rgb(225, 245, 110)',
             textColor: '#232C17',
             icon: undefined,
@@ -29,9 +31,8 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
         return [
           {
             id: 'step2-rental',
-            title: 'Período de Alquiler',
-            message:
-              'Indica el período en el que has vivido o estás viviendo en la propiedad para contextualizar tu opinión.',
+            title: t('addReview.staticMessages.step2Title'),
+            message: t('addReview.staticMessages.step2Message'),
             backgroundColor: 'rgb(225, 245, 110)',
             textColor: '#232C17',
             icon: undefined,
@@ -41,9 +42,8 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
         return [
           {
             id: 'step3-condition',
-            title: 'Estado del Piso',
-            message:
-              'Evalúa las condiciones del piso para ayudar a futuros inquilinos a tomar decisiones informadas.',
+            title: t('addReview.staticMessages.step3Title'),
+            message: t('addReview.staticMessages.step3Message'),
             backgroundColor: 'rgb(225, 245, 110)',
             textColor: '#232C17',
             icon: undefined,
@@ -53,9 +53,8 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
         return [
           {
             id: 'step4-community',
-            title: 'Comunidad y Barrio',
-            message:
-              'La información sobre la comunidad de vecinos y el barrio es muy valiosa para futuros inquilinos.',
+            title: t('addReview.staticMessages.step4Title'),
+            message: t('addReview.staticMessages.step4Message'),
             backgroundColor: 'rgb(225, 245, 110)',
             textColor: '#232C17',
             icon: undefined,
@@ -65,9 +64,8 @@ const StaticFormMessagesContainer: React.FC<StaticFormMessagesContainerProps> = 
         return [
           {
             id: 'step5-privacy',
-            title: 'Privacidad',
-            message:
-              'Los datos personales se procesan mediante hashing irreversible solo para asociar opiniones con propietarios. Nunca se almacenan en texto claro ni se comparten con terceros.',
+            title: t('addReview.staticMessages.step5Title'),
+            message: t('addReview.staticMessages.step5Message'),
             backgroundColor: 'rgb(225, 245, 110)',
             textColor: '#232C17',
             icon: <LockClosedIcon className="h-5 w-5 text-green-700" />,

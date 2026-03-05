@@ -2,8 +2,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PageSEO from '../seo/PageSEO';
 import MapView from '../components/MapView';
+import { useTranslations } from '../i18n/useTranslations';
 import { getPublicReviews, type PublicReview } from '../services/supabase/publicReviews';
-import { slugify } from '../utils/slugify';
+import { countryNameMatchesCode } from '../utils/countryMatching';
+import { getReviewsScopePreference } from '../utils/reviewsScope';
+import { useDetectedCountryCode } from '../services/location/useDetectedCountryCode';
+import {
+  getReviewCitySlug,
+  getReviewCountrySlug,
+} from '../utils/locationReviewRouting';
 
 type Status = 'loading' | 'ready' | 'not-found';
 
@@ -16,57 +23,94 @@ function humanizeSlug(slug: string) {
 }
 
 export default function CityReviewsPage() {
-  const { citySlug } = useParams<{ citySlug: string }>();
+  const { t } = useTranslations();
+  const { citySlug, countrySlug } = useParams<{ citySlug: string; countrySlug?: string }>();
+  const { countryCode: userCountryCode, countryResolved } = useDetectedCountryCode();
   const [status, setStatus] = useState<Status>('loading');
   const [reviews, setReviews] = useState<PublicReview[]>([]);
   const [cityName, setCityName] = useState<string>('');
   const [stateName, setStateName] = useState<string | null>(null);
+  const [countryName, setCountryName] = useState<string | null>(null);
+  const [resolvedCountrySlug, setResolvedCountrySlug] = useState<string | null>(countrySlug ?? null);
 
   useEffect(() => {
     let cancelled = false;
-    if (citySlug) {
-      setStatus('loading');
-      getPublicReviews()
-        .then(rows => {
-          if (cancelled) return;
-
-          const filtered = rows.filter(review => {
-            const slug =
-              review.city_slug ??
-              (typeof review.city === 'string' && review.city.length > 0
-                ? slugify(review.city)
-                : null);
-            return slug === citySlug;
-          });
-
-          if (filtered.length === 0) {
-            setReviews([]);
-            setStatus('not-found');
-            return;
-          }
-
-          const preferred = filtered.find(r => r.city) ?? filtered[0];
-          setReviews(filtered);
-          setCityName(preferred.city ?? humanizeSlug(citySlug));
-          setStateName(preferred.state ?? null);
-          setStatus('ready');
-        })
-        .catch(() => {
-          if (!cancelled) {
-            setStatus('not-found');
-          }
-        });
-    } else {
+    if (!citySlug) {
       setStatus('not-found');
+      return () => {
+        cancelled = true;
+      };
     }
+
+    if (!countryResolved) {
+      setStatus('loading');
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setStatus('loading');
+    const reviewsScope = getReviewsScopePreference();
+    const shouldScopeByCountry =
+      !countrySlug && reviewsScope === 'country' && Boolean(userCountryCode);
+
+    getPublicReviews({
+      scope: shouldScopeByCountry ? 'country' : 'all',
+      countryCode: shouldScopeByCountry ? userCountryCode : null,
+    })
+      .then(rows => {
+        if (cancelled) return;
+
+        const cityMatches = rows.filter(review => getReviewCitySlug(review) === citySlug);
+        if (cityMatches.length === 0) {
+          setReviews([]);
+          setStatus('not-found');
+          return;
+        }
+
+        let filtered = cityMatches;
+        let matchedCountrySlug: string | null = countrySlug ?? null;
+
+        if (countrySlug) {
+          filtered = cityMatches.filter(review => getReviewCountrySlug(review) === countrySlug);
+        } else if (userCountryCode) {
+          const sameUserCountry = cityMatches.filter(review =>
+            countryNameMatchesCode(review.country, userCountryCode)
+          );
+          if (sameUserCountry.length > 0) {
+            filtered = sameUserCountry;
+            matchedCountrySlug = getReviewCountrySlug(sameUserCountry[0]);
+          }
+        }
+
+        if (filtered.length === 0) {
+          setReviews([]);
+          setStatus('not-found');
+          return;
+        }
+
+        const preferred = filtered.find(r => r.city) ?? filtered[0];
+        setReviews(filtered);
+        setCityName(preferred.city ?? humanizeSlug(citySlug));
+        setStateName(preferred.state ?? null);
+        setCountryName(preferred.country ?? null);
+        setResolvedCountrySlug(matchedCountrySlug ?? getReviewCountrySlug(preferred));
+        setStatus('ready');
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setStatus('not-found');
+        }
+      });
 
     return () => {
       cancelled = true;
     };
-  }, [citySlug]);
+  }, [citySlug, countryResolved, countrySlug, userCountryCode]);
 
   const reviewCount = reviews.length;
-  const fallbackCityName = cityName || (citySlug ? humanizeSlug(citySlug) : 'Ciudad');
+  const fallbackCityName =
+    cityName || (citySlug ? humanizeSlug(citySlug) : t('cityReviews.city.defaultCity'));
 
   const initialView = useMemo(() => {
     if (!reviews.length) return undefined;
@@ -91,73 +135,92 @@ export default function CityReviewsPage() {
     const lat = avg[0] / coords.length;
     const lng = avg[1] / coords.length;
     const zoom = coords.length <= 1 ? 16 : 14;
-    const searchLabel = stateName ? `${fallbackCityName}, ${stateName}` : fallbackCityName;
+    const searchLabel = formatLocation(fallbackCityName, stateName, countryName);
 
     return {
       center: [lat, lng] as [number, number],
       zoom,
       searchLabel,
     };
-  }, [reviews, fallbackCityName, stateName]);
+  }, [reviews, fallbackCityName, stateName, countryName]);
 
   const heroSubtitle =
     reviewCount === 1
-      ? `Tenemos 1 opinión publicada sobre alquilar en ${fallbackCityName}.`
-      : `Tenemos ${reviewCount} opiniones publicadas sobre alquilar en ${fallbackCityName}.`;
+      ? t('cityReviews.city.hero.subtitleSingular', {
+          count: reviewCount,
+          city: fallbackCityName,
+        })
+      : t('cityReviews.city.hero.subtitlePlural', {
+          count: reviewCount,
+          city: fallbackCityName,
+        });
 
-  const seoTitle = `Opiniones de alquiler en ${fallbackCityName} | CaseroOk`;
+  const seoTitle = t('cityReviews.city.seo.title', { city: fallbackCityName });
+  const seoLocationSuffix = formatSeoLocationSuffix(stateName, countryName);
   const seoDescription =
     reviewCount > 0
-      ? `Descubre ${reviewCount === 1 ? 'la opinión' : `las ${reviewCount} opiniones`} de inquilinos sobre caseros y pisos en ${fallbackCityName}${
-          stateName ? `, ${stateName}` : ''
-        }.`
-      : `Descubre opiniones de inquilinos sobre caseros y pisos en ${fallbackCityName}.`;
+      ? reviewCount === 1
+        ? t('cityReviews.city.seo.descriptionSingular', {
+            city: fallbackCityName,
+            state: seoLocationSuffix,
+          })
+        : t('cityReviews.city.seo.descriptionPlural', {
+            count: reviewCount,
+            city: fallbackCityName,
+            state: seoLocationSuffix,
+          })
+      : t('cityReviews.city.seo.descriptionFallback', { city: fallbackCityName });
 
   return (
     <>
       <PageSEO
         title={seoTitle}
         description={seoDescription}
-        canonicalPath={citySlug ? `/opiniones/${citySlug}` : undefined}
+        canonicalPath={
+          citySlug
+            ? resolvedCountrySlug
+              ? `/opiniones/${resolvedCountrySlug}/${citySlug}`
+              : `/opiniones/${citySlug}`
+            : undefined
+        }
         noindex={status === 'not-found'}
       />
       <main className="mx-auto max-w-6xl px-6 pt-28 pb-24">
         {status === 'loading' ? (
           <section className="rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
             <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">
-              Opiniones por ciudad
+              {t('cityReviews.city.badge')}
             </p>
             <h1 className="mt-2 text-3xl font-semibold text-gray-900">
-              Opiniones sobre alquiler en {fallbackCityName}
+              {t('cityReviews.city.loading.title', { city: fallbackCityName })}
             </h1>
-            <p className="mt-4 text-gray-600">Cargando detalles y mapa…</p>
+            <p className="mt-4 text-gray-600">{t('cityReviews.city.loading.description')}</p>
           </section>
         ) : null}
 
         {status === 'not-found' ? (
           <section className="rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
             <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">
-              Opiniones por ciudad
+              {t('cityReviews.city.badge')}
             </p>
             <h1 className="mt-2 text-3xl font-semibold text-gray-900">
-              No encontramos reseñas en {fallbackCityName}
+              {t('cityReviews.city.notFound.title', { city: fallbackCityName })}
             </h1>
             <p className="mt-4 text-gray-600">
-              Aún no tenemos opiniones públicas para esta ubicación. Puedes explorar todas las reseñas
-              en el mapa general o volver al listado de ciudades disponibles.
+              {t('cityReviews.city.notFound.description')}
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 to="/map"
                 className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
               >
-                Ver mapa completo
+                {t('cityReviews.city.notFound.mapCta')}
               </Link>
               <Link
                 to="/opiniones"
                 className="rounded-full border border-emerald-700 px-5 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
               >
-                Ver ciudades con opiniones
+                {t('cityReviews.city.notFound.citiesCta')}
               </Link>
             </div>
           </section>
@@ -167,10 +230,12 @@ export default function CityReviewsPage() {
           <>
             <header className="mb-12 text-center md:text-left">
               <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
-                Opiniones por ciudad
+                {t('cityReviews.city.badge')}
               </p>
               <h1 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
-                Opiniones sobre alquiler en {formatCityWithState(fallbackCityName, stateName)}
+                {t('cityReviews.city.ready.title', {
+                  city: formatLocation(fallbackCityName, stateName, countryName),
+                })}
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-gray-600 md:mt-3">{heroSubtitle}</p>
               <div className="mt-4 flex flex-wrap justify-center gap-3 md:justify-start">
@@ -178,13 +243,13 @@ export default function CityReviewsPage() {
                   to="/map"
                   className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
                 >
-                  Ver mapa completo
+                  {t('cityReviews.city.ready.mapCta')}
                 </Link>
                 <Link
                   to="/opiniones"
                   className="rounded-full border border-emerald-700 px-5 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
                 >
-                  Ver todas las ciudades
+                  {t('cityReviews.city.ready.citiesCta')}
                 </Link>
               </div>
             </header>
@@ -192,10 +257,10 @@ export default function CityReviewsPage() {
             <section className="mb-12">
               <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Qué opinan los inquilinos de {fallbackCityName}
+                  {t('cityReviews.city.testimonials.title', { city: fallbackCityName })}
                 </h2>
                 <div className="flex items-center justify-between text-sm text-gray-600">
-                  Seleccionamos testimonios reales para que puedas evaluar mejor el alquiler en esta zona.
+                  {t('cityReviews.city.testimonials.description')}
                 </div>
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
                   {reviews.slice(0, Math.min(4, reviews.length)).map(review => (
@@ -204,7 +269,7 @@ export default function CityReviewsPage() {
                       className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-left"
                     >
                       <p className="text-sm text-gray-700">
-                        {review.owner_opinion ?? 'Opinión pendiente de completar.'}
+                        {review.owner_opinion ?? t('cityReviews.city.testimonials.pending')}
                       </p>
                       <footer className="mt-4 text-xs font-medium uppercase tracking-wide text-gray-600">
                         {review.full_address ?? fallbackCityName}
@@ -217,7 +282,9 @@ export default function CityReviewsPage() {
 
             {initialView ? (
               <MapView
-                title={`Mapa de opiniones en ${formatCityWithState(fallbackCityName, stateName)}`}
+                title={t('cityReviews.city.map.title', {
+                  city: formatLocation(fallbackCityName, stateName, countryName),
+                })}
                 subtitle={heroSubtitle}
                 initialViewOverride={initialView}
                 reviews={reviews}
@@ -226,17 +293,16 @@ export default function CityReviewsPage() {
             ) : (
               <section className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
                 <h2 className="text-xl font-semibold text-gray-900">
-                  Aún no podemos mostrar el mapa de {fallbackCityName}
+                  {t('cityReviews.city.mapUnavailable.title', { city: fallbackCityName })}
                 </h2>
                 <p className="mt-3 text-gray-600">
-                  Las opiniones disponibles todavía no incluyen coordenadas precisas. Consulta el mapa
-                  general para ver todas las reseñas.
+                  {t('cityReviews.city.mapUnavailable.description')}
                 </p>
                 <Link
                   to="/map"
                   className="mt-6 inline-flex items-center rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
                 >
-                  Abrir mapa general
+                  {t('cityReviews.city.mapUnavailable.cta')}
                 </Link>
               </section>
             )}
@@ -247,6 +313,16 @@ export default function CityReviewsPage() {
   );
 }
 
-function formatCityWithState(city: string, stateName: string | null) {
-  return stateName ? `${city}, ${stateName}` : city;
+function formatLocation(city: string, stateName: string | null, countryName: string | null) {
+  if (stateName && countryName) return `${city}, ${stateName}, ${countryName}`;
+  if (stateName) return `${city}, ${stateName}`;
+  if (countryName) return `${city}, ${countryName}`;
+  return city;
+}
+
+function formatSeoLocationSuffix(stateName: string | null, countryName: string | null) {
+  if (stateName && countryName) return `, ${stateName}, ${countryName}`;
+  if (stateName) return `, ${stateName}`;
+  if (countryName) return `, ${countryName}`;
+  return '';
 }

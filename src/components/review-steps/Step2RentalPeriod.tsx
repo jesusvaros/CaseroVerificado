@@ -3,6 +3,7 @@ import Slider from '@mui/material/Slider';
 import { useFormContext } from '../../store/useFormContext';
 import CustomInput from '../ui/CustomInput';
 import SelectableTagGroup from '../ui/SelectableTagGroup';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface Step2Props {
   onNext: () => void;
@@ -19,6 +20,7 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
   fieldErrors,
   isSubmitting,
 }) => {
+  const { t } = useTranslations();
   const { formData, updateFormData } = useFormContext();
   
 
@@ -49,7 +51,7 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
             return (
               <div>
                 <label className="mb-2 block text-lg font-medium text-black">
-                  ¿Cuántos años has estado en este piso?
+                  {t('addReview.step2.yearsQuestion')}
                 </label>
                 <div className="relative pt-6 pb-6 select-none mx-8">
                   <Slider
@@ -110,16 +112,20 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
                   />
                 </div>
                 {(fieldErrors?.startYear || fieldErrors?.endYear) && (
-                  <p className="mt-2 text-sm text-red-600">Revisa el período seleccionado.</p>
+                  <p className="mt-2 text-sm text-red-600">{t('addReview.step2.periodError')}</p>
                 )}
 
                 {/* Aún vivo aquí + Fianza (en fila en desktop) */}
                 <div className="mt-3 md:flex md:items-start md:gap-6">
                   <div className="md:flex-1">
                     <SelectableTagGroup
-                      label="¿Aún vives en el piso?"
+                      label={t('addReview.step2.currentlyLivingQuestion')}
                       options={['Sí', 'No']}
                       selectedOptions={[isLiving ? 'Sí' : 'No']}
+                      optionLabels={{
+                        Sí: t('addReview.common.yes'),
+                        No: t('addReview.common.no'),
+                      }}
                       onChange={(selected) => {
                         const choice = selected[0];
                         if (choice === 'Sí') {
@@ -144,7 +150,7 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
                   >
                     {!isLiving && (
                         <SelectableTagGroup
-                          label="¿Te devolvieron la fianza?"
+                          label={t('addReview.step2.depositReturnedQuestion')}
                           options={['Sí', 'No']}
                           selectedOptions={
                             formData.depositReturned === true
@@ -153,6 +159,10 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
                                 ? ['No']
                                 : []
                           }
+                          optionLabels={{
+                            Sí: t('addReview.common.yes'),
+                            No: t('addReview.common.no'),
+                          }}
                           onChange={(selected) => {
                             const choice = selected[0] as 'Sí' | 'No' | undefined;
                             const value = choice === 'Sí' ? true : choice === 'No' ? false : undefined;
@@ -173,19 +183,26 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
       <div className="mb-8">
         <CustomInput
           id="price"
-          label="Cuanto pagas al mes de alquiler?(€)"
+          label={t('addReview.step2.monthlyRentLabel')}
           type="number"
           value={formData.price || ''}
           onChange={e => updateFormData({ price: parseFloat(e.target.value) || 0 })}
-          placeholder="Ej: 800"
+          placeholder={t('addReview.step2.monthlyRentPlaceholder')}
           error={fieldErrors?.monthlyPrice}
         />
 
         <div className="mt-6">
           <SelectableTagGroup
-            label="Incluye:"
+            label={t('addReview.step2.includesLabel')}
             options={['Luz', 'Agua', 'Comunidad', 'Gas', 'Garaje']}
             selectedOptions={formData.includedServices || []}
+            optionLabels={{
+              Luz: t('addReview.step2.serviceElectricity'),
+              Agua: t('addReview.step2.serviceWater'),
+              Comunidad: t('addReview.step2.serviceCommunity'),
+              Gas: t('addReview.step2.serviceGas'),
+              Garaje: t('addReview.step2.serviceGarage'),
+            }}
             onChange={selected => updateFormData({ includedServices: selected })}
             multiSelect={true}
           />
@@ -195,7 +212,7 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
       {/* Sección: ¿Recomendarías este piso? (1-5, no numérico) */}
       <div className="mb-8">
         <SelectableTagGroup
-          label="¿Recomendarías este piso?"
+          label={t('addReview.step2.recommendQuestion')}
           options={['1', '2', '3', '4', '5']}
           selectedOptions={formData.wouldRecommend ? [formData.wouldRecommend] : []}
           onChange={(selected) => updateFormData({ wouldRecommend: (selected[0] as '1'|'2'|'3'|'4'|'5'|undefined) })}
@@ -210,14 +227,14 @@ const Step2RentalPeriod: React.FC<Step2Props> = ({
           onClick={onPrevious}
           className="text-black hover:text-gray-800"
         >
-          Anterior
+          {t('addReview.common.previous')}
         </button>
         <button
           onClick={onNext}
           disabled={isSubmitting}
           className="rounded bg-[rgb(74,94,50)] px-6 py-2 text-white hover:bg-[rgb(60,76,40)]"
         >
-          {isSubmitting ? 'Enviando...' : 'Siguiente'}
+          {isSubmitting ? t('addReview.common.sending') : t('addReview.common.next')}
         </button>
       </div>
     </div>

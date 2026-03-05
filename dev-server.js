@@ -17,6 +17,17 @@ const COST_PER_REQUEST = 0.0005;
 const MAX_DAILY_COST = parseFloat(process.env.HERE_MAX_DAILY_COST || '0.50');
 const MAX_MONTHLY_COST = parseFloat(process.env.HERE_MAX_MONTHLY_COST || '12.50');
 
+const DOMAIN_SUFFIX_TO_COUNTRY_CODE = [
+  { suffix: '.co.uk', countryCode: 'GB' },
+  { suffix: '.uk', countryCode: 'GB' },
+  { suffix: '.es', countryCode: 'ES' },
+  { suffix: '.fr', countryCode: 'FR' },
+  { suffix: '.it', countryCode: 'IT' },
+  { suffix: '.de', countryCode: 'DE' },
+  { suffix: '.pt', countryCode: 'PT' },
+  { suffix: '.ie', countryCode: 'IE' },
+];
+
 function getTodayKey() {
   return new Date().toISOString().split('T')[0];
 }
@@ -62,7 +73,39 @@ function canMakeRequest() {
   return { allowed: true, usage: { daily, monthly } };
 }
 
+function normalizeCountryCode(value) {
+  if (typeof value !== 'string') return null;
+  const normalized = value.trim().toUpperCase();
+  return /^[A-Z]{2}$/.test(normalized) ? normalized : null;
+}
+
+function detectCountryFromHost(host) {
+  if (typeof host !== 'string') return null;
+  const normalized = host.toLowerCase();
+  const match = DOMAIN_SUFFIX_TO_COUNTRY_CODE.find(entry => normalized.endsWith(entry.suffix));
+  return match?.countryCode ?? null;
+}
+
 // API Routes
+app.get('/api/detect-country', (req, res) => {
+  const vercelCountry = normalizeCountryCode(req.headers['x-vercel-ip-country']);
+  if (vercelCountry) {
+    return res.json({ countryCode: vercelCountry, source: 'x-vercel-ip-country' });
+  }
+
+  const cloudflareCountry = normalizeCountryCode(req.headers['cf-ipcountry']);
+  if (cloudflareCountry) {
+    return res.json({ countryCode: cloudflareCountry, source: 'cf-ipcountry' });
+  }
+
+  const hostCountry = detectCountryFromHost(req.headers.host);
+  if (hostCountry) {
+    return res.json({ countryCode: hostCountry, source: 'domain' });
+  }
+
+  return res.json({ countryCode: null, source: 'unknown' });
+});
+
 app.post('/api/geocode-proxy', async (req, res) => {
   const { allowed, reason, usage } = canMakeRequest();
   
@@ -182,6 +225,7 @@ const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`🚀 Development server with HERE API cost control running on http://localhost:${PORT}`);
   console.log(`📊 API endpoints:`);
+  console.log(`   - GET /api/detect-country`);
   console.log(`   - POST /api/geocode-proxy`);
   console.log(`   - GET /api/usage-stats`);
   console.log(`💰 Limits: ${DAILY_LIMIT} requests/day, €${MAX_DAILY_COST}/day`);

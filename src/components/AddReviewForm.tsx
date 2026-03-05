@@ -22,6 +22,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import { notifyReviewCompleted } from '../services/telegram';
 import { AnimatePresence, motion } from 'framer-motion';
 import { trackEvent } from '../utils/analytics';
+import { useTranslations } from '../i18n/useTranslations';
 
 export interface SessionStatus {
   step1_completed?: boolean;
@@ -32,6 +33,7 @@ export interface SessionStatus {
   created_at?: string;
 }
 const AddReviewForm: React.FC = () => {
+  const { t } = useTranslations();
   const { formData, updateFormData,resetForm } = useFormContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -74,7 +76,13 @@ const AddReviewForm: React.FC = () => {
   const { user } = useAuth();
   
   // Constants
-  const steps = ['Dirección', 'Estancia', 'Piso', 'Comunidad', 'Gestión'];
+  const steps = [
+    t('addReview.steps.address'),
+    t('addReview.steps.stay'),
+    t('addReview.steps.property'),
+    t('addReview.steps.community'),
+    t('addReview.steps.management'),
+  ];
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   const errorsDefault = useMemo(() => ({
@@ -312,7 +320,7 @@ const AddReviewForm: React.FC = () => {
       }
     } catch (error) {
       console.error(`Error validating step ${currentStep}:`, error);
-      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      const errorMessage = error instanceof Error ? error.message : t('addReview.common.unknownError');
       showErrorToast(errorMessage);
     }
   };
@@ -463,7 +471,7 @@ const AddReviewForm: React.FC = () => {
       }
     } catch (error) {
       console.error(`Error validating step ${currentStep}:`, error);
-      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      const errorMessage = error instanceof Error ? error.message : t('addReview.common.unknownError');
       showErrorToast(errorMessage);
     }
   };

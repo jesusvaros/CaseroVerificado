@@ -9,6 +9,7 @@ interface SelectableTagGroupProps {
   multiSelect?: boolean;
   className?: string;
   error?: boolean;
+  optionLabels?: Record<string, string>;
 }
 
 const SelectableTagGroup: React.FC<SelectableTagGroupProps> = ({
@@ -19,6 +20,7 @@ const SelectableTagGroup: React.FC<SelectableTagGroupProps> = ({
   multiSelect = true,
   className = '',
   error = false,
+  optionLabels,
 }) => {
   const handleTagClick = (option: string) => {
     if (multiSelect) {
@@ -43,7 +45,7 @@ const SelectableTagGroup: React.FC<SelectableTagGroupProps> = ({
         {options.map(option => (
           <SelectableTag
             key={option}
-            label={option}
+            label={optionLabels?.[option] ?? option}
             selected={selectedOptions.includes(option)}
             onClick={() => handleTagClick(option)}
           />

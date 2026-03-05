@@ -1,17 +1,30 @@
 import { Link } from 'react-router-dom';
 import type { StaticBlogPost } from '../../blog/posts';
+import { resolveLocale } from '../../i18n/config';
+import { buildBlogPostPath } from '../../i18n/routing';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface RelatedLinksCardProps {
   posts: StaticBlogPost[];
+  countryCode?: string | null;
   className?: string;
   mobileOnly?: boolean;
 }
 
-export default function RelatedLinksCard({ posts, className = '', mobileOnly = false }: RelatedLinksCardProps) {
+export default function RelatedLinksCard({
+  posts,
+  countryCode,
+  className = '',
+  mobileOnly = false,
+}: RelatedLinksCardProps) {
+  const { locale, dateLocale, t } = useTranslations();
+  const blogLocale = resolveLocale(locale);
+
   if (posts.length === 0) return null;
 
   // En móvil solo mostrar 2 posts
   const displayPosts = mobileOnly ? posts.slice(0, 2) : posts;
+  const scopedSearch = countryCode ? `?country=${countryCode}` : '';
 
   return (
     <div className={`my-8 ${className} ${mobileOnly ? 'block sm:hidden' : 'block'}`}>
@@ -19,7 +32,7 @@ export default function RelatedLinksCard({ posts, className = '', mobileOnly = f
         {displayPosts.map((post) => (
           <Link
             key={post.slug}
-            to={`/blog/${post.slug}`}
+            to={`${buildBlogPostPath(blogLocale, post.slug)}${scopedSearch}`}
             className="group block rounded-lg border border-gray-200 bg-white overflow-hidden transition-shadow hover:shadow-md hover:border-emerald-300"
           >
             {post.heroImageUrl && (
@@ -39,7 +52,7 @@ export default function RelatedLinksCard({ posts, className = '', mobileOnly = f
               <div className="flex items-center text-xs text-gray-500">
                 {post.publishedAt && (
                   <time dateTime={post.publishedAt}>
-                    {new Date(post.publishedAt).toLocaleDateString('es-ES', {
+                    {new Date(post.publishedAt).toLocaleDateString(dateLocale, {
                       day: 'numeric',
                       month: 'short',
                       year: 'numeric'
@@ -48,7 +61,7 @@ export default function RelatedLinksCard({ posts, className = '', mobileOnly = f
                 )}
                 {post.readingMinutes && (
                   <span className="ml-2">
-                    • {post.readingMinutes} min
+                    • {post.readingMinutes} {t('common.minutesShort')}
                   </span>
                 )}
               </div>

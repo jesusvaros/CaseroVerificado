@@ -16,6 +16,13 @@ import MapBoundsWatcher from './map/MapBoundsWatcher';
 import DetailsPanel from './map/DetailsPanel';
 import { useMap } from 'react-leaflet';
 import { trackUmamiEvent } from '../utils/analytics';
+import { detectUserCountryCode, onForcedCountryChange } from '../services/location/userCountry';
+import { countryNameMatchesCode } from '../utils/countryMatching';
+import { getCountryDefaultMapView } from '../services/location/countryMapDefaults';
+import { isCountryDebugLoggingEnabled } from '../utils/countryDebugLogging';
+import { getReviewsScopePreference, type ReviewsScope } from '../utils/reviewsScope';
+import { useDetectedCountryCode } from '../services/location/useDetectedCountryCode';
+import { useTranslations } from '../i18n/useTranslations';
 
 type MapViewProps = {
   title?: string;
@@ -57,12 +64,14 @@ const CloseOnMove = ({ onMove }: { onMove: () => void }) => {
 };
 
 const MapView = ({
-  title = 'Mapa de opiniones',
+  title,
   subtitle,
   initialViewOverride,
   reviews,
   autoFetch = reviews === undefined,
 }: MapViewProps = {}) => {
+  const { t } = useTranslations();
+  const resolvedTitle = title ?? t('cityReviews.index.empty.mapCta');
   const [searchParams] = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState(initialViewOverride?.searchLabel ?? '');
@@ -72,6 +81,8 @@ const MapView = ({
   const [visiblePublic, setVisiblePublic] = useState<PublicReview[]>(reviews ?? []);
   const [selectedReview, setSelectedReview] = useState<PublicReview | null>(null);
   const [mobileListOpen, setMobileListOpen] = useState(false);
+  const { countryCode: detectedCountryCode, countryResolved } = useDetectedCountryCode();
+  const [reviewsScope, setReviewsScope] = useState<ReviewsScope>(() => getReviewsScopePreference());
 
   // Center/zoom state used with SetViewOnChange to avoid remounts
   const [center, setCenter] = useState<[number, number]>(
@@ -84,6 +95,16 @@ const MapView = ({
   const [mapReady, setMapReady] = useState(false);
   const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null);
   const LAST_VIEW_KEY = 'map:lastView';
+
+  useEffect(() => {
+    const unsubscribe = onForcedCountryChange(() => {
+      setReviewsScope(getReviewsScopePreference());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const currentIcon = L.divIcon({
     className: '',
@@ -99,6 +120,18 @@ const MapView = ({
   // Initialize map center on mount with priority: override -> query params -> localStorage -> geolocation -> default
   useEffect(() => {
     if (!mapReady) return;
+    let cancelled = false;
+
+    const applyCountryFallback = async () => {
+      const countryCode = await detectUserCountryCode();
+      if (cancelled) return;
+      const fallback = getCountryDefaultMapView(countryCode);
+      setCenter(fallback.center);
+      setZoom(fallback.zoom);
+      mapRef.current?.setView(fallback.center, fallback.zoom, { animate: false });
+      centerInitialized.current = true;
+      geolocationAttempted.current = true;
+    };
 
     if (initialViewOverride) {
       const nextCenter = initialViewOverride.center;
@@ -172,22 +205,18 @@ const MapView = ({
           geolocationAttempted.current = true;
         },
         () => {
-          // 4) Default fallback: Madrid
-          setCenter([40.416775, -3.70379]);
-          setZoom(14);
-          mapRef.current?.setView([40.416775, -3.70379], 14, { animate: false });
-          centerInitialized.current = true;
-          geolocationAttempted.current = true;
+          // 4) Country fallback center
+          void applyCountryFallback();
         }
       );
     } else {
-      // 4) Default fallback: Madrid
-      setCenter([40.416775, -3.70379]);
-      setZoom(14);
-      mapRef.current?.setView([40.416775, -3.70379], 14, { animate: false });
-      centerInitialized.current = true;
-      geolocationAttempted.current = true;
+      // 4) Country fallback center
+      void applyCountryFallback();
     }
+
+    return () => {
+      cancelled = true;
+    };
   }, [mapReady, searchParams, initialViewOverride]);
 
   // Persist view on move/zoom
@@ -224,11 +253,32 @@ const MapView = ({
     if (!autoFetch) return;
 
     (async () => {
-      const rows = await getPublicReviews();
-      setPublicReviews(rows);
-      setVisiblePublic(rows);
-      if (!centerInitialized.current && geolocationAttempted.current && rows.length > 0) {
-        const valid = rows.filter(
+      if (reviewsScope === 'country' && !countryResolved) {
+        return;
+      }
+      const shouldScopeByCountry = reviewsScope === 'country' && Boolean(detectedCountryCode);
+      const rows = await getPublicReviews({
+        scope: shouldScopeByCountry ? 'country' : 'all',
+        countryCode: shouldScopeByCountry ? detectedCountryCode : null,
+      });
+
+      if (isCountryDebugLoggingEnabled()) {
+        console.info('[map-country-scope]', {
+          reviewsScope,
+          detectedCountryCode,
+          rawReviews: rows.length,
+          reviewsWithCountry: rows.filter(row => Boolean(row.country)).length,
+          scopedReviews: rows.length,
+        });
+      }
+
+      // Rows are already country-scoped at query level when reviewsScope === 'country'.
+      const visibleRows = rows;
+
+      setPublicReviews(visibleRows);
+      setVisiblePublic(visibleRows);
+      if (!centerInitialized.current && geolocationAttempted.current && visibleRows.length > 0) {
+        const valid = visibleRows.filter(
           (r): r is PublicReview & { lat: number; lng: number } =>
             typeof r.lat === 'number' && typeof r.lng === 'number'
         );
@@ -240,7 +290,7 @@ const MapView = ({
         }
       }
     })();
-  }, [autoFetch, reviews]);
+  }, [autoFetch, countryResolved, detectedCountryCode, reviews, reviewsScope]);
 
   useEffect(() => {
     if (initialViewOverride?.searchLabel) {
@@ -248,14 +298,12 @@ const MapView = ({
     }
   }, [initialViewOverride]);
 
-  
-
   return (
     <div className="w-full px-0 md:px-8 pt-24 md:pt-28 pb-0 md:pb-8">
       <div className="mx-auto max-w-[1800px]">
-        {title ? (
+        {resolvedTitle ? (
           <div className="hidden md:block mb-4">
-            <h1 className="text-left text-3xl font-semibold text-gray-900">{title}</h1>
+            <h1 className="text-left text-3xl font-semibold text-gray-900">{resolvedTitle}</h1>
             {subtitle ? <p className="mt-1 text-base text-gray-600">{subtitle}</p> : null}
           </div>
         ) : null}
@@ -386,7 +434,7 @@ const MapView = ({
                     trackUmamiEvent('map:mobile-open-list');
                     setMobileListOpen(true);
                   }}
-                  aria-label="Abrir opiniones"
+                  aria-label={t('cityReviews.index.empty.mapCta')}
                 >
                   <span className="block h-1.5 w-8 rounded-full bg-gray-400" />
                 </button>

@@ -1,34 +1,36 @@
 import React from 'react';
 import { ShieldCheckIcon, ClockIcon, UsersIcon, BoltIcon } from '@heroicons/react/24/outline';
-
-const benefits = [
-  {
-    Icon: ShieldCheckIcon,
-    title: 'Caseros verificados',
-    text: 'Consulta reseñas reales antes de alquilar.'
-  },
-  {
-    Icon: ClockIcon,
-    title: 'Ahorra tiempo',
-    text: 'Encuentra información confiable al instante.'
-  },
-  {
-    Icon: UsersIcon,
-    title: 'Comunidad anónima',
-    text: 'Comparte experiencias de manera segura.'
-  },
-  {
-    Icon: BoltIcon,
-    title: 'Actualizaciones inmediatas',
-    text: 'Las nuevas reseñas se publican al momento.'
-  }
-];
+import { useTranslations } from '../i18n/useTranslations';
 
 const BenefitsSection: React.FC = () => {
+  const { t } = useTranslations();
+  const benefits = [
+    {
+      Icon: ShieldCheckIcon,
+      title: t('home.benefits.item1Title'),
+      text: t('home.benefits.item1Text'),
+    },
+    {
+      Icon: ClockIcon,
+      title: t('home.benefits.item2Title'),
+      text: t('home.benefits.item2Text'),
+    },
+    {
+      Icon: UsersIcon,
+      title: t('home.benefits.item3Title'),
+      text: t('home.benefits.item3Text'),
+    },
+    {
+      Icon: BoltIcon,
+      title: t('home.benefits.item4Title'),
+      text: t('home.benefits.item4Text'),
+    },
+  ];
+
   return (
     <section className="w-full bg-gradient-to-b from-green-50 to-white py-16">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="mb-10 text-left text-3xl font-bold">¿Por qué usar CaseroOk?</h2>
+        <h2 className="mb-10 text-left text-3xl font-bold">{t('home.benefits.title')}</h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ Icon, title, text }) => (
             <div

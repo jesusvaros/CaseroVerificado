@@ -6,23 +6,25 @@ import {
   PencilSquareIcon
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-
-const features = [
-  {
-    Icon: MagnifyingGlassIcon,
-    text: 'Detecta automáticamente datos de contacto del anuncio'
-  },
-  {
-    Icon: ChatBubbleLeftRightIcon,
-    text: 'Comprueba si hay reseñas previas'
-  },
-  {
-    Icon: PencilSquareIcon,
-    text: 'Aporta tu experiencia en segundos'
-  }
-];
+import { useTranslations } from '../i18n/useTranslations';
 
 const ChromeStoreSection: React.FC = () => {
+  const { t } = useTranslations();
+  const features = [
+    {
+      Icon: MagnifyingGlassIcon,
+      text: t('home.chromeExtension.feature1'),
+    },
+    {
+      Icon: ChatBubbleLeftRightIcon,
+      text: t('home.chromeExtension.feature2'),
+    },
+    {
+      Icon: PencilSquareIcon,
+      text: t('home.chromeExtension.feature3'),
+    },
+  ];
+
   return (
     <section className="relative w-full bg-gradient-to-b from-white to-green-50 py-16 overflow-hidden">
       {/* Diagonal WIP tape overlay */}
@@ -44,14 +46,14 @@ const ChromeStoreSection: React.FC = () => {
         <div className="md:w-1/2">
           <img
             src="/chrome-extension-placeholder.svg"
-            alt="Vista previa de la extensión"
+            alt={t('home.chromeExtension.previewAlt')}
             className="w-full rounded-xl border border-gray-200 shadow-xl"
           />
         </div>
         <div className="md:w-1/2 text-left">
-          <h2 className="mb-6 text-3xl font-bold md:text-4xl">Instala nuestra extensión</h2>
+          <h2 className="mb-6 text-3xl font-bold md:text-4xl">{t('home.chromeExtension.title')}</h2>
           <p className="mb-8 text-lg text-gray-700">
-            Verifica caseros directamente mientras navegas por portales de alquiler. Nuestra extensión detecta al propietario y te muestra opiniones sin salir de la página.
+            {t('home.chromeExtension.description')}
           </p>
           <ul className="mb-8 space-y-4">
             {features.map(({ Icon, text }) => (
@@ -72,7 +74,7 @@ const ChromeStoreSection: React.FC = () => {
             title="Próximamente"
           >
             <img src={chromeLogo} alt="Google Chrome" className="mr-3 h-6 w-6" />
-            Instalar extensión
+            {t('home.chromeExtension.installButton')}
           </Link>
         </div>
       </div>

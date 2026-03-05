@@ -2,62 +2,80 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getCountryConfig } from './news-sources-config.mjs';
 
 if (!globalThis.fetch) {
-  console.error('Esta script requiere Node 18 o superior con fetch disponible.');
+  console.error('Este script requiere Node 18 o superior con fetch disponible.');
   process.exit(1);
 }
 
-// Load .env file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const envPath = path.resolve(__dirname, '../.env');
 
-try {
-  const envContent = await fs.readFile(envPath, 'utf8');
-  const envVars = envContent
-    .split('\n')
-    .filter(line => line.trim() && !line.startsWith('#'))
-    .reduce((acc, line) => {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length > 0) {
-        const value = valueParts.join('=').replace(/^["']|["']$/g, '');
-        process.env[key.trim()] = value.trim();
-      }
-      return acc;
-    }, {});
-} catch (error) {
-  // .env file is optional, continue without it
-}
+await loadDotEnv();
 
 const [rawUrl, ...rest] = process.argv.slice(2);
-
 if (!rawUrl) {
-  console.error('Uso: npm run generate:blog -- <URL> [--tone=informativo|practico|historia] [--keywords=palabras] [--date=YYYY-MM-DD]');
+  console.error(
+    'Uso: npm run generate:blog -- <URL> [--tone=informativo|practico|historia|empatico] [--keywords=palabras] [--date=YYYY-MM-DD] [--country=GB] [--language=en] [--includeTips=true|false] [--skipPostRefresh=true|false]'
+  );
   process.exit(1);
 }
 
-const options = rest.reduce((acc, item) => {
-  const match = item.match(/^--([^=]+)=(.*)$/);
-  if (match) {
-    acc[match[1]] = match[2];
-  }
-  return acc;
-}, {});
-
+const options = parseCliOptions(rest);
 const tone = options.tone ?? 'informativo';
 const keywords = options.keywords ?? '';
 const includeTips = options.includeTips ? options.includeTips !== 'false' : true;
 const publishedAt = options.date ?? new Date().toISOString().slice(0, 10);
+const countryCode = (options.country ?? 'ES').toUpperCase();
+
+const countryConfig = getCountryConfig(countryCode) ?? {
+  countryCode,
+  countryName: 'Spain',
+  outputLanguage: 'es',
+};
+
+const language = (options.language ?? countryConfig.outputLanguage ?? 'es').toLowerCase();
+const skipPostRefresh = options.skipPostRefresh === 'true';
 
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {
-  console.error('OPENAI_API_KEY no está definido. Añádelo a tu entorno antes de ejecutar el script.');
+  console.error('OPENAI_API_KEY no está definido. Añádelo al entorno antes de ejecutar el script.');
   process.exit(1);
 }
 
 const OPENAI_ENDPOINT = process.env.OPENAI_API_URL ?? 'https://api.openai.com/v1/chat/completions';
 const MODEL = process.env.BLOG_OPENAI_MODEL ?? 'gpt-4.1-mini';
+
+function parseCliOptions(args) {
+  return args.reduce((acc, item) => {
+    const match = item.match(/^--([^=]+)=(.*)$/);
+    if (match) {
+      acc[match[1]] = match[2];
+      return acc;
+    }
+    if (item.startsWith('--')) {
+      acc[item.slice(2)] = 'true';
+    }
+    return acc;
+  }, {});
+}
+
+async function loadDotEnv() {
+  const envPath = path.resolve(__dirname, '../.env');
+  try {
+    const envContent = await fs.readFile(envPath, 'utf8');
+    for (const line of envContent.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const [key, ...valueParts] = trimmed.split('=');
+      if (!key || valueParts.length === 0) continue;
+      process.env[key.trim()] = valueParts.join('=').replace(/^["']|["']$/g, '').trim();
+    }
+  } catch {
+    // .env is optional
+  }
+}
 
 function slugify(input) {
   return input
@@ -104,12 +122,10 @@ function extractArticle(html) {
       .trim()
   );
 
-  const content = paragraphText.length > 400 ? paragraphText : fallback;
-
   return {
     title: rawTitle ?? undefined,
     description: rawDescription ? decodeEntities(rawDescription) : undefined,
-    content,
+    content: paragraphText.length > 400 ? paragraphText : fallback,
   };
 }
 
@@ -118,72 +134,77 @@ function estimateReadingMinutes(text) {
   return Math.max(1, Math.round(words / 220));
 }
 
+function languageLabel(code) {
+  const map = {
+    es: 'Spanish',
+    en: 'English',
+    fr: 'French',
+    de: 'German',
+    it: 'Italian',
+    nl: 'Dutch',
+    sv: 'Swedish',
+    pt: 'Portuguese',
+  };
+  return map[code] ?? 'English';
+}
+
+function toneInstruction(selectedTone) {
+  switch (selectedTone) {
+    case 'historia':
+      return 'Use a narrative and empathetic style with practical examples from tenant life.';
+    case 'practico':
+      return 'Use a direct and practical style focused on concrete actions tenants can take.';
+    case 'empatico':
+    case 'empático':
+      return 'Use a warm and empathetic style that validates stress and uncertainty faced by renters.';
+    default:
+      return 'Use a clear, informative and empathetic style.';
+  }
+}
+
 function buildPrompts(article) {
   const tipsInstruction = includeTips
-    ? "Incluye al final una sección titulada 'Consejos prácticos para inquilinos' con 4-5 recomendaciones accionables que ayuden a proteger sus derechos y ahorrar dinero."
-    : 'No incluyas secciones con viñetas salvo que sean imprescindibles.';
+    ? "Add a final section titled 'Practical tips for tenants' with 4-5 actionable recommendations."
+    : 'Avoid bulleted sections unless strictly necessary.';
 
-  const keywordsInstruction = keywords ? `Optimiza el contenido para las palabras clave: ${keywords}.` : '';
+  const keywordInstruction = keywords ? `SEO keywords: ${keywords}.` : '';
+  const targetLanguage = languageLabel(language);
 
-  const toneInstruction = (() => {
-    switch (tone) {
-      case 'historia':
-        return 'Adopta un tono cercano y empático, resaltando testimonios y ejemplos reales de inquilinos que enfrentan dificultades económicas.';
-      case 'practico':
-        return 'Adopta un tono directo y práctico, enfocándote en acciones concretas que puede tomar el inquilino para protegerse y ahorrar dinero.';
-      case 'empático':
-        return 'Adopta un tono empático y comprensivo, reconociendo las dificultades económicas de los inquilinos que pagan hasta el 90% de sus ingresos en alquiler. Enfócate en soluciones prácticas y derechos que pueden ejercer.';
-      default:
-        return 'Adopta un tono informativo pero empático, reconociendo la situación vulnerable de muchos inquilinos.';
-    }
-  })();
+  const systemPrompt = `You are a housing policy analyst and tenant-rights writer.
 
-  const systemPrompt = `Eres un experto en vivienda y defensor de los derechos de inquilinos en España. Tu audiencia son inquilinos en situación vulnerable que destinan gran parte de sus ingresos al alquiler (hasta el 90%) y necesitan información práctica para protegerse y mejorar su situación.
+Audience:
+- Renters in ${countryConfig.countryName} (${countryConfig.countryCode})
+- People under housing pressure who need practical guidance
 
-CONTEXTO IMPORTANTE: Los inquilinos españoles enfrentan:
-- Alquileres que consumen 70-90% de sus ingresos
-- Dificultad extrema para ahorrar y acceder a la compra
-- Vulnerabilidad ante abusos y subidas de precio
-- Falta de información sobre sus derechos
+Mandatory constraints:
+- Write the final output entirely in ${targetLanguage}
+- Produce original content, no plagiarism
+- Keep legal guidance cautious: never present uncertain legal claims as absolute facts
+- Length target: 900-1300 words
+- Organize content with markdown headings (##)
+- Explain practical impact for tenants and include concrete next steps
 
-Genera un artículo de blog en español que:
-- Sea original y no plagie el contenido fuerte
-- Tenga entre 900-1300 palabras
-- Use un lenguaje claro, empático y accesible
-- Incluya información práctica que REALMENTE ayude al inquilino
-- Explique derechos específicos y cómo ejercerlos
-- Ofrezca consejos de ahorro y protección
-- Tenga estructura clara con subtítulos (##)
-- Genere engagement emocional sin ser sensacionalista
+Return ONLY a JSON object with:
+- title (max 60 chars)
+- summary (max 160 chars)
+- seo_title (max 60 chars)
+- seo_description (max 160 chars)
+- markdown (full article in markdown)`;
 
-Devuelve un JSON con:
-- title: Título atractivo que conecte emocionalmente (máx 60 caracteres)
-- summary: Resumen que destaque el beneficio para el inquilino (máx 160 caracteres)  
-- seo_title: Título SEO orientado a inquilinos (máx 60 caracteres)
-- seo_description: Meta descripción que prometa soluciones prácticas (máx 160 caracteres)
-- markdown: Contenido completo en markdown con enfoque en soluciones`;
-
-  const userPrompt = `Resumen original de la noticia:
+  const userPrompt = `Original article snapshot:
 URL: ${rawUrl}
-Título detectado: ${article.title ?? 'No encontrado'}
-Descripción detectada: ${article.description ?? 'No encontrada'}
-Texto principal aproximado (recortado si es necesario):
+Detected title: ${article.title ?? 'Not found'}
+Detected description: ${article.description ?? 'Not found'}
+Extracted text (truncated):
 """
-${article.content.slice(0, 4000)}
+${article.content.slice(0, 5000)}
 """
 
-${toneInstruction}
+${toneInstruction(tone)}
 ${tipsInstruction}
-${keywordsInstruction}
+${keywordInstruction}
 
-INSTRUCCIONES ESPECÍFICAS:
-1. Conecta la noticia con la realidad del inquilino vulnerable
-2. Explica cómo esta información puede ayudarle a ahorrar dinero o proteger sus derechos
-3. Incluye datos sobre el mercado de alquiler español cuando sea relevante
-4. Ofrece alternativas y soluciones prácticas
-5. Usa un lenguaje que genere confianza y esperanza, no desesperanza
-
-Genera un artículo completamente nuevo evitando plagio. Enfócate en cómo esta noticia impacta DIRECTAMENTE la vida del inquilino español y qué puede hacer al respecto.`;
+Write an original tenant-focused article for ${countryConfig.countryName}. If source details are missing, infer conservatively and avoid fabricated numbers.`;
 
   return { systemPrompt, userPrompt };
 }
@@ -205,14 +226,17 @@ async function callOpenAI(systemPrompt, userPrompt) {
   const body = {
     model: MODEL,
     temperature: 0.6,
-    response_format: { type: 'json_schema', json_schema: { name: 'blog_post', schema: responseSchema } },
+    response_format: {
+      type: 'json_schema',
+      json_schema: { name: 'blog_post', schema: responseSchema },
+    },
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
     ],
   };
 
-  const res = await fetch(OPENAI_ENDPOINT, {
+  const response = await fetch(OPENAI_ENDPOINT, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -221,12 +245,12 @@ async function callOpenAI(systemPrompt, userPrompt) {
     body: JSON.stringify(body),
   });
 
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`OpenAI API error ${res.status}: ${text}`);
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`OpenAI API error ${response.status}: ${text}`);
   }
 
-  const json = await res.json();
+  const json = await response.json();
   const content = json.choices?.[0]?.message?.content;
   if (!content) {
     throw new Error('Respuesta de OpenAI inesperada (sin contenido).');
@@ -235,30 +259,45 @@ async function callOpenAI(systemPrompt, userPrompt) {
   try {
     return JSON.parse(content);
   } catch (error) {
-    throw new Error(`No se pudo parsear la respuesta de OpenAI: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(
+      `No se pudo parsear la respuesta de OpenAI: ${error instanceof Error ? error.message : String(error)}`
+    );
   }
 }
 
 function escapeTemplateLiteral(value) {
   return value
-    .replace(/\\/g, '\\\\')   // Escape backslashes first
-    .replace(/'/g, "\\'")     // Escape single quotes
-    .replace(/`/g, '\\`')     // Escape backticks
-    .replace(/\$\{/g, '\\${'); // Escape template literal expressions
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/`/g, '\\`')
+    .replace(/\$\{/g, '\\${');
 }
 
-async function createPostFile({ slug, title, summary, markdown, seoTitle, seoDescription, heroImageUrl, sourceUrl, readingMinutes }) {
+async function createPostFile({
+  slug,
+  title,
+  summary,
+  markdown,
+  seoTitle,
+  seoDescription,
+  heroImageUrl,
+  sourceUrl,
+  readingMinutes,
+  country,
+  languageCode,
+}) {
   const postsDir = path.resolve(__dirname, '../src/blog/posts');
   const postFile = path.resolve(postsDir, `${slug}.ts`);
 
-  // Ensure the posts directory exists
   await fs.mkdir(postsDir, { recursive: true });
 
   const postContent = `export const post = {
   slug: '${escapeTemplateLiteral(slug)}',
   title: '${escapeTemplateLiteral(title)}',
   summary: '${escapeTemplateLiteral(summary)}',
-  publishedAt: '${publishedAt}',${heroImageUrl ? `\n  heroImageUrl: '${escapeTemplateLiteral(heroImageUrl)}',` : ''}${seoTitle ? `\n  seoTitle: '${escapeTemplateLiteral(seoTitle)}',` : ''}${seoDescription ? `\n  seoDescription: '${escapeTemplateLiteral(seoDescription)}',` : ''}${sourceUrl ? `\n  sourceUrl: '${escapeTemplateLiteral(sourceUrl)}',` : ''}${readingMinutes ? `\n  readingMinutes: ${readingMinutes},` : ''}
+  publishedAt: '${publishedAt}',
+  language: '${escapeTemplateLiteral(languageCode)}',
+  countryCode: '${escapeTemplateLiteral(country)}',${heroImageUrl ? `\n  heroImageUrl: '${escapeTemplateLiteral(heroImageUrl)}',` : ''}${seoTitle ? `\n  seoTitle: '${escapeTemplateLiteral(seoTitle)}',` : ''}${seoDescription ? `\n  seoDescription: '${escapeTemplateLiteral(seoDescription)}',` : ''}${sourceUrl ? `\n  sourceUrl: '${escapeTemplateLiteral(sourceUrl)}',` : ''}${readingMinutes ? `\n  readingMinutes: ${readingMinutes},` : ''}
   content: \`${escapeTemplateLiteral(markdown.trim())}\`,
 };
 
@@ -269,20 +308,41 @@ export default post;
   return postFile;
 }
 
+function buildAcceptLanguage() {
+  switch (language) {
+    case 'fr':
+      return 'fr-FR,fr;q=0.9,en;q=0.6';
+    case 'de':
+      return 'de-DE,de;q=0.9,en;q=0.6';
+    case 'it':
+      return 'it-IT,it;q=0.9,en;q=0.6';
+    case 'nl':
+      return 'nl-NL,nl;q=0.9,en;q=0.6';
+    case 'sv':
+      return 'sv-SE,sv;q=0.9,en;q=0.6';
+    case 'pt':
+      return 'pt-PT,pt;q=0.9,en;q=0.6';
+    case 'es':
+      return 'es-ES,es;q=0.9,en;q=0.6';
+    default:
+      return 'en-GB,en;q=0.9';
+  }
+}
+
 async function run() {
   console.log(`Descargando noticia desde ${rawUrl}...`);
-  const res = await fetch(rawUrl, {
+  const response = await fetch(rawUrl, {
     headers: {
-      'User-Agent': 'CaseroOkBot/1.0 (+https://caserook.com)',
-      'Accept-Language': 'es-ES,es;q=0.9',
+      'User-Agent': 'CaseroOkBot/2.0 (+https://caserook.com)',
+      'Accept-Language': buildAcceptLanguage(),
     },
   });
 
-  if (!res.ok) {
-    throw new Error(`No se pudo recuperar la URL proporcionada (${res.status} ${res.statusText}).`);
+  if (!response.ok) {
+    throw new Error(`No se pudo recuperar la URL (${response.status} ${response.statusText}).`);
   }
 
-  const html = await res.text();
+  const html = await response.text();
   const article = extractArticle(html);
 
   if (!article.content || article.content.length < 200) {
@@ -293,13 +353,12 @@ async function run() {
   console.log('Solicitando redacción a OpenAI...');
   const ai = await callOpenAI(systemPrompt, userPrompt);
 
-  const title = ai.title?.trim() || article.title || 'Artículo del blog';
-  const summary = ai.summary?.trim() || article.description || 'Resumen pendiente de completar.';
+  const title = ai.title?.trim() || article.title || 'Blog article';
+  const summary = ai.summary?.trim() || article.description || 'Pending summary.';
   const slug = slugify(title);
   const markdown = ai.markdown?.trim() || summary;
   const seoTitle = ai.seo_title?.trim() || title;
   const seoDescription = ai.seo_description?.trim() || summary;
-  // Use local images instead of external URLs for better SEO
   const heroImageUrl = `/images/blog/${slug}.jpg`;
   const readingMinutes = estimateReadingMinutes(markdown);
 
@@ -313,27 +372,32 @@ async function run() {
     heroImageUrl,
     sourceUrl: rawUrl,
     readingMinutes,
+    country: countryConfig.countryCode,
+    languageCode: language,
   });
 
-  console.log(`Artículo creado en ${postFile}. Revisa el archivo para hacer ajustes finales.`);
-  
-  // Auto-update posts index and download image
+  console.log(`Artículo creado en ${postFile}`);
+
+  if (skipPostRefresh) {
+    console.log('ℹ️ Se omitió actualización de índice/imágenes por --skipPostRefresh=true');
+    return;
+  }
+
   try {
-    console.log('🔄 Actualizando índice de posts y descargando imagen...');
-    
+    console.log('🔄 Actualizando índice de posts e imágenes...');
     const { generatePostsIndex } = await import('./auto-generate-posts-index.mjs');
     const { ensureImagesExist } = await import('./auto-download-images.mjs');
-    
+
     await generatePostsIndex();
     await ensureImagesExist();
-    
-    console.log('✅ Índice y imagen actualizados automáticamente');
+
+    console.log('✅ Índice e imágenes actualizados');
   } catch (error) {
-    console.error('❌ Error en auto-actualización:', error.message);
+    console.error('❌ Error en auto-actualización:', error instanceof Error ? error.message : String(error));
   }
 }
 
 run().catch(error => {
-  console.error(error instanceof Error ? error.message : error);
+  console.error(error instanceof Error ? error.message : String(error));
   process.exit(1);
 });

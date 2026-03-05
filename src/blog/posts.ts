@@ -1,16 +1,26 @@
 // Usa `npm run generate:blog -- <URL>` para crear nuevos artículos automáticamente.
 // Este archivo se genera automáticamente. No editar manualmente.
+import { normalizeBlogCountryCode, resolvePostCountryCode } from './countryBlogs';
+
+export type BlogLanguage = 'es' | 'en' | 'fr' | 'de' | 'pt' | 'it' | 'nl' | 'sv';
+
 export type StaticBlogPost = {
   slug: string;
   title: string;
   summary: string;
   content: string;
+  language: BlogLanguage;
   publishedAt: string; // ISO date string
+  countryCode?: string;
   heroImageUrl?: string;
   readingMinutes?: number;
   seoTitle?: string;
   seoDescription?: string;
   sourceUrl?: string;
+};
+
+type StaticBlogPostInput = Omit<StaticBlogPost, 'language'> & {
+  language?: string;
 };
 
 // Import individual post files (auto-generated)
@@ -1439,7 +1449,7 @@ import post1422 from './posts/vivir-seguro-en-tu-alquiler-derechos-y-proteccion-
 import post1423 from './posts/vivir-sin-miedo-derechos-y-consejos-para-inquilinos-vulnerables.js';
 import post1424 from './posts/volver-a-casa-tras-la-tormenta-guia-para-inquilinos-en-riesgo.js';
 
-const rawPosts: StaticBlogPost[] = [
+const rawPosts: StaticBlogPostInput[] = [
   post1,
   post2,
   post3,
@@ -2866,10 +2876,69 @@ const rawPosts: StaticBlogPost[] = [
   post1424,
 ];
 
-export const blogPosts = [...rawPosts].sort((a, b) => (a.publishedAt > b.publishedAt ? -1 : 1));
+function normalizeBlogLanguage(value: string | undefined): BlogLanguage {
+  switch (value) {
+    case 'en':
+    case 'fr':
+    case 'de':
+    case 'pt':
+    case 'it':
+    case 'nl':
+    case 'sv':
+      return value;
+    case 'es':
+    default:
+      return 'es';
+  }
+}
 
-export function findBlogPostBySlug(slug: string) {
-  return blogPosts.find(post => post.slug === slug);
+export const blogPosts: StaticBlogPost[] = [...rawPosts]
+  .flatMap(post => {
+    const normalizedCountry = normalizeBlogCountryCode(post.countryCode);
+    const hasExplicitCountry = typeof post.countryCode === 'string' && post.countryCode.trim().length > 0;
+
+    // Si un post trae país explícito pero no soportado (p.ej. EU), lo excluimos.
+    if (hasExplicitCountry && !normalizedCountry) {
+      return [];
+    }
+
+    return [{
+      ...post,
+      // Las noticias se mantienen en idioma original; por defecto español.
+      language: normalizeBlogLanguage(post.language),
+      // Compatibilidad histórica: si no hay país guardado, asumimos ES para posts legacy.
+      countryCode: normalizedCountry ?? resolvePostCountryCode(post.countryCode),
+    }];
+  })
+  .sort((a, b) => (a.publishedAt > b.publishedAt ? -1 : 1));
+
+export function getBlogPostsByLanguage(language: BlogLanguage, countryCode?: string | null) {
+  const scopedCountry = normalizeBlogCountryCode(countryCode);
+  const countryScopedPosts = scopedCountry
+    ? blogPosts.filter(post => post.countryCode === scopedCountry)
+    : blogPosts;
+
+  const filteredByLanguage = countryScopedPosts.filter(post => post.language === language);
+  return filteredByLanguage.length > 0 ? filteredByLanguage : countryScopedPosts;
+}
+
+export function findBlogPostBySlug(
+  slug: string,
+  language?: BlogLanguage,
+  countryCode?: string | null
+) {
+  const scopedCountry = normalizeBlogCountryCode(countryCode);
+  const countryScopedPosts = scopedCountry
+    ? blogPosts.filter(post => post.countryCode === scopedCountry)
+    : blogPosts;
+
+  if (language) {
+    const localized = countryScopedPosts.find(
+      post => post.slug === slug && post.language === language
+    );
+    if (localized) return localized;
+  }
+  return countryScopedPosts.find(post => post.slug === slug);
 }
 
 export function computeReadingMinutes(content: string, fallback?: number | null) {

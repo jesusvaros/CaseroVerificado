@@ -4,6 +4,7 @@ import { AddressInput } from './AddressInput';
 import { StreetNumberInput } from './StreetNumberInput';
 import type { AddressResult } from './types';
 import { geocodingService } from './geocodingService';
+import { useTranslations } from '../../../i18n/useTranslations';
 
 interface AddressAutocompleteProps {
   value: string;
@@ -31,7 +32,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   onNumberChange,
   onNumberBlur,
   onSelect,
-  placeholder = 'Buscar dirección...',
+  placeholder,
   showNumberField = false,
   hasError = false,
   numberHasError = false,
@@ -44,9 +45,11 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   actionIcon,
   allowBroadResults = false,
 }) => {
+  const { t } = useTranslations();
   const [results, setResults] = useState<AddressResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(value || '');
+  const resolvedPlaceholder = placeholder ?? t('addReview.step1.addressPlaceholder');
 
   useEffect(() => {
     setQuery(value || '');
@@ -109,7 +112,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
             onSelect={handleSelect}
             results={results}
             loading={loading}
-            placeholder={placeholder}
+            placeholder={resolvedPlaceholder}
             hasError={hasError}
             hideLabel={hideLabel}
             onActionClick={onActionClick}
@@ -127,6 +130,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
             onBlur={() => onNumberBlur(streetNumberValue || '')}
             disabled={!value || value.trim() === ''}
             hasError={numberHasError}
+            placeholder={t('addReview.step1.streetNumberPlaceholder')}
           />
         )}
 

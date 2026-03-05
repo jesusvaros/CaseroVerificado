@@ -1,5 +1,6 @@
 import { supabaseWrapper } from './client';
 import { slugify } from '../../utils/slugify';
+import { getCountryNameCandidates } from '../../utils/countryNames';
 
 export type PublicReview = {
   id: string | number;
@@ -10,21 +11,40 @@ export type PublicReview = {
   would_recommend: number | null;
   city: string | null;
   city_slug: string | null;
+  country: string | null;
   state: string | null;
   postal_code: string | null;
   street: string | null;
   validated_at: string | null;
+  is_synthetic: boolean;
+  has_full_details: boolean;
+  synthetic_batch: string | null;
 };
 
-export async function getPublicReviews(): Promise<PublicReview[]> {
+type GetPublicReviewsOptions = {
+  countryCode?: string | null;
+  scope?: 'country' | 'all';
+};
+
+export async function getPublicReviews(options: GetPublicReviewsOptions = {}): Promise<PublicReview[]> {
+  const { countryCode = null, scope = 'all' } = options;
   const client = supabaseWrapper.getClient();
   if (!client) return [];
 
-  const { data, error } = await client
+  let query = client
     .from('public_reviews')
     .select('id, address_details, owner_opinion, would_recommend, validated_at')
     .eq('is_public', true)
     .order('validated_at', { ascending: false });
+
+  if (scope === 'country' && countryCode) {
+    const countryCandidates = getCountryNameCandidates(countryCode);
+    if (countryCandidates.length > 0) {
+      query = query.in('address_details->components->>country', countryCandidates);
+    }
+  }
+
+  const { data, error } = await query;
 
   if (error || !data) return [];
 
@@ -52,6 +72,14 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
     door?: string | null;
     floor?: string | null;
     components?: AddressComponents;
+    meta?: {
+      isSynthetic?: boolean | string | null;
+      synthetic?: boolean | string | null;
+      hasFullDetails?: boolean | string | null;
+      fullDetails?: boolean | string | null;
+      syntheticBatch?: string | null;
+      [key: string]: unknown;
+    } | null;
   } | null;
 
   type Row = {
@@ -63,6 +91,19 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
   };
 
   const rows = data as unknown as Row[];
+
+  const parseBooleanFlag = (
+    value: boolean | string | null | undefined,
+    fallback: boolean
+  ): boolean => {
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'string') {
+      const normalized = value.trim().toLowerCase();
+      if (normalized === 'true' || normalized === '1' || normalized === 'yes') return true;
+      if (normalized === 'false' || normalized === '0' || normalized === 'no') return false;
+    }
+    return fallback;
+  };
 
   const mapped = rows.map(review => {
     const details: AddressDetails = review.address_details ?? null;
@@ -82,6 +123,8 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
         : typeof details?.components?.state === 'string'
           ? details.components.state
           : null;
+    const country =
+      typeof details?.components?.country === 'string' ? details.components.country : null;
     const postalCode =
       typeof details?.postalCode === 'string'
         ? details.postalCode
@@ -97,6 +140,13 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
     const citySlug = city ? slugify(city) : null;
     const wouldRecommend =
       review.would_recommend != null ? Number(review.would_recommend) : null;
+    const meta = details?.meta ?? null;
+    const isSynthetic = parseBooleanFlag(meta?.isSynthetic ?? meta?.synthetic, false);
+    const hasFullDetails = parseBooleanFlag(meta?.hasFullDetails ?? meta?.fullDetails, !isSynthetic);
+    const syntheticBatch =
+      typeof meta?.syntheticBatch === 'string' && meta.syntheticBatch.length > 0
+        ? meta.syntheticBatch
+        : null;
 
     return {
       id: review.id,
@@ -107,10 +157,14 @@ export async function getPublicReviews(): Promise<PublicReview[]> {
       would_recommend: wouldRecommend,
       city: city ?? null,
       city_slug: citySlug,
+      country,
       state: state ?? null,
       postal_code: postalCode ?? null,
       street: street ?? null,
       validated_at: review.validated_at ?? null,
+      is_synthetic: isSynthetic,
+      has_full_details: hasFullDetails,
+      synthetic_batch: syntheticBatch,
     } satisfies PublicReview;
   });
 

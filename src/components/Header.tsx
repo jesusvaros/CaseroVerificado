@@ -6,10 +6,39 @@ import logoUrl from '../assets/logo_coloreado.svg';
 import wordmarkUrl from '../assets/caserook_letras.svg';
 import { trackEvent } from '../utils/analytics';
 import toast from 'react-hot-toast';
+import { useTranslations } from '../i18n/useTranslations';
+import { buildBlogListPath } from '../i18n/routing';
+import { resolveLocale } from '../i18n/config';
+import {
+  BLOG_COUNTRY_CODES,
+  getCountryDisplayLabel,
+  normalizeBlogCountryCode,
+  type BlogCountryCode,
+} from '../blog/countryBlogs';
+import { useDetectedCountryCode } from '../services/location/useDetectedCountryCode';
+import { getPreferredLocaleByCountry } from '../services/location/countryLanguage';
+import { setForcedCountryCode } from '../services/location/userCountry';
+
+const BLOG_COUNTRY_FLAGS: Record<BlogCountryCode, string> = {
+  ES: '🇪🇸',
+  GB: '🇬🇧',
+  FR: '🇫🇷',
+  DE: '🇩🇪',
+  IT: '🇮🇹',
+  NL: '🇳🇱',
+  CH: '🇨🇭',
+  SE: '🇸🇪',
+  PT: '🇵🇹',
+};
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
+  const countryMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { locale, setLocale, t } = useTranslations();
+  const { countryCode: detectedCountryCode } = useDetectedCountryCode();
 
   // Hide input on specific routes
   const isAddReviewPage = location.pathname === '/add-review';
@@ -61,6 +90,38 @@ const Header: React.FC = () => {
   }, [isHomePage]);
 
   const showHeaderSearch = !isAddReviewPage && (!isHomePage || !homeInputVisible);
+  const requestedCountryCode = normalizeBlogCountryCode(new URLSearchParams(location.search).get('country'));
+  const detectedBlogCountryCode = normalizeBlogCountryCode(detectedCountryCode);
+  const activeCountryCode =
+    requestedCountryCode ?? detectedBlogCountryCode ?? 'ES';
+  const blogListPathWithScope = `${buildBlogListPath(locale)}?country=${activeCountryCode}`;
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryMenuRef.current && !countryMenuRef.current.contains(event.target as Node)) {
+        setIsCountryMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleCountryChange = (nextCountryCode: BlogCountryCode) => {
+    setIsCountryMenuOpen(false);
+    setForcedCountryCode(nextCountryCode);
+    const preferredLocale = resolveLocale(getPreferredLocaleByCountry(nextCountryCode) ?? 'en');
+    setLocale(preferredLocale);
+
+    const isBlogPath = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
+    if (!isBlogPath) return;
+
+    const nextSearch = new URLSearchParams(location.search);
+    nextSearch.set('country', nextCountryCode);
+    nextSearch.delete('page');
+    const nextSearchString = nextSearch.toString();
+    navigate(`${location.pathname}${nextSearchString ? `?${nextSearchString}` : ''}${location.hash}`);
+  };
 
   return (
     <header
@@ -102,49 +163,82 @@ const Header: React.FC = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
-                  Escribir opinión
-                </Link>
-              </div>
-
-              {/* Mobile 'Escribir opinión' button */}
-              <div className="md:hidden">
-                <Link
-                  to="/add-review"
-                  className="mx-2 flex min-w-[120px] items-center justify-center gap-2 rounded-lg bg-[#4A5E32] px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-gray-700"
-                  onClick={() => trackEvent('header:start-review-mobile')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                  </svg>
-                  Escribir opinión
+                  {t('header.writeReview')}
                 </Link>
               </div>
             </>
           )}
         </div>
 
-        {/* Right side: blog + map + login with small gap and slight right margin */}
+        {/* Right side: blog + country + map + login */}
         <div className="flex items-center gap-2 md:gap-3">
+          {showHeaderSearch && (
+            <Link
+              to="/add-review"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#4A5E32] bg-white text-[#4A5E32] shadow-sm transition-colors hover:bg-[#f5f8eb] focus:outline-none focus:ring-2 focus:ring-[#4A5E32] md:hidden"
+              aria-label={t('header.writeReview')}
+              onClick={() => trackEvent('header:start-review-mobile')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </Link>
+          )}
+
           {/* Blog - Desktop version */}
           <Link
-            to="/blog"
+            to={blogListPathWithScope}
             className="hidden items-center rounded-full border border-[#4A5E32] px-4 py-2 text-sm font-semibold text-[#4A5E32] transition hover:bg-[#4A5E32] hover:text-white md:inline-flex"
             onClick={() => trackEvent('nav:opiniones-desktop')}
           >
-            Blog
+            {t('header.blog')}
           </Link>
-          
+
           {/* Blog - Mobile version with icon */}
           <Link
-            to="/blog"
+            to={blogListPathWithScope}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[#4A5E32] text-[#4A5E32] transition hover:bg-[#4A5E32] hover:text-white md:hidden"
-            aria-label="Blog"
+            aria-label={t('header.blogAria')}
             onClick={() => trackEvent('nav:blog-mobile')}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.832 18.477 19.247 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </Link>
+
+          <div className="relative" ref={countryMenuRef}>
+            <button
+              type="button"
+              className="flex h-10 items-center gap-2 rounded-full border border-[#4A5E32] bg-white px-3 text-sm font-semibold text-[#4A5E32] transition hover:bg-[#f5f8eb] focus:outline-none focus:ring-2 focus:ring-[#4A5E32]"
+              aria-label={t('blogList.countrySwitcherLabel')}
+              aria-expanded={isCountryMenuOpen}
+              onClick={() => setIsCountryMenuOpen(open => !open)}
+            >
+              <span className="text-base" aria-hidden>{BLOG_COUNTRY_FLAGS[activeCountryCode]}</span>
+              <span className="hidden md:inline">{activeCountryCode}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {isCountryMenuOpen && (
+              <div className="absolute right-0 top-11 z-50 min-w-52 rounded-xl border border-gray-200 bg-white p-1 shadow-lg">
+                {BLOG_COUNTRY_CODES.map(countryCode => (
+                  <button
+                    key={countryCode}
+                    type="button"
+                    onClick={() => handleCountryChange(countryCode)}
+                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition hover:bg-gray-100 ${
+                      countryCode === activeCountryCode ? 'bg-gray-100 font-semibold text-gray-900' : 'text-gray-700'
+                    }`}
+                  >
+                    <span className="text-base" aria-hidden>{BLOG_COUNTRY_FLAGS[countryCode]}</span>
+                    <span>{getCountryDisplayLabel(countryCode, locale)}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Map */}
           <Link to="/map" className="flex items-center" onClick={() => trackEvent('nav:map')}>
@@ -177,6 +271,7 @@ const Header: React.FC = () => {
 // Login Dropdown Component
 const LoginDropdown: React.FC = () => {
   const { user, logout } = useAuth();
+  const { t } = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -233,7 +328,7 @@ const LoginDropdown: React.FC = () => {
     navigate('/add-review');
     
     // Mostrar toast de confirmación
-    toast.success('Formulario reiniciado. Puedes empezar una nueva review.');
+    toast.success(t('header.resetFormSuccess'));
   };
 
   const toggleDropdown = () => {
@@ -246,7 +341,7 @@ const LoginDropdown: React.FC = () => {
         onClick={toggleDropdown}
         className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4A5E32] text-white transition-colors hover:bg-[#5A6E42]"
         aria-expanded={isDropdownOpen}
-        aria-label={user ? 'Perfil de usuario' : 'Iniciar sesión'}
+        aria-label={user ? t('header.userProfileAria') : t('header.loginAria')}
       >
         {user ? (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -274,19 +369,19 @@ const LoginDropdown: React.FC = () => {
                 onClick={() => setIsDropdownOpen(false)}
                 className="mt-2 w-full rounded bg-[#4A5E32] px-4 py-2 text-center text-white transition-colors hover:bg-[#5A6E42]"
               >
-                Mi Perfil
+                {t('header.myProfile')}
               </Link>
               <button
                 onClick={handleResetForm}
                 className="mt-2 w-full rounded bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-orange-600"
               >
-                Nueva Review
+                {t('header.newReview')}
               </button>
               <button
                 onClick={handleLogout}
                 className="mt-2 w-full rounded bg-[#4A5E32] px-4 py-2 text-white transition-colors hover:bg-[#5A6E42]"
               >
-                Cerrar sesión
+                {t('header.logout')}
               </button>
             </div>
           ) : (

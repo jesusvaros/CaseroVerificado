@@ -23,6 +23,40 @@ export default function DetailsPanel({ review, onClose }: Props) {
     typeof wr === 'number'
       ? (String(Math.min(5, Math.max(1, wr))) as '1' | '2' | '3' | '4' | '5')
       : undefined;
+  const parseBooleanFlag = (value: unknown): boolean | null => {
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'string') {
+      const normalized = value.trim().toLowerCase();
+      if (normalized === 'true' || normalized === '1' || normalized === 'yes') return true;
+      if (normalized === 'false' || normalized === '0' || normalized === 'no') return false;
+    }
+    return null;
+  };
+
+  const rawMeta = (review as unknown as {
+    address_details?: {
+      meta?: {
+        isSynthetic?: unknown;
+        synthetic?: unknown;
+        hasFullDetails?: unknown;
+        fullDetails?: unknown;
+      } | null;
+    } | null;
+  })?.address_details?.meta;
+
+  const isSynthetic =
+    parseBooleanFlag(review?.is_synthetic) ??
+    parseBooleanFlag(rawMeta?.isSynthetic) ??
+    parseBooleanFlag(rawMeta?.synthetic) ??
+    false;
+
+  const hasFullDetails =
+    parseBooleanFlag(review?.has_full_details) ??
+    parseBooleanFlag(rawMeta?.hasFullDetails) ??
+    parseBooleanFlag(rawMeta?.fullDetails) ??
+    !isSynthetic;
+
+  const canOpenFullReview = Boolean(review?.id) && !isSynthetic && hasFullDetails;
 
   // Trim very long opinions for compact panel; full text is in the review page
   const truncate = (text: string | null | undefined, max = 280) => {
@@ -104,7 +138,7 @@ export default function DetailsPanel({ review, onClose }: Props) {
             </div>
 
             {/* Enlace a la ficha completa (sticky en mobile para que siempre se vea) */}
-            {review?.id && (
+            {canOpenFullReview && review?.id && (
               <div className="sticky bottom-0 left-0 right-0 -mx-4 border-t bg-white/95 px-4 py-3 backdrop-blur md:static md:m-0 md:border-0 md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-0">
                 <Link
                   to={`/review/${review.id}`}

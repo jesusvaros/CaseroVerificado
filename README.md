@@ -85,6 +85,19 @@ npm run preview
 - `npm run preview`: Sirve la build localmente.
 - `npm run lint`: Linter con ESLint.
 - `npm run format`: Formatea con Prettier.
+- `npm run scrape:news`: Ejecuta scraping/generación para Reino Unido (`GB`).
+- `npm run scrape:news:all`: Ejecuta scraping/generación para todos los países configurados.
+- `npm run daily:blog -- --country=ES|GB|FR|DE|IT|NL|CH|SE|PT|EU|ALL`: Automatización multi-país (independiente por país).
+
+## Automatización multi-país del blog
+
+- Cada país tiene historial propio de URLs procesadas (`data/processed-urls-<pais>.json`).
+- Cada país mantiene su propio estado de ejecución (`data/country-run-state.json`) y solo corre si han pasado 3 días desde su última ejecución.
+- Para forzar una ejecución manual sin esperar 3 días:
+
+```bash
+npm run daily:blog -- --country=GB --force=true
+```
 
 ## Integraciones y backend
 

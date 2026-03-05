@@ -1,5 +1,64 @@
 import type { FormDataType } from '../../../store/formTypes';
 import type { AddressResult, HereGeocodeItem } from './types';
+import { detectUserCountryCode } from '../../../services/location/userCountry';
+import { resolveLanguageTagForCountry } from '../../../services/location/countryLanguage';
+import { isCountryDebugLoggingEnabled } from '../../../utils/countryDebugLogging';
+
+type GeocodingContext = {
+  countryCode: string | null;
+  languageTag: string;
+};
+
+let geocodingContextPromise: Promise<GeocodingContext> | null = null;
+
+function normalizeLanguageTag(value: string | null | undefined): string | null {
+  if (!value || typeof value !== 'string') return null;
+  const normalized = value.trim();
+  if (normalized.length < 2) return null;
+  return normalized;
+}
+
+function pickNavigatorLanguage(): string {
+  if (typeof window === 'undefined') return 'en-US';
+
+  const candidates = [
+    ...(Array.isArray(window.navigator.languages) ? window.navigator.languages : []),
+    window.navigator.language,
+  ];
+
+  for (const candidate of candidates) {
+    const valid = normalizeLanguageTag(candidate);
+    if (valid) return valid;
+  }
+
+  return 'en-US';
+}
+
+function getCountryNameFromCode(countryCode: string | null): string | null {
+  if (!countryCode) return null;
+
+  try {
+    const displayNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    return displayNames.of(countryCode) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function getGeocodingContext(): Promise<GeocodingContext> {
+  if (!geocodingContextPromise) {
+    geocodingContextPromise = (async () => {
+      const countryCode = await detectUserCountryCode();
+      const languageTag = resolveLanguageTagForCountry(countryCode, pickNavigatorLanguage());
+      if (isCountryDebugLoggingEnabled()) {
+        console.info('[geocoding-context] resolved', { countryCode, languageTag });
+      }
+      return { countryCode, languageTag };
+    })();
+  }
+
+  return geocodingContextPromise;
+}
 
 /**
  * Service for handling geocoding operations with the HERE API
@@ -16,6 +75,24 @@ export const geocodingService = {
     }
 
     try {
+      const { countryCode, languageTag } = await getGeocodingContext();
+      const params: Record<string, string> = {
+        q: searchText,
+        lang: languageTag,
+        limit: '10',
+      };
+      if (countryCode) {
+        params.in = `countryCode:${countryCode}`;
+      }
+      if (isCountryDebugLoggingEnabled()) {
+        console.info('[geocoding-search] request', {
+          countryCode,
+          languageTag,
+          query: searchText,
+          in: params.in ?? null,
+        });
+      }
+
       // Use server-side proxy for cost control
       const response = await fetch('/api/geocode-proxy', {
         method: 'POST',
@@ -24,12 +101,7 @@ export const geocodingService = {
         },
         body: JSON.stringify({
           endpoint: 'geocode',
-          params: {
-            q: searchText,
-            in: 'countryCode:ESP',
-            lang: 'es-ES',
-            limit: '10'
-          }
+          params,
         })
       });
 
@@ -99,7 +171,31 @@ export const geocodingService = {
       };
     }
 
-    const fullAddressQuery = `${street} ${newNumber}, ${city}, España`;
+    const { countryCode, languageTag } = await getGeocodingContext();
+    const countryLabel =
+      (typeof currentDetails?.components?.country === 'string'
+        ? currentDetails.components.country
+        : null) ?? getCountryNameFromCode(countryCode);
+
+    const fullAddressQuery = [`${street} ${newNumber}`.trim(), city.trim(), countryLabel]
+      .filter(Boolean)
+      .join(', ');
+    const params: Record<string, string> = {
+      q: fullAddressQuery,
+      lang: languageTag,
+      limit: '1',
+    };
+    if (countryCode) {
+      params.in = `countryCode:${countryCode}`;
+    }
+    if (isCountryDebugLoggingEnabled()) {
+      console.info('[geocoding-address] request', {
+        countryCode,
+        languageTag,
+        query: fullAddressQuery,
+        in: params.in ?? null,
+      });
+    }
 
     // Use server-side proxy for cost control
     const response = await fetch('/api/geocode-proxy', {
@@ -109,12 +205,7 @@ export const geocodingService = {
       },
       body: JSON.stringify({
         endpoint: 'geocode',
-        params: {
-          q: fullAddressQuery,
-          in: 'countryCode:ESP',
-          lang: 'es-ES',
-          limit: '1'
-        }
+        params,
       })
     });
 
@@ -169,6 +260,15 @@ export const geocodingService = {
    */
   async reverseGeocode(lat: number, lng: number): Promise<AddressResult | null> {
     try {
+      const { countryCode, languageTag } = await getGeocodingContext();
+      if (isCountryDebugLoggingEnabled()) {
+        console.info('[geocoding-reverse] request', {
+          countryCode,
+          languageTag,
+          at: `${lat},${lng}`,
+        });
+      }
+
       // Use server-side proxy for cost control
       const response = await fetch('/api/geocode-proxy', {
         method: 'POST',
@@ -179,7 +279,7 @@ export const geocodingService = {
           endpoint: 'revgeocode',
           params: {
             at: `${lat},${lng}`,
-            lang: 'es-ES',
+            lang: languageTag,
             limit: '1'
           }
         })

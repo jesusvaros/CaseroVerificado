@@ -6,6 +6,7 @@ import LocationMap from '../ui/LocationMap';
 import { useMapLocationHandler } from './location/mapLocationHandler';
 import { geocodingService } from '../ui/address/geocodingService';
 import type { FormDataType } from '../../store/formTypes';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface Step1Props {
   onNext: () => void;
@@ -17,6 +18,7 @@ interface Step1Props {
 }
 
 const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1Props) => {
+  const { t } = useTranslations();
   const { formData, updateFormData } = useFormContext();
   const [addressDetails, setAddressDetails] = useState<FormDataType['addressDetails']>(
     formData.addressDetails || {}
@@ -95,6 +97,7 @@ const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1
         onNumberBlur={handleNumberBlur}
         onSelect={handleSelect}
         showNumberField={true}
+        placeholder={t('addReview.step1.addressPlaceholder')}
         hasError={fieldErrors?.street}
         numberHasError={fieldErrors?.number}
       />
@@ -110,10 +113,10 @@ const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1
       <div className="-mx-2 mt-8 flex">
         <div className="w-1/2 px-2">
           <CustomInput
-            label="Piso"
+            label={t('addReview.step1.floorLabel')}
             id="floor"
             type="text"
-            placeholder="Piso"
+            placeholder={t('addReview.step1.floorPlaceholder')}
             value={formData.addressDetails?.floor || ''}
             onChange={e => {
               updateFormData({
@@ -127,10 +130,10 @@ const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1
         </div>
         <div className="w-1/2 px-2">
           <CustomInput
-            label="Puerta"
+            label={t('addReview.step1.doorLabel')}
             id="door"
             type="text"
-            placeholder="Puerta"
+            placeholder={t('addReview.step1.doorPlaceholder')}
             value={formData.addressDetails?.door || ''}
             onChange={e =>
               updateFormData({
@@ -150,7 +153,7 @@ const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1
           disabled={isSubmitting}
           className="rounded bg-[rgb(74,94,50)] px-6 py-2 text-white hover:bg-[rgb(60,76,40)] disabled:opacity-50"
         >
-          {isSubmitting ? 'Enviando...' : 'Siguiente'}
+          {isSubmitting ? t('addReview.common.sending') : t('addReview.common.next')}
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomInput from '../CustomInput';
+import { useTranslations } from '../../../i18n/useTranslations';
 
 interface StreetNumberInputProps {
   id: string;
@@ -8,6 +9,7 @@ interface StreetNumberInputProps {
   onBlur: (value: string) => void;
   disabled: boolean;
   hasError: boolean;
+  placeholder?: string;
 }
 
 export const StreetNumberInput: React.FC<StreetNumberInputProps> = ({
@@ -17,7 +19,9 @@ export const StreetNumberInput: React.FC<StreetNumberInputProps> = ({
   onBlur,
   disabled,
   hasError,
+  placeholder,
 }) => {
+  const { t } = useTranslations();
   const handleInputChange = (inputValue: string) => {
     if (inputValue === '') {
       onChange(inputValue);
@@ -29,12 +33,12 @@ export const StreetNumberInput: React.FC<StreetNumberInputProps> = ({
   return (
     <div className="w-1/4">
       <label htmlFor={id} className="mb-2 block text-lg font-medium text-black">
-        Número
+        {t('addReview.step1.streetNumberLabel')}
       </label>
       <CustomInput
         id={id}
         type="text"
-        placeholder="Número"
+        placeholder={placeholder ?? t('addReview.step1.streetNumberPlaceholder')}
         value={value}
         disabled={disabled}
         onChange={e => handleInputChange(e.target.value)}

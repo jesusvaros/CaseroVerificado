@@ -1,5 +1,6 @@
 import type { StaticBlogPost } from './posts';
 import { blogPosts } from './posts';
+import { resolvePostCountryCode } from './countryBlogs';
 
 // Categorías basadas en palabras clave comunes en los títulos
 const categories = {
@@ -69,8 +70,12 @@ export function getRelatedPosts(
     ...excludePosts.map(p => p.slug)
   ]);
   
-  // Filtrar posts disponibles
-  const availablePosts = blogPosts.filter(post => !excludeSlugs.has(post.slug));
+  // Filtrar posts disponibles dentro del mismo país para evitar cruces.
+  const currentCountry = resolvePostCountryCode(currentPost.countryCode);
+  const availablePosts = blogPosts.filter(post => {
+    if (excludeSlugs.has(post.slug)) return false;
+    return resolvePostCountryCode(post.countryCode) === currentCountry;
+  });
   
   // Calcular puntuación de relevancia para cada post
   const postsWithScore = availablePosts.map(post => ({

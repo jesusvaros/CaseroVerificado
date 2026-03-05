@@ -4,6 +4,7 @@ import CustomInput from '../CustomInput';
 import type { AddressResult } from './types';
 import { AddressDropdown } from './AddressDropdown';
 import { umamiEventProps } from '../../../utils/analytics';
+import { useTranslations } from '../../../i18n/useTranslations';
 
 interface AddressInputProps {
   id: string;
@@ -40,6 +41,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   actionIcon,
   allowBroadResults = false,
 }) => {
+  const { t } = useTranslations();
   const [isFocused, setIsFocused] = useState(false);
   const Icon = actionIcon || MapPinIcon;
 
@@ -47,7 +49,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
     <div className={`relative ${className}`}>
       {!hideLabel && (
         <label htmlFor={id} className="mb-2 block text-lg font-medium text-black">
-          Dirección {required && <span className="text-red-500">*</span>}
+          {t('addReview.step1.addressLabel')} {required && <span className="text-red-500">*</span>}
         </label>
       )}
       <CustomInput
@@ -70,7 +72,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
             type="button"
             onClick={onActionClick}
             disabled={actionDisabled}
-            aria-label="Ubicarme"
+            aria-label={t('addReview.step1.locateMeAria')}
             className="text-[rgb(74,94,50)] hover:text-[rgb(54,74,30)] disabled:opacity-50 disabled:cursor-not-allowed"
             {...umamiEventProps('map:locate')}
           >

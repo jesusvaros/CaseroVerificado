@@ -1,5 +1,6 @@
 import type { FormDataType } from '../store/formTypes';
 import { submitSessionStep2 } from '../services/supabase/GetSubmitStep2';
+import { tRuntime } from '../i18n/runtime';
 
 export interface ValidationResult {
   isValid: boolean;
@@ -16,7 +17,7 @@ export const validateStep2 = (context: FormDataType): ValidationResult => {
   if (!startYear) {
     return {
       isValid: false,
-      message: 'El año de inicio es obligatorio',
+      message: tRuntime('addReview.validation.step2.startYearRequired'),
       fieldErrors: { ...fieldErrors, startYear: true },
     };
   }
@@ -24,7 +25,7 @@ export const validateStep2 = (context: FormDataType): ValidationResult => {
   if (!price) {
     return {
       isValid: false,
-      message: 'El precio es obligatorio',
+      message: tRuntime('addReview.validation.step2.priceRequired'),
       fieldErrors: { ...fieldErrors, monthlyPrice: true },
     };
   }
@@ -32,21 +33,21 @@ export const validateStep2 = (context: FormDataType): ValidationResult => {
   if (endYear && startYear > endYear) {
     return {
       isValid: false,
-      message: 'El año de fin debe ser antes del año de inicio',
+      message: tRuntime('addReview.validation.step2.endYearAfterStartYear'),
       fieldErrors: { ...fieldErrors, endYear: true, startYear: true },
     };
   }
   if(!wouldRecommend){
     return {
       isValid: false,
-      message: 'La recomendación es obligatoria',
+      message: tRuntime('addReview.validation.step2.recommendationRequired'),
       fieldErrors: { ...fieldErrors, wouldRecommend: true },
     };
   }
   if(depositReturned === undefined && endYear !== undefined){
     return {
       isValid: false,
-      message: 'Si marcas que no vives en el piso, debes indicar si la fianza fue devuelta',
+      message: tRuntime('addReview.validation.step2.depositReturnedRequired'),
       fieldErrors: { ...fieldErrors, depositReturned: true },
     };
   }
@@ -66,7 +67,7 @@ export const submitStep2 = async (
 
     // Basic check - validation should have already happened
     if (!startYear || !price || !includedServices || !wouldRecommend) {
-      return { success: false, message: 'Datos incompletos' };
+      return { success: false, message: tRuntime('addReview.validation.common.incompleteData') };
     }
 
     // Get the reviewSessionId from localStorage
@@ -75,7 +76,7 @@ export const submitStep2 = async (
     // If no sessionId exists, we can't proceed with submission
     if (!sessionId || sessionId === 'PENDING') {
       console.error('No valid review session ID found');
-      return { success: false, message: 'No se ha encontrado una sesión válida' };
+      return { success: false, message: tRuntime('addReview.validation.common.noValidSession') };
     }
 
     // Submit data using our Supabase client function with simplified payload
@@ -90,13 +91,13 @@ export const submitStep2 = async (
 
     return {
       success,
-      message: success ? null : 'Error al guardar los datos en la base de datos',
+      message: success ? null : tRuntime('addReview.validation.common.databaseSaveError'),
     };
   } catch (error) {
     console.error('Error submitting address data:', error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Error al guardar los datos',
+      message: error instanceof Error ? error.message : tRuntime('addReview.validation.common.dataSaveError'),
     };
   }
 };

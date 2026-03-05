@@ -6,9 +6,11 @@ import AddressAutocomplete from './ui/AddressAutocomplete';
 import type { AddressResult } from './ui/AddressAutocomplete';
 import { showErrorToast } from './ui/toast/toastUtils';
 import { initializeSession } from '../services/sessionManager';
+import { useTranslations } from '../i18n/useTranslations';
 
 const InputSection: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslations();
   const { address, setAddress, updateFormData, formData } = useFormContext();
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState<'form' | 'map'>('form');
@@ -24,10 +26,10 @@ const InputSection: React.FC = () => {
   const { currentMessageIndex, nextMessageIndex, isAnimating, isMobile } = state;
 
   const messages = [
-    'Todas las reviews son Anónimas',
-    'Tus opiniones ayudan a crear un mercado de alquiler más transparente',
-    'Comparte tu experiencia con otros inquilinos',
-    'Ayuda a mejorar el mercado inmobiliario',
+    t('home.input.message1'),
+    t('home.input.message2'),
+    t('home.input.message3'),
+    t('home.input.message4'),
   ];
 
   // Check if the device is mobile
@@ -70,7 +72,7 @@ const InputSection: React.FC = () => {
   const handleStart = async () => {
     try {
       if (!formData.addressDetails?.coordinates || !address.trim()) {
-        showErrorToast('Por favor selecciona una dirección de la lista para continuar');
+        showErrorToast(t('home.input.selectAddressError'));
         return;
       }
 
@@ -87,7 +89,7 @@ const InputSection: React.FC = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      showErrorToast('Ha ocurrido un error al procesar tu solicitud');
+      showErrorToast(t('home.input.genericError'));
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +97,7 @@ const InputSection: React.FC = () => {
 
   const handleGoToMap = () => {
       if (!formData.addressDetails?.coordinates || !address.trim()) {
-        showErrorToast('Por favor selecciona una dirección de la lista para continuar');
+        showErrorToast(t('home.input.selectAddressError'));
         return;
       }
       const coords = formData.addressDetails.coordinates;
@@ -207,14 +209,14 @@ const InputSection: React.FC = () => {
                 onClick={() => setMode('form')}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
               >
-                Escribir review
+                {t('home.input.writeReview')}
               </button>
               <button
                 type="button"
                 onClick={() => setMode('map')}
                 className={`ml-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
               >
-                Buscar en el mapa
+                {t('home.input.searchMap')}
               </button>
             </div>
           </div>
@@ -225,7 +227,7 @@ const InputSection: React.FC = () => {
               <AddressAutocomplete
                 onSelect={handleAddressSelect}
                 value={address}
-                placeholder="Dirección del inmueble"
+                placeholder={t('home.input.propertyAddressPlaceholder')}
                 hideLabel
               />
             </div>
@@ -267,7 +269,7 @@ const InputSection: React.FC = () => {
           <div className="absolute left-[15%] top-[-100px] max-w-[200px] md:left-[9%] lg:left-[6%]">
             <div className="relative rounded-lg bg-white p-3 shadow-md">
               <p className="text-lg font-medium text-gray-700">
-                Todas las reviews son <span className="font-bold">Anónimas</span>
+                {renderMessage(t('home.input.message1'))}
               </p>
               <div className="absolute -bottom-2 right-1/2 h-4 w-4 rotate-45 transform bg-white" />
             </div>
@@ -276,8 +278,7 @@ const InputSection: React.FC = () => {
           <div className="absolute right-[15%] top-[-80px] max-w-[250px] md:right-[-2%] lg:right-[3%]">
             <div className="relative rounded-lg bg-white p-3 shadow-md">
               <p className="text-lg text-gray-700">
-                Tus opiniones ayudan a crear un mercado de alquiler más
-                <span className="font-bold"> transparente</span>
+                {renderMessage(t('home.input.message2'))}
               </p>
               <div className="absolute -bottom-2 left-1/2 h-4 w-4 rotate-45 transform bg-white" />
             </div>
@@ -292,14 +293,14 @@ const InputSection: React.FC = () => {
               onClick={() => setMode('form')}
               className={`px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'form' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
             >
-              Escribir review
+              {t('home.input.writeReview')}
             </button>
             <button
               type="button"
               onClick={() => setMode('map')}
               className={`ml-2 px-6 py-3 text-base md:text-lg font-semibold rounded-lg transition-colors ${mode === 'map' ? 'bg-[#4A5E32] text-white' : 'text-[#4A5E32] hover:bg-gray-200'}`}
             >
-              Buscar en el mapa
+              {t('home.input.searchMap')}
             </button>
           </div>
         </div>
@@ -309,7 +310,7 @@ const InputSection: React.FC = () => {
             <AddressAutocomplete
               onSelect={handleAddressSelect}
               value={address}
-              placeholder="Dirección del inmueble"
+              placeholder={t('home.input.propertyAddressPlaceholder')}
               hideLabel
               inputClassName="[&_input]:h-14 [&_input]:text-lg [&_input]:px-5"
             />
@@ -320,7 +321,7 @@ const InputSection: React.FC = () => {
             disabled={isLoading}
             className="flex h-14 items-center justify-center rounded-r-lg bg-[#F97316] px-8 py-4 text-lg font-semibold text-white hover:bg-[#EA580C] focus:outline-none"
           >
-            {mode === 'form' ? 'Empezar' : 'Buscar'}
+            {mode === 'form' ? t('home.input.start') : t('home.input.search')}
           </button>
         </div>
       </div>

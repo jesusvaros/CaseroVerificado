@@ -1,5 +1,6 @@
 import type { FormDataType } from '../store/formTypes';
 import { submitSessionStep3 } from '../services/supabase/GetSubmitStep3';
+import { tRuntime } from '../i18n/runtime';
 
 export interface ValidationResult {
   isValid: boolean;
@@ -23,7 +24,7 @@ export const validateStep3 = (context: FormDataType): ValidationResult => {
   if (!summerTemperature) {
     return {
       isValid: false,
-      message: 'La temperatura en verano es obligatoria',
+      message: tRuntime('addReview.validation.step3.summerTemperatureRequired'),
       fieldErrors: { ...fieldErrors, summerTemperature: true },
     };
   }
@@ -31,7 +32,7 @@ export const validateStep3 = (context: FormDataType): ValidationResult => {
   if (!winterTemperature) {
     return {
       isValid: false,
-      message: 'La temperatura en invierno es obligatoria',
+      message: tRuntime('addReview.validation.step3.winterTemperatureRequired'),
       fieldErrors: { ...fieldErrors, winterTemperature: true },
     };
   }
@@ -39,14 +40,14 @@ export const validateStep3 = (context: FormDataType): ValidationResult => {
   if (!noiseLevel) {
     return {
       isValid: false,
-      message: 'El nivel de ruido es obligatorio',
+      message: tRuntime('addReview.validation.step3.noiseLevelRequired'),
       fieldErrors: { ...fieldErrors, noiseLevel: true },
     };
   }
   if (!lightLevel) {
     return {
       isValid: false,
-      message: 'El nivel de luz es obligatorio',
+      message: tRuntime('addReview.validation.step3.lightLevelRequired'),
       fieldErrors: { ...fieldErrors, lightLevel: true },
     };
   }
@@ -55,7 +56,7 @@ export const validateStep3 = (context: FormDataType): ValidationResult => {
   if (!maintenanceStatus) {
     return {
       isValid: false,
-      message: 'El estado de mantenimiento es obligatorio',
+      message: tRuntime('addReview.validation.step3.maintenanceStatusRequired'),
       fieldErrors: { ...fieldErrors, maintenanceStatus: true },
     };
   }
@@ -88,7 +89,7 @@ export const submitStep3 = async (
       !lightLevel ||
       !maintenanceStatus
     ) {
-      return { success: false, message: 'Datos incompletos' };
+      return { success: false, message: tRuntime('addReview.validation.common.incompleteData') };
     }
 
     // Get the reviewSessionId from localStorage
@@ -97,7 +98,7 @@ export const submitStep3 = async (
     // If no sessionId exists, we can't proceed with submission
     if (!sessionId || sessionId === 'PENDING') {
       console.error('No valid review session ID found');
-      return { success: false, message: 'No se ha encontrado una sesión válida' };
+      return { success: false, message: tRuntime('addReview.validation.common.noValidSession') };
     }
 
     // Submit data using our Supabase client function with simplified payload
@@ -112,13 +113,13 @@ export const submitStep3 = async (
 
     return {
       success,
-      message: success ? null : 'Error al guardar los datos en la base de datos',
+      message: success ? null : tRuntime('addReview.validation.common.databaseSaveError'),
     };
   } catch (error) {
     console.error('Error submitting address data:', error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Error al guardar los datos',
+      message: error instanceof Error ? error.message : tRuntime('addReview.validation.common.dataSaveError'),
     };
   }
 };

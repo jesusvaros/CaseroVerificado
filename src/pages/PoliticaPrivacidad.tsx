@@ -1,74 +1,88 @@
 import { LEGAL_META } from '../config/legal';
 import LegalContainer from '../components/legal/LegalContainer';
+import { useTranslations } from '../i18n/useTranslations';
 
 export default function PoliticaPrivacidad() {
+  const { t } = useTranslations();
+
   return (
     <LegalContainer>
-      <h1 className="text-4xl font-extrabold mb-2 text-gray-900">Política de privacidad</h1>
-      <p className="text-sm text-gray-600 mb-6">Última actualización: 19/08/2025</p>
+      <h1 className="text-4xl font-extrabold mb-2 text-gray-900">{t('privacyPolicy.title')}</h1>
+      <p className="text-sm text-gray-600 mb-6">{t('legalCommon.lastUpdated')}</p>
 
-      <h2 className="text-xl font-semibold mb-2">1) Responsable del tratamiento</h2>
-      <p className="text-gray-700 mb-6">{LEGAL_META.ownerName} – Contacto: {LEGAL_META.contactEmail}.</p>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section1Title')}</h2>
+      <p className="text-gray-700 mb-6">
+        {t('privacyPolicy.section1Body', {
+          ownerName: LEGAL_META.ownerName,
+          contactEmail: LEGAL_META.contactEmail,
+        })}
+      </p>
 
-      <h2 className="text-xl font-semibold mb-2">2) Qué datos tratamos</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section2Title')}</h2>
       <div className="space-y-4 text-gray-700 mb-6">
-        <p><strong>Datos aportados por usuarios que publican opiniones:</strong> texto de la reseña, valoración y metadatos técnicos mínimos anti‑spam (p. ej., IP/UA).</p>
+        <p>
+          <strong>{t('privacyPolicy.section2Lead1Strong')}</strong> {t('privacyPolicy.section2Lead1')}
+        </p>
         <div>
-          <p className="mb-2"><strong>Identificadores de caseros/gestores para deduplicar y agrupar reseñas:</strong></p>
+          <p className="mb-2">
+            <strong>{t('privacyPolicy.section2Lead2Strong')}</strong>
+          </p>
           <ul className="list-disc pl-6 space-y-1">
-            <li>No guardamos datos personales en claro (nombre, teléfono, email).</li>
-            <li>Guardamos únicamente un hash irreversible (p. ej. SHA‑256) de datos normalizados (ej.: teléfono normalizado o email normalizado).</li>
-            <li>El hash se calcula en tu dispositivo (frontend o extensión) y solo se envía el hash, nunca el dato original.</li>
+            <li>{t('privacyPolicy.section2Bullet1')}</li>
+            <li>{t('privacyPolicy.section2Bullet2')}</li>
+            <li>{t('privacyPolicy.section2Bullet3')}</li>
           </ul>
         </div>
-        <p><strong>Datos de uso/analítica (solo si habilitas analítica con consentimiento):</strong> páginas vistas, eventos agregados.</p>
+        <p>
+          <strong>{t('privacyPolicy.section2Lead3Strong')}</strong> {t('privacyPolicy.section2Lead3')}
+        </p>
       </div>
 
-      <h2 className="text-xl font-semibold mb-2">3) Origen de los datos</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section3Title')}</h2>
       <div className="space-y-2 text-gray-700 mb-6">
-        <p>Aportación voluntaria del usuario al publicar su reseña.</p>
+        <p>{t('privacyPolicy.section3Body1')}</p>
         <p>
-          Extensión de navegador (Chrome/Firefox): capta únicamente información visible en páginas como Idealista; calcula el hash localmente y consulta el backend con ese hash. No realiza scraping masivo ni descarga datos personales en claro.
+          {t('privacyPolicy.section3Body2')}
         </p>
       </div>
 
-      <h2 className="text-xl font-semibold mb-2">4) Finalidades</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section4Title')}</h2>
       <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-1">
-        <li>Publicar y moderar opiniones.</li>
-        <li>Agrupar reseñas por casero/gestor mediante hashes para evitar duplicidades y mejorar la consulta.</li>
-        <li>Prevención de abuso y spam (limitación de frecuencia, señales técnicas).</li>
-        <li>(Opcional) Analítica para mejorar el servicio.</li>
+        <li>{t('privacyPolicy.section4Bullet1')}</li>
+        <li>{t('privacyPolicy.section4Bullet2')}</li>
+        <li>{t('privacyPolicy.section4Bullet3')}</li>
+        <li>{t('privacyPolicy.section4Bullet4')}</li>
       </ul>
 
-      <h2 className="text-xl font-semibold mb-2">5) Base jurídica</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section5Title')}</h2>
       <div className="text-gray-700 mb-6 space-y-2">
-        <p>Consentimiento del usuario que envía la reseña.</p>
+        <p>{t('privacyPolicy.section5Body1')}</p>
         <p>
-          Interés legítimo (art. 6.1.f RGPD) para: moderación, seguridad, deduplicación mediante hash y correcto funcionamiento del servicio. No se usan decisiones automatizadas con efectos jurídicos.
+          {t('privacyPolicy.section5Body2')}
         </p>
       </div>
 
-      <h2 className="text-xl font-semibold mb-2">6) Cesiones y encargados</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section6Title')}</h2>
       <p className="text-gray-700 mb-6">
-        No cedemos datos a terceros salvo obligación legal. Usamos proveedores de infraestructura como encargados del tratamiento (p. ej., Supabase, {LEGAL_META.hostingProvider}), bajo contrato conforme al RGPD. Pueden existir transferencias internacionales; en tal caso aplicamos garantías adecuadas (Cláusulas Contractuales Tipo de la UE).
+        {t('privacyPolicy.section6Body', { hostingProvider: LEGAL_META.hostingProvider })}
       </p>
 
-      <h2 className="text-xl font-semibold mb-2">7) Plazos de conservación</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section7Title')}</h2>
       <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-1">
-        <li>Reseñas y hashes: mientras el servicio esté activo o hasta que solicites su supresión/bloqueo.</li>
-        <li>Logs técnicos anti‑spam: {LEGAL_META.logsRetentionDays}.</li>
+        <li>{t('privacyPolicy.section7Bullet1')}</li>
+        <li>{t('privacyPolicy.section7Bullet2', { logsRetentionDays: LEGAL_META.logsRetentionDays })}</li>
       </ul>
 
-      <h2 className="text-xl font-semibold mb-2">8) Derechos</h2>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section8Title')}</h2>
       <p className="text-gray-700 mb-6">
-        Puedes solicitar acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a {LEGAL_META.contactEmail}. Nota sobre los hashes: al no almacenar el dato original, la supresión se realiza bloqueando o eliminando el hash asociado. Si eres un tercero afectado (p. ej., casero) y crees que existe una identificación indirecta, contáctanos para bloqueo del hash y desindexación del agrupado.
+        {t('privacyPolicy.section8Body', { contactEmail: LEGAL_META.contactEmail })}
       </p>
 
-      <h2 className="text-xl font-semibold mb-2">9) Menores</h2>
-      <p className="text-gray-700 mb-6">El servicio no está dirigido a menores de 14 años. No se aceptan envíos de datos por menores.</p>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section9Title')}</h2>
+      <p className="text-gray-700 mb-6">{t('privacyPolicy.section9Body')}</p>
 
-      <h2 className="text-xl font-semibold mb-2">10) Cambios</h2>
-      <p className="text-gray-700">Podemos actualizar esta política. Publicaremos la versión vigente con fecha de actualización.</p>
+      <h2 className="text-xl font-semibold mb-2">{t('privacyPolicy.section10Title')}</h2>
+      <p className="text-gray-700">{t('privacyPolicy.section10Body')}</p>
     </LegalContainer>
   );
 }

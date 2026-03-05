@@ -1,6 +1,7 @@
 import React from 'react';
 import type { SessionStatus } from '../AddReviewForm';
 import { umamiEventProps } from '../../utils/analytics';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface StepperBarProps {
   currentStep: number;
@@ -17,6 +18,7 @@ const StepperBar: React.FC<StepperBarProps> = ({
   orientation = 'horizontal',
   sessionStatus,
 }) => {
+  const { t } = useTranslations();
   const isVertical = orientation === 'vertical';
   const greenColor = 'rgb(74 94 50)'; // Green color for active and completed steps
   const lightGreenColor = 'rgba(74, 94, 50, 0.2)'; // Lighter green color for background
@@ -68,7 +70,7 @@ const StepperBar: React.FC<StepperBarProps> = ({
                   style={{
                     backgroundColor: isActive || isCompleted ? greenColor : undefined,
                   }}
-                  aria-label={`Ir al paso ${index + 1}: ${step}`}
+                  aria-label={t('addReview.stepper.goToStepAria', { step: index + 1, label: step })}
                 >
                   {isCompleted ? (
                     <svg

@@ -1,5 +1,6 @@
 import type { FormDataType } from '../store/formTypes';
 import { submitAddressStep1 } from '../services/supabase';
+import { tRuntime } from '../i18n/runtime';
 
 export interface ValidationResult {
   isValid: boolean;
@@ -20,7 +21,7 @@ export const validateStep1 = (context: FormContext): ValidationResult => {
   if (!addressDetails) {
     return {
       isValid: false,
-      message: 'No se ha proporcionado información de dirección',
+      message: tRuntime('addReview.validation.step1.missingAddressInfo'),
       fieldErrors,
     };
   }
@@ -28,7 +29,7 @@ export const validateStep1 = (context: FormContext): ValidationResult => {
   if (!addressDetails.street || !addressDetails.street.trim()) {
     return {
       isValid: false,
-      message: 'La dirección es obligatoria',
+      message: tRuntime('addReview.validation.step1.addressRequired'),
       fieldErrors: { ...fieldErrors, street: true },
     };
   }
@@ -39,14 +40,14 @@ export const validateStep1 = (context: FormContext): ValidationResult => {
   ) {
     return {
       isValid: false,
-      message: 'El número de la dirección es obligatorio',
+      message: tRuntime('addReview.validation.step1.addressNumberRequired'),
       fieldErrors: { ...fieldErrors, number: true },
     };
   }
   if (addressDetails.components?.house_number !== addressDetails.number) {
     return {
       isValid: false,
-      message: 'Revisa el número de la dirección',
+      message: tRuntime('addReview.validation.step1.addressNumberReview'),
       fieldErrors: { ...fieldErrors, number: true },
     };
   }
@@ -59,7 +60,7 @@ export const validateStep1 = (context: FormContext): ValidationResult => {
   ) {
     return {
       isValid: false,
-      message: 'No se han podido obtener las coordenadas de la dirección',
+      message: tRuntime('addReview.validation.step1.addressCoordinatesMissing'),
       fieldErrors: { ...fieldErrors, street: true },
     };
   }
@@ -79,7 +80,7 @@ export const submitStep1 = async (
 
     // Basic check - validation should have already happened
     if (!addressDetails?.coordinates) {
-      return { success: false, message: 'Datos de dirección incompletos' };
+      return { success: false, message: tRuntime('addReview.validation.common.incompleteAddressData') };
     }
 
     // Get the reviewSessionId from localStorage
@@ -88,7 +89,7 @@ export const submitStep1 = async (
     // If no sessionId exists, we can't proceed with submission
     if (!sessionId || sessionId === 'PENDING') {
       console.error('No valid review session ID found');
-      return { success: false, message: 'No se ha encontrado una sesión válida' };
+      return { success: false, message: tRuntime('addReview.validation.common.noValidSession') };
     }
 
     // Submit data using our Supabase client function with simplified payload
@@ -98,13 +99,13 @@ export const submitStep1 = async (
 
     return {
       success,
-      message: success ? null : 'Error al guardar los datos en la base de datos',
+      message: success ? null : tRuntime('addReview.validation.common.databaseSaveError'),
     };
   } catch (error) {
     console.error('Error submitting address data:', error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Error al guardar los datos',
+      message: error instanceof Error ? error.message : tRuntime('addReview.validation.common.dataSaveError'),
     };
   }
 };

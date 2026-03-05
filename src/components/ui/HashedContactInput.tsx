@@ -3,6 +3,7 @@ import { LockClosedIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import CustomInput from './CustomInput';
 import { hashValue as hashValueSupabase } from '../../services/supabase/hashValues.ts';
 import { trackUmamiEvent } from '../../utils/analytics';
+import { useTranslations } from '../../i18n/useTranslations';
 
 export interface HashedContactInputProps {
   id: string;
@@ -26,6 +27,7 @@ const HashedContactInput: React.FC<HashedContactInputProps> = ({
   onChange,
   className = '',
 }) => {
+  const { t } = useTranslations();
   const [localValue, setLocalValue] = useState(value);
   const [computedHash, setComputedHash] = useState(hashValue ?? '');
   const [showModal, setShowModal] = useState(false);
@@ -60,7 +62,7 @@ const HashedContactInput: React.FC<HashedContactInputProps> = ({
           className="flex h-12 w-12 items-center justify-center rounded-md border bg-white text-gray-600 mt-3"
           onMouseEnter={() => window.dispatchEvent(new CustomEvent('cv:privacyHover', { detail: true }))}
           onMouseLeave={() => window.dispatchEvent(new CustomEvent('cv:privacyHover', { detail: false }))}
-          aria-label="Información de privacidad"
+          aria-label={t('addReview.step5.privacyInfoAria')}
           role="button"
           tabIndex={0}
           onClick={() => {
@@ -86,9 +88,9 @@ const HashedContactInput: React.FC<HashedContactInputProps> = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-lg">
             <div className="mb-3 flex items-center justify-between">
-              <h4 className="text-base font-semibold">Así lo guardamos</h4>
+              <h4 className="text-base font-semibold">{t('addReview.step5.privacyModalTitle')}</h4>
               <button
-                aria-label="Cerrar"
+                aria-label={t('addReview.common.close')}
                 className="rounded p-1 hover:bg-gray-100"
                 onClick={() => {
                   trackUmamiEvent('review:privacy-info-close');
@@ -99,10 +101,10 @@ const HashedContactInput: React.FC<HashedContactInputProps> = ({
               </button>
             </div>
             <p className="mb-2 text-sm text-gray-600">
-              Este es el valor cifrado que se almacena en nuestra base de datos:
+              {t('addReview.step5.privacyModalDescription')}
             </p>
             <code className="block max-w-full truncate rounded bg-gray-100 p-2 text-xs">
-              {computedHash || hashValue || '—'}
+              {computedHash || hashValue || t('addReview.common.emDash')}
             </code>
             <div className="mt-4 flex justify-end">
               <button
@@ -112,7 +114,7 @@ const HashedContactInput: React.FC<HashedContactInputProps> = ({
                   setShowModal(false);
                 }}
               >
-                Cerrar
+                {t('addReview.common.close')}
               </button>
             </div>
           </div>

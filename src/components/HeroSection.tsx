@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import wordmarkUrl from '../assets/caserook_letras.svg';
 import logoUrl from '../assets/logo_coloreado.svg';
 import { umamiEventProps } from '../utils/analytics';
+import { useTranslations } from '../i18n/useTranslations';
 
 const HeroSection = () => {
+  const { t } = useTranslations();
+
   return (
     <section className="bg-gray-50 py-28 md:py-40">
       <div className="container mx-auto flex flex-col-reverse items-center px-4 text-center md:flex-row md:text-left">
@@ -22,14 +25,14 @@ const HeroSection = () => {
           {/* Desktop: show only the wordmark on the right */}
           <img src={wordmarkUrl} alt="CaseroOk" className="hidden md:inline-block md:h-24 mt-6" />
           <p className="mb-8 text-xl text-gray-700 md:text-2xl">
-            Transparencia en el mercado de alquiler: descubre cómo se comportan los caseros y comparte tu experiencia.
+            {t('home.hero.subtitle')}
           </p>
           <Link
             to="/add-review"
             className="w-fit self-center whitespace-nowrap inline-block rounded-lg bg-[#4A5E32] px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#3B4C28]"
             {...umamiEventProps('hero:cta-add-review')}
           >
-            Escribir review
+            {t('home.hero.cta')}
           </Link>
         </div>
       </div>
