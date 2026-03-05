@@ -56,6 +56,8 @@ export const NEWS_COUNTRY_CONFIG = {
       { name: 'El País - Vivienda', url: 'https://elpais.com/tag/vivienda/', keywordRequired: false },
       { name: 'ABC - Vivienda', url: 'https://www.abc.es/economia/vivienda/', keywordRequired: false },
       { name: 'Idealista News', url: 'https://www.idealista.com/news/', keywordRequired: true },
+      { name: 'Publico - Vivienda', url: 'https://www.publico.es/vivienda/', keywordRequired: false },
+      { name: 'CTXT - Vivienda', url: 'https://ctxt.es/es/search?q=vivienda', keywordRequired: false },
     ],
   },
   GB: {
@@ -71,6 +73,10 @@ export const NEWS_COUNTRY_CONFIG = {
       { name: 'The Guardian Housing', url: 'https://www.theguardian.com/uk/housing', keywordRequired: false },
       { name: 'Financial Times Property', url: 'https://www.ft.com/property', keywordRequired: false },
       { name: 'CityAM', url: 'https://www.cityam.com/', keywordRequired: true },
+      { name: 'Socialist Worker', url: 'https://socialistworker.co.uk/', keywordRequired: true },
+      { name: 'Socialist Standard', url: 'https://www.worldsocialism.org/spgb/socialist-standard-2/', keywordRequired: true },
+      { name: 'Novara Media - Housing', url: 'https://novaramedia.com/tag/housing/', keywordRequired: false },
+      { name: 'Novara Media - Housing Crisis', url: 'https://novaramedia.com/tag/housing-crisis/', keywordRequired: false },
     ],
   },
   FR: {
@@ -86,6 +92,8 @@ export const NEWS_COUNTRY_CONFIG = {
       { name: 'Le Monde (EN)', url: 'https://www.lemonde.fr/en/', keywordRequired: true },
       { name: 'Le Figaro Immobilier', url: 'https://www.lefigaro.fr/immobilier/', keywordRequired: false },
       { name: 'Les Echos Immobilier', url: 'https://www.lesechos.fr/immobilier', keywordRequired: false },
+      { name: "L'Humanite - Logement", url: 'https://www.humanite.fr/logement', keywordRequired: false },
+      { name: 'Liberation - Immobilier', url: 'https://www.liberation.fr/immobilier/', keywordRequired: false },
     ],
   },
   DE: {
@@ -101,6 +109,8 @@ export const NEWS_COUNTRY_CONFIG = {
       { name: 'FAZ', url: 'https://www.faz.net/', keywordRequired: true },
       { name: 'Sueddeutsche', url: 'https://www.sueddeutsche.de/', keywordRequired: true },
       { name: 'taz', url: 'https://taz.de/', keywordRequired: true },
+      { name: 'Neues Deutschland - Wohnen', url: 'https://www.nd-aktuell.de/thema/wohnen', keywordRequired: false },
+      { name: 'Junge Welt', url: 'https://www.jungewelt.de/', keywordRequired: true },
     ],
   },
   IT: {
@@ -116,6 +126,8 @@ export const NEWS_COUNTRY_CONFIG = {
       { name: 'Il Sole 24 Ore', url: 'https://www.ilsole24ore.com/', keywordRequired: true },
       { name: 'La Repubblica', url: 'https://www.repubblica.it/', keywordRequired: true },
       { name: 'Corriere della Sera', url: 'https://www.corriere.it/', keywordRequired: true },
+      { name: 'Il Manifesto - Casa', url: 'https://ilmanifesto.it/tag/casa', keywordRequired: false },
+      { name: 'Critica Sociale', url: 'https://www.criticasociale.net/', keywordRequired: true },
     ],
   },
   NL: {
