@@ -2,117 +2,255 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://caserook.com/</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://caserook.com/map</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://caserook.com/opiniones</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/add-review</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://caserook.com/aviso-legal</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/politica-privacidad</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/cookies</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/condiciones-uso</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/buenas-practicas</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/terminosycondiciones</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=GB</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=FR</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=DE</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=IT</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=NL</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=CH</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=SE</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog?country=PT</loc>
-    <lastmod>2026-04-12</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/acciones-legales-para-inquilinos-en-espana-guia-practica</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/alquileres-en-espana-derechos-y-consejos-para-inquilinos-bajo-presion</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/atropellos-y-seguridad-vial-que-derechos-tienen-los-inquilinos-en-zonas-de-riesg</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/come-affrontare-la-crisi-abitativa-e-tutelare-i-diritti-degli-inquilini-in-itali?country=IT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/come-affrontare-le-difficolta-abitative-in-italia-guida-per-gli-inquilini?country=IT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/como-a-instabilidade-politica-pode-afetar-a-habitacao-em-portugal?country=PT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/como-afrontar-la-presion-de-la-vivienda-en-espana-guia-para-inquilinos</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/como-as-eleicoes-no-peru-podem-inspirar-direitos-dos-inquilinos-em-portugal?country=PT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/direitos-dos-inquilinos-em-portugal-guia-pratico-contra-despejos?country=PT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/direitos-e-desafios-dos-inquilinos-em-portugal?country=PT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/funderingsproblemen-in-nederland-wat-huurders-moeten-weten?country=NL</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/gesunder-schlaf-und-zellregeneration-was-mieter-wissen-sollten?country=DE</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/guia-practica-para-inquilinos-derechos-y-obligaciones-en-el-alquiler-en-espana</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/housing-pressure-on-zurich-lake-s-left-shore-what-tenants-should-know?country=CH</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/huurders-onder-druk-omgaan-met-onzekerheid-op-de-woningmarkt?country=NL</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/kinderbonus-beim-immobilienkauf-in-bayern-was-mieter-wissen-sollten?country=DE</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/mortgage-rate-hikes-and-housing-pressure-what-renters-should-know?country=GB</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/navigating-home-buying-in-switzerland-practical-tips-for-renters?country=CH</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/sicurezza-abitativa-e-diritto-all-abitazione-come-tutelarsi-in-tempi-difficili?country=IT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/sicurezza-e-convivenza-come-tutelarsi-in-caso-di-violenza-in-casa-e-nel-quartier?country=IT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/sport-e-spazi-pubblici-come-influiscono-sulla-qualita-abitativa-in-citta?country=IT</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/wohnungsmarkt-in-deutschland-chancen-und-herausforderungen-fur-mieter?country=DE</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://caserook.com/blog/woningmarkt-onder-druk-wat-betekent-het-voor-huurders?country=NL</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://caserook.com/blog/acquisto-auto-usata-cosa-sapere-per-evitare-truffe?country=IT</loc>
@@ -3710,12 +3848,6 @@
   </url>
   <url>
     <loc>https://caserook.com/blog/wohnungskrise-in-deutschland-was-mieter-jetzt-wissen-mussen?country=DE</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://caserook.com/blog/wohnungsmarkt-in-deutschland-chancen-und-herausforderungen-fur-mieter?country=DE</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
