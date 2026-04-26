@@ -1,18 +1,18 @@
 {
   "ES": {
-    "lastRunAt": "2026-04-25T09:57:45.186Z",
-    "discoveredCount": 116,
+    "lastRunAt": "2026-04-26T09:59:05.394Z",
+    "discoveredCount": 118,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-04-25T09:58:34.825Z",
+    "lastRunAt": "2026-04-26T09:59:44.817Z",
     "discoveredCount": 213,
-    "generatedCount": 3
+    "generatedCount": 2
   },
   "FR": {
-    "lastRunAt": "2026-04-25T09:59:36.016Z",
-    "discoveredCount": 265,
-    "generatedCount": 3
+    "lastRunAt": "2026-04-26T09:59:53.012Z",
+    "discoveredCount": 40,
+    "generatedCount": 0
   },
   "DE": {
     "lastRunAt": "2026-04-25T10:01:07.145Z",
