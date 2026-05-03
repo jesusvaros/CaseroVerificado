@@ -1,52 +1,52 @@
 {
   "ES": {
-    "lastRunAt": "2026-05-01T10:27:05.882Z",
-    "discoveredCount": 121,
+    "lastRunAt": "2026-05-03T10:11:26.492Z",
+    "discoveredCount": 120,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-05-01T10:28:19.497Z",
-    "discoveredCount": 95,
+    "lastRunAt": "2026-05-03T10:12:24.754Z",
+    "discoveredCount": 219,
     "generatedCount": 3
   },
   "FR": {
-    "lastRunAt": "2026-05-01T10:28:27.089Z",
-    "discoveredCount": 41,
+    "lastRunAt": "2026-05-03T10:12:32.719Z",
+    "discoveredCount": 40,
     "generatedCount": 0
   },
   "DE": {
-    "lastRunAt": "2026-05-01T10:30:08.332Z",
-    "discoveredCount": 28,
-    "generatedCount": 5
+    "lastRunAt": "2026-05-03T10:13:23.145Z",
+    "discoveredCount": 24,
+    "generatedCount": 4
   },
   "IT": {
-    "lastRunAt": "2026-05-01T10:32:21.310Z",
-    "discoveredCount": 15,
+    "lastRunAt": "2026-05-03T10:14:37.755Z",
+    "discoveredCount": 12,
     "generatedCount": 5
   },
   "NL": {
-    "lastRunAt": "2026-05-01T10:33:01.055Z",
-    "discoveredCount": 2,
-    "generatedCount": 2
+    "lastRunAt": "2026-05-03T10:15:33.009Z",
+    "discoveredCount": 3,
+    "generatedCount": 3
   },
   "CH": {
-    "lastRunAt": "2026-05-01T10:33:07.958Z",
-    "discoveredCount": 1,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-03T10:16:29.150Z",
+    "discoveredCount": 3,
+    "generatedCount": 3
   },
   "SE": {
-    "lastRunAt": "2026-05-01T10:33:09.658Z",
-    "discoveredCount": 1,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-03T10:16:42.383Z",
+    "discoveredCount": 2,
+    "generatedCount": 1
   },
   "PT": {
-    "lastRunAt": "2026-05-01T10:34:36.785Z",
-    "discoveredCount": 11,
-    "generatedCount": 5
+    "lastRunAt": "2026-05-03T10:17:26.627Z",
+    "discoveredCount": 16,
+    "generatedCount": 3
   },
   "EU": {
-    "lastRunAt": "2026-05-01T10:34:37.530Z",
-    "discoveredCount": 2,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-03T10:17:39.480Z",
+    "discoveredCount": 3,
+    "generatedCount": 1
   }
 }
