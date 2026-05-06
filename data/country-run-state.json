@@ -1,52 +1,52 @@
 {
   "ES": {
-    "lastRunAt": "2026-05-04T11:09:33.319Z",
-    "discoveredCount": 120,
+    "lastRunAt": "2026-05-06T11:11:50.380Z",
+    "discoveredCount": 117,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-05-04T11:09:41.536Z",
-    "discoveredCount": 96,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-06T11:12:44.692Z",
+    "discoveredCount": 212,
+    "generatedCount": 3
   },
   "FR": {
-    "lastRunAt": "2026-05-04T11:10:15.683Z",
-    "discoveredCount": 41,
-    "generatedCount": 1
+    "lastRunAt": "2026-05-06T11:12:53.401Z",
+    "discoveredCount": 40,
+    "generatedCount": 0
   },
   "DE": {
-    "lastRunAt": "2026-05-04T11:11:32.477Z",
-    "discoveredCount": 23,
+    "lastRunAt": "2026-05-06T11:13:44.458Z",
+    "discoveredCount": 26,
     "generatedCount": 3
   },
   "IT": {
-    "lastRunAt": "2026-05-04T11:13:40.482Z",
-    "discoveredCount": 11,
+    "lastRunAt": "2026-05-06T11:16:19.486Z",
+    "discoveredCount": 10,
     "generatedCount": 4
   },
   "NL": {
-    "lastRunAt": "2026-05-04T11:14:06.599Z",
-    "discoveredCount": 3,
-    "generatedCount": 1
+    "lastRunAt": "2026-05-06T11:17:46.148Z",
+    "discoveredCount": 4,
+    "generatedCount": 4
   },
   "CH": {
-    "lastRunAt": "2026-05-04T11:14:12.747Z",
-    "discoveredCount": 0,
-    "generatedCount": 0
-  },
-  "SE": {
-    "lastRunAt": "2026-05-04T11:14:27.044Z",
+    "lastRunAt": "2026-05-06T11:18:11.778Z",
     "discoveredCount": 2,
     "generatedCount": 1
   },
+  "SE": {
+    "lastRunAt": "2026-05-06T11:18:14.990Z",
+    "discoveredCount": 2,
+    "generatedCount": 0
+  },
   "PT": {
-    "lastRunAt": "2026-05-04T11:15:34.792Z",
-    "discoveredCount": 9,
-    "generatedCount": 5
+    "lastRunAt": "2026-05-06T11:18:16.742Z",
+    "discoveredCount": 3,
+    "generatedCount": 0
   },
   "EU": {
-    "lastRunAt": "2026-05-04T11:16:04.571Z",
-    "discoveredCount": 4,
-    "generatedCount": 2
+    "lastRunAt": "2026-05-06T11:18:17.511Z",
+    "discoveredCount": 2,
+    "generatedCount": 0
   }
 }
