@@ -1,51 +1,51 @@
 {
   "ES": {
-    "lastRunAt": "2026-05-06T11:11:50.380Z",
-    "discoveredCount": 117,
+    "lastRunAt": "2026-05-08T10:44:03.775Z",
+    "discoveredCount": 121,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-05-06T11:12:44.692Z",
-    "discoveredCount": 212,
-    "generatedCount": 3
+    "lastRunAt": "2026-05-08T10:44:48.345Z",
+    "discoveredCount": 95,
+    "generatedCount": 2
   },
   "FR": {
-    "lastRunAt": "2026-05-06T11:12:53.401Z",
-    "discoveredCount": 40,
-    "generatedCount": 0
-  },
-  "DE": {
-    "lastRunAt": "2026-05-06T11:13:44.458Z",
-    "discoveredCount": 26,
-    "generatedCount": 3
-  },
-  "IT": {
-    "lastRunAt": "2026-05-06T11:16:19.486Z",
-    "discoveredCount": 10,
-    "generatedCount": 4
-  },
-  "NL": {
-    "lastRunAt": "2026-05-06T11:17:46.148Z",
-    "discoveredCount": 4,
-    "generatedCount": 4
-  },
-  "CH": {
-    "lastRunAt": "2026-05-06T11:18:11.778Z",
-    "discoveredCount": 2,
+    "lastRunAt": "2026-05-08T10:45:18.151Z",
+    "discoveredCount": 41,
     "generatedCount": 1
   },
+  "DE": {
+    "lastRunAt": "2026-05-08T10:47:21.612Z",
+    "discoveredCount": 19,
+    "generatedCount": 5
+  },
+  "IT": {
+    "lastRunAt": "2026-05-08T10:49:22.915Z",
+    "discoveredCount": 13,
+    "generatedCount": 5
+  },
+  "NL": {
+    "lastRunAt": "2026-05-08T10:51:03.186Z",
+    "discoveredCount": 5,
+    "generatedCount": 5
+  },
+  "CH": {
+    "lastRunAt": "2026-05-08T10:52:31.198Z",
+    "discoveredCount": 6,
+    "generatedCount": 3
+  },
   "SE": {
-    "lastRunAt": "2026-05-06T11:18:14.990Z",
-    "discoveredCount": 2,
+    "lastRunAt": "2026-05-08T10:52:33.820Z",
+    "discoveredCount": 1,
     "generatedCount": 0
   },
   "PT": {
-    "lastRunAt": "2026-05-06T11:18:16.742Z",
-    "discoveredCount": 3,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-08T10:54:59.050Z",
+    "discoveredCount": 10,
+    "generatedCount": 5
   },
   "EU": {
-    "lastRunAt": "2026-05-06T11:18:17.511Z",
+    "lastRunAt": "2026-05-08T10:54:59.430Z",
     "discoveredCount": 2,
     "generatedCount": 0
   }
