@@ -1,52 +1,52 @@
 {
   "ES": {
-    "lastRunAt": "2026-05-30T10:50:14.233Z",
-    "discoveredCount": 114,
+    "lastRunAt": "2026-05-31T11:03:47.126Z",
+    "discoveredCount": 115,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-05-30T10:51:33.695Z",
-    "discoveredCount": 95,
-    "generatedCount": 3
+    "lastRunAt": "2026-05-31T11:03:54.706Z",
+    "discoveredCount": 94,
+    "generatedCount": 0
   },
   "FR": {
-    "lastRunAt": "2026-05-30T10:51:41.663Z",
-    "discoveredCount": 38,
+    "lastRunAt": "2026-05-31T11:04:02.775Z",
+    "discoveredCount": 37,
     "generatedCount": 0
   },
   "DE": {
-    "lastRunAt": "2026-05-30T10:53:11.207Z",
-    "discoveredCount": 20,
-    "generatedCount": 5
+    "lastRunAt": "2026-05-31T11:04:51.383Z",
+    "discoveredCount": 19,
+    "generatedCount": 3
   },
   "IT": {
-    "lastRunAt": "2026-05-30T10:54:29.828Z",
-    "discoveredCount": 14,
+    "lastRunAt": "2026-05-31T11:06:20.795Z",
+    "discoveredCount": 6,
     "generatedCount": 5
   },
   "NL": {
-    "lastRunAt": "2026-05-30T10:54:57.269Z",
-    "discoveredCount": 2,
+    "lastRunAt": "2026-05-31T11:06:48.287Z",
+    "discoveredCount": 4,
     "generatedCount": 2
   },
   "CH": {
-    "lastRunAt": "2026-05-30T10:55:04.057Z",
-    "discoveredCount": 0,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-31T11:07:47.686Z",
+    "discoveredCount": 3,
+    "generatedCount": 3
   },
   "SE": {
-    "lastRunAt": "2026-05-30T10:55:06.259Z",
-    "discoveredCount": 2,
-    "generatedCount": 0
+    "lastRunAt": "2026-05-31T11:08:10.708Z",
+    "discoveredCount": 4,
+    "generatedCount": 1
   },
   "PT": {
-    "lastRunAt": "2026-05-30T10:55:31.745Z",
-    "discoveredCount": 3,
-    "generatedCount": 2
+    "lastRunAt": "2026-05-31T11:08:25.091Z",
+    "discoveredCount": 2,
+    "generatedCount": 1
   },
   "EU": {
-    "lastRunAt": "2026-05-30T10:55:41.355Z",
-    "discoveredCount": 1,
-    "generatedCount": 1
+    "lastRunAt": "2026-05-31T11:08:25.820Z",
+    "discoveredCount": 0,
+    "generatedCount": 0
   }
 }
