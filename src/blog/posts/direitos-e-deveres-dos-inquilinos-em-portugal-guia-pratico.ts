@@ -1,85 +1,81 @@
 export const post = {
   slug: 'direitos-e-deveres-dos-inquilinos-em-portugal-guia-pratico',
   title: 'Direitos e deveres dos inquilinos em Portugal: guia prático',
-  summary: 'Conheça seus direitos e deveres como inquilino em Portugal e saiba como agir em situações comuns de habitação e arrendamento.',
-  publishedAt: '2026-05-03',
+  summary: 'Entenda os direitos e deveres dos inquilinos em Portugal e saiba como agir em situações comuns de arrendamento e habitação.',
+  publishedAt: '2026-06-05',
   language: 'pt',
   countryCode: 'PT',
   heroImageUrl: '/images/blog/direitos-e-deveres-dos-inquilinos-em-portugal-guia-pratico.jpg',
-  seoTitle: 'Direitos e deveres dos inquilinos em Portugal',
-  seoDescription: 'Entenda os principais direitos e deveres dos inquilinos em Portugal e receba dicas práticas para garantir uma habitação segura e justa.',
-  sourceUrl: 'https://tribuna.expresso.pt/porto/fc-porto-campeao/2026-05-02-superar-o-passado-pensar-a-frente-o-adn-porto-voltou-0936948f?amp%3Butm_medium=root&amp%3Butm_campaign=WEB&amp%3Butm_content=https%3A%2F%2Ftribuna.expresso.pt%2Fporto%2Ffc-porto-campeao%2F2026-05-02-superar-o-passado-pensar-a-frente-o-adn-porto-voltou-0936948f',
+  seoTitle: 'Guia prático para inquilinos em Portugal',
+  seoDescription: 'Conheça os direitos e deveres dos inquilinos em Portugal, como lidar com rendas, despejos e habitação acessível.',
+  sourceUrl: 'https://www.publico.pt/2026/06/05/culturaipsilon/critica/ayres-extemporae-linha-frente-nova-geracao-musica-antiga-europeia-2176884',
   readingMinutes: 3,
-  content: `## Introdução
+  content: `## Direitos e deveres dos inquilinos em Portugal: guia prático
 
-Morar em Portugal, seja numa cidade grande ou numa vila pequena, implica conhecer os direitos e deveres relacionados com o arrendamento. Para muitos inquilinos, a habitação é uma das maiores despesas mensais e fonte de insegurança, especialmente em tempos de pressão no mercado imobiliário. Este artigo pretende esclarecer quais são os principais aspetos legais que os inquilinos devem conhecer para proteger a sua casa e garantir um arrendamento justo.
-
-## Direitos básicos dos inquilinos em Portugal
-
-### 1. Contrato de arrendamento
-
-O contrato escrito é fundamental para proteger tanto o inquilino como o senhorio. Deve especificar o valor da renda, a duração do contrato, as condições de renovação e as responsabilidades de cada parte. Mesmo que o contrato seja verbal, a lei portuguesa reconhece direitos, mas é sempre mais difícil comprovar termos sem documento escrito.
-
-### 2. Valor da renda e atualizações
-
-A renda deve ser acordada entre as partes no início do contrato. As atualizações anuais da renda são geralmente feitas com base no índice de preços ao consumidor (IPC), excluindo a habitação. O senhorio não pode aumentar a renda arbitrariamente durante a duração do contrato.
-
-### 3. Condições do imóvel
-
-O imóvel deve estar em condições habitáveis, com instalações básicas funcionando e segurança garantida. O senhorio é responsável por garantir estas condições, exceto se os danos forem causados pelo inquilino.
-
-### 4. Direito à renovação e proteção contra despejo
-
-Os contratos de arrendamento para habitação permanente costumam garantir o direito à renovação automática, salvo se o senhorio tiver motivos legítimos para não renovar (como necessidade própria comprovada). O despejo só pode ocorrer com ordem judicial, e o inquilino deve ser notificado com antecedência mínima legal.
-
-## Deveres do inquilino
-
-- Pagar a renda e encargos associados (água, luz, gás, conforme acordado) pontualmente.
-- Usar o imóvel de forma adequada, evitando danos.
-- Informar o senhorio sobre reparações necessárias e permitir o acesso para manutenção.
-- Devolver o imóvel nas condições acordadas no contrato ao final do arrendamento.
-
-## O que fazer em caso de problemas com o senhorio
-
-### 1. Atraso no pagamento da renda
-
-Se tiver dificuldades temporárias para pagar a renda, tente negociar diretamente com o senhorio uma solução amigável, como um plano de pagamentos. A lei não obriga o senhorio a aceitar, mas o diálogo pode evitar conflitos.
-
-### 2. Despejo sem ordem judicial
-
-Qualquer tentativa de despejo sem ordem judicial é ilegal. O inquilino deve procurar ajuda jurídica e pode recorrer a associações de defesa do consumidor ou habitação para apoio.
-
-### 3. Problemas no imóvel
-
-Registe por escrito os problemas e solicite reparações ao senhorio. Se não houver resposta, pode recorrer aos serviços municipais de inspeção ou a apoio jurídico.
-
-### 4. Rendas excessivas ou abusivas
-
-Em áreas com pressão habitacional, as rendas podem ser elevadas. Informe-se sobre programas de habitação social ou apoios municipais que possam ajudar a garantir uma casa acessível.
-
-## O papel da habitação social e apoios disponíveis
-
-Portugal tem programas de habitação social e apoios para famílias com baixos rendimentos. Estes programas podem ser uma alternativa para quem enfrenta dificuldades no mercado privado. Informe-se junto da Câmara Municipal ou Segurança Social sobre candidaturas e requisitos.
-
-## Impacto prático para os inquilinos
-
-Conhecer os seus direitos permite ao inquilino evitar situações de abuso, negociar com confiança e garantir uma habitação estável. Saber o que pode exigir e como agir perante problemas evita ansiedade e insegurança, essenciais para o bem-estar familiar.
-
-## Dicas práticas para inquilinos
-
-1. **Exija sempre um contrato escrito:** este é o seu principal documento de proteção.
-2. **Guarde todos os comprovativos de pagamento:** renda, despesas e comunicações com o senhorio.
-3. **Faça um inventário ao entrar e sair do imóvel:** fotografias e lista detalhada evitam disputas.
-4. **Seja proativo na comunicação:** informe logo que detete problemas na casa.
-5. **Procure apoio:** associações de defesa do inquilino, serviços municipais e apoio jurídico podem ser essenciais.
-
-## Conclusão
-
-O mercado de habitação em Portugal pode ser desafiante, mas com informação e organização, os inquilinos podem garantir os seus direitos e construir uma relação de arrendamento mais segura e justa. Em caso de dúvidas ou conflitos, não hesite em procurar ajuda especializada para proteger o seu direito à habitação.
+Se é inquilino em Portugal ou está a pensar arrendar uma casa, é fundamental conhecer os seus direitos e deveres para garantir uma relação equilibrada com o senhorio e evitar problemas futuros. Num mercado imobiliário que pode ser desafiante, especialmente nas grandes cidades, compreender as regras do arrendamento é uma forma de proteger o seu alojamento e assegurar uma habitação digna e acessível.
 
 ---
 
-*Este artigo não substitui aconselhamento jurídico profissional. Para casos específicos, consulte um advogado ou uma entidade competente.*`,
+## O que diz a lei sobre o arrendamento em Portugal?
+
+A legislação que regula o arrendamento em Portugal é o Novo Regime do Arrendamento Urbano (NRAU), que estabelece direitos e obrigações para inquilinos e senhorios. Este regime visa proteger o acesso à habitação, promover a estabilidade contratual e definir regras claras para situações como aumento de renda, despejo e manutenção do imóvel.
+
+### Direitos básicos do inquilino
+
+- **Estabilidade do contrato:** A duração mínima dos contratos habitacionais costuma ser de um ano, renovável automaticamente, salvo acordo em contrário.
+- **Renda justa:** O senhorio pode atualizar a renda anualmente, mas deve respeitar os limites legais e as condições contratuais.
+- **Conservação do imóvel:** O senhorio é responsável por assegurar que o imóvel está em condições habitáveis e deve realizar reparações estruturais.
+- **Privacidade e uso pacífico:** O inquilino tem o direito de usar a casa sem interferências indevidas, salvo situações previstas na lei.
+
+### Deveres do inquilino
+
+- **Pagamento da renda:** Deve pagar a renda pontualmente conforme o contrato.
+- **Conservação do imóvel:** Deve cuidar do imóvel, evitando danos e comunicando problemas ao senhorio.
+- **Respeito pelas regras do condomínio:** Se o imóvel fizer parte de um condomínio, o inquilino deve cumprir as normas.
+
+---
+
+## Situações comuns e como agir
+
+### Aumento da renda
+
+O senhorio pode atualizar a renda uma vez por ano, geralmente com base na inflação ou índices oficiais, mas deve comunicar com antecedência. Se discordar do aumento, pode tentar negociar ou recorrer a meios legais, como a mediação ou arbitragem.
+
+### Despejo
+
+O despejo só pode ocorrer em situações específicas previstas na lei, como incumprimento do pagamento da renda ou necessidade de o senhorio usar o imóvel para habitação própria. O senhorio deve seguir um processo legal, que inclui aviso prévio e possibilidade de defesa do inquilino.
+
+Se receber uma notificação de despejo, procure ajuda legal para entender os seus direitos e prazos.
+
+### Manutenção e reparações
+
+Reparações estruturais são responsabilidade do senhorio, enquanto pequenas reparações e manutenção diária são do inquilino. Em caso de divergência, documente sempre as comunicações e, se necessário, peça apoio a associações de defesa do consumidor ou jurídicas.
+
+### Habitação social e apoio
+
+Em Portugal, existem programas de habitação social e apoios para famílias em situação de vulnerabilidade. Informe-se junto das câmaras municipais ou serviços sociais sobre candidaturas e requisitos para aceder a estas soluções.
+
+---
+
+## Impacto prático para os inquilinos
+
+Conhecer os seus direitos permite-lhe evitar abusos, como aumentos de renda ilegais, despejos injustificados ou falta de condições dignas. Além disso, estar informado facilita a negociação com o senhorio e o recurso a apoios quando necessário.
+
+A insegurança habitacional pode ser um grande stress, mas agir com conhecimento e apoio aumenta as chances de manter um alojamento estável e acessível.
+
+---
+
+## Dicas práticas para inquilinos
+
+1. **Leia sempre o contrato com atenção**: Antes de assinar, certifique-se de que entende todas as cláusulas, especialmente sobre renda, duração e responsabilidades.
+2. **Guarde toda a documentação**: Contrato, recibos de renda, comunicações com o senhorio e comprovativos de reparações são importantes para proteger os seus direitos.
+3. **Comunique por escrito**: Para avisos, pedidos de reparação ou reclamações, prefira email ou carta registada para ter prova das comunicações.
+4. **Procure apoio em associações e serviços legais**: Existem organizações que ajudam inquilinos a defender os seus direitos gratuitamente ou a baixo custo.
+5. **Informe-se sobre habitação social e apoios**: Se tiver dificuldades económicas, verifique se pode candidatar-se a programas de habitação acessível.
+
+---
+
+Ter uma habitação segura e digna é um direito fundamental. Conhecer o quadro legal e agir de forma informada é o melhor caminho para garantir esse direito enquanto inquilino em Portugal.`,
 };
 
 export default post;
