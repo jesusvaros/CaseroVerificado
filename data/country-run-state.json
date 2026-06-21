@@ -1,51 +1,51 @@
 {
   "ES": {
-    "lastRunAt": "2026-06-19T12:52:24.661Z",
-    "discoveredCount": 127,
+    "lastRunAt": "2026-06-21T11:49:18.300Z",
+    "discoveredCount": 126,
     "generatedCount": 5
   },
   "GB": {
-    "lastRunAt": "2026-06-19T12:52:32.570Z",
+    "lastRunAt": "2026-06-21T11:49:25.054Z",
     "discoveredCount": 93,
     "generatedCount": 0
   },
   "FR": {
-    "lastRunAt": "2026-06-19T12:52:42.892Z",
-    "discoveredCount": 39,
+    "lastRunAt": "2026-06-21T11:49:32.952Z",
+    "discoveredCount": 40,
     "generatedCount": 0
   },
   "DE": {
-    "lastRunAt": "2026-06-19T12:54:26.948Z",
+    "lastRunAt": "2026-06-21T11:50:36.707Z",
     "discoveredCount": 25,
     "generatedCount": 5
   },
   "IT": {
-    "lastRunAt": "2026-06-19T12:55:30.054Z",
-    "discoveredCount": 9,
-    "generatedCount": 4
+    "lastRunAt": "2026-06-21T11:51:51.449Z",
+    "discoveredCount": 13,
+    "generatedCount": 5
   },
   "NL": {
-    "lastRunAt": "2026-06-19T12:56:27.102Z",
-    "discoveredCount": 2,
-    "generatedCount": 2
+    "lastRunAt": "2026-06-21T11:52:25.372Z",
+    "discoveredCount": 4,
+    "generatedCount": 3
   },
   "CH": {
-    "lastRunAt": "2026-06-19T12:57:00.855Z",
+    "lastRunAt": "2026-06-21T11:52:40.951Z",
     "discoveredCount": 3,
-    "generatedCount": 2
+    "generatedCount": 1
   },
   "SE": {
-    "lastRunAt": "2026-06-19T12:57:03.689Z",
+    "lastRunAt": "2026-06-21T11:52:43.173Z",
     "discoveredCount": 1,
     "generatedCount": 0
   },
   "PT": {
-    "lastRunAt": "2026-06-19T12:57:49.536Z",
+    "lastRunAt": "2026-06-21T11:53:21.364Z",
     "discoveredCount": 5,
     "generatedCount": 3
   },
   "EU": {
-    "lastRunAt": "2026-06-19T12:57:50.207Z",
+    "lastRunAt": "2026-06-21T11:53:21.934Z",
     "discoveredCount": 1,
     "generatedCount": 0
   }
