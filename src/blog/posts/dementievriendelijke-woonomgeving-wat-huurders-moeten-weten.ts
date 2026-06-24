@@ -1,70 +1,75 @@
 export const post = {
   slug: 'dementievriendelijke-woonomgeving-wat-huurders-moeten-weten',
   title: 'Dementievriendelijke woonomgeving: wat huurders moeten weten',
-  summary: 'Ontdek hoe een dementievriendelijke woonomgeving het leven van mensen met dementie verbetert en welke stappen huurders kunnen nemen voor passende huisvesting.',
-  publishedAt: '2026-03-07',
+  summary: 'Steeds meer Nederlanders met dementie wonen thuis. Ontdek hoe een dementievriendelijke woonomgeving eruitziet en wat huurders praktisch kunnen doen.',
+  publishedAt: '2026-06-24',
   language: 'nl',
   countryCode: 'NL',
   heroImageUrl: '/images/blog/dementievriendelijke-woonomgeving-wat-huurders-moeten-weten.jpg',
-  seoTitle: 'Dementievriendelijk wonen: praktische tips voor huurders',
-  seoDescription: 'Leer hoe u als huurder kunt bijdragen aan een dementievriendelijke woonomgeving en welke rechten en opties u heeft bij het zoeken van geschikte huisvesting.',
-  sourceUrl: 'https://www.nrc.nl/nieuws/2026/02/10/moderne-verpleeghuizen-kunnen-verwarrend-zijn-voor-mensen-met-dementie-iemand-ging-naast-de-wc-liggen-en-viel-daar-in-slaap-a4919325',
+  seoTitle: 'Dementievriendelijk wonen: tips voor huurders in Nederland',
+  seoDescription: 'Leer hoe huurders hun woning en buurt dementievriendelijk kunnen maken met praktische tips voor betere bewegwijzering en herkenbaarheid.',
+  sourceUrl: 'https://www.nrc.nl/nieuws/2026/06/22/nederland-telt-straks-een-half-miljoen-mensen-met-dementie-dus-maak-de-bewegwijzering-kraakhelder-en-omlijst-die-glazen-deur-met-oranje-zegt-de-dementiearchitect-a4930560',
   readingMinutes: 3,
-  content: `## Dementie en woonomgeving: waarom het ertoe doet
+  content: `## Dementie en wonen in Nederland: de groeiende uitdaging
 
-Dementie is een aandoening die het brein aantast en het dagelijks functioneren van mensen aanzienlijk beïnvloedt. Mensen met dementie kunnen zich snel verliezen in onbekende of te moderne omgevingen, wat leidt tot verwarring en stress. Zoals verpleegkundige Peter Peltzer uitlegt, werkt het brein van iemand met dementie als een "tapijtrol des levens": het laatst geleerde verdwijnt als eerste. Dit betekent dat een omgeving die te complex of onoverzichtelijk is, het moeilijk maakt om zich te oriënteren.
+In Nederland leven momenteel ongeveer 320.000 mensen met dementie, en dit aantal kan in 2040 oplopen tot een half miljoen. De meeste van hen wonen thuis, vaak in een huurwoning. Dit betekent dat steeds meer huurders en hun omgevingen rekening moeten houden met de specifieke behoeften van mensen met dementie.
 
-Voor huurders en hun naasten betekent dit dat het vinden van een dementievriendelijke woonruimte cruciaal kan zijn om het welzijn van de betrokkene te verbeteren. Dit geldt zowel voor mensen die zelf met dementie wonen als voor huurders die zorg dragen voor iemand in hun huishouden.
+Gemeenten en welzijnsorganisaties zetten zich in voor het creëren van ‘dementievriendelijke’ wijken en buurthuizen. Dit houdt in dat de openbare ruimte en woonomgevingen zo worden ingericht dat mensen met dementie zich beter kunnen oriënteren en veiliger kunnen bewegen. Dit is niet alleen relevant voor mensen met dementie zelf, maar ook voor hun mantelzorgers, familie en buren.
 
-## Wat maakt een woonomgeving dementievriendelijk?
+## Wat betekent een dementievriendelijke woonomgeving?
 
-Een dementievriendelijke woning en buurt kenmerken zich door:
+Een dementievriendelijke woonomgeving is een plek waar mensen met geheugenproblemen zich minder snel zullen verliezen, zich veilig voelen en langer zelfstandig kunnen wonen. Dit kan door simpele, doeltreffende aanpassingen:
 
-- **Overzichtelijkheid:** Duidelijke looproutes zonder onnodige obstakels, zodat iemand makkelijk kan navigeren.
-- **Veiligheid:** Voorkomen van valgevaar en gevaarlijke situaties, bijvoorbeeld door goede verlichting en geen gladde vloeren.
-- **Rustige omgeving:** Minder prikkels en geluidsoverlast die verwarring kunnen veroorzaken.
-- **Herkenbare elementen:** Visuele aanwijzingen zoals pictogrammen, kleuren of symbolen om de weg te wijzen.
-- **Toegankelijkheid:** Eenvoudige toegang tot voorzieningen zoals een toilet, slaapkamer en keuken.
+- **Duidelijke bewegwijzering:** Bordjes met grote letters, contrasterende kleuren en heldere pijlen helpen bij het vinden van de weg.
+- **Contrasterende kleuren:** Voor deuren, deurkozijnen, lichtknopjes en toiletbrillen worden felle kleuren zoals oranje of geel gebruikt om deze elementen beter zichtbaar te maken.
+- **Rustige en overzichtelijke ruimtes:** Vermijden van overdaad aan informatie, zoals te veel posters of flyers op een deur, die verwarring kunnen veroorzaken.
+- **Veilige en toegankelijke inrichting:** Geen gladde vloeren, goede verlichting en herkenbare plekken in huis en buurt.
 
-Moderne verpleeghuizen proberen hierop in te spelen, maar kunnen soms juist verwarrend zijn door hun strakke en klinische inrichting. Voor huurders in zelfstandige woningen is het belangrijk om hier zelf rekening mee te houden.
+## De impact op huurders
 
-## Huurders en dementievriendelijk wonen: wat zijn uw opties?
+Voor huurders met dementie of mantelzorgers betekent dit dat zij baat kunnen hebben bij een woning en buurt die hierop zijn ingericht. Maar ook voor huurders zonder dementie kan zo’n omgeving comfortabeler en overzichtelijker zijn.
 
-### 1. Kies bewust bij het zoeken van een woning
+Huurders kunnen zelf het initiatief nemen om samen met hun verhuurder of woningcorporatie te kijken naar mogelijke aanpassingen. Dit kan de woonkwaliteit verbeteren en het langer zelfstandig wonen ondersteunen.
 
-Als u zelf of een naaste met dementie bent, probeer dan een woning te vinden die past bij de hierboven genoemde kenmerken. Sociale huurwoningen of woonzorgcomplexen bieden soms aangepaste woningen die rekening houden met dementie. Informeer bij woningcorporaties naar speciale woonprojecten voor mensen met dementie.
+## Wat kunnen huurders doen?
 
-### 2. Vraag aanpassingen aan bij uw verhuurder
+### 1. Praat met uw verhuurder of woningcorporatie
 
-Als u al een woning huurt, kan het helpen om met de verhuurder te overleggen over mogelijke aanpassingen. Denk aan het plaatsen van extra handgrepen, het verbeteren van de verlichting of het aanpassen van deuren en drempels. Volgens de wet kan de verhuurder niet zomaar weigeren als de aanpassingen redelijk zijn en de woning niet onherstelbaar worden veranderd.
+Leg uit dat een dementievriendelijke woonomgeving belangrijk is, zeker als u of een huisgenoot dementie heeft of risico loopt. Vraag of er mogelijkheden zijn om kleine aanpassingen te doen, zoals het plaatsen van contrasterende deurkozijnen of betere bewegwijzering in gemeenschappelijke ruimtes.
 
-### 3. Maak gebruik van zorg- en welzijnsorganisaties
+### 2. Maak gebruik van lokale initiatieven
 
-Er bestaan diverse organisaties die ondersteuning bieden aan mensen met dementie en hun mantelzorgers. Zij kunnen adviseren over geschikte woonvormen en helpen met het aanvragen van zorg of woningaanpassingen. Bijvoorbeeld het Wmo-loket bij uw gemeente of gespecialiseerde dementie-ondersteuningsgroepen.
+Veel gemeenten voeren beleid om wijken dementievriendelijker te maken. Informeer bij uw gemeente of er projecten lopen waar u aan mee kunt doen of ondersteuning kunt krijgen.
 
-### 4. Wees alert op huurprijs en betaalbaarheid
+### 3. Pas zelf kleine dingen aan in uw woning
 
-Dementievriendelijke woningen kunnen soms duurder zijn, zeker in de vrije sector. Sociale huurwoningen zijn vaak betaalbaarder, maar hebben langere wachttijden. Informeer bij uw woningcorporatie of gemeente naar mogelijkheden en eventuele voorrangsregels voor mensen met een medische noodzaak.
+Gebruik gekleurde stickers op lichtknopjes, markeer deurklinken met opvallende kleuren, en zorg dat belangrijke ruimtes zoals het toilet duidelijk herkenbaar zijn. Dit helpt niet alleen bij dementie, maar maakt het dagelijks leven voor iedereen makkelijker.
 
-### 5. Bescherm uw rechten als huurder
+### 4. Betrek buren en buurtgenoten
 
-Huurders hebben rechten als het gaat om woonzekerheid en het voorkomen van ontruiming, ook als zij of hun naasten met dementie te maken hebben. Bij dreigende ontruiming is het verstandig om juridisch advies in te winnen, bijvoorbeeld via het Juridisch Loket of een huurdersvereniging.
+Een dementievriendelijke buurt is een sociale buurt. Het helpt als mensen elkaar kennen en alert zijn op elkaar. Organiseer of neem deel aan buurtactiviteiten die gericht zijn op inclusiviteit en ondersteuning.
+
+### 5. Vraag om advies en ondersteuning
+
+Organisaties zoals Alzheimer Nederland bieden informatie en ondersteuning over wonen met dementie. Zij kunnen ook helpen met het beoordelen van uw woonomgeving en advies geven over aanpassingen.
 
 ## Praktische tips voor huurders
 
-1. **Informeer u goed:** Vraag bij uw gemeente, woningcorporatie of zorginstellingen naar specifieke woonvormen voor mensen met dementie.
+- **Vraag uw verhuurder om een dementiescan** van uw woning of gebouw, een beoordeling die in kaart brengt hoe geschikt de omgeving is voor mensen met dementie.
+- **Gebruik opvallende kleuren** voor deurkozijnen en lichtknopjes om het vinden van belangrijke ruimtes te vergemakkelijken.
+- **Vermijd overvolle informatieborden** in gemeenschappelijke ruimtes; houd bewegwijzering eenvoudig en overzichtelijk.
+- **Installeer goede verlichting** en zorg dat vloeren niet glad zijn om valgevaar te verminderen.
+- **Zoek contact met buurtinitiatieven** die zich inzetten voor dementievriendelijkheid en sociale samenhang.
 
-2. **Communiceer met uw verhuurder:** Leg uit waarom bepaalde aanpassingen nodig zijn en vraag schriftelijk om toestemming.
+## Conclusie
 
-3. **Maak gebruik van mantelzorg en ondersteuning:** Betrek zorginstanties vroegtijdig bij uw woonsituatie om problemen te voorkomen.
+Met de groei van het aantal mensen met dementie in Nederland wordt het steeds belangrijker dat woonomgevingen hierop aansluiten. Voor huurders betekent dit kansen om samen met verhuurders en gemeenschappen hun huis en buurt dementievriendelijker te maken. Dit bevordert niet alleen het welzijn van mensen met dementie, maar maakt de woonomgeving ook voor iedereen prettiger en veiliger.
 
-4. **Houd uw woonomgeving veilig en herkenbaar:** Kleine aanpassingen zoals duidelijke bewegwijzering en het verwijderen van obstakels kunnen veel verschil maken.
+Door kleine aanpassingen en bewustwording kunnen we samen bijdragen aan een samenleving waarin iedereen zich thuis en veilig voelt, ook bij geheugenproblemen.
 
-5. **Wees alert op uw rechten:** Bij problemen met huur, huurverhoging of ontruiming, zoek tijdig hulp om uw woonzekerheid te beschermen.
+---
 
-## Slotwoord
-
-Een dementievriendelijke woonomgeving kan het leven van mensen met dementie aanzienlijk verbeteren en stress verminderen. Voor huurders in Nederland is het belangrijk om bewust te zijn van de mogelijkheden en rechten rondom huisvesting die aansluiten bij deze behoefte. Door actief te zoeken, goed te communiceren en gebruik te maken van beschikbare ondersteuning, kunt u bijdragen aan een veilige en prettige woonplek voor uzelf of uw naaste met dementie.`,
+*Deze informatie is bedoeld als praktische gids. Voor specifieke juridische of medische vragen wordt altijd geadviseerd contact op te nemen met professionals of gespecialiseerde organisaties.*`,
 };
 
 export default post;
