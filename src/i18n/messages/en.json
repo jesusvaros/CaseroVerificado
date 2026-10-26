@@ -95,6 +95,70 @@
       "a4": "Search for the property address and complete the form. You can also use the browser extension that automatically detects listing data.",
       "q5": "What if I see inappropriate content?",
       "a5": "We have moderation and terms of use that prohibit defamatory or illegal content. If you find something like that, you can report it and we will review it."
+    },
+    "v2": {
+      "hero": {
+        "titleStart": "Know your landlord",
+        "titleHighlight": "before",
+        "titleEnd": "you pay the deposit.",
+        "subtitle": "Anonymous tenant reviews of flats and landlords across Spain. Free and ad-free.",
+        "searchPlaceholder": "Street and number",
+        "searchCta": "Search",
+        "lived": "Did you live at that address?",
+        "livedCta": "Write your review",
+        "cities": "See cities"
+      },
+      "stats": {
+        "reviews": "real reviews",
+        "cities": "cities with reviews",
+        "guides": "tenant guides",
+        "free": "no ads, no fees"
+      },
+      "features": {
+        "reviews": {
+          "eyebrow": "What tenants say",
+          "title": "The landlord, the flat and the deposit, told by people who lived there.",
+          "body": "Each review says whether they would recommend the flat and how the landlord behaved, answering what you need to know before signing.",
+          "topic1": "How the landlord handled repairs",
+          "topic2": "Noise, light and temperature",
+          "topic3": "The building and neighbours",
+          "topic4": "Whether the deposit was returned"
+        },
+        "map": {
+          "eyebrow": "Reviews map",
+          "title": "Look up the street before the viewing.",
+          "body": "See what people say about flats nearby and read each full review.",
+          "cta": "Open the map"
+        }
+      },
+      "quote": {
+        "caption": "Real review from a tenant in {{city}}",
+        "unknownCity": "Spain"
+      },
+      "guides": {
+        "title": "Guides for tenants",
+        "body": "Based on Spanish law, the Housing Ministry and tenant unions, with sources at the end of each guide.",
+        "all": "See all guides"
+      },
+      "trust": {
+        "anonymous": {
+          "title": "Truly anonymous",
+          "body": "Your name and email are never published. Landlord details are stored encrypted."
+        },
+        "moderated": {
+          "title": "Moderated by hand",
+          "body": "Every review is checked before it goes live, and you can report any review."
+        },
+        "reply": {
+          "title": "Landlords can reply",
+          "body": "If you are the landlord, write to us from the review to publish your reply."
+        }
+      },
+      "cta": {
+        "title": "Rented a flat? Tell us how it went.",
+        "body": "Three minutes, anonymous and moderated. You help whoever signs tomorrow.",
+        "button": "Write my review"
+      }
     }
   },
   "addReview": {

@@ -95,6 +95,70 @@
       "a4": "Busca la dirección del inmueble y rellena el formulario. También puedes usar la extensión del navegador que detecta automáticamente los datos del anuncio.",
       "q5": "¿Qué pasa si veo contenido inapropiado?",
       "a5": "Contamos con moderación y términos de uso que prohíben contenido difamatorio o ilegal. Si encuentras algo así, puedes reportarlo y lo revisaremos."
+    },
+    "v2": {
+      "hero": {
+        "titleStart": "Conoce al casero",
+        "titleHighlight": "antes",
+        "titleEnd": "de pagar la fianza.",
+        "subtitle": "Opiniones anónimas de inquilinos sobre pisos y caseros de toda España. Gratis y sin anuncios.",
+        "searchPlaceholder": "Calle y número del piso",
+        "searchCta": "Buscar",
+        "lived": "¿Viviste en esa dirección?",
+        "livedCta": "Escribe tu opinión",
+        "cities": "Ver ciudades"
+      },
+      "stats": {
+        "reviews": "opiniones reales",
+        "cities": "ciudades con opiniones",
+        "guides": "guías para inquilinos",
+        "free": "ni anuncios ni cuotas"
+      },
+      "features": {
+        "reviews": {
+          "eyebrow": "Lo que cuentan los inquilinos",
+          "title": "El casero, el piso y la fianza, contados por quien vivió ahí.",
+          "body": "Cada opinión dice si recomendarían el piso y cómo fue el trato. Y responde a lo que de verdad quieres saber antes de firmar.",
+          "topic1": "Cómo respondía el casero a las averías",
+          "topic2": "Ruido, luz y temperatura del piso",
+          "topic3": "La comunidad y el edificio",
+          "topic4": "Si devolvieron la fianza"
+        },
+        "map": {
+          "eyebrow": "Mapa de opiniones",
+          "title": "Busca la calle antes de visitar el piso.",
+          "body": "Mira en el mapa qué dicen de los pisos de la zona y lee cada opinión completa.",
+          "cta": "Abrir el mapa"
+        }
+      },
+      "quote": {
+        "caption": "Opinión real de un inquilino en {{city}}",
+        "unknownCity": "España"
+      },
+      "guides": {
+        "title": "Guías para inquilinos",
+        "body": "Escritas a partir del BOE, el Ministerio de Vivienda y los sindicatos de inquilinas. Con las fuentes al final de cada guía.",
+        "all": "Ver todas las guías"
+      },
+      "trust": {
+        "anonymous": {
+          "title": "Anónimo de verdad",
+          "body": "Tu nombre y tu email nunca se publican. Los datos del casero se guardan cifrados."
+        },
+        "moderated": {
+          "title": "Moderado a mano",
+          "body": "Cada opinión se revisa antes de publicarse y puedes denunciar cualquiera que no cumpla las normas."
+        },
+        "reply": {
+          "title": "El propietario puede responder",
+          "body": "Si eres el casero, escríbenos desde la propia opinión para publicar tu respuesta."
+        }
+      },
+      "cta": {
+        "title": "¿Has vivido de alquiler? Cuéntalo.",
+        "body": "Tres minutos, anónimo y moderado. Ayudas a quien va a firmar mañana.",
+        "button": "Escribir mi opinión"
+      }
     }
   },
   "addReview": {
