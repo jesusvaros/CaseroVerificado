@@ -1,5 +1,5 @@
-import { slugify } from '../../utils/slugify';
-import { provinceFromPostalCode, type RentValues } from './rentZones';
+import type { RentValues } from './rentZones';
+import { findMunicipality } from './municipalities';
 
 // Areas of a city with their reference rent (€/m² per month): official neighbourhoods where we have
 // them (public/data/ciudades, built by scripts/data/build_city_barrios.py), census sections otherwise.
@@ -13,6 +13,7 @@ export interface CityArea {
 
 export interface CityRent {
   name: string;
+  cumun: string;
   level: 'barrio' | 'section';
   rent: RentValues | null;
   ipva: [number, number] | null;
@@ -33,20 +34,16 @@ async function fetchJson<T>(path: string): Promise<T | null> {
   return res?.ok ? ((await res.json()) as T) : null;
 }
 
-// INE writes "Coruña, A"; cities in our URLs are "a-coruna" or "coruna"
-const nameSlugs = (name: string) => {
-  const m = name.match(/^(.*), (\S+)$/);
-  return [name, m ? `${m[2]} ${m[1]}` : name, ...name.split('/')].map(slugify);
-};
-
-export async function getCityRent(citySlug: string, postalCodes: (string | null)[]): Promise<CityRent | null> {
-  if (CITY_FILES.has(citySlug)) {
-    const file = await fetchJson<{ name: string; municipality: Municipality; source: string; features: { geometry: CityArea['geometry']; properties: { id: string; name: string; district: string; p25: number | null; p50: number | null; p75: number | null; n: number } }[] }>(
-      `/data/ciudades/${citySlug}.json`
+export async function getCityRent(citySlug: string): Promise<CityRent | null> {
+  const canonical = (await findMunicipality(citySlug))?.slug ?? citySlug;
+  if (CITY_FILES.has(canonical)) {
+    const file = await fetchJson<{ name: string; cumun: string; municipality: Municipality; source: string; features: { geometry: CityArea['geometry']; properties: { id: string; name: string; district: string; p25: number | null; p50: number | null; p75: number | null; n: number } }[] }>(
+      `/data/ciudades/${canonical}.json`
     );
     if (file) {
       return {
         name: file.name,
+        cumun: file.cumun,
         level: 'barrio',
         rent: file.municipality.r,
         ipva: file.municipality.ipva,
@@ -61,17 +58,18 @@ export async function getCityRent(citySlug: string, postalCodes: (string | null)
     }
   }
 
-  const province = postalCodes.map(provinceFromPostalCode).find(Boolean);
-  if (!province) return null;
+  const found = await findMunicipality(citySlug);
+  if (!found) return null;
+  const cumun = found.cumun;
   const zones = await fetchJson<{ municipalities: Record<string, Municipality>; features: { geometry: CityArea['geometry']; properties: { s: string; r: RentValues | null } }[] }>(
-    `/data/zonas/${province}.json`
+    `/data/zonas/${cumun.slice(0, 2)}.json`
   );
-  const entry = zones && Object.entries(zones.municipalities).find(([, m]) => m.name && nameSlugs(m.name).includes(citySlug));
-  if (!zones || !entry) return null;
-  const [cumun, municipality] = entry;
+  const municipality = zones?.municipalities[cumun];
+  if (!zones || !municipality) return null;
 
   return {
     name: municipality.name,
+    cumun,
     level: 'section',
     rent: municipality.r,
     ipva: municipality.ipva,

@@ -65,3 +65,11 @@ python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/madrid.geojson 28079 
 python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/barcelona.geojson 08019 public/data/zonas \
   public/data/ciudades/barcelona.json "barris de l'Ajuntament de Barcelona (CC BY 4.0)"
 ```
+
+## Rebuild the municipality index
+
+After rebuilding the rent zones, refresh the list used by the city search and the city pages:
+
+```bash
+python3 -I scripts/data/build_municipality_index.py public/data/zonas public/data/municipios.json
+```

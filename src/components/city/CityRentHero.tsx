@@ -1,5 +1,6 @@
 import { useTranslations } from '../../i18n/useTranslations';
 import type { CityRent } from '../../services/publicData/cityRent';
+import CitySearch from './CitySearch';
 
 const CityRentHero = ({ city, region, rent }: { city: string; region: string | null; rent: CityRent | null }) => {
   const { t } = useTranslations();
@@ -13,6 +14,9 @@ const CityRentHero = ({ city, region, rent }: { city: string; region: string | n
           {region && <span className="text-sm text-[#9FC3A5]">{region}</span>}
           <h1 className="font-display text-5xl font-extrabold leading-none tracking-tight md:text-6xl">{t('cityPage.title', { city })}</h1>
           <p className="text-lg leading-relaxed text-[#CFE5C6]">{t('cityPage.subtitle')}</p>
+          <div className="pt-2">
+            <CitySearch dark />
+          </div>
         </div>
         {(median || change != null) && (
           <div className="flex gap-12">
