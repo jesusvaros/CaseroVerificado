@@ -129,7 +129,7 @@ interface PeriodSectionProps {
     start_year: number;
     end_year: number | null;
     price: number;
-    included_services: string[];
+    included_services: string[] | null;
     would_recommend?: '1'|'2'|'3'|'4'|'5';
     deposit_returned?: string | undefined;
     owner_score?: number | null;
@@ -239,85 +239,88 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
         <p className="text-[18px] font-medium">{periodData.price}€</p>
       </div>
 
-      <div className="md:col-span-2">
-        <p className="text-[16px] font-medium text-gray-600">Incluidos en el precio</p>
-        <div className="mt-4 flex w-full justify-between">
-          {/* Luz */}
-          <div className="flex flex-col items-center">
-            <div
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Luz') ? 'bg-green-100' : 'bg-gray-100'}`}
-            >
-              <LightIcon />
-              {!periodData.included_services.includes('Luz') && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
-                </div>
-              )}
+      {/* One-page reviews do not ask about included services */}
+      {Array.isArray(periodData.included_services) && (
+        <div className="md:col-span-2">
+          <p className="text-[16px] font-medium text-gray-600">Incluidos en el precio</p>
+          <div className="mt-4 flex w-full justify-between">
+            {/* Luz */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Luz') ? 'bg-green-100' : 'bg-gray-100'}`}
+              >
+                <LightIcon />
+                {!periodData.included_services.includes('Luz') && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
+                  </div>
+                )}
+              </div>
+              <span className="mt-1 text-[16px]">Luz</span>
             </div>
-            <span className="mt-1 text-[16px]">Luz</span>
-          </div>
-
-          {/* Agua */}
-          <div className="flex flex-col items-center">
-            <div
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Agua') ? 'bg-green-100' : 'bg-gray-100'}`}
-            >
-              <WaterIcon />
-              {!periodData.included_services.includes('Agua') && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
-                </div>
-              )}
+  
+            {/* Agua */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Agua') ? 'bg-green-100' : 'bg-gray-100'}`}
+              >
+                <WaterIcon />
+                {!periodData.included_services.includes('Agua') && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
+                  </div>
+                )}
+              </div>
+              <span className="mt-1 text-[16px]">Agua</span>
             </div>
-            <span className="mt-1 text-[16px]">Agua</span>
-          </div>
-
-          {/* Comunidad */}
-          <div className="flex flex-col items-center">
-            <div
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Comunidad') ? 'bg-green-100' : 'bg-gray-100'}`}
-            >
-              <CommunityIcon />
-              {!periodData.included_services.includes('Comunidad') && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
-                </div>
-              )}
+  
+            {/* Comunidad */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Comunidad') ? 'bg-green-100' : 'bg-gray-100'}`}
+              >
+                <CommunityIcon />
+                {!periodData.included_services.includes('Comunidad') && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
+                  </div>
+                )}
+              </div>
+              <span className="mt-1 text-[16px]">Comunidad</span>
             </div>
-            <span className="mt-1 text-[16px]">Comunidad</span>
-          </div>
-
-          {/* Gas */}
-          <div className="flex flex-col items-center">
-            <div
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Gas') ? 'bg-green-100' : 'bg-gray-100'}`}
-            >
-              <GasIcon />
-              {!periodData.included_services.includes('Gas') && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
-                </div>
-              )}
+  
+            {/* Gas */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Gas') ? 'bg-green-100' : 'bg-gray-100'}`}
+              >
+                <GasIcon />
+                {!periodData.included_services.includes('Gas') && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
+                  </div>
+                )}
+              </div>
+              <span className="mt-1 text-[16px]">Gas</span>
             </div>
-            <span className="mt-1 text-[16px]">Gas</span>
-          </div>
-
-          {/* Garaje */}
-          <div className="flex flex-col items-center">
-            <div
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Garaje') ? 'bg-green-100' : 'bg-gray-100'}`}
-            >
-              <GarageIcon />
-              {!periodData.included_services.includes('Garaje') && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
-                </div>
-              )}
+  
+            {/* Garaje */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${periodData.included_services.includes('Garaje') ? 'bg-green-100' : 'bg-gray-100'}`}
+              >
+                <GarageIcon />
+                {!periodData.included_services.includes('Garaje') && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-0.5 w-10 rotate-45 bg-red-500"></div>
+                  </div>
+                )}
+              </div>
+              <span className="mt-1 text-[16px]">Garaje</span>
             </div>
-            <span className="mt-1 text-[16px]">Garaje</span>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

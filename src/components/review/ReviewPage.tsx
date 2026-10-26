@@ -39,7 +39,7 @@ interface Step2Data {
   start_year: number;
   end_year: number | null;
   price: number;
-  included_services: string[];
+  included_services: string[] | null;
   would_recommend?: '1'|'2'|'3'|'4'|'5';
   deposit_returned?: string | undefined;
   owner_score?: number | null;
@@ -140,7 +140,7 @@ const ReviewPage = () => {
                 start_year: publicReview.start_year,
                 end_year: publicReview.end_year,
                 price: publicReview.price,
-                included_services: publicReview.included_services ?? [],
+                included_services: publicReview.included_services ?? null,
                 would_recommend: publicReview.would_recommend ?? undefined,
                 deposit_returned: publicReview.deposit_returned ?? undefined,
                 owner_score: publicReview.owner_score,
