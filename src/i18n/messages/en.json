@@ -723,7 +723,9 @@
       "mobile": "Use two fingers to move the map"
     },
     "searchLabel": "Search another city",
-    "searchPlaceholder": "Another city or town…"
+    "searchPlaceholder": "Another city or town…",
+    "currentRent": "monthly rent in new contracts ({{period}})",
+    "salePerM2": "€/m² sale, appraised value ({{period}})"
   },
   "cityIndex": {
     "seoTitle": "Rent by city: official prices and reviews | CaseroOk",
@@ -746,5 +748,17 @@
     "subidas_renta": "Rent increases",
     "cobros_indebidos": "Improper charges",
     "entra_sin_avisar": "Enters without notice"
+  },
+  "market": {
+    "title": "Latest figures",
+    "postcodeRent": "Rent in new contracts in your postcode",
+    "cityRent": "Rent in new contracts in {{place}}",
+    "perMonth": "/month",
+    "depositsNote": "Median of {{n}} deposits lodged in {{period}}. Source: Generalitat Valenciana.",
+    "incasolNote": "Average of {{n}} contracts, {{period}}. Source: INCASÒL (deposits).",
+    "sale": "Sale price in {{place}}",
+    "saleNote": "Average appraised value, {{period}}. Source: Ministry of Housing.",
+    "deals": "Homes sold in the last year",
+    "dealsNote": "Sales up to {{period}}. Source: Ministry of Housing."
   }
 }

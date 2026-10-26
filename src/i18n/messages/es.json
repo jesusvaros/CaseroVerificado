@@ -723,7 +723,9 @@
       "mobile": "Usa dos dedos para mover el mapa"
     },
     "searchLabel": "Buscar otra ciudad",
-    "searchPlaceholder": "Ver otra ciudad o pueblo…"
+    "searchPlaceholder": "Ver otra ciudad o pueblo…",
+    "currentRent": "alquiler al mes en contratos nuevos ({{period}})",
+    "salePerM2": "€/m² de venta, valor tasado ({{period}})"
   },
   "cityIndex": {
     "seoTitle": "Alquiler por ciudades: precios oficiales y opiniones | CaseroOk",
@@ -746,5 +748,17 @@
     "subidas_renta": "Subidas de renta",
     "cobros_indebidos": "Cobros indebidos",
     "entra_sin_avisar": "Entra sin avisar"
+  },
+  "market": {
+    "title": "Lo más reciente",
+    "postcodeRent": "Alquiler en contratos nuevos de tu código postal",
+    "cityRent": "Alquiler en contratos nuevos en {{place}}",
+    "perMonth": "/mes",
+    "depositsNote": "Mediana de {{n}} fianzas depositadas en {{period}}. Fuente: Generalitat Valenciana.",
+    "incasolNote": "Media de {{n}} contratos, {{period}}. Fuente: INCASÒL (fianzas).",
+    "sale": "Precio de venta en {{place}}",
+    "saleNote": "Valor tasado medio, {{period}}. Fuente: Ministerio de Vivienda.",
+    "deals": "Viviendas vendidas en el último año",
+    "dealsNote": "Compraventas hasta el {{period}}. Fuente: Ministerio de Vivienda."
   }
 }

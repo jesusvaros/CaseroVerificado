@@ -3,14 +3,22 @@ import { getCityRent, type CityRent } from '../../services/publicData/cityRent';
 import { containsPoint, type Geometry } from '../../services/publicData/rentZones';
 import type { PublicReview } from '../../services/supabase/publicReviews';
 import { rentBreaks } from './rentScale';
+import { getMarket, type MarketData } from '../../services/publicData/market';
 
 export function useCityRent(citySlug: string | undefined, reviews: PublicReview[]) {
   const [rent, setRent] = useState<CityRent | null>(null);
+  const [market, setMarket] = useState<MarketData | null>(null);
   useEffect(() => {
     if (!citySlug) return;
     let cancelled = false;
     setRent(null);
-    getCityRent(citySlug).then(result => !cancelled && setRent(result));
+    setMarket(null);
+    getCityRent(citySlug).then(async result => {
+      if (cancelled) return;
+      setRent(result);
+      const current = result ? await getMarket(result.cumun) : null;
+      if (!cancelled) setMarket(current);
+    });
     return () => {
       cancelled = true;
     };
@@ -29,5 +37,5 @@ export function useCityRent(citySlug: string | undefined, reviews: PublicReview[
     return counts;
   }, [rent, reviews]);
 
-  return { rent, breaks, reviewCounts };
+  return { rent, market, breaks, reviewCounts };
 }
