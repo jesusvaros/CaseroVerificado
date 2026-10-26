@@ -78,7 +78,7 @@ export function useHomeShowcase(): HomeShowcase {
         const first = group.find(r => r.lat != null && r.lng != null);
         const facts = first ? await getBuildingFacts(first.lat!, first.lng!) : null;
         if (!active) return;
-        if (facts?.yearBuilt) {
+        if (facts?.yearBuilt && facts.dwellings > 1) {
           setState(prev => ({ ...prev, building: { title: featured.title, city: featured.city, path: featured.path, facts } }));
           return;
         }
