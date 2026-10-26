@@ -14,7 +14,6 @@ import { buildBlogListPath, buildBlogPostPath } from '../../i18n/routing';
 import { useTranslations } from '../../i18n/useTranslations';
 import { useDetectedCountryCode } from '../../services/location/useDetectedCountryCode';
 import PageSEO from '../../seo/PageSEO';
-import BlogCommentsSection from './BlogCommentsSection';
 import RelatedLinksCard from './RelatedLinksCard';
 
 function formatDate(dateString: string | null, dateLocale: string) {
@@ -303,12 +302,6 @@ export default function BlogPostPage() {
                 return renderBlock(block, index);
               })}
             </section>
-
-            <div className="mt-16">
-              <BlogCommentsSection
-                postSlug={post.slug}
-              />
-            </div>
 
             <RelatedLinksCard
               posts={relatedPosts.bottom}

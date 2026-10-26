@@ -85,19 +85,8 @@ npm run preview
 - `npm run preview`: Sirve la build localmente.
 - `npm run lint`: Linter con ESLint.
 - `npm run format`: Formatea con Prettier.
-- `npm run scrape:news`: Ejecuta scraping/generación para Reino Unido (`GB`).
-- `npm run scrape:news:all`: Ejecuta scraping/generación para todos los países configurados.
-- `npm run daily:blog -- --country=ES|GB|FR|DE|IT|NL|CH|SE|PT|EU|ALL`: Automatización multi-país (independiente por país).
-
-## Automatización multi-país del blog
-
-- Cada país tiene historial propio de URLs procesadas (`data/processed-urls-<pais>.json`).
-- Cada país mantiene su propio estado de ejecución (`data/country-run-state.json`) y solo corre si han pasado 3 días desde su última ejecución.
-- Para forzar una ejecución manual sin esperar 3 días:
-
-```bash
-npm run daily:blog -- --country=GB --force=true
-```
+- `npm run update:posts`: Regenera `src/blog/posts.ts` tras añadir o quitar guías en `src/blog/posts`.
+- `npm run generate:sitemap`: Regenera `public/sitemap.xml` (también se ejecuta antes de cada build).
 
 ## Integraciones y backend
 
@@ -105,7 +94,7 @@ npm run daily:blog -- --country=GB --force=true
   - Autenticación: email OTP y Google OAuth (callbacks en `/auth/callback`).
   - Tablas y vistas: el frontend consume una vista pública `public_reviews` para el mapa y usa sesiones de review (`review_sessions`) en el flujo del formulario.
   - RPC/Procedimientos: el cliente llama a funciones como `get_gestion_step5_data` y `upsert_gestion_step5_and_mark_review_session` para persistir pasos del formulario.
-  - Edge Function: `reject-review` (en `supabase/functions/reject-review.ts`) que requiere `RESEND_API_KEY` y `RESEND_SENDER` para notificar rechazos por email.
+  - Edge Function: `reject-review` (en `supabase/functions/reject-review/index.ts`) que requiere `RESEND_API_KEY` y `RESEND_SENDER` para notificar rechazos por email.
 
 - Función serverless (Vercel)
   - Endpoint `api/notify-telegram.ts` para mandar un resumen de reseñas a Telegram sin exponer el token en cliente. Usa `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` y opcionalmente `ALLOWED_ORIGIN`.
