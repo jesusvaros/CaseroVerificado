@@ -537,5 +537,41 @@
     "addReviewDescription": "Share an anonymous review about your property or landlord.",
     "homeTitle": "CaseroOk - Anonymous reviews about properties and landlords",
     "homeDescription": "Discover and share anonymous reviews about properties and landlords in Spain."
+  },
+  "addressData": {
+    "rent": {
+      "title": "Is the asking rent reasonable?",
+      "markerMedian": "Median: {{amount}} for {{m2}} m²",
+      "markerAsked": "{{amount}} for {{m2}} m²",
+      "meters": "Square metres",
+      "asked": "Asking",
+      "verdict": {
+        "high": "It is above what 3 in 4 tenants in the area pay.",
+        "normal": "It is within the usual range for the area.",
+        "low": "It is below the usual range for the area."
+      },
+      "ipva": "Rents in {{city}} rose {{change}} % in {{year}} (rental housing price index, INE).",
+      "source": {
+        "section": "25th, 50th and 75th percentiles for the census section. Ministry of Housing (SERPAVI), {{year}} data.",
+        "district": "25th, 50th and 75th percentiles for the district: the section has few contracts. Ministry of Housing (SERPAVI), {{year}} data.",
+        "municipality": "25th, 50th and 75th percentiles for the municipality: the area has few contracts. Ministry of Housing (SERPAVI), {{year}} data."
+      }
+    },
+    "building": {
+      "title": "The building",
+      "yearBuilt": "Built in",
+      "dwellings": "Homes",
+      "averageM2": "Average size",
+      "use": "Use",
+      "source": "Spanish cadastre (Dirección General del Catastro), reference {{reference}}."
+    },
+    "tensioned": {
+      "title": "This is a stressed rental market",
+      "titlePartial": "Stressed rental market in part of the municipality",
+      "text": "New contracts have a rent cap and you can ask for extraordinary extensions. Check whether your landlord is a large owner.",
+      "only": "It only covers: {{areas}}.",
+      "until": "In force until {{date}}. {{boe}}.",
+      "guide": "Read the guide →"
+    }
   }
 }

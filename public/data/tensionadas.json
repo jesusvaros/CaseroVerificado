@@ -1,0 +1,2221 @@
+{
+ "01059": {
+  "boe": "BOE núm. 261, de 30 de octubre de 2025",
+  "from": "2025-10-31",
+  "name": "Vitoria-Gasteiz",
+  "partial": "excepto la zona rural constituida por entidades locales menores no incluida en la trama urbana",
+  "to": "2028-10-31"
+ },
+ "08001": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Abrera",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08003": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Alella",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08005": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Ametlla del Vallès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08006": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Arenys de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08007": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Arenys de Munt",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08009": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Argentona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08010": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Artés",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08014": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Aiguafreda",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08015": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Badalona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08016": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Bagà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08019": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Barcelona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08020": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Begues",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08022": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Berga",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08023": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Bigues i Riells del Fai",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08029": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cabrera de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08030": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cabrils",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08031": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Calaf",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08032": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Caldes d'Estrac",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08033": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Caldes de Montbui",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08035": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Calella",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08037": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Calldetenes",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08040": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Canet de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08041": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Canovelles",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08043": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Canyelles",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08046": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cardedeu",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08051": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Castellar del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08054": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Castellbisbal",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08056": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Castelldefels",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08058": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Castellet i la Gornal",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08061": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Castellgalí",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08064": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Castellterçol",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08067": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Centelles",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08068": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cervelló",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08072": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Corbera de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08073": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cornellà de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08074": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cubelles",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08075": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Dosrius",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08076": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Esparreguera",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08077": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Esplugues de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08083": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Folgueroles",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08086": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "les Franqueses del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08088": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Garriga",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08089": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Gavà",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08091": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Gelida",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08092": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Gironella",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08096": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Granollers",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08101": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "l'Hospitalet de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08102": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Igualada",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08105": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Llagosta",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08106": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Llinars del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08107": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Lliçà d'Amunt",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08108": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Lliçà de Vall",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08110": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Malgrat de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08112": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Manlleu",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08113": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Manresa",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08118": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "el Masnou",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08119": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Masquefa",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08120": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Matadepera",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08121": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Mataró",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08123": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Molins de Rei",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08124": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Mollet del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08125": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Montcada i Reixac",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08126": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Montgat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08127": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Monistrol de Montserrat",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08135": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Montmeló",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08136": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Montornès del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08138": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Moià",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08141": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Navàs",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08143": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Òdena",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08145": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Olèrdola",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08146": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Olesa de Bonesvalls",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08147": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Olesa de Montserrat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08148": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Olivella",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08155": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Palafolls",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08156": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Palau-solità i Plegamans",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08157": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Pallejà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08158": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "el Papiol",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08159": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Parets del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08161": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Piera",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08163": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Pineda de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08167": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Polinyà",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08169": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "el Prat de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08171": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Prats de Lluçanès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08172": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Premià de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08175": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Puig-reig",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08180": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Ripollet",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08181": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Roca del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08183": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Roda de Ter",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08184": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Rubí",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08187": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sabadell",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08192": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santpedor",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08194": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Adrià de Besòs",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08197": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Andreu de Llavaneres",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08198": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Antoni de Vilamajor",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08200": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Boi de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08202": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Celoni",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08203": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Cebrià de Vallalta",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08204": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Climent de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08205": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Cugat del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08207": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Esteve de Palautordera",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08208": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Esteve Sesrovires",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08209": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Fost de Campsentelles",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08210": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Feliu de Codines",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08211": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Feliu de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08213": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Fruitós de Bages",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08214": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vilassar de Dalt",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08215": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Hipòlit de Voltregà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08217": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Joan Despí",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08218": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Joan de Vilatorrada",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08219": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vilassar de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08221": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Just Desvern",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08222": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Llorenç d'Hortons",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08223": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Llorenç Savall",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08227": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Martí Sarroca",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08230": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Premià de Dalt",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08231": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Pere de Ribes",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08232": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Pere de Riudebitlles",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08233": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Pere de Torelló",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08234": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Pere de Vilamajor",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08235": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Pol de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08237": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Quirze de Besora",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08238": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Quirze del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08240": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Sadurní d'Anoia",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08244": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Coloma de Cervelló",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08245": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Coloma de Gramenet",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08248": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Eulàlia de Ronçana",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08250": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Margarida de Montbui",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08252": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Barberà del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08254": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Esquirol",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08259": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Maria de Palautordera",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08260": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Perpètua de Mogoda",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08261": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Susanna",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08263": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Vicenç dels Horts",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08264": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Vicenç de Montalt",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08266": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cerdanyola del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08267": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sentmenat",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08269": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Seva",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08270": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sitges",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08274": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Súria",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08278": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Taradell",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08279": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Terrassa",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08281": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Teià",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08282": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tiana",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08283": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08285": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Torelló",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08288": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Torrelles de Foix",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08289": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Torrelles de Llobregat",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08291": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vacarisses",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08294": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vallgorguina",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08295": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vallirana",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08298": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vic",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08300": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Viladecavalls",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08301": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Viladecans",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08302": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vilanova del Camí",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08305": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vilafranca del Penedès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08307": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Vilanova i la Geltrú",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08902": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vilanova del Vallès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "08904": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Badia del Vallès",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "08905": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Palma de Cervelló",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "15030": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "A Coruña",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "15078": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Santiago de Compostela",
+  "partial": null,
+  "to": "2029-07-30"
+ },
+ "17008": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Anglès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17009": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Arbúcies",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17013": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Begur",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17015": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Banyoles",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17019": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Besalú",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17022": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Bisbal d'Empordà",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17023": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Blanes",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17027": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Breda",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17032": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Cadaqués",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17033": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Caldes de Malavella",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17034": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Calonge i Sant Antoni",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17044": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Cassà de la Selva",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17047": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Castelló d'Empúries",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17048": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Platja d'Aro i S'Agaró",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17049": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Celrà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17062": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Escala",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17066": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Figueres",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17073": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Fornells de la Selva",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17079": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Girona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17083": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Hostalric",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17092": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Llançà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17095": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Lloret de Mar",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17103": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Maçanet de la Selva",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17114": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Olot",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17117": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Palafrugell",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17118": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Palamós",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17124": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Pals",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17132": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Peralada",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17137": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Porqueres",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17141": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Puigcerdà",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17146": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Riells i Viabrea",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17147": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Ripoll",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17148": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Riudarenes",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17152": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Roses",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17155": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Salt",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17160": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sant Feliu de Guíxols",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17169": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Julià de Ramis",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17178": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Pere Pescador",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17180": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Santa Coloma de Farners",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17181": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Cristina d'Aro",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17186": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sarrià de Ter",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "17193": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sils",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17199": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Torroella de Montgrí",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17202": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Tossa de Mar",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17213": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vidreres",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17221": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vilafant",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "17233": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vilobí d'Onyar",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "20027": {
+  "boe": "BOE núm. 102, de 27 de abril de 2026",
+  "from": "2026-04-28",
+  "name": "Zestoa",
+  "partial": null,
+  "to": "2029-04-28"
+ },
+ "20040": {
+  "boe": "BOE núm. 29, de 2 de febrero de 2026",
+  "from": "2026-02-03",
+  "name": "Hernani",
+  "partial": null,
+  "to": "2029-02-03"
+ },
+ "20045": {
+  "boe": "BOE núm. 104, de 30 de abril de 2025",
+  "from": "2025-05-01",
+  "name": "Irun",
+  "partial": null,
+  "to": "2028-05-01"
+ },
+ "20053": {
+  "boe": "BOE núm. 29, de 2 de febrero de 2026",
+  "from": "2026-02-03",
+  "name": "Lezo",
+  "partial": null,
+  "to": "2029-02-03"
+ },
+ "20055": {
+  "boe": "BOE núm. 102, de 27 de abril de 2026",
+  "from": "2026-04-28",
+  "name": "Arrasate/Mondragón",
+  "partial": null,
+  "to": "2029-04-28"
+ },
+ "20064": {
+  "boe": "BOE núm. 102, de 27 de abril de 2026",
+  "from": "2026-04-28",
+  "name": "Pasaia",
+  "partial": null,
+  "to": "2029-04-28"
+ },
+ "20067": {
+  "boe": "BOE núm. 26, de 30 de enero de 2025",
+  "from": "2025-01-31",
+  "name": "Errenteria",
+  "partial": null,
+  "to": "2028-01-31"
+ },
+ "20069": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Donostia/San Sebastián",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "20071": {
+  "boe": "BOE núm. 29, de 2 de febrero de 2026",
+  "from": "2026-02-03",
+  "name": "Tolosa",
+  "partial": null,
+  "to": "2029-02-03"
+ },
+ "20073": {
+  "boe": "BOE núm. 261, de 30 de octubre de 2025",
+  "from": "2025-10-31",
+  "name": "Usurbil",
+  "partial": null,
+  "to": "2028-10-31"
+ },
+ "20081": {
+  "boe": "BOE núm. 104, de 30 de abril de 2025",
+  "from": "2025-05-01",
+  "name": "Zumaia",
+  "partial": null,
+  "to": "2028-05-01"
+ },
+ "20902": {
+  "boe": "BOE núm. 104, de 30 de abril de 2025",
+  "from": "2025-05-01",
+  "name": "Lasarte-Oria",
+  "partial": null,
+  "to": "2028-05-01"
+ },
+ "20903": {
+  "boe": "BOE núm. 261, de 30 de octubre de 2025",
+  "from": "2025-10-31",
+  "name": "Astigarraga",
+  "partial": null,
+  "to": "2028-10-31"
+ },
+ "25011": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Alcarràs",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25019": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Almacelles",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25023": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Alpicat",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25034": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Artesa de Segre",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25040": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Balaguer",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25050": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Bellpuig",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25051": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Bellver de Cerdanya",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25058": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "les Borges Blanques",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25072": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cervera",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25110": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Guissona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25120": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Lleida",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25122": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Linyola",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25137": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Mollerussa",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25172": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Ponts",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25173": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "el Pont de Suert",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "25203": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Seu d'Urgell",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25207": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Solsona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25209": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Sort",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25217": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tàrrega",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25234": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tremp",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "25243": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vielha e Mijaran",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "31010": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Altsasu/Alsasua",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31016": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Ansoáin/Antsoain",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31023": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Aranguren",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31050": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Baztan",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31060": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Burlada/Burlata",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31072": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Cintruénigo",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31077": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Corella",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31086": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Valle de Egüés/Eguesibar",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31088": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Valle de Elorz/Elortzibar",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31097": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Estella-Lizarra",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31122": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Huarte/Uharte",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31201": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Pamplona/Iruña",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31202": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Peralta/Azkoien",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31215": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "San Adrián",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31227": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Tafalla",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31232": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Tudela",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31258": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Villava/Atarrabia",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31901": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Barañáin/Barañain",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31902": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Berrioplano/Berriobeiti",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31903": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Berriozar",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "31907": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Zizur Mayor",
+  "partial": null,
+  "to": "2028-07-30"
+ },
+ "33004": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Avilés",
+  "partial": "barrio de La Magdalena",
+  "to": "2029-07-30"
+ },
+ "33008": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Cabrales",
+  "partial": "núcleo de Arenas y núcleo de Poo",
+  "to": "2029-07-30"
+ },
+ "33024": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Gijón",
+  "partial": "barrio de La Arena y barrio de Cimadevilla",
+  "to": "2029-07-30"
+ },
+ "33025": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Gozón",
+  "partial": "Luanco",
+  "to": "2029-07-30"
+ },
+ "33036": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Llanes",
+  "partial": "núcleo urbano de Llanes y núcleo de Posada de Llanes; núcleos de Nueva, Poo, Barro y Celorio",
+  "to": "2029-07-30"
+ },
+ "43002": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Albinyana",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43004": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Alcanar",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43005": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Alcover",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43012": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Altafulla",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43013": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Ametlla de Mar",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43014": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Amposta",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43016": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Arboç",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43028": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Bisbal del Penedès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43037": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Calafell",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43038": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Cambrils",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43044": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Sénia",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43050": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Creixell",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43051": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Cunit",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43055": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Falset",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43086": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Montblanc",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43088": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Montbrió del Camp",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43092": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Mont-roig del Camp",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43093": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Móra d'Ebre",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43094": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Móra la Nova",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43095": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "el Morell",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43111": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Pobla de Montornès",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43123": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Reus",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43129": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Riudoms",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43131": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Roda de Berà",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43133": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Roquetes",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43136": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Ràpita",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43137": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Jaume dels Domenys",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43138": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Bàrbara",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43139": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Coloma de Queralt",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43140": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Santa Oliva",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43145": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "la Selva del Camp",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43148": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tarragona",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43153": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Torredembarra",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43155": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Tortosa",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43156": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Ulldecona",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43161": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Valls",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43163": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "el Vendrell",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43178": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Vinyols i els Arcs",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43901": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Deltebre",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43902": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "Sant Jaume d'Enveja",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43904": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Aldea",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43905": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "Salou",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "43906": {
+  "boe": "BOE núm. 244, de 9 de octubre de 2024",
+  "from": "2024-10-10",
+  "name": "l'Ampolla",
+  "partial": null,
+  "to": "2027-10-10"
+ },
+ "43907": {
+  "boe": "BOE núm. 66, de 15 de marzo de 2024",
+  "from": "2024-03-16",
+  "name": "la Canonja",
+  "partial": null,
+  "to": "2027-03-16"
+ },
+ "48013": {
+  "boe": "BOE núm. 104, de 30 de abril de 2025",
+  "from": "2025-05-01",
+  "name": "Barakaldo",
+  "partial": null,
+  "to": "2028-05-01"
+ },
+ "48015": {
+  "boe": "BOE núm. 184, de 29 de julio de 2026",
+  "from": "2026-07-30",
+  "name": "Basauri",
+  "partial": null,
+  "to": "2029-07-30"
+ },
+ "48020": {
+  "boe": "BOE núm. 261, de 30 de octubre de 2025",
+  "from": "2025-10-31",
+  "name": "Bilbao",
+  "partial": null,
+  "to": "2028-10-31"
+ },
+ "48036": {
+  "boe": "BOE núm. 181, de 29 de julio de 2025",
+  "from": "2025-07-30",
+  "name": "Galdakao",
+  "partial": "Distrito 2",
+  "to": "2028-07-30"
+ }
+}
