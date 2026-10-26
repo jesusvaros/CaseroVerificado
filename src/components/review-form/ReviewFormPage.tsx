@@ -14,6 +14,7 @@ import AddressSection from './AddressSection';
 import StayFields from './StayFields';
 import ScoreRow from './ScoreRow';
 import DepositChoice from './DepositChoice';
+import TagPicker from './TagPicker';
 import { sectionTitle } from './fieldStyles';
 import { MIN_OPINION_LENGTH, validateReview, type ReviewField } from './validateReview';
 
@@ -105,6 +106,12 @@ const ReviewFormPage = () => {
             <legend className={`${sectionTitle} mb-4`}>{t('addReview.v2.deposit.title')}</legend>
             <DepositChoice value={formData.depositReturned} onChange={v => updateFormData({ depositReturned: v })} hasError={errors.includes('deposit')} />
             {errors.includes('deposit') && <p className="text-sm text-coral-ink">{t('addReview.v2.errors.deposit')}</p>}
+          </fieldset>
+
+          <fieldset className="flex flex-col gap-3">
+            <legend className={`${sectionTitle} mb-1`}>{t('addReview.v2.tags.title')}</legend>
+            <p className="mb-2 text-ink-muted">{t('addReview.v2.tags.hint')}</p>
+            <TagPicker value={formData.tags ?? []} onChange={tags => updateFormData({ tags })} />
           </fieldset>
 
           <label id="review-field-opinion" className="flex flex-col gap-3">

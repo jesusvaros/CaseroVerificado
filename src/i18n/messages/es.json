@@ -330,6 +330,10 @@
         "deposit": "Elige una respuesta sobre la fianza.",
         "opinion": "Cuéntalo con un poco más de detalle (mínimo {{min}} caracteres).",
         "saveFailed": "No se pudo guardar la opinión. Inténtalo de nuevo en unos minutos."
+      },
+      "tags": {
+        "title": "¿Algo a destacar?",
+        "hint": "Opcional. Toca lo que aplique."
       }
     }
   },
@@ -728,5 +732,19 @@
     "subtitle": "Precio oficial por zonas en 2.601 municipios, opiniones de inquilinos y tus derechos en cada sitio.",
     "listTitle": "Los mercados de alquiler más grandes",
     "source": "Mediana del alquiler por m² de vivienda colectiva en 2024. Fuente: SERPAVI (Ministerio de Vivienda y Agenda Urbana)."
+  },
+  "reviewTags": {
+    "responde_rapido": "Responde rápido",
+    "arregla_averias": "Arregla las averías",
+    "trato_correcto": "Trato correcto",
+    "luminoso": "Piso luminoso",
+    "vecinos_tranquilos": "Vecinos tranquilos",
+    "humedades": "Humedades o moho",
+    "ruido": "Ruido",
+    "frio_calor": "Frío o calor",
+    "averias_sin_arreglar": "Averías sin arreglar",
+    "subidas_renta": "Subidas de renta",
+    "cobros_indebidos": "Cobros indebidos",
+    "entra_sin_avisar": "Entra sin avisar"
   }
 }

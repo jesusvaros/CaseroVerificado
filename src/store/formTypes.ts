@@ -50,6 +50,7 @@ export type FormDataType = {
   buildingScore?: Score;
   areaScore?: Score;
   opinion?: string;
+  tags?: import('../components/review-form/reviewTags').ReviewTag[];
 
   // Contact Information (Modal)
   contactName?: string;
@@ -75,6 +76,7 @@ export const initialFormData: FormDataType = {
   buildingScore: undefined,
   areaScore: undefined,
   opinion: '',
+  tags: [],
   contactName: '',
   contactEmail: '',
 };

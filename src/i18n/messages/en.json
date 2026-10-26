@@ -330,6 +330,10 @@
         "deposit": "Choose an answer about the deposit.",
         "opinion": "Add a bit more detail (at least {{min}} characters).",
         "saveFailed": "The review could not be saved. Please try again in a few minutes."
+      },
+      "tags": {
+        "title": "Anything to highlight?",
+        "hint": "Optional. Tap what applies."
       }
     }
   },
@@ -728,5 +732,19 @@
     "subtitle": "Official rent by area in 2,601 municipalities, tenant reviews and your rights in each place.",
     "listTitle": "The biggest rental markets",
     "source": "Median rent per m² for flats in 2024. Source: SERPAVI (Ministry of Housing)."
+  },
+  "reviewTags": {
+    "responde_rapido": "Replies quickly",
+    "arregla_averias": "Fixes things",
+    "trato_correcto": "Fair treatment",
+    "luminoso": "Bright flat",
+    "vecinos_tranquilos": "Quiet neighbours",
+    "humedades": "Damp or mould",
+    "ruido": "Noise",
+    "frio_calor": "Too cold or hot",
+    "averias_sin_arreglar": "Repairs ignored",
+    "subidas_renta": "Rent increases",
+    "cobros_indebidos": "Improper charges",
+    "entra_sin_avisar": "Enters without notice"
   }
 }
