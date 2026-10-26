@@ -39,3 +39,29 @@ python3 -I scripts/data/build_tensioned_zones.py /tmp/zonas.html public/data/zon
 ```
 
 Names the script cannot match are printed as `UNMATCHED`; add them to `MANUAL` with their INE code.
+
+## Rebuild the neighbourhood maps (Madrid and Barcelona)
+
+Other cities show census sections straight from `zonas/<province>.json`; only cities with official neighbourhood shapes get a file in `public/data/ciudades/` (listed in `CITY_FILES` in `src/services/publicData/cityRent.ts`).
+
+```bash
+cd /tmp/serpavi
+# Madrid: 131 barrios, Ayuntamiento de Madrid, CC BY 4.0
+curl -A "$UA" -o madrid.topo.json 'https://geoportal.madrid.es/fsdescargas/IDEAM_WBGEOPORTAL/LIMITES_ADMINISTRATIVOS/Barrios/TopoJSON/Barrios.json'
+npx mapshaper@0.6.102 madrid.topo.json -rename-fields id=COD_BAR,name=NOMBRE,district=NOMDIS \
+  -filter-fields id,name,district -simplify 20% keep-shapes -o madrid.geojson format=geojson precision=0.00001
+
+# Barcelona: 73 barris, Ajuntament de Barcelona, CC BY 4.0 (the "geojson" download is a zip, in EPSG:25831)
+curl -L -A "$UA" -o bcn.zip 'https://opendata-ajuntament.barcelona.cat/data/dataset/808daafa-d9ce-48c0-925a-fa5afdb1ed41/resource/cd800462-f326-429f-a67a-c69b7fc4c50a/download'
+unzip -o bcn.zip -d bcn
+npx mapshaper@0.6.102 bcn/0301100100_UNITATS_ADM_POLIGONS.json -filter "TIPUS_UA == 'BARRI'" \
+  -each "id=DISTRICTE+BARRI, name=NOM, district=DISTRICTE" -filter-fields id,name,district \
+  -proj wgs84 init=EPSG:25831 -simplify 20% keep-shapes -o barcelona.geojson format=geojson precision=0.00001
+# district is a code here: replace it with nom_districte from the BarcelonaCiutat_Barris.json resource
+cd -
+
+python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/madrid.geojson 28079 public/data/zonas \
+  public/data/ciudades/madrid.json "barrios del Ayuntamiento de Madrid (CC BY 4.0)"
+python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/barcelona.geojson 08019 public/data/zonas \
+  public/data/ciudades/barcelona.json "barris de l'Ajuntament de Barcelona (CC BY 4.0)"
+```

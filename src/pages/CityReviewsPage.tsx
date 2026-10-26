@@ -2,6 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PageSEO from '../seo/PageSEO';
 import MapView from '../components/MapView';
+import CityRentHero from '../components/city/CityRentHero';
+import CityRentSection from '../components/city/CityRentSection';
+import CityQuotes from '../components/city/CityQuotes';
+import { useCityRent } from '../components/city/useCityRent';
 import { useTranslations } from '../i18n/useTranslations';
 import { getPublicReviews, type PublicReview } from '../services/supabase/publicReviews';
 import { countryNameMatchesCode } from '../utils/countryMatching';
@@ -112,6 +116,8 @@ export default function CityReviewsPage() {
   const fallbackCityName =
     cityName || (citySlug ? humanizeSlug(citySlug) : t('cityReviews.city.defaultCity'));
 
+  const { rent, breaks, reviewCounts } = useCityRent(citySlug, reviews);
+
   const initialView = useMemo(() => {
     if (!reviews.length) return undefined;
     const coords = reviews
@@ -185,6 +191,7 @@ export default function CityReviewsPage() {
         }
         noindex={status === 'not-found'}
       />
+      {status !== 'ready' && (
       <main className="mx-auto max-w-6xl px-6 pt-28 pb-24">
         {status === 'loading' ? (
           <section className="rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
@@ -226,89 +233,46 @@ export default function CityReviewsPage() {
           </section>
         ) : null}
 
-        {status === 'ready' ? (
-          <>
-            <header className="mb-12 text-center md:text-left">
-              <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
-                {t('cityReviews.city.badge')}
-              </p>
-              <h1 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
-                {t('cityReviews.city.ready.title', {
-                  city: formatLocation(fallbackCityName, stateName, countryName),
-                })}
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg text-gray-600 md:mt-3">{heroSubtitle}</p>
-              <div className="mt-4 flex flex-wrap justify-center gap-3 md:justify-start">
-                <Link
-                  to="/map"
-                  className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
-                >
-                  {t('cityReviews.city.ready.mapCta')}
-                </Link>
-                <Link
-                  to="/opiniones"
-                  className="rounded-full border border-emerald-700 px-5 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
-                >
-                  {t('cityReviews.city.ready.citiesCta')}
-                </Link>
-              </div>
-            </header>
-
-            <section className="mb-12">
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  {t('cityReviews.city.testimonials.title', { city: fallbackCityName })}
-                </h2>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  {t('cityReviews.city.testimonials.description')}
-                </div>
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
-                  {reviews.slice(0, Math.min(4, reviews.length)).map(review => (
-                    <blockquote
-                      key={review.id}
-                      className="rounded-2xl border border-gray-200 bg-gray-50 p-5 text-left"
-                    >
-                      <p className="text-sm text-gray-700">
-                        {review.owner_opinion ?? t('cityReviews.city.testimonials.pending')}
-                      </p>
-                      <footer className="mt-4 text-xs font-medium uppercase tracking-wide text-gray-600">
-                        {review.full_address ?? fallbackCityName}
-                      </footer>
-                    </blockquote>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {initialView ? (
-              <MapView
-                title={t('cityReviews.city.map.title', {
-                  city: formatLocation(fallbackCityName, stateName, countryName),
-                })}
-                subtitle={heroSubtitle}
-                initialViewOverride={initialView}
-                reviews={reviews}
-                autoFetch={false}
-              />
-            ) : (
-              <section className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  {t('cityReviews.city.mapUnavailable.title', { city: fallbackCityName })}
-                </h2>
-                <p className="mt-3 text-gray-600">
-                  {t('cityReviews.city.mapUnavailable.description')}
-                </p>
-                <Link
-                  to="/map"
-                  className="mt-6 inline-flex items-center rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
-                >
-                  {t('cityReviews.city.mapUnavailable.cta')}
-                </Link>
-              </section>
-            )}
-          </>
-        ) : null}
       </main>
+      )}
+      {status === 'ready' ? (
+        <div className="bg-white pb-24 text-ink">
+          <CityRentHero city={fallbackCityName} region={stateName} rent={rent} />
+          {rent ? (
+            <CityRentSection rent={rent} breaks={breaks} reviewCounts={reviewCounts} reviews={reviews} />
+          ) : (
+            <div className="mx-auto max-w-6xl px-6 pt-12">
+                {initialView ? (
+                  <MapView
+                    title={t('cityReviews.city.map.title', {
+                      city: formatLocation(fallbackCityName, stateName, countryName),
+                    })}
+                    subtitle={heroSubtitle}
+                    initialViewOverride={initialView}
+                    reviews={reviews}
+                    autoFetch={false}
+                  />
+                ) : (
+                  <section className="rounded-2xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {t('cityReviews.city.mapUnavailable.title', { city: fallbackCityName })}
+                    </h2>
+                    <p className="mt-3 text-gray-600">
+                      {t('cityReviews.city.mapUnavailable.description')}
+                    </p>
+                    <Link
+                      to="/map"
+                      className="mt-6 inline-flex items-center rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
+                    >
+                      {t('cityReviews.city.mapUnavailable.cta')}
+                    </Link>
+                  </section>
+                )}
+            </div>
+          )}
+          <CityQuotes city={fallbackCityName} reviews={reviews} />
+        </div>
+      ) : null}
     </>
   );
 }

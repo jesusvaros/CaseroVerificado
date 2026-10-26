@@ -5,7 +5,7 @@
 export type RentValues = [number, number | null, number, number | null, number | null, number | null, number | null];
 
 type Ring = [number, number][];
-type Geometry = { type: 'Polygon'; coordinates: Ring[] } | { type: 'MultiPolygon'; coordinates: Ring[][] };
+export type Geometry = { type: 'Polygon'; coordinates: Ring[] } | { type: 'MultiPolygon'; coordinates: Ring[][] };
 
 interface ZoneFile {
   districts: Record<string, RentValues | null>;
@@ -53,7 +53,7 @@ function inPolygon(lng: number, lat: number, rings: Ring[]): boolean {
   return inRing(lng, lat, rings[0]) && !rings.slice(1).some(hole => inRing(lng, lat, hole));
 }
 
-function contains(geometry: Geometry, lng: number, lat: number): boolean {
+export function containsPoint(geometry: Geometry, lng: number, lat: number): boolean {
   return geometry.type === 'Polygon'
     ? inPolygon(lng, lat, geometry.coordinates)
     : geometry.coordinates.some(polygon => inPolygon(lng, lat, polygon));
@@ -70,7 +70,7 @@ export async function getZoneData(lat: number, lng: number, postalCode?: string 
   const province = provinceFromPostalCode(postalCode);
   if (!province) return null;
   const file = await loadProvince(province);
-  const feature = file?.features.find(f => contains(f.geometry, lng, lat));
+  const feature = file?.features.find(f => containsPoint(f.geometry, lng, lat));
   if (!file || !feature) return null;
 
   const section = feature.properties.s;
