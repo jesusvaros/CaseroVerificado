@@ -296,7 +296,9 @@
         "year": "Year",
         "stillLiving": "I still live here",
         "rent": "Monthly rent",
-        "rentPlaceholder": "850 €"
+        "rentPlaceholder": "850 €",
+        "size": "Size (optional)",
+        "sizePlaceholder": "60 m²"
       },
       "scores": {
         "title": "Rate it",
@@ -664,6 +666,7 @@
     "depositFull": "got their full deposit back",
     "wouldRecommend": "would recommend it",
     "averageRent": "average rent reported",
+    "rentPerM2": "per m² declared",
     "reviewsTitle": "Reviews",
     "lived": "lived here {{from}} to {{to}}",
     "now": "now",

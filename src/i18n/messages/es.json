@@ -296,7 +296,9 @@
         "year": "Año",
         "stillLiving": "Sigo viviendo aquí",
         "rent": "Alquiler al mes",
-        "rentPlaceholder": "850 €"
+        "rentPlaceholder": "850 €",
+        "size": "Metros (opcional)",
+        "sizePlaceholder": "60 m²"
       },
       "scores": {
         "title": "Ponle nota",
@@ -664,6 +666,7 @@
     "depositFull": "recuperaron la fianza entera",
     "wouldRecommend": "lo recomendarían",
     "averageRent": "alquiler medio declarado",
+    "rentPerM2": "por m² declarado",
     "reviewsTitle": "Opiniones",
     "lived": "vivió de {{from}} a {{to}}",
     "now": "hoy",

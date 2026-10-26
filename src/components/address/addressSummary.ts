@@ -24,6 +24,8 @@ export function summarise(reviews: PublicReview[]) {
     recommend: withRecommendation.length
       ? { yes: withRecommendation.filter(r => (r.would_recommend ?? 0) >= 4).length, total: withRecommendation.length }
       : null,
+    // Only reviews that gave both rent and size; the form allows 10-1000 m²
+    rentPerM2: mean(reviews.filter(r => r.price && r.size_m2).map(r => r.price! / r.size_m2!)),
     averageRent: mean(reviews.map(r => r.price).filter((v): v is number => typeof v === 'number' && v > 0)),
   };
 }
