@@ -38,7 +38,8 @@
   "home": {
     "hero": {
       "subtitle": "Transparency in the rental market: see how landlords behave and share your experience.",
-      "cta": "Write review"
+      "cta": "Write review",
+      "mapCta": "Open the reviews map"
     },
     "input": {
       "message1": "All reviews are Anonymous",
@@ -124,6 +125,7 @@
     "step1": {
       "addressLabel": "Address",
       "addressPlaceholder": "Search address...",
+      "loginNotice": "Your review is anonymous. At the end we ask you to sign in only to prevent duplicates; your name and email are never published.",
       "streetNumberLabel": "Number",
       "streetNumberPlaceholder": "Number",
       "locateMeAria": "Locate me",

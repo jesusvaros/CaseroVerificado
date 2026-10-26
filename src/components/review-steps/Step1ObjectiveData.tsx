@@ -90,6 +90,9 @@ const Step1ObjectiveData = ({ onNext, fieldErrors, isSubmitting = false }: Step1
 
   return (
     <div className="w-full">
+      <p className="mb-4 rounded-lg bg-gray-50 px-4 py-3 text-sm text-gray-600">
+        {t('addReview.step1.loginNotice')}
+      </p>
       <AddressAutocomplete
         value={addressDetails?.street || ''}
         streetNumberValue={addressDetails?.number || ''}

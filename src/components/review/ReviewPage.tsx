@@ -8,6 +8,8 @@ import { getSessionStep3Data } from '../../services/supabase/GetSubmitStep3';
 import { getSessionStep4Data } from '../../services/supabase/GetSubmitStep4';
 import { getSessionStep5Data } from '../../services/supabase/GetSubmitStep5';
 import { trackEvent } from '../../utils/analytics';
+import PageSEO from '../../seo/PageSEO';
+import { LEGAL_META } from '../../config/legal';
 
 // Importar componentes de sección
 import LocationMap from '../ui/LocationMap';
@@ -378,6 +380,11 @@ const ReviewPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 mt-16 text-[16px] bg-gray-100 relative">
+      <PageSEO
+        title={`Opinión de inquilino: ${getAddressTitle()} | CaseroOk`}
+        description={`Experiencia anónima de un inquilino en ${getAddressTitle()}: el piso, la comunidad y el trato con el casero.`}
+        noindex={!isPublicReview}
+      />
       {isPublicReview && (
         <button
           type="button"
@@ -428,6 +435,18 @@ const ReviewPage = () => {
           <div className="hidden md:block">
             <DesktopView />
           </div>
+
+          {isPublicReview && (
+            <p className="mt-8 text-center text-sm text-gray-600">
+              ¿Esta opinión es falsa, contiene datos personales o eres el propietario y quieres responder?{' '}
+              <a
+                className="font-medium text-[#4A5E32] underline"
+                href={`mailto:${LEGAL_META.contactEmail}?subject=${encodeURIComponent(`Denuncia o réplica de la opinión ${id ?? ''}`)}`}
+              >
+                Escríbenos a {LEGAL_META.contactEmail}
+              </a>
+            </p>
+          )}
         </>
       )}
     </div>

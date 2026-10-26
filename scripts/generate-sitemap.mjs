@@ -115,7 +115,7 @@ async function loadCitySummaries() {
       auth: { persistSession: false },
     });
 
-    const { data, error } = await client.from('public_reviews').select('address_details').eq('is_public', true);
+    const { data, error } = await client.from('public_reviews').select('address_details').eq('is_public', true).not('validated_at', 'is', null);
 
     if (error || !data) {
       console.warn('No se pudieron obtener las ciudades de Supabase:', error?.message ?? 'Error desconocido');
@@ -232,7 +232,6 @@ async function generateSitemap() {
     { path: '/map', changefreq: 'weekly', priority: '0.8', lastmod: today },
     { path: '/opiniones', changefreq: 'daily', priority: '0.7', lastmod: today },
     { path: '/blog', changefreq: 'daily', priority: '0.7', lastmod: today },
-    { path: '/add-review', changefreq: 'monthly', priority: '0.5', lastmod: today },
     { path: '/aviso-legal', changefreq: 'yearly', priority: '0.2', lastmod: today },
     { path: '/politica-privacidad', changefreq: 'yearly', priority: '0.2', lastmod: today },
     { path: '/cookies', changefreq: 'yearly', priority: '0.2', lastmod: today },
@@ -246,30 +245,18 @@ async function generateSitemap() {
     lastmod: item.lastmod,
   }));
 
-  // Mantener España sin query y exponer blogs por país para indexación internacional.
-  const countryBlogListEntries = BLOG_COUNTRY_CODES
-    .filter(countryCode => countryCode !== 'ES')
-    .map(countryCode => ({
-      loc: buildUrl(baseUrl, `/blog?country=${countryCode}`),
-      changefreq: 'daily',
-      priority: '0.7',
-      lastmod: today,
-    }));
+  // Solo se indexa el contenido para España: el blog de otros países no aporta a CaseroOk.
+  const countryBlogListEntries = [];
 
   const blogPosts = await loadBlogPosts();
-  const blogEntries = blogPosts.map(post => {
-    const countryCode = resolveSitemapCountryCode(post.countryCode);
-    const scopedPath = countryCode === 'ES'
-      ? `/blog/${post.slug}`
-      : `/blog/${post.slug}?country=${countryCode}`;
-
-    return {
-      loc: buildUrl(baseUrl, scopedPath),
+  const blogEntries = blogPosts
+    .filter(post => resolveSitemapCountryCode(post.countryCode) === 'ES')
+    .map(post => ({
+      loc: buildUrl(baseUrl, `/blog/${post.slug}`),
       changefreq: 'weekly',
       priority: '0.6',
       lastmod: post.publishedAt ?? today,
-    };
-  });
+    }));
 
   const citySummaries = await loadCitySummaries();
   const cityEntries = citySummaries.map(city => ({
