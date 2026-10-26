@@ -12,6 +12,8 @@ interface CustomInputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
+  // No wrapper margin, border or focus ring: for inputs that sit inside their own styled box
+  bare?: boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -26,9 +28,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
   onBlur,
   onFocus,
   error,
+  bare = false,
 }) => {
   return (
-    <div className={`mb-4 ${className}`}>
+    <div className={bare ? className : `mb-4 ${className}`}>
       {label && (
         <label htmlFor={id} className="mb-2 block text-lg font-medium text-black">
           {label}
@@ -39,7 +42,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
         type={type}
         value={value}
         onChange={onChange}
-        className={`w-full rounded-xl border shadow-sm border-gray-500 text-lg font-medium text-black p-3 focus:outline-none focus:ring-[1px] ${className} ${error ? 'bg-red-100 border-red-400' : 'focus:ring-[rgb(74,94,50)]'}`}
+        className={
+          bare
+            ? 'block h-12 w-full border-0 bg-transparent p-0 text-lg text-ink placeholder:text-ink-muted/70 focus:outline-none focus:ring-0'
+            : `w-full rounded-xl border shadow-sm border-gray-500 text-lg font-medium text-black p-3 focus:outline-none focus:ring-[1px] ${className} ${error ? 'bg-red-100 border-red-400' : 'focus:ring-[rgb(74,94,50)]'}`
+        }
         placeholder={placeholder}
         disabled={disabled}
         onBlur={onBlur}

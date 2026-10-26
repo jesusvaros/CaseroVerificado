@@ -17,6 +17,14 @@ export default {
         mist: '#F3F7EE',
         line: '#ECEFE7',
       },
+      keyframes: {
+        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+        halo: { '0%, 100%': { transform: 'scale(0.9)', opacity: '0.22' }, '50%': { transform: 'scale(1.12)', opacity: '0.1' } },
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+        halo: 'halo 3.2s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

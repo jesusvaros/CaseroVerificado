@@ -24,6 +24,7 @@ interface AddressAutocompleteProps {
   onUserInput?: (v: string) => void;
   actionIcon?: React.ComponentType<{ className?: string }>;
   allowBroadResults?: boolean; // Allow cities/villages results (not only streets)
+  bare?: boolean; // Unstyled input for search boxes that draw their own frame
 }
 
 const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
@@ -44,6 +45,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
   onUserInput,
   actionIcon,
   allowBroadResults = false,
+  bare = false,
 }) => {
   const { t } = useTranslations();
   const [results, setResults] = useState<AddressResult[]>([]);
@@ -120,6 +122,7 @@ const AddressAutocomplete: React.FC<AddressAutocompleteProps> = ({
             actionIcon={actionIcon}
             className={inputClassName}
             allowBroadResults={allowBroadResults}
+            bare={bare}
           />
         </div>
         {showNumberField && onNumberChange && onNumberBlur && (

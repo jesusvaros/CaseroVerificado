@@ -22,6 +22,7 @@ interface AddressInputProps {
   actionDisabled?: boolean;
   actionIcon?: React.ComponentType<{ className?: string }>;
   allowBroadResults?: boolean;
+  bare?: boolean;
 }
 
 export const AddressInput: React.FC<AddressInputProps> = ({
@@ -40,6 +41,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   actionDisabled = false,
   actionIcon,
   allowBroadResults = false,
+  bare = false,
 }) => {
   const { t } = useTranslations();
   const [isFocused, setIsFocused] = useState(false);
@@ -64,9 +66,18 @@ export const AddressInput: React.FC<AddressInputProps> = ({
           setTimeout(() => setIsFocused(false), 200);
         }}
         className={`${hideLabel ? 'rounded-l-lg rounded-r-none' : 'rounded-lg'} ${hasError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`}
+        bare={bare}
       />
       {/* Right-side controls: crosshair action and optional spinner */}
-      <div className={hideLabel ? 'absolute right-3 top-2.5 flex items-center gap-2' : 'absolute right-3 top-11 flex items-center gap-2'}>
+      <div
+        className={
+          bare
+            ? 'absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2'
+            : hideLabel
+              ? 'absolute right-3 top-2.5 flex items-center gap-2'
+              : 'absolute right-3 top-11 flex items-center gap-2'
+        }
+      >
         {onActionClick && (
           <button
             type="button"
