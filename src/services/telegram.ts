@@ -26,6 +26,8 @@ export function buildReviewSummary(sessionId: string, userId: string, data: Form
     '',
     `Notas: casero ${safe(data.ownerScore)} · vivienda ${safe(data.propertyScore)} · edificio ${safe(data.buildingScore)} · zona ${safe(data.areaScore)}`,
     '',
+    `Etiquetas: ${data.tags?.length ? data.tags.join(', ') : '-'}`,
+    '',
     `Opinión: ${safe(data.opinion)}`,
   ];
 

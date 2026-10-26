@@ -3,6 +3,7 @@ import type { PublicReview } from '../../services/supabase/publicReviews';
 import { useTranslations } from '../../i18n/useTranslations';
 import { LEGAL_META } from '../../config/legal';
 import { reviewScore } from './addressSummary';
+import ReviewTagChips from '../review/ReviewTagChips';
 
 const DEPOSIT_CHIP: Record<string, 'good' | 'bad'> = { true: 'good', partial: 'bad', false: 'bad' };
 
@@ -30,6 +31,7 @@ const AddressReviewList = ({ reviews }: { reviews: PublicReview[] }) => {
             <div className="flex min-w-0 flex-1 flex-col gap-2.5">
               {period.length > 0 && <div className="text-sm text-ink-muted">{period.join(' · ')}</div>}
               {review.owner_opinion && <p className="whitespace-pre-line text-[17px] leading-relaxed">{review.owner_opinion}</p>}
+              <ReviewTagChips tags={review.tags} />
               {deposit && (
                 <div className="flex flex-wrap gap-1.5 text-[13px] font-bold">
                   <span className={`rounded-full px-2.5 py-1 ${deposit === 'good' ? 'bg-lime-soft text-[#1E5A12]' : 'bg-coral-soft text-coral-ink'}`}>
