@@ -6,14 +6,13 @@ import { Toaster } from 'react-hot-toast';
 // Import our components
 import Header from './components/Header';
 import PageSEO from './seo/PageSEO';
-import HeroSection from './components/HeroSection';
-import InputSection from './components/InputSection';
-import BenefitsSection from './components/BenefitsSection';
-import ChromeStoreSection from './components/ChromeStoreSection';
-import PictureSection from './components/PictureSection';
-import HowItWorksSection from './components/HowItWorksSection';
-//import LatestReviewsSection from './components/LatestReviewsSection';
 import FAQSection from './components/FAQSection';
+import HomeHero from './components/landing/HomeHero';
+import HomeStats from './components/landing/HomeStats';
+import HomeFeatures from './components/landing/HomeFeatures';
+import HomeQuote from './components/landing/HomeQuote';
+import HomeGuides from './components/landing/HomeGuides';
+import HomeClosing from './components/landing/HomeClosing';
 import MapView from './components/MapView';
 import AddReviewForm from './components/AddReviewForm';
 import AuthCallback from './components/AuthCallback';
@@ -135,15 +134,13 @@ function App() {
             element={
               <>
                 <PageSEO title={t('seo.homeTitle')} description={t('seo.homeDescription')} />
-                <HeroSection />
-                <InputSection />
-                <HowItWorksSection />
-                {/* <StatsSection /> */}
-                <BenefitsSection />
-                <ChromeStoreSection />
-                  <PictureSection />
-                  {/* <LatestReviewsSection /> */}
-                  <FAQSection />
+                <HomeHero />
+                <HomeStats />
+                <HomeFeatures />
+                <HomeQuote />
+                <HomeGuides />
+                <FAQSection />
+                <HomeClosing />
                 </>
               }
             />
