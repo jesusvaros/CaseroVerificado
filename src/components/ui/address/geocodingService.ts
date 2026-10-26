@@ -34,6 +34,19 @@ function pickNavigatorLanguage(): string {
   return 'en-US';
 }
 
+// HERE's `in=countryCode:` filter only accepts ISO 3166-1 alpha-3 codes ("ESP"); sending the
+// alpha-2 code we detect ("ES") makes every request fail with a 400 and no suggestions show up.
+const ALPHA2_TO_ALPHA3: Record<string, string> = {
+  ES: 'ESP', PT: 'PRT', FR: 'FRA', IT: 'ITA', DE: 'DEU', NL: 'NLD', BE: 'BEL', SE: 'SWE',
+  CH: 'CHE', AT: 'AUT', IE: 'IRL', GB: 'GBR', DK: 'DNK', NO: 'NOR', FI: 'FIN', PL: 'POL',
+  GR: 'GRC', LU: 'LUX', AD: 'AND', US: 'USA', CA: 'CAN', MX: 'MEX', AR: 'ARG',
+};
+
+function countryFilter(countryCode: string | null): string | null {
+  const alpha3 = countryCode ? ALPHA2_TO_ALPHA3[countryCode.toUpperCase()] : undefined;
+  return alpha3 ? `countryCode:${alpha3}` : null;
+}
+
 function getCountryNameFromCode(countryCode: string | null): string | null {
   if (!countryCode) return null;
 
@@ -81,8 +94,9 @@ export const geocodingService = {
         lang: languageTag,
         limit: '10',
       };
-      if (countryCode) {
-        params.in = `countryCode:${countryCode}`;
+      const filter = countryFilter(countryCode);
+      if (filter) {
+        params.in = filter;
       }
       if (isCountryDebugLoggingEnabled()) {
         console.info('[geocoding-search] request', {
@@ -185,8 +199,9 @@ export const geocodingService = {
       lang: languageTag,
       limit: '1',
     };
-    if (countryCode) {
-      params.in = `countryCode:${countryCode}`;
+    const filter = countryFilter(countryCode);
+    if (filter) {
+      params.in = filter;
     }
     if (isCountryDebugLoggingEnabled()) {
       console.info('[geocoding-address] request', {
