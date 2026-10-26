@@ -12,7 +12,7 @@ interface CityRentMapProps {
   onSelect: (id: number | null) => void;
 }
 
-function bounds(areas: CityArea[]): maplibregl.LngLatBoundsLike {
+function bounds(areas: CityArea[]): maplibregl.LngLatBounds {
   const b = new maplibregl.LngLatBounds();
   for (const area of areas) {
     const polygons = area.geometry.type === 'Polygon' ? [area.geometry.coordinates] : area.geometry.coordinates;
@@ -36,6 +36,8 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
       bounds: bounds(areas),
       fitBoundsOptions: { padding: 24 },
       dragRotate: false,
+      // The map sits in a long page: zoom with ctrl/cmd + scroll or two fingers, so scrolling moves the page
+      cooperativeGestures: true,
       attributionControl: { compact: true },
     });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
@@ -45,6 +47,9 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
     const features = areas.map(a => ({ ...a, properties: { ...a.properties, color: rentColor(a.properties.p50, breaks) } }));
 
     instance.on('load', () => {
+      // The container may have been laid out after the map was created
+      instance.resize();
+      instance.fitBounds(bounds(areas), { padding: 24, animate: false });
       instance.addSource('areas', { type: 'geojson', data: { type: 'FeatureCollection', features } });
       instance.addLayer({
         id: 'areas-fill',
@@ -88,8 +93,13 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
     const instance = map.current;
     if (!instance?.getSource('areas')) return;
     if (selected.current != null) instance.setFeatureState({ source: 'areas', id: selected.current }, { selected: false });
-    if (selectedId != null) instance.setFeatureState({ source: 'areas', id: selectedId }, { selected: true });
+    if (selectedId != null) {
+      instance.setFeatureState({ source: 'areas', id: selectedId }, { selected: true });
+      const area = areas.find(a => a.id === selectedId);
+      if (area) instance.fitBounds(bounds([area]), { padding: 80, maxZoom: 14 });
+    }
     selected.current = selectedId;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
 
   return <div ref={container} className="h-[420px] w-full overflow-hidden rounded-3xl md:h-[520px]" aria-hidden="true" />;
