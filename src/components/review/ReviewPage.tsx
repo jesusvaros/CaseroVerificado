@@ -19,6 +19,7 @@ import PeriodSection from './PeriodSection';
 import PropertySection from './PropertySection';
 import CommunitySection from './CommunitySection';
 import OpinionSection from './OpinionSection';
+import AddressPublicData from '../address-data/AddressPublicData';
 
 interface Step1Data {
   address_details: {
@@ -29,6 +30,7 @@ interface Step1Data {
     city?: string;
     postalCode?: string;
     coordinates?: { lat: number; lng: number };
+    components?: { postcode?: string };
   };
 }
 
@@ -283,6 +285,15 @@ const ReviewPage = () => {
   }, [id, user]);
   
   // Reviews from the one-page form have no step 3 or step 4 answers: hide those cards.
+  const coordinates = step1Data?.address_details?.coordinates;
+  const publicData = (
+    <AddressPublicData
+      lat={coordinates?.lat}
+      lng={coordinates?.lng}
+      postalCode={step1Data?.address_details?.postalCode || step1Data?.address_details?.components?.postcode}
+    />
+  );
+
   const hasAnswers = (data: object | null) =>
     !!data && Object.values(data).some(v => (Array.isArray(v) ? v.length > 0 : v != null && v !== ''));
   const hasPropertyDetails = hasAnswers(step3Data);
@@ -329,6 +340,8 @@ const ReviewPage = () => {
           wouldRecommend={step2Data?.would_recommend}
         />
       </div>
+
+      <div className="rounded-lg bg-white p-6 shadow">{publicData}</div>
       
       {hasPropertyDetails && (
         <div className="rounded-lg bg-white p-6 shadow">
@@ -394,6 +407,8 @@ const ReviewPage = () => {
             wouldRecommend={step2Data?.would_recommend}
           />
         </div>
+
+        <div className="rounded-lg bg-white p-8 shadow">{publicData}</div>
         
         {hasPropertyDetails && (
           <div className="rounded-lg bg-white p-8 shadow">

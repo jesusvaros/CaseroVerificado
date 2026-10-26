@@ -537,5 +537,41 @@
     "addReviewDescription": "Comparte una opinión anónima sobre tu vivienda o casero.",
     "homeTitle": "CaseroOk - Opiniones anónimas sobre viviendas y caseros",
     "homeDescription": "Descubre y comparte opiniones anónimas sobre viviendas y caseros en España."
+  },
+  "addressData": {
+    "rent": {
+      "title": "¿Es razonable lo que te piden?",
+      "markerMedian": "Mediana: {{amount}} para {{m2}} m²",
+      "markerAsked": "{{amount}} para {{m2}} m²",
+      "meters": "Metros",
+      "asked": "Te piden",
+      "verdict": {
+        "high": "Está por encima de lo que pagan 3 de cada 4 inquilinos de la zona.",
+        "normal": "Está dentro de lo habitual en la zona.",
+        "low": "Está por debajo de lo habitual en la zona."
+      },
+      "ipva": "Los alquileres en {{city}} subieron un {{change}} % en {{year}} (índice de precios de vivienda en alquiler, INE).",
+      "source": {
+        "section": "Percentiles 25, 50 y 75 de la sección censal. Ministerio de Vivienda (SERPAVI), datos de {{year}}.",
+        "district": "Percentiles 25, 50 y 75 del distrito: la sección tiene pocos contratos. Ministerio de Vivienda (SERPAVI), datos de {{year}}.",
+        "municipality": "Percentiles 25, 50 y 75 del municipio: la zona tiene pocos contratos. Ministerio de Vivienda (SERPAVI), datos de {{year}}."
+      }
+    },
+    "building": {
+      "title": "El edificio",
+      "yearBuilt": "Construido en",
+      "dwellings": "Viviendas",
+      "averageM2": "Superficie media",
+      "use": "Uso",
+      "source": "Dirección General del Catastro, referencia {{reference}}."
+    },
+    "tensioned": {
+      "title": "Estás en zona tensionada",
+      "titlePartial": "Zona tensionada en parte del municipio",
+      "text": "En un contrato nuevo la renta tiene tope y puedes pedir prórrogas extraordinarias. Mira si tu casero es gran tenedor.",
+      "only": "Solo afecta a: {{areas}}.",
+      "until": "Vigente hasta el {{date}}. {{boe}}.",
+      "guide": "Leer la guía →"
+    }
   }
 }
