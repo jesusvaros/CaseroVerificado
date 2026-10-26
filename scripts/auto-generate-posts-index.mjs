@@ -32,7 +32,7 @@ async function generatePostsIndex() {
     const arrayItems = postFiles.map((_, index) => `  post${index + 1},`).join('\n');
     
     // Generate the complete posts.ts file
-    const postsContent = `// Usa \`npm run generate:blog -- <URL>\` para crear nuevos artículos automáticamente.
+    const postsContent = `// Añade guías en src/blog/posts y ejecuta \`npm run update:posts\` para regenerar este índice.
 // Este archivo se genera automáticamente. No editar manualmente.
 import { normalizeBlogCountryCode, resolvePostCountryCode } from './countryBlogs';
 
