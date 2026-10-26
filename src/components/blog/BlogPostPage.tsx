@@ -37,23 +37,41 @@ type ContentBlock = {
   content: string[];
 };
 
+// Supports **bold**, [text](https://url) and bare https:// URLs, so guide sources render as links.
+const INLINE_PATTERN = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+[^\s).,;:])/;
+
 function processInlineMarkdown(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
   let currentText = text;
   let key = 0;
 
   while (currentText.length > 0) {
-    const boldMatch = currentText.match(/\*\*(.+?)\*\*/);
-    if (boldMatch && boldMatch.index !== undefined) {
-      if (boldMatch.index > 0) {
-        parts.push(currentText.substring(0, boldMatch.index));
-      }
-      parts.push(<strong key={`bold-${key++}`}>{boldMatch[1]}</strong>);
-      currentText = currentText.substring(boldMatch.index + boldMatch[0].length);
-    } else {
+    const match = currentText.match(INLINE_PATTERN);
+    if (!match || match.index === undefined) {
       parts.push(currentText);
       break;
     }
+    if (match.index > 0) {
+      parts.push(currentText.substring(0, match.index));
+    }
+    const [whole, bold, linkText, linkUrl, bareUrl] = match;
+    if (bold !== undefined) {
+      parts.push(<strong key={`bold-${key++}`}>{bold}</strong>);
+    } else {
+      const href = linkUrl ?? bareUrl;
+      parts.push(
+        <a
+          key={`link-${key++}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-words text-emerald-700 underline hover:text-emerald-900"
+        >
+          {linkText ?? bareUrl}
+        </a>
+      );
+    }
+    currentText = currentText.substring(match.index + whole.length);
   }
 
   return parts;

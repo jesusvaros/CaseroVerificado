@@ -24,10 +24,30 @@ type StaticBlogPostInput = Omit<StaticBlogPost, 'language'> & {
 };
 
 // Import individual post files (auto-generated)
-import post1 from './posts/como-evaluar-un-contrato-de-alquiler.js';
+import post1 from './posts/actualizacion-anual-de-la-renta-ipc-irav.js';
+import post2 from './posts/ayudas-al-alquiler-bono-alquiler-joven-y-plan-estatal.js';
+import post3 from './posts/como-evaluar-un-contrato-de-alquiler.js';
+import post4 from './posts/devolucion-de-la-fianza-alquiler.js';
+import post5 from './posts/duracion-prorrogas-y-preaviso-del-contrato-de-alquiler.js';
+import post6 from './posts/gastos-de-agencia-ibi-y-comunidad-quien-paga.js';
+import post7 from './posts/humedades-y-habitabilidad-como-reclamar.js';
+import post8 from './posts/reparaciones-que-paga-el-casero-y-que-el-inquilino.js';
+import post9 from './posts/si-venden-el-piso-que-alquilas-tus-derechos.js';
+import post10 from './posts/sindicatos-de-inquilinas-que-hacen-y-como-pedir-ayuda.js';
+import post11 from './posts/zonas-tensionadas-que-son-y-como-saber-si-te-afectan.js';
 
 const rawPosts: StaticBlogPostInput[] = [
   post1,
+  post2,
+  post3,
+  post4,
+  post5,
+  post6,
+  post7,
+  post8,
+  post9,
+  post10,
+  post11,
 ];
 
 function normalizeBlogLanguage(value: string | undefined): BlogLanguage {
