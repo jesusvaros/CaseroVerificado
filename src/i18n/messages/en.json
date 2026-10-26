@@ -22,7 +22,12 @@
     "myProfile": "My profile",
     "newReview": "New review",
     "logout": "Sign out",
-    "resetFormSuccess": "Form reset. You can start a new review."
+    "resetFormSuccess": "Form reset. You can start a new review.",
+    "nav": {
+      "cities": "Cities",
+      "prices": "Prices by area",
+      "guides": "Guides"
+    }
   },
   "footer": {
     "blog": "Blog",
@@ -33,7 +38,8 @@
     "cookiesPolicy": "Cookies policy",
     "termsOfUse": "Terms of use",
     "goodPractices": "Best practices",
-    "disclaimer": "All reviews are anonymous and reflect personal experiences, not statements of fact or legal advice."
+    "disclaimer": "All reviews are anonymous and reflect personal experiences, not statements of fact or legal advice.",
+    "dataSources": "Data: Spanish cadastre (Dirección General del Catastro), Ministry of Housing (SERPAVI), INE."
   },
   "home": {
     "hero": {
@@ -158,6 +164,67 @@
         "title": "Rented a flat? Tell us how it went.",
         "body": "Three minutes, anonymous and moderated. You help whoever signs tomorrow.",
         "button": "Write my review"
+      }
+    },
+    "v3": {
+      "hero": {
+        "subtitle": "Anonymous tenant reviews, the official rent for the area and building facts. Free and ad-free.",
+        "tryWith": "Try",
+        "or": "or"
+      },
+      "card": {
+        "oneReview": "1 review · {{city}}",
+        "reviews": "{{count}} reviews · {{city}}",
+        "deposit": "Deposit returned in {{full}} of {{total}} cases"
+      },
+      "stats": {
+        "reviews": "real reviews",
+        "zones": "areas with an official reference rent",
+        "tensioned": "municipalities with a rent cap",
+        "free": "no ads, no fees"
+      },
+      "scores": {
+        "eyebrow": "What tenants say",
+        "title": "The landlord, the flat and the deposit, rated.",
+        "text": "Every review rates the landlord, the home, the building and the area. And it answers what you really want to know: did they get their deposit back?",
+        "sample": "Example of an address rating."
+      },
+      "rent": {
+        "eyebrow": "Official reference rent",
+        "title": "Are they asking too much? Check in seconds.",
+        "text": "Enter the size of the flat and we show where the rent falls against the area, with the Ministry of Housing index.",
+        "asked": "Asking {{amount}}",
+        "median": "median {{amount}}",
+        "caption": "Example with real data: 60 m² in Madrid (SERPAVI 2024). Each address gets its own area."
+      },
+      "building": {
+        "eyebrow": "Cadastre data",
+        "title": "Useful even before anyone reviews it.",
+        "text": "Year built, number of homes and use of every building. If the flat is from 1960, you know what to ask about the boiler and the windows.",
+        "year": "year built",
+        "dwellings": "homes in the building",
+        "caption": "{{address}}, {{city}}"
+      },
+      "quote": {
+        "caption": "Tenant in {{city}}",
+        "lived": "lived there {{from}} to {{to}}"
+      },
+      "guides": {
+        "title": "Guides for tenants",
+        "text": "Written from the BOE, the Ministry of Housing and tenant unions. No small print.",
+        "all": "All guides →",
+        "items": {
+          "deposit": "Getting your deposit back, step by step",
+          "tensioned": "Rent-capped areas: do they affect you?",
+          "repairs": "Repairs: what the landlord pays",
+          "sale": "If the flat you rent is sold",
+          "unions": "Tenant unions: how to get help"
+        }
+      },
+      "closing": {
+        "title": "Have you rented? Tell us.",
+        "text": "Three minutes, anonymous and moderated. You help whoever signs tomorrow.",
+        "cta": "Write my review"
       }
     }
   },

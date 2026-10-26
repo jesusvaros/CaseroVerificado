@@ -3,264 +3,70 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth/hooks';
 import LoginContent from './ui/LoginContent';
 import logoUrl from '../assets/logo_coloreado.svg';
-import wordmarkUrl from '../assets/caserook_letras.svg';
 import { trackEvent } from '../utils/analytics';
 import toast from 'react-hot-toast';
 import { useTranslations } from '../i18n/useTranslations';
-import { buildBlogListPath } from '../i18n/routing';
-import { resolveLocale } from '../i18n/config';
-import {
-  BLOG_COUNTRY_CODES,
-  getCountryDisplayLabel,
-  normalizeBlogCountryCode,
-  type BlogCountryCode,
-} from '../blog/countryBlogs';
-import { useDetectedCountryCode } from '../services/location/useDetectedCountryCode';
-import { getPreferredLocaleByCountry } from '../services/location/countryLanguage';
-import { setForcedCountryCode } from '../services/location/userCountry';
 
-const BLOG_COUNTRY_FLAGS: Record<BlogCountryCode, string> = {
-  ES: '🇪🇸',
-  GB: '🇬🇧',
-  FR: '🇫🇷',
-  DE: '🇩🇪',
-  IT: '🇮🇹',
-  NL: '🇳🇱',
-  CH: '🇨🇭',
-  SE: '🇸🇪',
-  PT: '🇵🇹',
-};
+const NAV = [
+  { to: '/opiniones', key: 'header.nav.cities', event: 'nav:cities' },
+  { to: '/opiniones/espana/madrid', key: 'header.nav.prices', event: 'nav:prices' },
+  { to: '/blog', key: 'header.nav.guides', event: 'nav:guides' },
+];
 
+// Header from the redesign: over the dark hero on the home page, white everywhere else and once
+// the visitor scrolls past the hero.
 const Header: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
-  const countryMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const navigate = useNavigate();
-  const { locale, setLocale, t } = useTranslations();
-  const { countryCode: detectedCountryCode } = useDetectedCountryCode();
-
-  // Hide input on specific routes
-  const isAddReviewPage = location.pathname === '/add-review';
+  const { t } = useTranslations();
   const isHomePage = location.pathname === '/';
+  const [pastHero, setPastHero] = useState(false);
 
-  // Handle scroll event to change header appearance
   useEffect(() => {
-    // On the add-review form page, keep header static and skip scroll listener
-    if (isAddReviewPage) {
-      if (scrolled) setScrolled(false);
-      return;
-    }
-
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 330; // Change this value as needed
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled, isAddReviewPage]);
-
-  // The home hero no longer shows its own logo, so the header logo is always visible
-  const showLogo = true;
-
-  // Detect if the home input section is visible to avoid showing header input
-  const [homeInputVisible, setHomeInputVisible] = useState<boolean>(true);
-  useEffect(() => {
-    if (!isHomePage) {
-      setHomeInputVisible(false);
-      return;
-    }
-    const el = document.getElementById('home-address-section');
-    if (!el) {
-      setHomeInputVisible(false);
-      return;
-    }
-    const obs = new IntersectionObserver(
-      entries => {
-        const entry = entries[0];
-        setHomeInputVisible(entry.isIntersecting);
-      },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+    if (!isHomePage) return;
+    const onScroll = () => setPastHero(window.scrollY > 420);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, [isHomePage]);
 
-  const showHeaderSearch = !isAddReviewPage && (!isHomePage || !homeInputVisible);
-  const requestedCountryCode = normalizeBlogCountryCode(new URLSearchParams(location.search).get('country'));
-  const detectedBlogCountryCode = normalizeBlogCountryCode(detectedCountryCode);
-  const activeCountryCode =
-    requestedCountryCode ?? detectedBlogCountryCode ?? 'ES';
-  const blogListPathWithScope = `${buildBlogListPath(locale)}?country=${activeCountryCode}`;
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (countryMenuRef.current && !countryMenuRef.current.contains(event.target as Node)) {
-        setIsCountryMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleCountryChange = (nextCountryCode: BlogCountryCode) => {
-    setIsCountryMenuOpen(false);
-    setForcedCountryCode(nextCountryCode);
-    const preferredLocale = getPreferredLocaleByCountry(nextCountryCode);
-    if (preferredLocale) {
-      setLocale(resolveLocale(preferredLocale));
-    }
-
-    const isBlogPath = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
-    if (!isBlogPath) return;
-
-    const nextSearch = new URLSearchParams(location.search);
-    nextSearch.set('country', nextCountryCode);
-    nextSearch.delete('page');
-    const nextSearchString = nextSearch.toString();
-    navigate(`${location.pathname}${nextSearchString ? `?${nextSearchString}` : ''}${location.hash}`);
-  };
+  const dark = isHomePage && !pastHero;
 
   return (
     <header
-      className={`duration-400 fixed left-0 right-0 top-0 z-[1000] transition-all ${scrolled && !isAddReviewPage ? 'py-2' : 'py-3'} px-6`}
-      style={{
-        backgroundColor: '#FFFFFF',
-        borderBottom: '1px solid #ECEFE7',
-      }}
+      className={`fixed left-0 right-0 top-0 z-[1000] transition-colors duration-300 ${
+        dark ? 'bg-forest text-white' : 'border-b border-line bg-white/95 text-ink backdrop-blur'
+      }`}
     >
-      <div className="flex w-full items-center justify-between">
-        {showLogo ? (
-          <Link
-            to="/"
-            className="flex items-center"
-            aria-label="CaseroOk - Inicio"
-            onClick={() => trackEvent('nav:logo-home')}
-          >
-            <img src={logoUrl} alt="CaseroOk" className="h-12 w-12 md:h-14 md:w-14" />
-            <img src={wordmarkUrl} alt="CaseroOk" className="hidden md:inline-block ml-2 h-6 md:h-7" />
-          </Link>
-        ) : (
-          <span />
-        )}
+      <div className="mx-auto flex h-[76px] max-w-[1320px] items-center justify-between gap-4 px-5 md:px-[5%]">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="CaseroOk - Inicio" onClick={() => trackEvent('nav:logo-home')}>
+          <img src={logoUrl} alt="" className="h-9 w-9" />
+          <span className="font-display text-2xl font-extrabold tracking-tight">CaseroOk</span>
+        </Link>
 
-        {/* Input field on desktop, 'Add a review' button on mobile */}
-        <div className="flex flex-1 justify-center">
-          {showHeaderSearch && (
-            <>
-              {/* Desktop 'Escribir opinión' button */}
-              <div className="hidden md:block">
-                <Link
-                  to="/add-review"
-                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-[#1F7A4D] px-8 py-3 text-lg font-semibold text-white transition-colors hover:bg-[#0E3B26] focus:outline-none focus:ring-2 focus:ring-[#1F7A4D]"
-                  onClick={() => trackEvent('header:start-review')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                  </svg>
-                  {t('header.writeReview')}
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* Right side: blog + country + map + login */}
-        <div className="flex items-center gap-2 md:gap-3">
-          {showHeaderSearch && (
+        <nav className="hidden items-center gap-7 text-[15px] font-semibold md:flex">
+          {NAV.map(item => (
             <Link
-              to="/add-review"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#1F7A4D] bg-white text-[#1F7A4D] shadow-sm transition-colors hover:bg-[#F3F7EE] focus:outline-none focus:ring-2 focus:ring-[#1F7A4D] md:hidden"
-              aria-label={t('header.writeReview')}
-              onClick={() => trackEvent('header:start-review-mobile')}
+              key={item.to}
+              to={item.to}
+              className={`transition-colors ${dark ? 'text-[#DDF2CF] hover:text-white' : 'text-ink-soft hover:text-brand'}`}
+              onClick={() => trackEvent(item.event)}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-              </svg>
+              {t(item.key)}
             </Link>
-          )}
+          ))}
+        </nav>
 
-          {/* Blog - Desktop version */}
+        <div className="flex items-center gap-2.5">
           <Link
-            to={blogListPathWithScope}
-            className="hidden items-center rounded-full border border-[#1F7A4D] px-4 py-2 text-sm font-semibold text-[#1F7A4D] transition hover:bg-[#1F7A4D] hover:text-white md:inline-flex"
-            onClick={() => trackEvent('nav:opiniones-desktop')}
+            to="/add-review"
+            className={`rounded-full px-5 py-3 text-[15px] font-bold transition-colors ${
+              dark ? 'bg-lime text-forest hover:bg-white' : 'bg-forest text-white hover:bg-brand'
+            }`}
+            onClick={() => trackEvent('header:start-review')}
           >
-            {t('header.blog')}
+            {t('header.writeReview')}
           </Link>
-
-          {/* Blog - Mobile version with icon */}
-          <Link
-            to={blogListPathWithScope}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1F7A4D] text-[#1F7A4D] transition hover:bg-[#1F7A4D] hover:text-white md:hidden"
-            aria-label={t('header.blogAria')}
-            onClick={() => trackEvent('nav:blog-mobile')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.832 18.477 19.247 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-          </Link>
-
-          <div className="relative" ref={countryMenuRef}>
-            <button
-              type="button"
-              className="flex h-10 items-center gap-2 rounded-full border border-[#1F7A4D] bg-white px-3 text-sm font-semibold text-[#1F7A4D] transition hover:bg-[#F3F7EE] focus:outline-none focus:ring-2 focus:ring-[#1F7A4D]"
-              aria-label={t('blogList.countrySwitcherLabel')}
-              aria-expanded={isCountryMenuOpen}
-              onClick={() => setIsCountryMenuOpen(open => !open)}
-            >
-              <span className="text-base" aria-hidden>{BLOG_COUNTRY_FLAGS[activeCountryCode]}</span>
-              <span className="hidden md:inline">{activeCountryCode}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {isCountryMenuOpen && (
-              <div className="absolute right-0 top-11 z-50 min-w-52 rounded-xl border border-gray-200 bg-white p-1 shadow-lg">
-                {BLOG_COUNTRY_CODES.map(countryCode => (
-                  <button
-                    key={countryCode}
-                    type="button"
-                    onClick={() => handleCountryChange(countryCode)}
-                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition hover:bg-gray-100 ${
-                      countryCode === activeCountryCode ? 'bg-gray-100 font-semibold text-gray-900' : 'text-gray-700'
-                    }`}
-                  >
-                    <span className="text-base" aria-hidden>{BLOG_COUNTRY_FLAGS[countryCode]}</span>
-                    <span>{getCountryDisplayLabel(countryCode, locale)}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Map */}
-          <Link to="/map" className="flex items-center" onClick={() => trackEvent('nav:map')}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1F7A4D] text-white transition-colors hover:bg-[#1F7A4D]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                />
-              </svg>
-            </div>
-          </Link>
-
-          {/* Login */}
-          <LoginDropdown />
+          <LoginDropdown dark={dark} />
         </div>
       </div>
     </header>
@@ -268,7 +74,7 @@ const Header: React.FC = () => {
 };
 
 // Login Dropdown Component
-const LoginDropdown: React.FC = () => {
+const LoginDropdown: React.FC<{ dark: boolean }> = ({ dark }) => {
   const { user, logout } = useAuth();
   const { t } = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -338,7 +144,9 @@ const LoginDropdown: React.FC = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1F7A4D] text-white transition-colors hover:bg-[#0E3B26]"
+        className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors ${
+          dark ? 'border border-[#5E8A6E] text-white hover:bg-forest-600' : 'border border-line text-ink hover:bg-mist'
+        }`}
         aria-expanded={isDropdownOpen}
         aria-label={user ? t('header.userProfileAria') : t('header.loginAria')}
       >

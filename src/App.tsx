@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation, Link, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';
 
 // Import our components
 import Header from './components/Header';
 import PageSEO from './seo/PageSEO';
-import FAQSection from './components/FAQSection';
-import HomeHero from './components/landing/HomeHero';
-import HomeStats from './components/landing/HomeStats';
-import HomeFeatures from './components/landing/HomeFeatures';
-import HomeQuote from './components/landing/HomeQuote';
-import HomeGuides from './components/landing/HomeGuides';
-import HomeClosing from './components/landing/HomeClosing';
+import HomePage from './components/landing/HomePage';
+import SiteFooter from './components/SiteFooter';
 import MapView from './components/MapView';
 import ReviewFormPage from './components/review-form/ReviewFormPage';
 import AuthCallback from './components/AuthCallback';
@@ -34,12 +29,10 @@ import AddressPage from './pages/AddressPage';
 import UmamiTracker from './components/analytics/UmamiTracker';
 import ScrollToTop from './components/ScrollToTop';
 import { useTranslations } from './i18n/useTranslations';
-import { buildBlogListPath } from './i18n/routing';
 
 // Import Providers
 import { FormProvider } from './store/FormContext';
 import { AuthProvider } from './store/auth';
-import { umamiEventProps } from './utils/analytics';
 import { trackEvent } from './utils/analytics';
 
 function LegacyLocaleBlogRedirect() {
@@ -51,7 +44,7 @@ function LegacyLocaleBlogRedirect() {
 
 function App() {
   const location = useLocation();
-  const { locale, t } = useTranslations();
+  const { t } = useTranslations();
   const isGrayPage = location.pathname.includes('/review/') || location.pathname === '/profile' || location.pathname === '/map';
 
   useEffect(() => {
@@ -135,41 +128,14 @@ function App() {
             element={
               <>
                 <PageSEO title={t('seo.homeTitle')} description={t('seo.homeDescription')} />
-                <HomeHero />
-                <HomeStats />
-                <HomeFeatures />
-                <HomeQuote />
-                <HomeGuides />
-                <FAQSection />
-                <HomeClosing />
+                <HomePage />
                 </>
               }
             />
         </Routes>
 
 
-        <footer className="mx-auto mt-8 max-w-6xl py-6 text-center text-sm text-gray-600">
-          <nav className="mb-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <Link className="hover:text-gray-700" to={buildBlogListPath(locale)} {...umamiEventProps('footer:blog')}>{t('footer.blog')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/opiniones" {...umamiEventProps('footer:opiniones')}>{t('footer.opinionsByCity')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/terminosycondiciones" {...umamiEventProps('footer:terminos-condiciones')}>{t('footer.termsAndConditions')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/aviso-legal" {...umamiEventProps('footer:aviso-legal')}>{t('footer.legalNotice')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/politica-privacidad" {...umamiEventProps('footer:privacidad')}>{t('footer.privacyPolicy')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/cookies" {...umamiEventProps('footer:cookies')}>{t('footer.cookiesPolicy')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/condiciones-uso" {...umamiEventProps('footer:condiciones-uso')}>{t('footer.termsOfUse')}</Link>
-            <span className="text-gray-400">•</span>
-            <Link className="hover:text-gray-700" to="/buenas-practicas" {...umamiEventProps('footer:buenas-practicas')}>{t('footer.goodPractices')}</Link>
-          </nav>
-            <p>
-              © {new Date().getFullYear()} CaseroOk - {t('footer.disclaimer')}
-            </p>
-          </footer>
+        <SiteFooter />
         </div>
       </FormProvider>
     </AuthProvider>

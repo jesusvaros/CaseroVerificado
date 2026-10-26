@@ -22,7 +22,12 @@
     "myProfile": "Mi perfil",
     "newReview": "Nueva review",
     "logout": "Cerrar sesión",
-    "resetFormSuccess": "Formulario reiniciado. Puedes empezar una nueva review."
+    "resetFormSuccess": "Formulario reiniciado. Puedes empezar una nueva review.",
+    "nav": {
+      "cities": "Ciudades",
+      "prices": "Precios por barrio",
+      "guides": "Guías"
+    }
   },
   "footer": {
     "blog": "Blog",
@@ -33,7 +38,8 @@
     "cookiesPolicy": "Política de Cookies",
     "termsOfUse": "Condiciones de Uso",
     "goodPractices": "Buenas Prácticas",
-    "disclaimer": "Todas las opiniones son anónimas y reflejan experiencias personales, no declaraciones de hechos ni asesoramiento legal."
+    "disclaimer": "Todas las opiniones son anónimas y reflejan experiencias personales, no declaraciones de hechos ni asesoramiento legal.",
+    "dataSources": "Datos: Dirección General del Catastro, Ministerio de Vivienda (SERPAVI), INE."
   },
   "home": {
     "hero": {
@@ -158,6 +164,67 @@
         "title": "¿Has vivido de alquiler? Cuéntalo.",
         "body": "Tres minutos, anónimo y moderado. Ayudas a quien va a firmar mañana.",
         "button": "Escribir mi opinión"
+      }
+    },
+    "v3": {
+      "hero": {
+        "subtitle": "Opiniones anónimas de inquilinos, el precio oficial de la zona y los datos del edificio. Gratis y sin anuncios.",
+        "tryWith": "Prueba con",
+        "or": "o"
+      },
+      "card": {
+        "oneReview": "1 opinión · {{city}}",
+        "reviews": "{{count}} opiniones · {{city}}",
+        "deposit": "Fianza devuelta en {{full}} de {{total}} casos"
+      },
+      "stats": {
+        "reviews": "opiniones reales",
+        "zones": "zonas con precio oficial de alquiler",
+        "tensioned": "municipios en zona tensionada",
+        "free": "ni anuncios ni cuotas"
+      },
+      "scores": {
+        "eyebrow": "Lo que cuentan los inquilinos",
+        "title": "El casero, el piso y la fianza, con nota.",
+        "text": "Cada opinión puntúa al casero, la vivienda, el edificio y la zona. Y responde a lo que de verdad quieres saber: si te devolvieron la fianza.",
+        "sample": "Ejemplo de cómo se ve la nota de una dirección."
+      },
+      "rent": {
+        "eyebrow": "Precio de referencia oficial",
+        "title": "¿Te piden de más? Compruébalo en segundos.",
+        "text": "Mete los metros del piso y te enseñamos dónde cae el precio frente a la zona, con el índice del Ministerio de Vivienda.",
+        "asked": "Te piden {{amount}}",
+        "median": "mediana {{amount}}",
+        "caption": "Ejemplo con datos reales: 60 m² en Madrid (SERPAVI 2024). En cada dirección se calcula para su zona."
+      },
+      "building": {
+        "eyebrow": "Datos del Catastro",
+        "title": "Útil aunque nadie haya opinado todavía.",
+        "text": "Año de construcción, número de viviendas y uso de cada edificio. Si el piso es de 1960, ya sabes qué preguntar sobre la caldera y las ventanas.",
+        "year": "año de construcción",
+        "dwellings": "viviendas en el edificio",
+        "caption": "{{address}}, {{city}}"
+      },
+      "quote": {
+        "caption": "Inquilino en {{city}}",
+        "lived": "vivió de {{from}} a {{to}}"
+      },
+      "guides": {
+        "title": "Guías para inquilinos",
+        "text": "Escritas a partir del BOE, el Ministerio de Vivienda y los sindicatos de inquilinas. Sin letra pequeña.",
+        "all": "Ver todas las guías →",
+        "items": {
+          "deposit": "Cómo recuperar la fianza paso a paso",
+          "tensioned": "Zonas tensionadas: ¿te afectan?",
+          "repairs": "Reparaciones: qué paga el casero",
+          "sale": "Si venden el piso que alquilas",
+          "unions": "Sindicatos de inquilinas: cómo pedir ayuda"
+        }
+      },
+      "closing": {
+        "title": "¿Has vivido de alquiler? Cuéntalo.",
+        "text": "Tres minutos, anónimo y moderado. Ayudas a quien va a firmar mañana.",
+        "cta": "Escribir mi opinión"
       }
     }
   },

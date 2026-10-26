@@ -1,46 +1,35 @@
 import { useEffect, useState } from 'react';
-import { fetchSiteStats } from '../../services/stats';
-import { getPublicReviews } from '../../services/supabase/publicReviews';
-import { blogPosts } from '../../blog/posts';
 import { useTranslations } from '../../i18n/useTranslations';
 
-type Stat = { value: string; label: string; accent?: boolean };
+// Counts from the static public data: census sections with an official rent and stressed municipalities.
+const ZONES_WITH_RENT = 26298;
 
-const HomeStats = () => {
+const HomeStats = ({ reviewCount }: { reviewCount: number | null }) => {
   const { t } = useTranslations();
-  const [reviews, setReviews] = useState<number | null>(null);
-  const [cities, setCities] = useState<number | null>(null);
+  const [tensioned, setTensioned] = useState<number | null>(null);
 
   useEffect(() => {
-    let active = true;
-    fetchSiteStats().then(stats => active && setReviews(stats.totalReviews));
-    getPublicReviews().then(list => {
-      if (!active) return;
-      setCities(new Set(list.map(review => review.city_slug).filter(Boolean)).size);
-    });
-    return () => {
-      active = false;
-    };
+    fetch('/data/tensionadas.json')
+      .then(res => (res.ok ? res.json() : {}))
+      .then(zones => setTensioned(Object.keys(zones).length))
+      .catch(() => setTensioned(null));
   }, []);
 
-  const guides = blogPosts.filter(post => post.language === 'es').length;
-  const stats: Stat[] = [
-    { value: reviews === null ? '…' : String(reviews), label: t('home.v2.stats.reviews') },
-    { value: cities === null ? '…' : String(cities), label: t('home.v2.stats.cities') },
-    { value: String(guides), label: t('home.v2.stats.guides') },
-    { value: '0 €', label: t('home.v2.stats.free'), accent: true },
+  const stats = [
+    { value: reviewCount == null ? '…' : String(reviewCount), label: t('home.v3.stats.reviews'), color: 'text-brand' },
+    { value: ZONES_WITH_RENT.toLocaleString('es-ES'), label: t('home.v3.stats.zones'), color: 'text-brand' },
+    { value: tensioned == null ? '…' : String(tensioned), label: t('home.v3.stats.tensioned'), color: 'text-coral' },
+    { value: '0 €', label: t('home.v3.stats.free'), color: 'text-brand' },
   ];
 
   return (
     <section className="border-b border-line">
-      <dl className="mx-auto flex max-w-7xl flex-wrap justify-between gap-x-16 gap-y-8 px-5 py-12 md:px-10">
+      <dl className="mx-auto flex max-w-[1320px] flex-wrap justify-between gap-x-16 gap-y-8 px-5 py-14 md:px-[5%]">
         {stats.map(stat => (
           <div key={stat.label}>
             <dt className="sr-only">{stat.label}</dt>
-            <dd className={`font-display text-5xl font-extrabold leading-none ${stat.accent ? 'text-coral' : 'text-brand'}`}>
-              {stat.value}
-            </dd>
-            <dd className="mt-2 text-sm text-ink-muted">{stat.label}</dd>
+            <dd className={`font-display text-5xl font-extrabold leading-none ${stat.color}`}>{stat.value}</dd>
+            <dd className="mt-1.5 text-[15px] text-ink-muted">{stat.label}</dd>
           </div>
         ))}
       </dl>
