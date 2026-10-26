@@ -1,6 +1,5 @@
 import { getSessionIdBack } from '../sessionManager';
 import { supabaseWrapper } from './client';
-import type { AddressStep1Payload } from './types';
 
 // Define types for the address data returned from the database
 interface AddressStepData {
@@ -38,25 +37,5 @@ export async function getAddressStep1Data(sessionIdExternal?: string): Promise<A
   } catch (error) {
     console.error('Error fetching address data:', error);
     return null;
-  }
-}
-
-export async function submitAddressStep1(payload: AddressStep1Payload): Promise<boolean> {
-  try {
-    const client = supabaseWrapper.getClient();
-    if (!client) throw new Error('Supabase client not available');
-
-    const sessionId = await getSessionIdBack();
-
-    const { error } = await client.rpc('upsert_address_step1_and_mark_review_session', {
-      p_review_session_id: sessionId,
-      p_address_details: payload.addressDetails,
-    });
-
-    if (error) throw error;
-    return true;
-  } catch (error) {
-    console.error('Error submitting address data:', error);
-    return false;
   }
 }

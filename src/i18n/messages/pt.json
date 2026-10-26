@@ -136,143 +136,14 @@
   "addReview": {
     "common": {
       "close": "Close",
-      "next": "Next",
-      "previous": "Previous",
-      "sending": "Sending...",
-      "finish": "Finish",
-      "yes": "Yes",
-      "no": "No",
-      "optional": "Optional",
-      "chooseAtLeastOne": "Choose at least one option",
-      "selectOneOption": "Please select an option.",
-      "unknownError": "Unknown error",
-      "emDash": "—"
-    },
-    "steps": {
-      "address": "Address",
-      "stay": "Stay",
-      "property": "Property",
-      "community": "Community",
-      "management": "Management"
-    },
-    "stepper": {
-      "goToStepAria": "Go to step {{step}}: {{label}}"
+      "sending": "Sending..."
     },
     "step1": {
       "addressLabel": "Morada",
       "addressPlaceholder": "Pesquisar morada...",
       "streetNumberLabel": "Número",
       "streetNumberPlaceholder": "Número",
-      "locateMeAria": "Localizar-me",
-      "floorLabel": "Andar",
-      "floorPlaceholder": "Andar",
-      "doorLabel": "Porta",
-      "doorPlaceholder": "Porta"
-    },
-    "step2": {
-      "yearsQuestion": "How many years have you lived in this flat?",
-      "periodError": "Review the selected period.",
-      "currentlyLivingQuestion": "Are you still living in the flat?",
-      "depositReturnedQuestion": "Was your deposit returned?",
-      "monthlyRentLabel": "How much do you pay per month for rent? (€)",
-      "monthlyRentPlaceholder": "Ex: 800",
-      "includesLabel": "Includes:",
-      "serviceElectricity": "Electricity",
-      "serviceWater": "Water",
-      "serviceCommunity": "Community fees",
-      "serviceGas": "Gas",
-      "serviceGarage": "Garage",
-      "recommendQuestion": "Would you recommend this flat?"
-    },
-    "step3": {
-      "summerTemperatureLabel": "Summer temperature",
-      "winterTemperatureLabel": "Winter temperature",
-      "noiseLevelLabel": "Noise level",
-      "lightLevelLabel": "Natural light level",
-      "maintenanceStatusLabel": "Maintenance condition",
-      "propertyOpinionLabel": "Your opinion about the property",
-      "propertyOpinionPlaceholder": "Share your experience and opinion about the flat...",
-      "optionWellInsulated": "Well insulated",
-      "optionOkay": "Okay",
-      "optionHot": "Hot",
-      "optionCold": "Cold",
-      "optionQuiet": "Quiet",
-      "optionTolerable": "Tolerable",
-      "optionQuiteNoisy": "Quite noisy",
-      "optionVeryNoisy": "Very noisy",
-      "optionNoLight": "No light",
-      "optionLowLight": "Low light",
-      "optionBright": "Bright",
-      "optionVeryBright": "Very bright",
-      "optionLikeNew": "Like new",
-      "optionGood": "Good",
-      "optionAcceptable": "Acceptable",
-      "optionPoor": "Poor",
-      "optionBad": "Bad"
-    },
-    "step4": {
-      "neighborTypesLabel": "Neighbor types",
-      "touristApartmentsLabel": "Tourist flats in the building",
-      "buildingCleanlinessLabel": "Building cleanliness",
-      "communityEnvironmentLabel": "Neighborhood atmosphere",
-      "communitySecurityLabel": "Neighborhood safety",
-      "communityOpinionLabel": "Your opinion about the community and neighborhood",
-      "communityOpinionPlaceholder": "Share your experience and opinion about the community and neighborhood...",
-      "optionFamily": "Family",
-      "optionYoungCouples": "Young couples",
-      "optionStudentFlats": "Student flats",
-      "optionSharedFlats": "Shared flats",
-      "optionSeniors": "Seniors +75",
-      "optionYesTolerable": "Yes, tolerable",
-      "optionYesAnnoying": "Yes, annoying",
-      "optionNone": "None",
-      "optionVeryClean": "Very clean",
-      "optionGood": "Good",
-      "optionLow": "Low",
-      "optionNoCleaning": "No cleaning",
-      "optionQuiet": "Quiet",
-      "optionLeisureFestive": "Leisure/Festive",
-      "optionStudent": "Student",
-      "optionNightlife": "Nightlife",
-      "optionVerySafe": "Very safe",
-      "optionNoIssues": "No issues",
-      "optionCouldImprove": "Could improve",
-      "optionUnsafe": "Unsafe"
-    },
-    "step5": {
-      "ownerTypeLabel": "Owner type",
-      "ownerTypeError": "Please select the owner type.",
-      "ownerTypeOwner": "Owner",
-      "ownerTypeAgency": "Agency",
-      "ownerDataLabel": "Owner details",
-      "agencyDataLabel": "Agency details",
-      "fullNameLabel": "Full name",
-      "fullNamePlaceholder": "Full name",
-      "contactInfoLabel": "Contact information",
-      "phoneLabel": "Contact phone",
-      "phonePlaceholder": "Ex: 600123456",
-      "emailLabel": "Email address",
-      "emailPlaceholder": "email@example.com",
-      "ownerOpinionLabel": "Your opinion about the owner",
-      "agencyOpinionLabel": "Your opinion about the agency",
-      "opinionPlaceholder": "Describe your experience honestly, respectfully, and based on real facts. Avoid personal data, insults, or threats.",
-      "acceptTermsPrefix": "I have read and accept the",
-      "termsAndConditions": "terms and conditions",
-      "privacyInfoAria": "Privacy information",
-      "privacyModalTitle": "How we store it",
-      "privacyModalDescription": "This is the hashed value stored in our database:"
-    },
-    "staticMessages": {
-      "step1Title": "Your opinion is anonymous",
-      "step1Message": "The information you share will not be shown exactly as entered.",
-      "step2Title": "Rental Period",
-      "step2Message": "Indicate the period you have lived or are living in the property to contextualize your opinion.",
-      "step3Title": "Property Condition",
-      "step3Message": "Evaluate the flat's condition to help future tenants make informed decisions.",
-      "step4Title": "Community and Neighborhood",
-      "step4Message": "Information about the building community and neighborhood is very valuable for future tenants.",
-      "step5Title": "Privacy",
-      "step5Message": "Personal data is processed with irreversible hashing only to associate opinions with owners. It is never stored in plain text or shared with third parties."
+      "locateMeAria": "Localizar-me"
     },
     "login": {
       "title": "Save and validate your review",
@@ -296,45 +167,6 @@
     },
     "toast": {
       "validationErrorTitle": "Validation error"
-    },
-    "validation": {
-      "common": {
-        "incompleteData": "Incomplete data",
-        "incompleteAddressData": "Incomplete address data",
-        "noValidSession": "No valid session was found",
-        "databaseSaveError": "Error saving data to the database",
-        "dataSaveError": "Error saving data",
-        "dataSubmissionError": "Error submitting data"
-      },
-      "step1": {
-        "missingAddressInfo": "No address information was provided",
-        "addressRequired": "Address is required",
-        "addressNumberRequired": "Address number is required",
-        "addressNumberReview": "Please review the address number",
-        "addressCoordinatesMissing": "Address coordinates could not be obtained"
-      },
-      "step2": {
-        "startYearRequired": "Start year is required",
-        "priceRequired": "Price is required",
-        "endYearAfterStartYear": "End year must be after start year",
-        "recommendationRequired": "Recommendation is required",
-        "depositReturnedRequired": "If you indicate that you no longer live in the flat, you must specify whether the deposit was returned"
-      },
-      "step3": {
-        "summerTemperatureRequired": "Summer temperature is required",
-        "winterTemperatureRequired": "Winter temperature is required",
-        "noiseLevelRequired": "Noise level is required",
-        "lightLevelRequired": "Light level is required",
-        "maintenanceStatusRequired": "Maintenance status is required"
-      },
-      "step4": {
-        "neighborTypesRequired": "Neighbor information is required",
-        "communityEnvironmentRequired": "Neighborhood environment information is required"
-      },
-      "step5": {
-        "ownerTypeRequired": "Owner information is required",
-        "acceptTermsRequired": "Accept the terms and conditions"
-      }
     }
   },
   "cityReviews": {

@@ -8,8 +8,12 @@ export interface FormContextType {
   resetForm: () => void;
 }
 
+export type Score = 1 | 2 | 3 | 4 | 5;
+
+// 'ongoing' means the tenant still lives there, so there is no deposit outcome yet
+export type DepositReturned = 'true' | 'partial' | 'false' | 'ongoing';
+
 export type FormDataType = {
-  // Step 1: Housing
   addressDetails?: {
     street?: string;
     number?: string;
@@ -35,42 +39,17 @@ export type FormDataType = {
     };
   };
 
-  // Step 2: Rental Period
   startYear?: number;
+  // null = still living there
   endYear?: number | null;
   price?: number;
-  includedServices?: string[];
-  // Would you recommend this flat? 1-5 stored as string tags
-  wouldRecommend?: '1' | '2' | '3' | '4' | '5';
-  // Deposit returned when tenant no longer lives there
-  depositReturned?: boolean;
+  depositReturned?: DepositReturned;
 
-  // Step 3: Property Condition
-  summerTemperature?: 'Bien aislado' | 'Correcto' | 'Caluroso';
-  winterTemperature?: 'Bien aislado' | 'Correcto' | 'Frío';
-  noiseLevel?: 'Silencioso' | 'Tolerable' | 'Bastante' | 'Se oye todo';
-  lightLevel?: 'Nada de luz' | 'Poca luz' | 'Luminoso' | 'Muy luminoso';
-  maintenanceStatus?: 'Como nuevo' | 'Bueno' | 'Aceptable' | 'Poco' | 'Malo';
-  propertyOpinion?: string;
-
-  // Step 4: Community
-  neighborTypes?: string[];
-  touristApartments?: 'Sí, tolerable' | 'Sí, molestos' | 'No hay';
-  buildingCleanliness?: 'Muy limpio' | 'Buena' | 'Poca' | 'Sin limpieza';
-  communityEnvironment?: string[];
-  communitySecurity?: 'Muy segura' | 'Sin problemas' | 'Mejorable' | 'Poco segura';
-  communityOpinion?: string;
-
-  // Step 5: Owner
-  ownerType?: 'Particular' | 'Agencia';
-  ownerName?: string;
-  ownerNameHash?: string;
-  ownerPhone?: string;
-  ownerPhoneHash?: string;
-  ownerEmail?: string;
-  ownerEmailHash?: string;
-  ownerOpinion?: string;
-  checkboxReadTerms?: boolean;
+  ownerScore?: Score;
+  propertyScore?: Score;
+  buildingScore?: Score;
+  areaScore?: Score;
+  opinion?: string;
 
   // Contact Information (Modal)
   contactName?: string;
@@ -87,40 +66,15 @@ export const initialFormData: FormDataType = {
     city: '',
     postalCode: '',
   },
-
-  // Step 2: Rental Period
-  price: undefined,
-  includedServices: [],
-  startYear: 2025,
+  startYear: undefined,
   endYear: undefined,
-  wouldRecommend: undefined,
+  price: undefined,
   depositReturned: undefined,
-
-  // Step 3: Property Condition
-  summerTemperature: undefined,
-  winterTemperature: undefined,
-  noiseLevel: undefined,
-  lightLevel: undefined,
-  maintenanceStatus: undefined,
-  propertyOpinion: '',
-
-  // Step 4: Community
-  neighborTypes: [],
-  touristApartments: undefined,
-  buildingCleanliness: undefined,
-  communityEnvironment: [],
-  communitySecurity: undefined,
-  communityOpinion: '',
-
-  // Step 5: Owner
-  ownerType: 'Particular',
-  ownerName: '',
-  ownerPhone: '',
-  ownerEmail: '',
-  ownerOpinion: '',
-  checkboxReadTerms: false,
-
-  // Contact Information (Modal)
+  ownerScore: undefined,
+  propertyScore: undefined,
+  buildingScore: undefined,
+  areaScore: undefined,
+  opinion: '',
   contactName: '',
   contactEmail: '',
 };
