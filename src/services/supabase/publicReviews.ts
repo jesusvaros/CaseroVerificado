@@ -15,7 +15,16 @@ export type PublicReview = {
   state: string | null;
   postal_code: string | null;
   street: string | null;
+  number: string | null;
   validated_at: string | null;
+  price: number | null;
+  start_year: number | null;
+  end_year: number | null;
+  deposit_returned: string | null;
+  owner_score: number | null;
+  property_score: number | null;
+  building_score: number | null;
+  area_score: number | null;
   is_synthetic: boolean;
   has_full_details: boolean;
   synthetic_batch: string | null;
@@ -33,7 +42,9 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
 
   let query = client
     .from('public_reviews')
-    .select('id, address_details, owner_opinion, would_recommend, validated_at')
+    .select(
+      'id, address_details, owner_opinion, would_recommend, validated_at, price, start_year, end_year, deposit_returned, owner_score, property_score, building_score, area_score'
+    )
     .eq('is_public', true)
     .order('validated_at', { ascending: false });
 
@@ -58,6 +69,7 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
     state?: string | null;
     postcode?: string | null;
     road?: string | null;
+    house_number?: string | null;
     country?: string | null;
   } | null;
 
@@ -88,6 +100,14 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
     owner_opinion?: string | null;
     would_recommend?: number | string | null;
     validated_at?: string | null;
+    price?: number | string | null;
+    start_year?: number | null;
+    end_year?: number | null;
+    deposit_returned?: string | null;
+    owner_score?: number | null;
+    property_score?: number | null;
+    building_score?: number | null;
+    area_score?: number | null;
   };
 
   const rows = data as unknown as Row[];
@@ -137,6 +157,12 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
         : typeof details?.components?.road === 'string'
           ? details.components.road
           : null;
+    const number =
+      typeof details?.number === 'string' && details.number
+        ? details.number
+        : typeof details?.components?.house_number === 'string'
+          ? details.components.house_number
+          : null;
     const citySlug = city ? slugify(city) : null;
     const wouldRecommend =
       review.would_recommend != null ? Number(review.would_recommend) : null;
@@ -161,7 +187,16 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
       state: state ?? null,
       postal_code: postalCode ?? null,
       street: street ?? null,
+      number,
       validated_at: review.validated_at ?? null,
+      price: review.price != null ? Number(review.price) : null,
+      start_year: review.start_year ?? null,
+      end_year: review.end_year ?? null,
+      deposit_returned: review.deposit_returned ?? null,
+      owner_score: review.owner_score ?? null,
+      property_score: review.property_score ?? null,
+      building_score: review.building_score ?? null,
+      area_score: review.area_score ?? null,
       is_synthetic: isSynthetic,
       has_full_details: hasFullDetails,
       synthetic_batch: syntheticBatch,

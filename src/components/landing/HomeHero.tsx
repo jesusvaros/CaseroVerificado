@@ -7,7 +7,7 @@ import HeroIllustration from './HeroIllustration';
 
 const HomeHero = () => {
   const { t } = useTranslations();
-  const { address, isLoading, selectAddress, openMap, startReview } = useHomeAddressSearch();
+  const { address, isLoading, selectAddress, search, startReview } = useHomeAddressSearch();
 
   return (
     <section id="home-address-section" className="overflow-hidden bg-forest pt-24 text-white">
@@ -31,7 +31,7 @@ const HomeHero = () => {
             </div>
             <button
               type="button"
-              onClick={openMap}
+              onClick={search}
               className="h-12 shrink-0 rounded-full bg-brand px-7 font-bold text-white transition-colors hover:bg-forest focus:outline-none focus-visible:ring-2 focus-visible:ring-lime"
               {...umamiEventProps('home:hero-search-map')}
             >

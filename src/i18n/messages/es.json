@@ -573,5 +573,47 @@
       "until": "Vigente hasta el {{date}}. {{boe}}.",
       "guide": "Leer la guía →"
     }
+  },
+  "addressPage": {
+    "outOf5": "de 5",
+    "breadcrumb": "Migas de pan",
+    "oneReview": "1 opinión",
+    "reviews": "{{count}} opiniones",
+    "tensioned": "Zona tensionada",
+    "builtIn": "Edificio de {{year}}",
+    "livedHere": "Viví aquí",
+    "summaryTitle": "Lo que dicen los inquilinos",
+    "categories": {
+      "owner_score": "Casero",
+      "property_score": "Vivienda",
+      "building_score": "Edificio",
+      "area_score": "Zona"
+    },
+    "xOfY": "{{x}} de {{y}}",
+    "depositFull": "recuperaron la fianza entera",
+    "wouldRecommend": "lo recomendarían",
+    "averageRent": "alquiler medio declarado",
+    "reviewsTitle": "Opiniones",
+    "lived": "vivió de {{from}} a {{to}}",
+    "now": "hoy",
+    "perMonth": "{{price}} € al mes",
+    "deposit": {
+      "true": "Fianza devuelta",
+      "partial": "Fianza retenida en parte",
+      "false": "Fianza no devuelta"
+    },
+    "fullReview": "Ver opinión completa",
+    "report": "Denunciar o responder",
+    "emptyTitle": "Todavía nadie ha opinado sobre esta dirección",
+    "emptyText": "Si viviste aquí, cuéntalo en tres minutos. Es anónimo y ayudas a quien vaya a alquilar después.",
+    "union": {
+      "title": "¿Problemas con este piso?",
+      "text": "{{name}} asesora gratis a inquilinos con problemas con su casero.",
+      "contact": "Escribirles →"
+    },
+    "notFoundTitle": "No encontramos esta dirección",
+    "searchAnother": "Buscar otra dirección",
+    "seoTitle": "{{address}}, {{city}}: opiniones de inquilinos y precio del alquiler | CaseroOk",
+    "seoDescription": "Opiniones anónimas de inquilinos de {{address}} ({{city}}), precio de referencia del alquiler en la zona y datos del edificio."
   }
 }
