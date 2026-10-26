@@ -8,7 +8,6 @@ import CityAreaCard from './CityAreaCard';
 import CityAreaList from './CityAreaList';
 import { RENT_COLORS, perM2 } from './rentScale';
 import TenantUnionLink from '../address/TenantUnionLink';
-import { provinceFromPostalCode } from '../../services/publicData/rentZones';
 
 interface CityRentSectionProps {
   rent: CityRent;
@@ -22,7 +21,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const selected = rent.areas.find(a => a.id === selectedId) ?? null;
   const points = reviews.filter(r => r.lat != null && r.lng != null).map(r => [r.lng!, r.lat!] as [number, number]);
-  const province = reviews.map(r => provinceFromPostalCode(r.postal_code)).find(Boolean) ?? null;
+  const province = rent.cumun.slice(0, 2);
 
   return (
     <>

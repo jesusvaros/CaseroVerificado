@@ -6,6 +6,7 @@ import CityRentHero from '../components/city/CityRentHero';
 import CityRentSection from '../components/city/CityRentSection';
 import CityQuotes from '../components/city/CityQuotes';
 import { useCityRent } from '../components/city/useCityRent';
+import { canonicalCitySlug, findMunicipality } from '../services/publicData/municipalities';
 import { useTranslations } from '../i18n/useTranslations';
 import { getPublicReviews, type PublicReview } from '../services/supabase/publicReviews';
 import { countryNameMatchesCode } from '../utils/countryMatching';
@@ -62,13 +63,30 @@ export default function CityReviewsPage() {
       scope: shouldScopeByCountry ? 'country' : 'all',
       countryCode: shouldScopeByCountry ? userCountryCode : null,
     })
-      .then(rows => {
+      .then(async rows => {
+        // Review cities come from the geocoder ("Alicante", "Valencia"); compare canonical slugs
+        const canonical = await canonicalCitySlug(citySlug);
+        const reviewSlugs = await Promise.all(rows.map(review => canonicalCitySlug(getReviewCitySlug(review) ?? '')));
         if (cancelled) return;
 
-        const cityMatches = rows.filter(review => getReviewCitySlug(review) === citySlug);
-        if (cityMatches.length === 0) {
+        const cityMatches = rows.filter((_, i) => reviewSlugs[i] === canonical);
+        const municipality = await findMunicipality(citySlug);
+        if (cancelled) return;
+        // Any municipality with official rent data gets a page, even before its first review
+        const showWithoutReviews = () => {
           setReviews([]);
-          setStatus('not-found');
+          setCityName(municipality!.name);
+          setStateName(null);
+          setCountryName(null);
+          setResolvedCountrySlug('espana');
+          setStatus('ready');
+        };
+        if (cityMatches.length === 0) {
+          if (municipality) showWithoutReviews();
+          else {
+            setReviews([]);
+            setStatus('not-found');
+          }
           return;
         }
 
@@ -88,8 +106,11 @@ export default function CityReviewsPage() {
         }
 
         if (filtered.length === 0) {
-          setReviews([]);
-          setStatus('not-found');
+          if (municipality) showWithoutReviews();
+          else {
+            setReviews([]);
+            setStatus('not-found');
+          }
           return;
         }
 

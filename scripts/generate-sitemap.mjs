@@ -274,6 +274,11 @@ async function generateSitemap() {
     priority: '0.5',
     lastmod: today,
   }));
+  // City pages with official rent data, even without reviews: markets with at least 300 contracts
+  const municipalityIndex = JSON.parse(await fs.readFile(path.join(ROOT_DIR, 'public/data/municipios.json'), 'utf8'));
+  const marketEntries = municipalityIndex.municipalities
+    .filter(([, , , , contracts]) => contracts >= 300)
+    .map(([slug]) => ({ loc: buildUrl(baseUrl, `/opiniones/espana/${slug}`), changefreq: 'monthly', priority: '0.5', lastmod: today }));
   const cityEntries = citySummaries.map(city => ({
     loc: buildUrl(baseUrl, `/opiniones/${city.slug}`),
     changefreq: 'weekly',
@@ -286,6 +291,7 @@ async function generateSitemap() {
     ...countryBlogListEntries,
     ...blogEntries,
     ...cityEntries,
+    ...marketEntries,
     ...addressEntries,
   ]);
 
@@ -298,6 +304,7 @@ async function generateSitemap() {
   console.log(`• Posts del blog: ${blogEntries.length}`);
   console.log(`• Ciudades: ${cityEntries.length}`);
   console.log(`• Direcciones: ${addressEntries.length}`);
+  console.log(`• Municipios con precio oficial: ${marketEntries.length}`);
 }
 
 generateSitemap().catch(error => {

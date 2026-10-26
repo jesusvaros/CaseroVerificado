@@ -717,6 +717,16 @@
       "windows": "Usa Ctrl + rueda para hacer zoom en el mapa",
       "mac": "Usa ⌘ + rueda para hacer zoom en el mapa",
       "mobile": "Usa dos dedos para mover el mapa"
-    }
+    },
+    "searchLabel": "Buscar otra ciudad",
+    "searchPlaceholder": "Ver otra ciudad o pueblo…"
+  },
+  "cityIndex": {
+    "seoTitle": "Alquiler por ciudades: precios oficiales y opiniones | CaseroOk",
+    "seoDescription": "Precio de referencia del alquiler por barrios y zonas en 2.601 municipios de España, con opiniones de inquilinos.",
+    "title": "¿Dónde vas a alquilar?",
+    "subtitle": "Precio oficial por zonas en 2.601 municipios, opiniones de inquilinos y tus derechos en cada sitio.",
+    "listTitle": "Los mercados de alquiler más grandes",
+    "source": "Mediana del alquiler por m² de vivienda colectiva en 2024. Fuente: SERPAVI (Ministerio de Vivienda y Agenda Urbana)."
   }
 }

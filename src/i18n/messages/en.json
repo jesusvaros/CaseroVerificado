@@ -717,6 +717,16 @@
       "windows": "Use Ctrl + scroll to zoom the map",
       "mac": "Use ⌘ + scroll to zoom the map",
       "mobile": "Use two fingers to move the map"
-    }
+    },
+    "searchLabel": "Search another city",
+    "searchPlaceholder": "Another city or town…"
+  },
+  "cityIndex": {
+    "seoTitle": "Rent by city: official prices and reviews | CaseroOk",
+    "seoDescription": "Official reference rent by neighbourhood in 2,601 Spanish municipalities, with tenant reviews.",
+    "title": "Where are you renting?",
+    "subtitle": "Official rent by area in 2,601 municipalities, tenant reviews and your rights in each place.",
+    "listTitle": "The biggest rental markets",
+    "source": "Median rent per m² for flats in 2024. Source: SERPAVI (Ministry of Housing)."
   }
 }

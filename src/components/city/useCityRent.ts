@@ -6,16 +6,15 @@ import { rentBreaks } from './rentScale';
 
 export function useCityRent(citySlug: string | undefined, reviews: PublicReview[]) {
   const [rent, setRent] = useState<CityRent | null>(null);
-  const postalCodes = reviews.map(r => r.postal_code).join(',');
-
   useEffect(() => {
     if (!citySlug) return;
     let cancelled = false;
-    getCityRent(citySlug, postalCodes.split(',')).then(result => !cancelled && setRent(result));
+    setRent(null);
+    getCityRent(citySlug).then(result => !cancelled && setRent(result));
     return () => {
       cancelled = true;
     };
-  }, [citySlug, postalCodes]);
+  }, [citySlug]);
 
   const breaks = useMemo(() => rentBreaks((rent?.areas ?? []).map(a => a.properties.p50).filter((v): v is number => v != null)), [rent]);
 
