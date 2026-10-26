@@ -54,8 +54,22 @@ jobs:
           echo "🚀 Starting daily blog automation for all configured countries..."
           npm run daily:blog -- --country=ALL --everyDays=1
           echo "✅ Daily blog automation completed for all configured countries"
+
+      - name: Detect deployable blog changes
+        id: blog-content
+        run: |
+          BLOG_CHANGES=$(git status --porcelain -- src/blog/posts/ public/images/blog/ | wc -l | tr -d ' ')
+          echo "blog_changes=$BLOG_CHANGES" >> "$GITHUB_OUTPUT"
+          if [ "$BLOG_CHANGES" -gt 0 ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "✅ New blog content detected"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "ℹ️ No new blog content; state-only changes will not trigger a deployment"
+          fi
       
       - name: Generate updated sitemap
+        if: steps.blog-content.outputs.changed == 'true'
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
@@ -67,7 +81,7 @@ jobs:
           echo "📋 Checking for changes..."
           git status --porcelain
           
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ "${{ steps.blog-content.outputs.changed }}" = "true" ]; then
             echo "✅ Changes detected"
             echo "changed=true" >> $GITHUB_OUTPUT
             
@@ -79,7 +93,7 @@ jobs:
             NEW_POSTS=$(git status --porcelain | grep "src/blog/posts/" | wc -l)
             echo "📝 New blog posts: $NEW_POSTS"
           else
-            echo "ℹ️ No changes detected"
+            echo "ℹ️ No deployable content changes detected"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
       
