@@ -10,7 +10,7 @@ import HomeClosing from './HomeClosing';
 
 // Home page, section by section as in the "1 · Landing" design.
 const HomePage = () => {
-  const { reviews, featured, quote } = useHomeShowcase();
+  const { reviews, featured, building, quote } = useHomeShowcase();
 
   return (
     <div className="bg-white text-ink">
@@ -18,7 +18,7 @@ const HomePage = () => {
       <HomeStats reviewCount={reviews.length || null} />
       <HomeScores />
       <HomeRentCheck />
-      <HomeBuilding featured={featured} />
+      <HomeBuilding building={building} />
       <HomeQuote review={quote} />
       <HomeGuides />
       <HomeClosing />
