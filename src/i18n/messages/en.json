@@ -615,5 +615,41 @@
     "searchAnother": "Search another address",
     "seoTitle": "{{address}}, {{city}}: tenant reviews and rent prices | CaseroOk",
     "seoDescription": "Anonymous tenant reviews of {{address}} ({{city}}), the reference rent for the area and building facts."
+  },
+  "cityPage": {
+    "title": "Renting in {{city}}",
+    "subtitle": "What each neighbourhood costs according to the official index, what tenants say and your rights here.",
+    "medianPerM2": "median per m² a month ({{year}})",
+    "yearChange": "in a year, according to INE ({{year}})",
+    "section": "Census section",
+    "for60": "{{amount}} € a month for 60 m²",
+    "range": "typical range {{low}} to {{high}} €",
+    "noData": "Not enough contracts for a figure",
+    "noReviews": "No reviews yet",
+    "oneReview": "1 review",
+    "reviews": "{{count}} reviews",
+    "beFirst": "Be the first",
+    "barrioNote": "price estimated from its census sections",
+    "cheaper": "Cheaper",
+    "pricier": "Pricier",
+    "reviewDot": "Published review",
+    "sourceBarrio": "Median rent per m² for flats, averaged over each neighbourhood's census sections weighted by number of contracts. Source: {{source}}.",
+    "sourceSection": "Median rent per m² for flats in each census section. Source: {{source}}.",
+    "sectionsHint": "Tap an area on the map to see its reference rent. For a specific address, search it on the home page.",
+    "listTitle": "Neighbourhoods, most to least expensive",
+    "asideTitle": "If you rent in {{city}}",
+    "depositTitle": "Your deposit",
+    "depositText": "How much they can ask, where it is lodged in your region and how to get it back when you leave.",
+    "aidTitle": "Rent support",
+    "aidText": "Bono Alquiler Joven and the State Housing Plan: requirements and how to apply.",
+    "readGuide": "Read the guide →",
+    "latestTitle": "Latest from {{city}}",
+    "addMine": "Add mine",
+    "fewContracts": "Based on only {{n}} contracts: take it as a rough guide.",
+    "mapHelp": {
+      "windows": "Use Ctrl + scroll to zoom the map",
+      "mac": "Use ⌘ + scroll to zoom the map",
+      "mobile": "Use two fingers to move the map"
+    }
   }
 }

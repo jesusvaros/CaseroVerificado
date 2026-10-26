@@ -615,5 +615,41 @@
     "searchAnother": "Buscar otra dirección",
     "seoTitle": "{{address}}, {{city}}: opiniones de inquilinos y precio del alquiler | CaseroOk",
     "seoDescription": "Opiniones anónimas de inquilinos de {{address}} ({{city}}), precio de referencia del alquiler en la zona y datos del edificio."
+  },
+  "cityPage": {
+    "title": "Alquilar en {{city}}",
+    "subtitle": "Cuánto cuesta cada barrio según el índice oficial, qué cuentan los inquilinos y qué derechos tienes aquí.",
+    "medianPerM2": "mediana por m² al mes ({{year}})",
+    "yearChange": "en un año, según el INE ({{year}})",
+    "section": "Sección censal",
+    "for60": "{{amount}} € al mes por 60 m²",
+    "range": "lo normal, de {{low}} a {{high}} €",
+    "noData": "Sin datos suficientes de contratos",
+    "noReviews": "Sin opiniones todavía",
+    "oneReview": "1 opinión",
+    "reviews": "{{count}} opiniones",
+    "beFirst": "Sé el primero",
+    "barrioNote": "precio estimado a partir de sus secciones censales",
+    "cheaper": "Más barato",
+    "pricier": "Más caro",
+    "reviewDot": "Opinión publicada",
+    "sourceBarrio": "Mediana del alquiler por m² de vivienda colectiva, media de las secciones censales de cada barrio ponderada por número de contratos. Fuente: {{source}}.",
+    "sourceSection": "Mediana del alquiler por m² de vivienda colectiva en cada sección censal. Fuente: {{source}}.",
+    "sectionsHint": "Toca una zona del mapa para ver su precio de referencia. Para una dirección concreta, búscala en la portada.",
+    "listTitle": "Barrios, del más caro al más barato",
+    "asideTitle": "Si alquilas en {{city}}",
+    "depositTitle": "Tu fianza",
+    "depositText": "Cuánto pueden pedirte, dónde se deposita según tu comunidad y cómo recuperarla al irte.",
+    "aidTitle": "Ayudas al alquiler",
+    "aidText": "Bono Alquiler Joven y ayudas del Plan Estatal: requisitos y cómo pedirlas.",
+    "readGuide": "Leer la guía →",
+    "latestTitle": "Lo último que cuentan en {{city}}",
+    "addMine": "Añadir la mía",
+    "fewContracts": "Basado en solo {{n}} contratos: tómalo como orientación.",
+    "mapHelp": {
+      "windows": "Usa Ctrl + rueda para hacer zoom en el mapa",
+      "mac": "Usa ⌘ + rueda para hacer zoom en el mapa",
+      "mobile": "Usa dos dedos para mover el mapa"
+    }
   }
 }
