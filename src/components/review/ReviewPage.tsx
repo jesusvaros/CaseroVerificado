@@ -12,6 +12,8 @@ import PageSEO from '../../seo/PageSEO';
 import { LEGAL_META } from '../../config/legal';
 
 // Importar componentes de sección
+import ScoresSection from './ScoresSection';
+import { hasScores } from './reviewScores';
 import LocationMap from '../ui/LocationMap';
 import PeriodSection from './PeriodSection';
 import PropertySection from './PropertySection';
@@ -37,6 +39,10 @@ interface Step2Data {
   included_services: string[];
   would_recommend?: '1'|'2'|'3'|'4'|'5';
   deposit_returned?: string | undefined;
+  owner_score?: number | null;
+  property_score?: number | null;
+  building_score?: number | null;
+  area_score?: number | null;
 }
 
 interface Step3Data {
@@ -134,6 +140,10 @@ const ReviewPage = () => {
                 included_services: publicReview.included_services ?? [],
                 would_recommend: publicReview.would_recommend ?? undefined,
                 deposit_returned: publicReview.deposit_returned ?? undefined,
+                owner_score: publicReview.owner_score,
+                property_score: publicReview.property_score,
+                building_score: publicReview.building_score,
+                area_score: publicReview.area_score,
               });
 
               // Step 3
@@ -272,6 +282,12 @@ const ReviewPage = () => {
     }
   }, [id, user]);
   
+  // Reviews from the one-page form have no step 3 or step 4 answers: hide those cards.
+  const hasAnswers = (data: object | null) =>
+    !!data && Object.values(data).some(v => (Array.isArray(v) ? v.length > 0 : v != null && v !== ''));
+  const hasPropertyDetails = hasAnswers(step3Data);
+  const hasCommunityDetails = hasAnswers(step4Data);
+
   const MobileView = () => (
     <div className="space-y-6">
       <div className="rounded-lg bg-white p-6 shadow">
@@ -301,6 +317,11 @@ const ReviewPage = () => {
 
       <div className="rounded-lg bg-white p-6 shadow">
         <h2 className="mb-4 text-[20px] font-bold">Opinión</h2>
+        {hasScores(step2Data) && (
+          <div className="mb-6">
+            <ScoresSection scores={step2Data} />
+          </div>
+        )}
         <OpinionSection 
           propertyOpinion={step3Data?.property_opinion}
           communityOpinion={step4Data?.community_opinion}
@@ -309,15 +330,19 @@ const ReviewPage = () => {
         />
       </div>
       
-      <div className="rounded-lg bg-white p-6 shadow">
-        <h2 className="mb-4 text-[20px] font-bold">Características del piso</h2>
-        <PropertySection propertyData={step3Data} />
-      </div>
+      {hasPropertyDetails && (
+        <div className="rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 text-[20px] font-bold">Características del piso</h2>
+          <PropertySection propertyData={step3Data} />
+        </div>
+      )}
 
-      <div className="rounded-lg bg-white p-6 shadow">
-        <h2 className="mb-4 text-[20px] font-bold">Comunidad y vecindario</h2>
-        <CommunitySection communityData={step4Data} />
-      </div>
+      {hasCommunityDetails && (
+        <div className="rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 text-[20px] font-bold">Comunidad y vecindario</h2>
+          <CommunitySection communityData={step4Data} />
+        </div>
+      )}
     </div>
   );
 
@@ -357,6 +382,11 @@ const ReviewPage = () => {
       {/* Columna derecha con el resto de secciones */}
       <div className="w-2/3 space-y-6">
         <div className="rounded-lg bg-white p-8 shadow">
+          {hasScores(step2Data) && (
+            <div className="mb-6">
+              <ScoresSection scores={step2Data} />
+            </div>
+          )}
           <OpinionSection 
             propertyOpinion={step3Data?.property_opinion}
             communityOpinion={step4Data?.community_opinion}
@@ -365,15 +395,19 @@ const ReviewPage = () => {
           />
         </div>
         
-        <div className="rounded-lg bg-white p-8 shadow">
-          <h2 className="mb-4 text-[20px] font-bold">Características del piso</h2>
-          <PropertySection propertyData={step3Data} />
-        </div>
+        {hasPropertyDetails && (
+          <div className="rounded-lg bg-white p-8 shadow">
+            <h2 className="mb-4 text-[20px] font-bold">Características del piso</h2>
+            <PropertySection propertyData={step3Data} />
+          </div>
+        )}
 
-        <div className="rounded-lg bg-white p-8 shadow">
-          <h2 className="mb-4 text-[20px] font-bold">Comunidad y vecindario</h2>
-          <CommunitySection communityData={step4Data} />
-        </div>
+        {hasCommunityDetails && (
+          <div className="rounded-lg bg-white p-8 shadow">
+            <h2 className="mb-4 text-[20px] font-bold">Comunidad y vecindario</h2>
+            <CommunitySection communityData={step4Data} />
+          </div>
+        )}
       </div>
     </div>
   );

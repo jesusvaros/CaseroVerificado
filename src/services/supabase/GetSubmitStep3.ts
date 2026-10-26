@@ -35,36 +35,3 @@ export async function getSessionStep3Data(id?: string): Promise<EstanciaStep2Pay
     return null;
   }
 }
-
-export async function submitSessionStep3(payload: {
-  summerTemperature: string;
-  winterTemperature: string;
-  noiseLevel: string;
-  lightLevel: string;
-  maintenanceStatus: string;
-  propertyOpinion?: string;
-}): Promise<boolean> {
-  try {
-    // Get Supabase client
-    const client = supabaseWrapper.getClient();
-    if (!client) throw new Error('Supabase client not available');
-
-    const sessionId = await getSessionIdBack();
-
-    const { error } = await client.rpc('upsert_piso_step3_and_mark_review_session', {
-      p_review_session_id: sessionId,
-      p_summer_temperature: payload.summerTemperature,
-      p_winter_temperature: payload.winterTemperature,
-      p_noise_level: payload.noiseLevel,
-      p_light_level: payload.lightLevel,
-      p_maintenance_status: payload.maintenanceStatus,
-      p_property_opinion: payload.propertyOpinion,
-    });
-
-    if (error) throw error;
-    return true;
-  } catch (error) {
-    console.error('Error submitting address data:', error);
-    return false;
-  }
-}

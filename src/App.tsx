@@ -14,7 +14,7 @@ import HomeQuote from './components/landing/HomeQuote';
 import HomeGuides from './components/landing/HomeGuides';
 import HomeClosing from './components/landing/HomeClosing';
 import MapView from './components/MapView';
-import AddReviewForm from './components/AddReviewForm';
+import ReviewFormPage from './components/review-form/ReviewFormPage';
 import AuthCallback from './components/AuthCallback';
 import ReviewPage from './components/review/ReviewPage';
 import ProfilePage from './components/profile/ProfilePage';
@@ -37,7 +37,6 @@ import { buildBlogListPath } from './i18n/routing';
 
 // Import Providers
 import { FormProvider } from './store/FormContext';
-import { FormMessagesProvider } from './store/FormMessagesProvider';
 import { AuthProvider } from './store/auth';
 import { umamiEventProps } from './utils/analytics';
 import { trackEvent } from './utils/analytics';
@@ -52,7 +51,7 @@ function LegacyLocaleBlogRedirect() {
 function App() {
   const location = useLocation();
   const { locale, t } = useTranslations();
-  const isGrayPage = location.pathname === '/add-review' || location.pathname.includes('/review/') || location.pathname === '/profile' || location.pathname === '/map';
+  const isGrayPage = location.pathname.includes('/review/') || location.pathname === '/profile' || location.pathname === '/map';
 
   useEffect(() => {
     trackEvent('app:loaded', { timestamp: new Date().toISOString() });
@@ -123,10 +122,10 @@ function App() {
           <Route
             path="/add-review"
             element={
-              <FormMessagesProvider>
+              <>
                 <PageSEO title={t('seo.addReviewTitle')} description={t('seo.addReviewDescription')} noindex />
-                <AddReviewForm />
-              </FormMessagesProvider>
+                <ReviewFormPage />
+              </>
             }
           />
               <Route

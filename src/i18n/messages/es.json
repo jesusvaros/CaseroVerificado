@@ -164,144 +164,14 @@
   "addReview": {
     "common": {
       "close": "Cerrar",
-      "next": "Siguiente",
-      "previous": "Anterior",
-      "sending": "Enviando...",
-      "finish": "Finalizar",
-      "yes": "Sí",
-      "no": "No",
-      "optional": "Opcional",
-      "chooseAtLeastOne": "Elige al menos una opción",
-      "selectOneOption": "Por favor, selecciona una opción.",
-      "unknownError": "Error desconocido",
-      "emDash": "—"
-    },
-    "steps": {
-      "address": "Dirección",
-      "stay": "Estancia",
-      "property": "Piso",
-      "community": "Comunidad",
-      "management": "Gestión"
-    },
-    "stepper": {
-      "goToStepAria": "Ir al paso {{step}}: {{label}}"
+      "sending": "Enviando..."
     },
     "step1": {
       "addressLabel": "Dirección",
       "addressPlaceholder": "Buscar dirección...",
-      "loginNotice": "Tu opinión será anónima. Al final te pediremos iniciar sesión solo para evitar duplicados; tu nombre y email nunca se publican.",
       "streetNumberLabel": "Número",
       "streetNumberPlaceholder": "Número",
-      "locateMeAria": "Ubicarme",
-      "floorLabel": "Piso",
-      "floorPlaceholder": "Piso",
-      "doorLabel": "Puerta",
-      "doorPlaceholder": "Puerta"
-    },
-    "step2": {
-      "yearsQuestion": "¿Cuántos años has estado en este piso?",
-      "periodError": "Revisa el período seleccionado.",
-      "currentlyLivingQuestion": "¿Aún vives en el piso?",
-      "depositReturnedQuestion": "¿Te devolvieron la fianza?",
-      "monthlyRentLabel": "Cuanto pagas al mes de alquiler?(€)",
-      "monthlyRentPlaceholder": "Ej: 800",
-      "includesLabel": "Incluye:",
-      "serviceElectricity": "Luz",
-      "serviceWater": "Agua",
-      "serviceCommunity": "Comunidad",
-      "serviceGas": "Gas",
-      "serviceGarage": "Garaje",
-      "recommendQuestion": "¿Recomendarías este piso?"
-    },
-    "step3": {
-      "summerTemperatureLabel": "Temperatura en verano",
-      "winterTemperatureLabel": "Temperatura en invierno",
-      "noiseLevelLabel": "Nivel de ruido",
-      "lightLevelLabel": "Nivel de luz",
-      "maintenanceStatusLabel": "Estado de mantenimiento",
-      "propertyOpinionLabel": "Opinión sobre el piso",
-      "propertyOpinionPlaceholder": "Comparte tu experiencia y opinión sobre el piso...",
-      "optionWellInsulated": "Bien aislado",
-      "optionOkay": "Correcto",
-      "optionHot": "Caluroso",
-      "optionCold": "Frío",
-      "optionQuiet": "Silencioso",
-      "optionTolerable": "Tolerable",
-      "optionQuiteNoisy": "Bastante",
-      "optionVeryNoisy": "Se oye todo",
-      "optionNoLight": "Nada de luz",
-      "optionLowLight": "Poca luz",
-      "optionBright": "Luminoso",
-      "optionVeryBright": "Muy luminoso",
-      "optionLikeNew": "Como nuevo",
-      "optionGood": "Bueno",
-      "optionAcceptable": "Aceptable",
-      "optionPoor": "Poco",
-      "optionBad": "Malo"
-    },
-    "step4": {
-      "neighborTypesLabel": "Tipos de vecinos",
-      "touristApartmentsLabel": "Pisos turísticos en el edificio",
-      "buildingCleanlinessLabel": "Limpieza del edificio",
-      "communityEnvironmentLabel": "Ambiente del barrio",
-      "communitySecurityLabel": "Seguridad del barrio",
-      "communityOpinionLabel": "Tu opinión sobre la comunidad y el barrio",
-      "communityOpinionPlaceholder": "Comparte tu experiencia y opinión sobre la comunidad y el barrio...",
-      "optionFamily": "Familiar",
-      "optionYoungCouples": "Parejas jóvenes",
-      "optionStudentFlats": "Pisos de estudiantes",
-      "optionSharedFlats": "Pisos compartidos",
-      "optionSeniors": "Mayores +75 años",
-      "optionYesTolerable": "Sí, tolerable",
-      "optionYesAnnoying": "Sí, molestos",
-      "optionNone": "No hay",
-      "optionVeryClean": "Muy limpio",
-      "optionGood": "Buena",
-      "optionLow": "Poca",
-      "optionNoCleaning": "Sin limpieza",
-      "optionQuiet": "Tranquilo",
-      "optionLeisureFestive": "Lúdico/Festivo",
-      "optionStudent": "Estudiantil",
-      "optionNightlife": "Nocturno",
-      "optionVerySafe": "Muy segura",
-      "optionNoIssues": "Sin problemas",
-      "optionCouldImprove": "Mejorable",
-      "optionUnsafe": "Poco segura"
-    },
-    "step5": {
-      "ownerTypeLabel": "Tipo de propietario",
-      "ownerTypeError": "Por favor, selecciona el tipo de propietario.",
-      "ownerTypeOwner": "Propietario",
-      "ownerTypeAgency": "Agencia",
-      "ownerDataLabel": "Datos del propietario",
-      "agencyDataLabel": "Datos de la agencia",
-      "fullNameLabel": "Nombre completo",
-      "fullNamePlaceholder": "Nombre completo",
-      "contactInfoLabel": "Información de contacto",
-      "phoneLabel": "Teléfono de contacto",
-      "phonePlaceholder": "Ej: 600123456",
-      "emailLabel": "Correo electrónico",
-      "emailPlaceholder": "correo@ejemplo.com",
-      "ownerOpinionLabel": "Tu opinión sobre el propietario",
-      "agencyOpinionLabel": "Tu opinión sobre la agencia",
-      "opinionPlaceholder": "Describe tu experiencia de manera honesta, respetuosa y basada en hechos reales. Evita incluir datos personales, insultos o amenazas.",
-      "acceptTermsPrefix": "He leído y acepto los",
-      "termsAndConditions": "términos y condiciones",
-      "privacyInfoAria": "Información de privacidad",
-      "privacyModalTitle": "Así lo guardamos",
-      "privacyModalDescription": "Este es el valor cifrado que se almacena en nuestra base de datos:"
-    },
-    "staticMessages": {
-      "step1Title": "Tu opinión es anónima",
-      "step1Message": "La información que compartas no se mostrará de forma exacta.",
-      "step2Title": "Período de Alquiler",
-      "step2Message": "Indica el período en el que has vivido o estás viviendo en la propiedad para contextualizar tu opinión.",
-      "step3Title": "Estado del Piso",
-      "step3Message": "Evalúa las condiciones del piso para ayudar a futuros inquilinos a tomar decisiones informadas.",
-      "step4Title": "Comunidad y Barrio",
-      "step4Message": "La información sobre la comunidad de vecinos y el barrio es muy valiosa para futuros inquilinos.",
-      "step5Title": "Privacidad",
-      "step5Message": "Los datos personales se procesan mediante hashing irreversible solo para asociar opiniones con propietarios. Nunca se almacenan en texto claro ni se comparten con terceros."
+      "locateMeAria": "Ubicarme"
     },
     "login": {
       "title": "Guardar y validar tu opinión",
@@ -326,43 +196,73 @@
     "toast": {
       "validationErrorTitle": "Error de validación"
     },
-    "validation": {
-      "common": {
-        "incompleteData": "Datos incompletos",
-        "incompleteAddressData": "Datos de dirección incompletos",
-        "noValidSession": "No se ha encontrado una sesión válida",
-        "databaseSaveError": "Error al guardar los datos en la base de datos",
-        "dataSaveError": "Error al guardar los datos",
-        "dataSubmissionError": "Error en el envío de datos"
+    "v2": {
+      "optional": "opcional",
+      "aside": {
+        "titleStart": "Cuenta cómo te fue.",
+        "titleHighlight": "Tres minutos.",
+        "anonymous": {
+          "strong": "Anónima.",
+          "text": "Tu nombre y tu email nunca se publican."
+        },
+        "moderated": {
+          "strong": "Revisada a mano",
+          "text": "antes de publicarse."
+        },
+        "loginLast": {
+          "strong": "Solo al final",
+          "text": "te pedimos iniciar sesión, para evitar duplicados."
+        },
+        "guide": "¿Dudas con la fianza?",
+        "guideLink": "Lee la guía"
       },
-      "step1": {
-        "missingAddressInfo": "No se ha proporcionado información de dirección",
-        "addressRequired": "La dirección es obligatoria",
-        "addressNumberRequired": "El número de la dirección es obligatorio",
-        "addressNumberReview": "Revisa el número de la dirección",
-        "addressCoordinatesMissing": "No se han podido obtener las coordenadas de la dirección"
+      "address": {
+        "title": "¿Dónde vivías?",
+        "placeholder": "Calle y ciudad",
+        "number": "Número",
+        "floor": "Piso",
+        "door": "Puerta"
       },
-      "step2": {
-        "startYearRequired": "El año de inicio es obligatorio",
-        "priceRequired": "El precio es obligatorio",
-        "endYearAfterStartYear": "El año de fin debe ser antes del año de inicio",
-        "recommendationRequired": "La recomendación es obligatoria",
-        "depositReturnedRequired": "Si marcas que no vives en el piso, debes indicar si la fianza fue devuelta"
+      "stay": {
+        "from": "Desde",
+        "until": "Hasta",
+        "year": "Año",
+        "stillLiving": "Sigo viviendo aquí",
+        "rent": "Alquiler al mes",
+        "rentPlaceholder": "850 €"
       },
-      "step3": {
-        "summerTemperatureRequired": "La temperatura en verano es obligatoria",
-        "winterTemperatureRequired": "La temperatura en invierno es obligatoria",
-        "noiseLevelRequired": "El nivel de ruido es obligatorio",
-        "lightLevelRequired": "El nivel de luz es obligatorio",
-        "maintenanceStatusRequired": "El estado de mantenimiento es obligatorio"
+      "scores": {
+        "title": "Ponle nota",
+        "owner": "Casero",
+        "property": "Vivienda",
+        "building": "Edificio",
+        "area": "Zona",
+        "aria": "{{label}}: {{score}} de 5"
       },
-      "step4": {
-        "neighborTypesRequired": "No se ha proporcionado información de los vecinos",
-        "communityEnvironmentRequired": "No se ha proporcionado información del ambiente del barrio"
+      "deposit": {
+        "title": "¿Te devolvieron la fianza?",
+        "options": {
+          "true": "Sí, entera",
+          "partial": "Solo una parte",
+          "false": "No",
+          "ongoing": "Sigo viviendo aquí"
+        }
       },
-      "step5": {
-        "ownerTypeRequired": "No se ha proporcionado información del propietario",
-        "acceptTermsRequired": "Acepta los términos y condiciones"
+      "opinion": {
+        "title": "¿Qué debería saber el próximo inquilino?",
+        "hint": "Cuenta hechos, no insultos ni datos personales. Así se publica antes y te protege a ti.",
+        "placeholder": "Cómo respondía el casero a las averías, si hubo subidas, cómo fue la salida…"
+      },
+      "submit": "Enviar opinión",
+      "submitNote": "Te pediremos un email para confirmarla. Nunca se publica.",
+      "errors": {
+        "address": "Elige la dirección de la lista de sugerencias.",
+        "number": "Falta el número del portal.",
+        "stay": "Indica desde qué año y cuánto pagabas al mes.",
+        "scores": "Pon nota al casero y a la vivienda.",
+        "deposit": "Elige una respuesta sobre la fianza.",
+        "opinion": "Cuéntalo con un poco más de detalle (mínimo {{min}} caracteres).",
+        "saveFailed": "No se pudo guardar la opinión. Inténtalo de nuevo en unos minutos."
       }
     }
   },

@@ -35,36 +35,3 @@ export async function getSessionStep2Data(id?: string): Promise<EstanciaStep2Pay
     return null;
   }
 }
-
-export async function submitSessionStep2(payload: {
-  startYear: number;
-  endYear: number | null;
-  price: number;
-  includedServices: string[];
-  wouldRecommend: string;
-  depositReturned: boolean|undefined;
-}): Promise<boolean> {
-  try {
-    // Get Supabase client
-    const client = supabaseWrapper.getClient();
-    if (!client) throw new Error('Supabase client not available');
-
-    const sessionId = await getSessionIdBack();
-
-    const { error } = await client.rpc('upsert_estancia_step2_and_mark_review_session', {
-      p_review_session_id: sessionId,
-      p_start_year: payload.startYear,
-      p_end_year: payload.endYear,
-      p_price: payload.price,
-      p_included_services: payload.includedServices,
-      p_would_recommend: payload.wouldRecommend,
-      p_deposit_returned: payload.depositReturned,
-    });
-
-    if (error) throw error;
-    return true;
-  } catch (error) {
-    console.error('Error submitting address data:', error);
-    return false;
-  }
-}

@@ -7,9 +7,6 @@ const WEBHOOK_URL = (import.meta.env.VITE_TELEGRAM_WEBHOOK_URL as string | undef
 const safe = (val?: string | number | boolean | null) =>
   val === undefined || val === null || val === '' ? '-' : String(val);
 
-const join = (arr?: (string | undefined)[]) =>
-  Array.isArray(arr) && arr.length ? arr.filter(Boolean).join(', ') : '-';
-
 export function buildReviewSummary(sessionId: string, userId: string, data: FormDataType) {
   const addr = data.addressDetails;
   const addressLine = addr?.fullAddress
@@ -23,37 +20,13 @@ export function buildReviewSummary(sessionId: string, userId: string, data: Form
     `User: ${userId}`,
     '',
     `Dirección: ${safe(addressLine)}`,
-    '',
-    '— Estancia —',
     `Años: ${safe(data.startYear)} - ${safe(data.endYear ?? 'Presente')}`,
     `Precio: ${safe(data.price)}`,
-    `Servicios incluidos: ${join(data.includedServices)}`,
-    `Recomendaría: ${safe(data.wouldRecommend)}`,
     `Fianza devuelta: ${safe(data.depositReturned)}`,
     '',
-    '— Piso —',
-    `Verano: ${safe(data.summerTemperature)}`,
-    `Invierno: ${safe(data.winterTemperature)}`,
-    `Ruido: ${safe(data.noiseLevel)}`,
-    `Luz: ${safe(data.lightLevel)}`,
-    `Mantenimiento: ${safe(data.maintenanceStatus)}`,
-    `Opinión piso: ${safe(data.propertyOpinion)}`,
+    `Notas: casero ${safe(data.ownerScore)} · vivienda ${safe(data.propertyScore)} · edificio ${safe(data.buildingScore)} · zona ${safe(data.areaScore)}`,
     '',
-    '— Comunidad —',
-    `Vecindario: ${join(data.neighborTypes)}`,
-    `Apart. turísticos: ${safe(data.touristApartments)}`,
-    `Limpieza: ${safe(data.buildingCleanliness)}`,
-    `Entorno: ${join(data.communityEnvironment)}`,
-    `Seguridad: ${safe(data.communitySecurity)}`,
-    `Opinión comunidad: ${safe(data.communityOpinion)}`,
-    '',
-    '— Propietario —',
-    `Tipo: ${safe(data.ownerType)}`,
-    // Prefer hashed identifiers if present
-    `Nombre (hash): ${safe(data.ownerNameHash)}`,
-    `Teléfono (hash): ${safe(data.ownerPhoneHash)}`,
-    `Email (hash): ${safe(data.ownerEmailHash)}`,
-    `Opinión: ${safe(data.ownerOpinion)}`,
+    `Opinión: ${safe(data.opinion)}`,
   ];
 
   // Optional contact info (commented out to avoid sending PII by default)

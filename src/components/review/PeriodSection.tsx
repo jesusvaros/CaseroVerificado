@@ -132,8 +132,16 @@ interface PeriodSectionProps {
     included_services: string[];
     would_recommend?: '1'|'2'|'3'|'4'|'5';
     deposit_returned?: string | undefined;
+    owner_score?: number | null;
   } | null;
 }
+
+const DEPOSIT_LABELS: Record<string, { label: string; className: string }> = {
+  true: { label: 'Sí, entera', className: 'bg-green-100 text-green-700' },
+  partial: { label: 'Solo una parte', className: 'bg-orange-100 text-orange-700' },
+  false: { label: 'No', className: 'bg-red-100 text-red-700' },
+  ongoing: { label: 'Sigue viviendo aquí', className: 'bg-gray-100 text-gray-700' },
+};
 
 const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
   if (!periodData) {
@@ -151,7 +159,8 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
       {/* Recomendación (estrellas) + Fianza devuelta */}
       {(periodData.would_recommend || typeof periodData.deposit_returned !== 'undefined') && (
         <div className="md:col-span-2 flex items-center gap-4 flex-wrap">
-          {periodData.would_recommend && (
+          {/* Reviews with category scores show those instead of the single recommendation */}
+          {periodData.would_recommend && typeof periodData.owner_score !== 'number' && (
             <div className="flex items-center gap-2">
               <span className="text-[16px] font-medium text-gray-600">Recomendación</span>
               <div className="ml-1 flex items-center" aria-label={`Recomendación ${periodData.would_recommend} de 5`}>
@@ -167,14 +176,12 @@ const PeriodSection: React.FC<PeriodSectionProps> = ({ periodData }) => {
               </div>
             </div>
           )}
-          {typeof periodData.deposit_returned !== 'undefined' && (
+          {periodData.deposit_returned && DEPOSIT_LABELS[periodData.deposit_returned] && (
             <div className="flex items-center gap-2">
               <span className="text-[16px] font-medium text-gray-600">Fianza devuelta</span>
-              {periodData.deposit_returned === 'true' ? (
-                <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-700 text-[14px]">Sí</span>
-              ) : (
-                <span className="inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-red-700 text-[14px]">No</span>
-              )}
+              <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[14px] ${DEPOSIT_LABELS[periodData.deposit_returned].className}`}>
+                {DEPOSIT_LABELS[periodData.deposit_returned].label}
+              </span>
             </div>
           )}
         </div>

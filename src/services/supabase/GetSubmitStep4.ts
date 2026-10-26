@@ -10,15 +10,6 @@ interface EstanciaStep2Payload {
   community_opinion?: string;
 }
 
-interface SubmitStep4Payload {
-  neighborTypes?: string[];
-  touristApartments?: 'Sí, tolerable' | 'Sí, molestos' | 'No hay';
-  buildingCleanliness?: 'Muy limpio' | 'Buena' | 'Poca' | 'Sin limpieza';
-  communityEnvironment?: string[];
-  communitySecurity?: 'Muy segura' | 'Sin problemas' | 'Mejorable' | 'Poco segura';
-  communityOpinion?: string;
-}
-
 export async function getSessionStep4Data(id?: string): Promise<EstanciaStep2Payload | null> {
   try {
     const client = supabaseWrapper.getClient();
@@ -42,30 +33,5 @@ export async function getSessionStep4Data(id?: string): Promise<EstanciaStep2Pay
   } catch (error) {
     console.error('Error fetching address data:', error);
     return null;
-  }
-}
-
-export async function submitSessionStep4(payload: SubmitStep4Payload): Promise<boolean> {
-  try {
-    const client = supabaseWrapper.getClient();
-    if (!client) throw new Error('Supabase client not available');
-
-    const sessionId = await getSessionIdBack();
-
-    const { error } = await client.rpc('upsert_comunidad_step4_and_mark_review_session', {
-      p_review_session_id: sessionId,
-      p_neighbor_types: payload.neighborTypes,
-      p_community_environment: payload.communityEnvironment, //opcional
-      p_tourist_apartments: payload.touristApartments, //opcional
-      p_building_cleanliness: payload.buildingCleanliness, //opcional
-      p_community_security: payload.communitySecurity,
-      p_community_opinion: payload.communityOpinion,
-    });
-
-    if (error) throw error;
-    return true;
-  } catch (error) {
-    console.error('Error submitting address data:', error);
-    return false;
   }
 }
