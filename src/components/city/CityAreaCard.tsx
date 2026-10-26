@@ -3,9 +3,11 @@ import type { CityArea } from '../../services/publicData/cityRent';
 import { perM2 } from './rentScale';
 
 // What the map shows for the tapped area: rent per m², a 60 m² estimate and how many reviews it has.
+const FEW_CONTRACTS = 50;
+
 const CityAreaCard = ({ area, reviews, level }: { area: CityArea; reviews: number; level: 'barrio' | 'section' }) => {
   const { t } = useTranslations();
-  const { name, district, p25, p50, p75 } = area.properties;
+  const { name, district, p25, p50, p75, n } = area.properties;
 
   return (
     <div className="flex flex-col gap-1 rounded-2xl bg-white p-5 shadow-lg ring-1 ring-black/5">
@@ -18,6 +20,7 @@ const CityAreaCard = ({ area, reviews, level }: { area: CityArea; reviews: numbe
             {t('cityPage.for60', { amount: Math.round(p50 * 60).toLocaleString('es-ES') })}
             {p25 != null && p75 != null && ` · ${t('cityPage.range', { low: Math.round(p25 * 60).toLocaleString('es-ES'), high: Math.round(p75 * 60).toLocaleString('es-ES') })}`}
           </span>
+          {n > 0 && n < FEW_CONTRACTS && <span className="text-sm font-semibold text-coral-ink">{t('cityPage.fewContracts', { n })}</span>}
         </>
       ) : (
         <span className="text-sm text-ink-muted">{t('cityPage.noData')}</span>

@@ -644,6 +644,12 @@
     "aidText": "Bono Alquiler Joven and the State Housing Plan: requirements and how to apply.",
     "readGuide": "Read the guide →",
     "latestTitle": "Latest from {{city}}",
-    "addMine": "Add mine"
+    "addMine": "Add mine",
+    "fewContracts": "Based on only {{n}} contracts: take it as a rough guide.",
+    "mapHelp": {
+      "windows": "Use Ctrl + scroll to zoom the map",
+      "mac": "Use ⌘ + scroll to zoom the map",
+      "mobile": "Use two fingers to move the map"
+    }
   }
 }

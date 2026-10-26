@@ -3,6 +3,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { CityArea } from '../../services/publicData/cityRent';
 import { rentColor } from './rentScale';
+import { useTranslations } from '../../i18n/useTranslations';
 
 interface CityRentMapProps {
   areas: CityArea[];
@@ -24,6 +25,7 @@ function bounds(areas: CityArea[]): maplibregl.LngLatBounds {
 // Choropleth of the reference rent per area, drawn with MapLibre directly (not through Leaflet)
 // so the colours are a single paint expression and hover/selection use feature state.
 const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: CityRentMapProps) => {
+  const { t } = useTranslations();
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const selected = useRef<number | null>(null);
@@ -38,6 +40,11 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
       dragRotate: false,
       // The map sits in a long page: zoom with ctrl/cmd + scroll or two fingers, so scrolling moves the page
       cooperativeGestures: true,
+      locale: {
+        'CooperativeGesturesHandler.WindowsHelpText': t('cityPage.mapHelp.windows'),
+        'CooperativeGesturesHandler.MacHelpText': t('cityPage.mapHelp.mac'),
+        'CooperativeGesturesHandler.MobileHelpText': t('cityPage.mapHelp.mobile'),
+      },
       attributionControl: { compact: true },
     });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');

@@ -644,6 +644,12 @@
     "aidText": "Bono Alquiler Joven y ayudas del Plan Estatal: requisitos y cómo pedirlas.",
     "readGuide": "Leer la guía →",
     "latestTitle": "Lo último que cuentan en {{city}}",
-    "addMine": "Añadir la mía"
+    "addMine": "Añadir la mía",
+    "fewContracts": "Basado en solo {{n}} contratos: tómalo como orientación.",
+    "mapHelp": {
+      "windows": "Usa Ctrl + rueda para hacer zoom en el mapa",
+      "mac": "Usa ⌘ + rueda para hacer zoom en el mapa",
+      "mobile": "Usa dos dedos para mover el mapa"
+    }
   }
 }
