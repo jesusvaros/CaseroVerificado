@@ -137,7 +137,7 @@ export default function CityReviewsPage() {
   const fallbackCityName =
     cityName || (citySlug ? humanizeSlug(citySlug) : t('cityReviews.city.defaultCity'));
 
-  const { rent, breaks, reviewCounts } = useCityRent(citySlug, reviews);
+  const { rent, market, breaks, reviewCounts } = useCityRent(citySlug, reviews);
 
   const initialView = useMemo(() => {
     if (!reviews.length) return undefined;
@@ -258,7 +258,7 @@ export default function CityReviewsPage() {
       )}
       {status === 'ready' ? (
         <div className="bg-white pb-24 text-ink">
-          <CityRentHero city={fallbackCityName} region={stateName} rent={rent} />
+          <CityRentHero city={fallbackCityName} region={stateName} rent={rent} market={market} />
           {rent ? (
             <CityRentSection rent={rent} breaks={breaks} reviewCounts={reviewCounts} reviews={reviews} />
           ) : (

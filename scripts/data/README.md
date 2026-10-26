@@ -73,3 +73,18 @@ After rebuilding the rent zones, refresh the list used by the city search and th
 ```bash
 python3 -I scripts/data/build_municipality_index.py public/data/zonas public/data/municipios.json
 ```
+
+## Current market data (automatic, monthly)
+
+`public/data/mercado/<province>.json` is rebuilt on the 5th of every month by `.github/workflows/market-data.yml`, which commits to `main` (and so redeploys). Run it by hand from the Actions tab ("Market data" › Run workflow).
+
+| Figure | Source | Lag |
+|---|---|---|
+| Sale €/m² (appraised value), ~306 municipalities over 25,000 inhabitants | Ministerio de Vivienda, `sedal/35103500.XLS` | ~3 months (quarterly) |
+| Number of home sales, every municipality | Ministerio de Vivienda, `sedal/34010210.XLS` | ~3 months (quarterly) |
+| Monthly rent from this year's deposits, by municipality and postcode | Generalitat Valenciana, dataset `viv-reg-fia-<year>` | ~1 month |
+| Monthly rent from deposits, by municipality | INCASÒL (Catalonia), Socrata `qww9-bvhh` | ~4 months (quarterly) |
+
+The build fails (and nothing is committed) if coverage drops below the minimums in `MIN_COVERAGE`, which is what happens when a source changes its layout. Names that cannot be matched to an INE code are printed as `UNMATCHED`; add the important ones to `ALIASES`.
+
+Not usable: the Notariado's postcode sale prices (their terms forbid reuse without written permission) and anything scraped from Idealista or Fotocasa. There is no open rent data newer than SERPAVI 2024 for Madrid or Andalusia.

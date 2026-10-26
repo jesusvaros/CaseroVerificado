@@ -1,0 +1,54 @@
+name: Market data
+
+# Refreshes public/data/mercado with the latest official sales and rent figures
+# (scripts/data/build_market.py) and commits them to main, which redeploys the site.
+on:
+  schedule:
+    - cron: '0 6 5 * *' # 5th of every month, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install xlrd==2.0.1
+
+      - name: Download sources
+        env:
+          UA: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36'
+        run: |
+          mkdir -p /tmp/market
+          cd /tmp/market
+          curl -fsSL -A "$UA" -o 35103500.xls https://apps.fomento.gob.es/BoletinOnline2/sedal/35103500.XLS
+          curl -fsSL -A "$UA" -o 34010210.xls https://apps.fomento.gob.es/BoletinOnline2/sedal/34010210.XLS
+          # Generalitat Valenciana publishes one dataset per year: viv-reg-fia-<year>
+          YEAR=$(date -u +%Y)
+          CSV=$(curl -fsSL "https://dadesobertes.gva.es/api/3/action/package_show?id=viv-reg-fia-$YEAR" \
+            | python -c "import json,sys; print(next(r['url'] for r in json.load(sys.stdin)['result']['resources'] if r['format'].upper() == 'CSV'))")
+          curl -fsSL -A "$UA" -o gva.csv "$CSV"
+          curl -fsSL -o incasol.json "https://analisi.transparenciacatalunya.cat/resource/qww9-bvhh.json?\$where=ambit_territorial='Municipi'%20AND%20any>='$((YEAR - 1))'&\$limit=50000"
+
+      - name: Build
+        run: python -I scripts/data/build_market.py /tmp/market public/data/zonas public/data/mercado
+
+      # A monthly commit also keeps the repository active, so GitHub does not pause this schedule
+      - name: Commit
+        run: |
+          git add public/data/mercado
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh official market data ($(date -u +%Y-%m))"
+          git push

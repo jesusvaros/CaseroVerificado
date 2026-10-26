@@ -1,8 +1,9 @@
 import { useTranslations } from '../../i18n/useTranslations';
 import type { CityRent } from '../../services/publicData/cityRent';
 import CitySearch from './CitySearch';
+import type { MarketData } from '../../services/publicData/market';
 
-const CityRentHero = ({ city, region, rent }: { city: string; region: string | null; rent: CityRent | null }) => {
+const CityRentHero = ({ city, region, rent, market }: { city: string; region: string | null; rent: CityRent | null; market: MarketData | null }) => {
   const { t } = useTranslations();
   const median = rent?.rent?.[2];
   const change = rent?.ipva?.[1];
@@ -18,25 +19,26 @@ const CityRentHero = ({ city, region, rent }: { city: string; region: string | n
             <CitySearch dark />
           </div>
         </div>
-        {(median || change != null) && (
-          <div className="flex gap-12">
-            {median && (
-              <div>
-                <div className="font-display text-5xl font-extrabold leading-none text-lime">{median.toLocaleString('es-ES')} €</div>
-                <div className="mt-1 text-[15px] text-[#CFE5C6]">{t('cityPage.medianPerM2', { year: rent!.rent![0] })}</div>
-              </div>
+        {(median || market) && (
+          <div className="flex flex-wrap gap-x-12 gap-y-6">
+            {market?.rent && (
+              <Stat value={`${market.rent[0].toLocaleString('es-ES')} €`} label={t('cityPage.currentRent', { period: market.rent[2] })} accent />
             )}
-            {change != null && (
-              <div>
-                <div className="font-display text-5xl font-extrabold leading-none">{change > 0 ? '+' : ''}{change.toLocaleString('es-ES')} %</div>
-                <div className="mt-1 text-[15px] text-[#CFE5C6]">{t('cityPage.yearChange', { year: rent!.ipva![0] })}</div>
-              </div>
-            )}
+            {median && <Stat value={`${median.toLocaleString('es-ES')} €`} label={t('cityPage.medianPerM2', { year: rent!.rent![0] })} accent={!market?.rent} />}
+            {market?.sale && <Stat value={`${market.sale[0].toLocaleString('es-ES')} €`} label={t('cityPage.salePerM2', { period: market.sale[2] })} />}
+            {change != null && <Stat value={`${change > 0 ? '+' : ''}${change.toLocaleString('es-ES')} %`} label={t('cityPage.yearChange', { year: rent!.ipva![0] })} />}
           </div>
         )}
       </div>
     </section>
   );
 };
+
+const Stat = ({ value, label, accent = false }: { value: string; label: string; accent?: boolean }) => (
+  <div>
+    <div className={`font-display text-4xl font-extrabold leading-none md:text-5xl ${accent ? 'text-lime' : ''}`}>{value}</div>
+    <div className="mt-1 max-w-[180px] text-[15px] text-[#CFE5C6]">{label}</div>
+  </div>
+);
 
 export default CityRentHero;
