@@ -573,5 +573,47 @@
       "until": "In force until {{date}}. {{boe}}.",
       "guide": "Read the guide →"
     }
+  },
+  "addressPage": {
+    "outOf5": "out of 5",
+    "breadcrumb": "Breadcrumb",
+    "oneReview": "1 review",
+    "reviews": "{{count}} reviews",
+    "tensioned": "Stressed rental market",
+    "builtIn": "Built in {{year}}",
+    "livedHere": "I lived here",
+    "summaryTitle": "What tenants say",
+    "categories": {
+      "owner_score": "Landlord",
+      "property_score": "Home",
+      "building_score": "Building",
+      "area_score": "Area"
+    },
+    "xOfY": "{{x}} of {{y}}",
+    "depositFull": "got their full deposit back",
+    "wouldRecommend": "would recommend it",
+    "averageRent": "average rent reported",
+    "reviewsTitle": "Reviews",
+    "lived": "lived here {{from}} to {{to}}",
+    "now": "now",
+    "perMonth": "{{price}} € a month",
+    "deposit": {
+      "true": "Deposit returned",
+      "partial": "Part of the deposit kept",
+      "false": "Deposit not returned"
+    },
+    "fullReview": "Full review",
+    "report": "Report or reply",
+    "emptyTitle": "Nobody has reviewed this address yet",
+    "emptyText": "If you lived here, tell us in three minutes. It is anonymous and helps whoever rents next.",
+    "union": {
+      "title": "Problems with this flat?",
+      "text": "{{name}} gives free advice to tenants in trouble with their landlord.",
+      "contact": "Write to them →"
+    },
+    "notFoundTitle": "We could not find this address",
+    "searchAnother": "Search another address",
+    "seoTitle": "{{address}}, {{city}}: tenant reviews and rent prices | CaseroOk",
+    "seoDescription": "Anonymous tenant reviews of {{address}} ({{city}}), the reference rent for the area and building facts."
   }
 }

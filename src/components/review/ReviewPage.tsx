@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { supabaseWrapper } from '../../services/supabase/client';
 import { useAuth } from '../../store/auth/hooks';
 import { getAddressStep1Data } from '../../services/supabase/GetSubmitStep1';
@@ -20,6 +20,7 @@ import PropertySection from './PropertySection';
 import CommunitySection from './CommunitySection';
 import OpinionSection from './OpinionSection';
 import AddressPublicData from '../address-data/AddressPublicData';
+import { addressPath } from '../../utils/addressPath';
 
 interface Step1Data {
   address_details: {
@@ -30,7 +31,7 @@ interface Step1Data {
     city?: string;
     postalCode?: string;
     coordinates?: { lat: number; lng: number };
-    components?: { postcode?: string };
+    components?: { postcode?: string; city?: string; house_number?: string };
   };
 }
 
@@ -286,6 +287,12 @@ const ReviewPage = () => {
   
   // Reviews from the one-page form have no step 3 or step 4 answers: hide those cards.
   const coordinates = step1Data?.address_details?.coordinates;
+  const details = step1Data?.address_details;
+  const addressPagePath = addressPath(
+    details?.city || details?.components?.city,
+    details?.street,
+    details?.number || details?.components?.house_number
+  );
   const publicData = (
     <AddressPublicData
       lat={coordinates?.lat}
@@ -453,6 +460,11 @@ const ReviewPage = () => {
         <h1 className="text-center text-2xl font-bold md:text-3xl lg:text-4xl mt-8">
           {getAddressTitle()}
         </h1>
+        {isPublicReview && addressPagePath && (
+          <Link to={addressPagePath} className="mt-2 font-semibold text-brand underline underline-offset-4">
+            Ver todas las opiniones y datos de esta dirección
+          </Link>
+        )}
         
         {/* Validation status indicator for user's own reviews */}
         {isUserReview && (

@@ -30,6 +30,7 @@ import CondicionesUso from './pages/CondicionesUso';
 import BuenasPracticas from './pages/BuenasPracticas';
 import CityReviewsIndexPage from './pages/CityReviewsIndexPage';
 import CityReviewsPage from './pages/CityReviewsPage';
+import AddressPage from './pages/AddressPage';
 import UmamiTracker from './components/analytics/UmamiTracker';
 import ScrollToTop from './components/ScrollToTop';
 import { useTranslations } from './i18n/useTranslations';
@@ -100,6 +101,7 @@ function App() {
           <Route path="/opiniones" element={<CityReviewsIndexPage />} />
           <Route path="/opiniones/:countrySlug/:citySlug" element={<CityReviewsPage />} />
           <Route path="/opiniones/:citySlug" element={<CityReviewsPage />} />
+          <Route path="/direccion/:citySlug/:addressSlug" element={<AddressPage />} />
           <Route path="/:locale/blog" element={<LegacyLocaleBlogRedirect />} />
           <Route path="/:locale/blog/:slug" element={<LegacyLocaleBlogRedirect />} />
           <Route path="/blog" element={<BlogListPage />} />

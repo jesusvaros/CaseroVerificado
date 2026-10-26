@@ -6,6 +6,7 @@ import type { AddressResult } from '../components/ui/AddressAutocomplete';
 import { showErrorToast } from '../components/ui/toast/toastUtils';
 import { initializeSession } from '../services/sessionManager';
 import { useTranslations } from '../i18n/useTranslations';
+import { addressPath } from '../utils/addressPath';
 
 // Address search shared by the home hero: open the map at an address or start a review for it.
 export function useHomeAddressSearch() {
@@ -30,12 +31,22 @@ export function useHomeAddressSearch() {
     });
   };
 
-  const openMap = () => {
+  // A full address (street and number) opens its page; a street or a city opens the map there.
+  const search = () => {
     if (!hasSelection || !formData.addressDetails?.coordinates) {
       showErrorToast(t('home.input.selectAddressError'));
       return;
     }
     const { lat, lng } = formData.addressDetails.coordinates;
+    const c = formData.addressAutocompleteResult?.components;
+    const city = c?.city || c?.town || c?.village;
+    const path = addressPath(city, c?.road, c?.house_number);
+    if (path && c) {
+      const params = new URLSearchParams({ lat: String(lat), lng: String(lng), street: c.road ?? '', number: c.house_number ?? '', city: city ?? '' });
+      if (c.postcode) params.set('cp', c.postcode);
+      navigate(`${path}?${params}`);
+      return;
+    }
     navigate(`/map?lat=${lat}&lng=${lng}&q=${encodeURIComponent(address)}`);
   };
 
@@ -60,5 +71,5 @@ export function useHomeAddressSearch() {
     }
   };
 
-  return { address, isLoading, selectAddress, openMap, startReview };
+  return { address, isLoading, selectAddress, search, startReview };
 }

@@ -107,7 +107,7 @@ async function loadCitySummaries() {
 
   if (!supabaseUrl || !supabaseKey) {
     console.warn('Entorno Supabase no configurado. Saltando URLs por ciudad.');
-    return [];
+    return { cities: [], addresses: [] };
   }
 
   try {
@@ -119,10 +119,12 @@ async function loadCitySummaries() {
 
     if (error || !data) {
       console.warn('No se pudieron obtener las ciudades de Supabase:', error?.message ?? 'Error desconocido');
-      return [];
+      return { cities: [], addresses: [] };
     }
 
     const grouped = new Map();
+    // Address pages (/direccion/<city>/<street-number>), same slug rule as src/utils/addressPath.ts
+    const addresses = new Set();
     for (const row of data) {
       const details = row.address_details ?? {};
       const rawCity =
@@ -143,6 +145,10 @@ async function loadCitySummaries() {
         details.components?.region ??
         null;
 
+      const street = details.street ?? details.components?.road ?? null;
+      const number = details.number || details.components?.house_number || null;
+      if (street && number) addresses.add(`/direccion/${citySlug}/${slugify(`${street} ${number}`)}`);
+
       const existing = grouped.get(citySlug);
 
       if (existing) {
@@ -158,10 +164,13 @@ async function loadCitySummaries() {
       }
     }
 
-    return Array.from(grouped.values()).sort((a, b) => b.count - a.count);
+    return {
+      cities: Array.from(grouped.values()).sort((a, b) => b.count - a.count),
+      addresses: Array.from(addresses).sort(),
+    };
   } catch (error) {
     console.warn('Error inesperado obteniendo ciudades de Supabase:', error.message);
-    return [];
+    return { cities: [], addresses: [] };
   }
 }
 
@@ -258,7 +267,13 @@ async function generateSitemap() {
       lastmod: post.publishedAt ?? today,
     }));
 
-  const citySummaries = await loadCitySummaries();
+  const { cities: citySummaries, addresses } = await loadCitySummaries();
+  const addressEntries = addresses.map(addressPath => ({
+    loc: buildUrl(baseUrl, addressPath),
+    changefreq: 'weekly',
+    priority: '0.5',
+    lastmod: today,
+  }));
   const cityEntries = citySummaries.map(city => ({
     loc: buildUrl(baseUrl, `/opiniones/${city.slug}`),
     changefreq: 'weekly',
@@ -271,6 +286,7 @@ async function generateSitemap() {
     ...countryBlogListEntries,
     ...blogEntries,
     ...cityEntries,
+    ...addressEntries,
   ]);
 
   const xml = renderSitemap(entries);
@@ -281,6 +297,7 @@ async function generateSitemap() {
   console.log(`• Blog por país: ${countryBlogListEntries.length}`);
   console.log(`• Posts del blog: ${blogEntries.length}`);
   console.log(`• Ciudades: ${cityEntries.length}`);
+  console.log(`• Direcciones: ${addressEntries.length}`);
 }
 
 generateSitemap().catch(error => {
