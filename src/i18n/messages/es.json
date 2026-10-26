@@ -37,15 +37,16 @@
   },
   "home": {
     "hero": {
-      "subtitle": "Transparencia en el mercado de alquiler: descubre cómo se comportan los caseros y comparte tu experiencia.",
-      "cta": "Escribir review"
+      "subtitle": "Opiniones anónimas de inquilinos sobre pisos y caseros en España. Busca una dirección antes de firmar o cuenta cómo te fue.",
+      "cta": "Escribir opinión",
+      "mapCta": "Ver el mapa de opiniones"
     },
     "input": {
-      "message1": "Todas las reviews son Anónimas",
+      "message1": "Todas las opiniones son anónimas",
       "message2": "Tus opiniones ayudan a crear un mercado de alquiler más transparente",
       "message3": "Comparte tu experiencia con otros inquilinos",
       "message4": "Ayuda a mejorar el mercado inmobiliario",
-      "writeReview": "Escribir review",
+      "writeReview": "Escribir opinión",
       "searchMap": "Buscar en el mapa",
       "propertyAddressPlaceholder": "Dirección del inmueble",
       "start": "Empezar",
@@ -124,6 +125,7 @@
     "step1": {
       "addressLabel": "Dirección",
       "addressPlaceholder": "Buscar dirección...",
+      "loginNotice": "Tu opinión será anónima. Al final te pediremos iniciar sesión solo para evitar duplicados; tu nombre y email nunca se publican.",
       "streetNumberLabel": "Número",
       "streetNumberPlaceholder": "Número",
       "locateMeAria": "Ubicarme",
@@ -344,7 +346,7 @@
         "description": "Explora opiniones verificadas de inquilinos clasificadas por ciudad. Elige tu municipio y revisa experiencias reales antes de alquilar."
       },
       "hero": {
-        "badge": "Opiniones verificadas",
+        "badge": "Opiniones de inquilinos",
         "title": "Opiniones de alquiler por ciudad",
         "description": "Reunimos testimonios reales de inquilinos para ayudarte a encontrar un alquiler seguro. Consulta las ciudades disponibles y abre el mapa centrado en tu zona."
       },

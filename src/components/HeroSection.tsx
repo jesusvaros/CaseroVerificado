@@ -8,7 +8,7 @@ const HeroSection = () => {
   const { t } = useTranslations();
 
   return (
-    <section className="bg-gray-50 py-28 md:py-40">
+    <section className="bg-gray-50 py-12 md:py-20">
       <div className="container mx-auto flex flex-col-reverse items-center px-4 text-center md:flex-row md:text-left">
         <div className="mt-10 md:mt-0 md:w-1/2">
           {/* Desktop: show logo on the left; hidden on mobile */}
@@ -33,6 +33,13 @@ const HeroSection = () => {
             {...umamiEventProps('hero:cta-add-review')}
           >
             {t('home.hero.cta')}
+          </Link>
+          <Link
+            to="/map"
+            className="mt-4 text-base font-medium text-[#4A5E32] underline-offset-4 hover:underline"
+            {...umamiEventProps('hero:cta-map')}
+          >
+            {t('home.hero.mapCta')}
           </Link>
         </div>
       </div>

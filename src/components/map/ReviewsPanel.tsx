@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { umamiEventProps } from '../../utils/analytics';
 
 export type ReviewListItem = {
   id: string | number;
@@ -45,10 +47,17 @@ const ReviewsPanel: React.FC<ReviewsPanelProps> = ({
       {reviews.length === 0 ? (
         <div className="flex-1 flex items-center justify-center text-center px-4">
           <div>
-            <div className="text-2xl">😞</div>
-            <p className="mt-2 text-lg font-semibold text-gray-700">
+            <p className="text-lg font-semibold text-gray-700">
               Aún no hay opiniones en esta zona
             </p>
+            <p className="mt-1 text-sm text-gray-600">¿Has vivido de alquiler por aquí?</p>
+            <Link
+              to="/add-review"
+              className="mt-4 inline-block rounded-lg bg-[#4A5E32] px-5 py-2 text-sm font-semibold text-white hover:bg-[#3B4C28]"
+              {...umamiEventProps('map:empty-add-review')}
+            >
+              Sé el primero en opinar
+            </Link>
           </div>
         </div>
       ) : (
