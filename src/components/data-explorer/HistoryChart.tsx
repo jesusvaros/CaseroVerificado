@@ -5,6 +5,8 @@ export interface Series {
   label: string;
   color: string;
   values: (number | null)[];
+  // Dashed lines mark a different source (new contracts) next to SERPAVI
+  dashed?: boolean;
 }
 
 const W = 640;
@@ -73,7 +75,7 @@ const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props)
         ))}
         {hover != null && <line x1={x(hover)} x2={x(hover)} y1={PAD.top} y2={H - PAD.bottom} stroke="#10180F" strokeOpacity={0.25} />}
         {series.map(s => (
-          <path key={s.key} d={path(s.values)} fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+          <path key={s.key} d={path(s.values)} fill="none" stroke={s.color} strokeWidth={2} strokeDasharray={s.dashed ? '6 4' : undefined} strokeLinejoin="round" strokeLinecap="round" />
         ))}
         {hover != null &&
           series.map(s => s.values[hover] != null && (

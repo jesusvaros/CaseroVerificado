@@ -850,7 +850,19 @@
   },
   "explorer": {
     "open": "See the data",
+    "since": "since",
     "cityOpen": "See how it changed",
+    "sectionTitle": "Census area in {{place}}",
+    "channels": {
+      "title": "Change by source",
+      "together": "Together",
+      "separate": "Separate",
+      "marketPostcode": "New contracts · postcode {{cp}}",
+      "marketMunicipality": "New contracts · municipality",
+      "indexNote": "Together, each line is shown as an index: {{year}} = 100, so €/m² and €/month can be compared on one chart without mixing units.",
+      "sameUnitNote": "All lines in {{unit}}.",
+      "legend": "Solid line: the Ministry's reference rent (declared contracts, up to 2024). Dashed line: new contracts (deposits). * Current year."
+    },
     "title": "The data behind this price",
     "close": "Close",
     "loading": "Loading history…",
@@ -863,6 +875,7 @@
       "municipality": "Municipality"
     },
     "summary": "In {{year}} the median was €{{p50}}/m² across {{n}} declared contracts.",
+    "areaSummary": "In {{year}} the median in {{name}} was €{{p50}}/m²{{change}}.",
     "change": "{{change}} since {{from}}",
     "tableTitle": "Year by year",
     "tableLevel": "Data for:",

@@ -52,7 +52,13 @@ const CityAreaCard = ({ area, reviews, level, cumun, city, trend }: Props) => {
         {t('explorer.open')} →
       </button>
       {exploring && (
-        <ZoneDataExplorer municipality={cumun} section={level === 'section' ? area.properties.key : null} place={name ?? city} onClose={() => setExploring(false)} />
+        <ZoneDataExplorer
+          municipality={cumun}
+          section={level === 'section' ? area.properties.key : null}
+          place={city}
+          area={level === 'barrio' && name && area.history ? { name, values: area.history } : null}
+          onClose={() => setExploring(false)}
+        />
       )}
     </div>
   );
