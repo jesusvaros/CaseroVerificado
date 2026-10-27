@@ -27,19 +27,23 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
 
   return (
     <div className="flex flex-wrap gap-4">
-      <div className="flex w-full gap-1 rounded-full bg-mist p-1 sm:w-fit" role="radiogroup" aria-label={t('addReview.v2.stay.typeLabel')}>
-        {(['whole', 'room'] as const).map(type => (
-          <button
-            key={type}
-            type="button"
-            role="radio"
-            aria-checked={rentalType === type}
-            onClick={() => updateFormData({ rentalType: type })}
-            className={`flex-1 rounded-full px-5 py-2 text-sm font-bold transition-colors sm:flex-none ${rentalType === type ? 'bg-forest text-white' : 'text-ink-soft hover:text-ink'}`}
-          >
-            {t(`addReview.v2.stay.${type}`)}
-          </button>
-        ))}
+      {/* Own row, so the year, rent and size fields keep lining up as before */}
+      <div className="flex w-full flex-col gap-1.5">
+        <span className={smallLabel}>{t('addReview.v2.stay.typeLabel')}</span>
+        <div className="flex w-full gap-1 rounded-full bg-mist p-1 sm:w-fit" role="radiogroup" aria-label={t('addReview.v2.stay.typeLabel')}>
+          {(['whole', 'room'] as const).map(type => (
+            <button
+              key={type}
+              type="button"
+              role="radio"
+              aria-checked={rentalType === type}
+              onClick={() => updateFormData({ rentalType: type })}
+              className={`flex-1 rounded-full px-5 py-2 text-sm font-bold transition-colors sm:flex-none ${rentalType === type ? 'bg-forest text-white' : 'text-ink-soft hover:text-ink'}`}
+            >
+              {t(`addReview.v2.stay.${type}`)}
+            </button>
+          ))}
+        </div>
       </div>
       <label id="review-field-startYear" className="flex w-28 flex-col gap-1.5">
         <span className={smallLabel}>{t('addReview.v2.stay.from')}</span>
