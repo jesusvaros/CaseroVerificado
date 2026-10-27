@@ -38,7 +38,7 @@ const ReviewCard = ({ review, onApprove, onReject, onDelete }: CardProps) => {
       </header>
       <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
         {SCORE_LABELS.map(([key, label]) => review[key] != null && <span key={key}>{label}: <strong>{review[key]}</strong></span>)}
-        {review.price != null && <span>{review.price} €/mes{review.size_m2 ? ` · ${review.size_m2} m²` : ''}</span>}
+        {review.price != null && <span>{review.price} €/mes{review.rental_type === 'room' ? ' (habitación)' : ''}{review.size_m2 ? ` · ${review.size_m2} m²` : ''}</span>}
         {review.start_year && <span>{review.start_year} – {review.end_year ?? 'hoy'}</span>}
         {review.deposit_returned && <span>{DEPOSIT[review.deposit_returned] ?? review.deposit_returned}</span>}
       </div>

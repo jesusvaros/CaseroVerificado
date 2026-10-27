@@ -8,6 +8,7 @@ const TenantSummary = ({ summary }: { summary: ReturnType<typeof summarise> }) =
     summary.deposit && { value: t('addressPage.xOfY', { x: summary.deposit.full, y: summary.deposit.total }), label: t('addressPage.depositFull'), accent: true },
     summary.recommend && { value: t('addressPage.xOfY', { x: summary.recommend.yes, y: summary.recommend.total }), label: t('addressPage.wouldRecommend'), accent: true },
     summary.averageRent && { value: `${Math.round(summary.averageRent).toLocaleString('es-ES')} €`, label: t('addressPage.averageRent'), accent: false },
+    summary.roomRent && { value: `${Math.round(summary.roomRent).toLocaleString('es-ES')} €`, label: t('addressPage.roomRent'), accent: false },
     summary.rentPerM2 && {
       value: `${summary.rentPerM2.toLocaleString('es-ES', { maximumFractionDigits: 1 })} €`,
       label: t('addressPage.rentPerM2'),

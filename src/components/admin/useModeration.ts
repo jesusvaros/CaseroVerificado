@@ -9,6 +9,7 @@ export interface PendingReview {
   end_year: number | null;
   price: number | null;
   size_m2: number | null;
+  rental_type?: string | null;
   deposit_returned: string | null;
   owner_score: number | null;
   property_score: number | null;

@@ -301,7 +301,12 @@
         "rent": "Alquiler al mes",
         "rentPlaceholder": "850 €",
         "size": "Metros (opcional)",
-        "sizePlaceholder": "60 m²"
+        "sizePlaceholder": "60 m²",
+        "typeLabel": "Qué alquilabas",
+        "whole": "Piso entero",
+        "room": "Una habitación",
+        "rentRoom": "Alquiler de tu habitación",
+        "sizeRoom": "Metros del piso (opcional)"
       },
       "scores": {
         "title": "Ponle nota",
@@ -675,6 +680,8 @@
     "lived": "vivió de {{from}} a {{to}}",
     "now": "hoy",
     "perMonth": "{{price}} € al mes",
+    "perMonthRoom": "{{price}} € al mes por una habitación",
+    "roomRent": "alquiler medio por habitación",
     "deposit": {
       "true": "Fianza devuelta",
       "partial": "Fianza retenida en parte",

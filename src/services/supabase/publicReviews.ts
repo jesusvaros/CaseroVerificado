@@ -27,6 +27,7 @@ export type PublicReview = {
   area_score: number | null;
   tags: string[] | null;
   size_m2: number | null;
+  rental_type: 'whole' | 'room';
   is_synthetic: boolean;
   has_full_details: boolean;
   synthetic_batch: string | null;
@@ -45,7 +46,7 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
   let query = client
     .from('public_reviews')
     .select(
-      'id, address_details, owner_opinion, would_recommend, validated_at, price, start_year, end_year, deposit_returned, owner_score, property_score, building_score, area_score, tags, size_m2'
+      'id, address_details, owner_opinion, would_recommend, validated_at, price, start_year, end_year, deposit_returned, owner_score, property_score, building_score, area_score, tags, size_m2, rental_type'
     )
     .eq('is_public', true)
     .order('validated_at', { ascending: false });
@@ -112,6 +113,7 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
     area_score?: number | null;
     tags?: string[] | null;
     size_m2?: number | null;
+    rental_type?: string | null;
   };
 
   const rows = data as unknown as Row[];
@@ -203,6 +205,7 @@ export async function getPublicReviews(options: GetPublicReviewsOptions = {}): P
       area_score: review.area_score ?? null,
       tags: review.tags ?? null,
       size_m2: review.size_m2 ?? null,
+      rental_type: review.rental_type === 'room' ? 'room' : 'whole',
       is_synthetic: isSynthetic,
       has_full_details: hasFullDetails,
       synthetic_batch: syntheticBatch,

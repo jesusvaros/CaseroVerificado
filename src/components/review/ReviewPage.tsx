@@ -47,6 +47,7 @@ interface Step2Data {
   building_score?: number | null;
   area_score?: number | null;
   tags?: string[] | null;
+  rental_type?: string | null;
 }
 
 interface Step3Data {
@@ -355,6 +356,7 @@ const ReviewPage = () => {
                 startYear={step2Data?.start_year}
                 endYear={step2Data?.end_year}
                 price={step2Data?.price}
+                rentalType={step2Data?.rental_type}
                 depositReturned={step2Data?.deposit_returned}
                 includedServices={step2Data?.included_services}
                 ownerType={step5Data?.owner_type}

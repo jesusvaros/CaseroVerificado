@@ -9,17 +9,18 @@ interface ReviewFactsProps {
   startYear?: number | null;
   endYear?: number | null;
   price?: number | null;
+  rentalType?: string | null;
   depositReturned?: string;
   includedServices?: string[] | null;
   ownerType?: string;
 }
 
 // Years, rent, deposit outcome and (older reviews) what the rent included and who rented it out.
-const ReviewFacts = ({ startYear, endYear, price, depositReturned, includedServices, ownerType }: ReviewFactsProps) => {
+const ReviewFacts = ({ startYear, endYear, price, rentalType, depositReturned, includedServices, ownerType }: ReviewFactsProps) => {
   const deposit = depositReturned ? DEPOSIT[depositReturned] : undefined;
   const facts = [
     startYear && { label: 'Vivió aquí', value: `${startYear} – ${endYear ?? 'hoy'}` },
-    price && { label: 'Alquiler', value: `${Math.round(Number(price)).toLocaleString('es-ES')} € al mes` },
+    price && { label: rentalType === 'room' ? 'Alquiler de la habitación' : 'Alquiler', value: `${Math.round(Number(price)).toLocaleString('es-ES')} € al mes` },
     ownerType && { label: 'Alquilado por', value: ownerType === 'Agencia' ? 'Agencia' : 'Particular' },
     includedServices?.length && { label: 'Incluía', value: includedServices.join(', ') },
   ].filter(Boolean) as { label: string; value: string }[];
