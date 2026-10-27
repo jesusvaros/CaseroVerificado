@@ -8,6 +8,7 @@ import { submitReview } from '../../services/supabase/submitReview';
 import { notifyReviewCompleted } from '../../services/telegram';
 import { showErrorToast } from '../ui/toast/toastUtils';
 import { trackEvent } from '../../utils/analytics';
+import { trackSiteEvent } from '../../services/siteEvents';
 import ContactModal from '../ui/ContactModal';
 import ReviewFormAside from './ReviewFormAside';
 import AddressSection from './AddressSection';
@@ -31,6 +32,7 @@ const ReviewFormPage = () => {
   useEffect(() => {
     void initializeSession(user?.id);
     trackEvent('review:form-open', { authenticated: !!user });
+    trackSiteEvent('review_form_opened');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -43,6 +45,7 @@ const ReviewFormPage = () => {
   const finish = (sessionId: string, userId: string) => {
     void notifyReviewCompleted(sessionId, userId, formData).catch(e => console.warn('Telegram notification failed', e));
     setIsLoginOpen(false);
+    trackSiteEvent('review_submitted');
     navigate(`/review/${sessionId}`);
     resetForm();
   };

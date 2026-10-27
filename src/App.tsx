@@ -13,7 +13,7 @@ import ReviewFormPage from './components/review-form/ReviewFormPage';
 import AuthCallback from './components/AuthCallback';
 import ReviewPage from './components/review/ReviewPage';
 import ProfilePage from './components/profile/ProfilePage';
-import ModerationPage from './components/admin/ModerationPage';
+import AdminPage from './components/admin/AdminPage';
 import BlogListPage from './components/blog/BlogListPage';
 import BlogPostPage from './components/blog/BlogPostPage';
 // Legal pages
@@ -34,6 +34,7 @@ import { useTranslations } from './i18n/useTranslations';
 import { FormProvider } from './store/FormContext';
 import { AuthProvider } from './store/auth';
 import { trackEvent } from './utils/analytics';
+import { trackSessionStart } from './services/siteEvents';
 
 function LegacyLocaleBlogRedirect() {
   const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
 
   useEffect(() => {
     trackEvent('app:loaded', { timestamp: new Date().toISOString() });
+    trackSessionStart();
   }, []);
 
   return (
@@ -105,7 +107,8 @@ function App() {
               <ProfilePage />
             </>
           } />
-          <Route path="/admin/moderate" element={<ModerationPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/moderate" element={<Navigate to="/admin?tab=moderacion" replace />} />
           {/* Legal routes */}
           <Route path="/aviso-legal" element={<><PageSEO title={t('legalNotice.seoTitle')} description={t('legalNotice.seoDescription')} /><AvisoLegal /></>} />
           <Route path="/politica-privacidad" element={<><PageSEO title={t('privacyPolicy.seoTitle')} description={t('privacyPolicy.seoDescription')} /><PoliticaPrivacidad /></>} />
