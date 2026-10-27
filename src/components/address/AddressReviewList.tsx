@@ -18,7 +18,7 @@ const AddressReviewList = ({ reviews }: { reviews: PublicReview[] }) => {
         const deposit = review.deposit_returned ? DEPOSIT_CHIP[review.deposit_returned] : undefined;
         const period = [
           review.start_year && t('addressPage.lived', { from: review.start_year, to: review.end_year ?? t('addressPage.now') }),
-          review.price && t('addressPage.perMonth', { price: Math.round(review.price).toLocaleString('es-ES') }),
+          review.price && t(review.rental_type === 'room' ? 'addressPage.perMonthRoom' : 'addressPage.perMonth', { price: Math.round(review.price).toLocaleString('es-ES') }),
         ].filter(Boolean);
 
         return (

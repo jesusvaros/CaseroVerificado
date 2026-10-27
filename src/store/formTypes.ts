@@ -44,6 +44,8 @@ export type FormDataType = {
   endYear?: number | null;
   price?: number;
   sizeM2?: number;
+  // 'room' when the tenant rented one room of a shared flat
+  rentalType?: 'whole' | 'room';
   depositReturned?: DepositReturned;
 
   ownerScore?: Score;
@@ -72,6 +74,7 @@ export const initialFormData: FormDataType = {
   endYear: undefined,
   price: undefined,
   sizeM2: undefined,
+  rentalType: 'whole',
   depositReturned: undefined,
   ownerScore: undefined,
   propertyScore: undefined,

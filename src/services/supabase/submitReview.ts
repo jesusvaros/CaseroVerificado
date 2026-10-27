@@ -24,6 +24,7 @@ export async function submitReview(formData: FormDataType): Promise<string> {
     p_opinion: formData.opinion,
     p_tags: formData.tags?.length ? formData.tags : null,
     p_size_m2: formData.sizeM2 ?? null,
+    p_rental_type: formData.rentalType ?? 'whole',
   });
 
   if (error) throw error;
