@@ -7,6 +7,8 @@ export interface Series {
   values: (number | null)[];
   // Dashed lines mark a different source (new contracts) next to SERPAVI
   dashed?: boolean;
+  // Shorter name for the label at the end of the line
+  short?: string;
 }
 
 const W = 640;
@@ -21,6 +23,11 @@ interface Props {
 }
 
 // One value per period for up to three areas, with a crosshair tooltip and direct labels at the line ends.
+const endLabel = (s: Series) => {
+  const text = s.short ?? s.label;
+  return text.length > 13 ? `${text.slice(0, 12)}…` : text;
+};
+
 const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props) => {
   const years = labels;
   const fmt = (v: number) => v.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
@@ -83,7 +90,7 @@ const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props)
           ))}
         {ends.map(e => (
           <text key={e.s.key} x={x(e.i) + 8} y={e.y + 4} className="text-[12px] font-bold" fill="#10180F">
-            <tspan fill={e.s.color}>●</tspan> {e.s.label}
+            <tspan fill={e.s.color}>●</tspan> {endLabel(e.s)}
           </text>
         ))}
       </svg>

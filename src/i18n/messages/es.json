@@ -856,6 +856,8 @@
     "channels": {
       "title": "Evolución por fuente",
       "together": "Juntos",
+      "shortPostcode": "Nuevos · CP",
+      "shortMunicipality": "Nuevos · municipio",
       "separate": "Separados",
       "marketPostcode": "Contratos nuevos · CP {{cp}}",
       "marketMunicipality": "Contratos nuevos · municipio",

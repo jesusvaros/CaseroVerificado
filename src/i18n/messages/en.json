@@ -856,6 +856,8 @@
     "channels": {
       "title": "Change by source",
       "together": "Together",
+      "shortPostcode": "New · postcode",
+      "shortMunicipality": "New · municipality",
       "separate": "Separate",
       "marketPostcode": "New contracts · postcode {{cp}}",
       "marketMunicipality": "New contracts · municipality",

@@ -6,6 +6,7 @@ import type { MarketHistory, MarketPoint } from '../../services/publicData/marke
 export interface Channel {
   key: string;
   label: string;
+  short: string;
   color: string;
   dashed: boolean;
   unit: '€/m²' | '€/mes';
@@ -36,17 +37,18 @@ export function buildChannels(
   const none = new Set<number>();
   if (history) {
     const serpavi = (key: keyof typeof CHANNEL_COLORS, label: string, values: (number | null)[]) =>
-      values.some(v => v != null) && out.push({ key, label, color: CHANNEL_COLORS[key], dashed: false, unit: '€/m²', years: history.years, values, partial: none });
+      values.some(v => v != null) && out.push({ key, label, short: label, color: CHANNEL_COLORS[key], dashed: false, unit: '€/m²', years: history.years, values, partial: none });
     if (area) serpavi('area', area.label, area.values);
     else if (history.section?.vc) serpavi('area', t('explorer.series.section'), history.section.vc.map(p => (p ? p[1] : null)));
     if (history.district?.vc) serpavi('district', t('explorer.series.district'), history.district.vc.map(p => (p ? p[2] : null)));
     if (history.municipality?.vc) serpavi('municipality', t('explorer.series.municipality'), history.municipality.vc.map(p => (p ? p[2] : null)));
   }
-  const fromMarket = (key: 'marketPostcode' | 'marketMunicipality', label: string, points: MarketPoint[] | null) => {
+  const fromMarket = (key: 'marketPostcode' | 'marketMunicipality', label: string, short: string, points: MarketPoint[] | null) => {
     if (!points?.length) return;
     out.push({
       key,
       label,
+      short,
       color: CHANNEL_COLORS[key],
       dashed: true,
       unit: '€/mes',
@@ -56,8 +58,8 @@ export function buildChannels(
     });
   };
   if (market) {
-    fromMarket('marketPostcode', t('explorer.channels.marketPostcode', { cp: postalCode ?? '' }), market.postcode);
-    fromMarket('marketMunicipality', t('explorer.channels.marketMunicipality'), market.municipality);
+    fromMarket('marketPostcode', t('explorer.channels.marketPostcode', { cp: postalCode ?? '' }), t('explorer.channels.shortPostcode'), market.postcode);
+    fromMarket('marketMunicipality', t('explorer.channels.marketMunicipality'), t('explorer.channels.shortMunicipality'), market.municipality);
   }
   return out;
 }
@@ -77,6 +79,7 @@ export function together(channels: Channel[]) {
     return {
       key: c.key,
       label: c.label,
+      short: c.short,
       color: c.color,
       dashed: c.dashed,
       values: years.map(y => {
