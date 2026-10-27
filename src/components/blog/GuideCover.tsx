@@ -8,9 +8,10 @@ const TONES: Record<CoverTone, { bg: string; halo: string; icon: string; label: 
 };
 
 // Drawn cover for a guide: its topic icon over two soft rings, in one of the brand tones.
-const GuideCover = ({ slug, size = 'card', className = '' }: { slug: string; size?: 'card' | 'hero' | 'thumb'; className?: string }) => {
+// onDark swaps the forest tone for lime so the cover stands out on the forest page header.
+const GuideCover = ({ slug, size = 'card', onDark = false, className = '' }: { slug: string; size?: 'card' | 'hero' | 'thumb'; onDark?: boolean; className?: string }) => {
   const { label, Icon, tone } = guideTopic(slug);
-  const t = TONES[tone];
+  const t = TONES[onDark && tone === 'forest' ? 'lime' : tone];
   const iconSize = size === 'hero' ? 'h-24 w-24 md:h-28 md:w-28' : size === 'thumb' ? 'h-9 w-9' : 'h-16 w-16';
 
   return (

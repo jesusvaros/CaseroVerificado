@@ -198,7 +198,7 @@ export default function BlogPostPage() {
               {readingMinutes ? ` · ${t('blogPost.readingTime', { minutes: readingMinutes })}` : ''}
             </span>
           </div>
-          <GuideCover slug={post.slug} size="hero" className="hidden aspect-square rounded-3xl md:flex" />
+          <GuideCover slug={post.slug} size="hero" onDark className="hidden aspect-square rounded-3xl md:flex" />
         </div>
       </header>
 

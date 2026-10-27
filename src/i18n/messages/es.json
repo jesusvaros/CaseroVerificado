@@ -719,6 +719,7 @@
     "firstCta": "Escribir la primera opinión",
     "salesYear": "viviendas vendidas en el último año (hasta {{period}})",
     "subtitleZones": "Cuánto cuesta cada zona según el índice oficial, qué cuentan los inquilinos y qué derechos tienes aquí.",
+    "subtitleNoRent": "Qué cuentan los inquilinos, cuánto se vende y qué derechos tienes aquí.",
     "listTitle": "Barrios, del más caro al más barato",
     "asideTitle": "Si alquilas en {{city}}",
     "depositTitle": "Tu fianza",

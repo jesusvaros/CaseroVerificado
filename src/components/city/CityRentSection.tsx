@@ -53,9 +53,11 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
             </span>
           )}
         </div>
-        <p className="text-xs text-[#6B7465]">
-          {t(rent.level === 'barrio' ? 'cityPage.sourceBarrio' : 'cityPage.sourceSection', { source: rent.source })}
-        </p>
+        {breaks.length > 0 && (
+          <p className="text-xs text-[#6B7465]">
+            {t(rent.level === 'barrio' ? 'cityPage.sourceBarrio' : 'cityPage.sourceSection', { source: rent.source })}
+          </p>
+        )}
       </section>
 
       <section className="mx-auto flex max-w-[1320px] flex-wrap items-start gap-16 px-5 pt-16 md:px-[5%]">
