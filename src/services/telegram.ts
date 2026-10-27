@@ -21,7 +21,7 @@ export function buildReviewSummary(sessionId: string, userId: string, data: Form
     '',
     `Dirección: ${safe(addressLine)}`,
     `Años: ${safe(data.startYear)} - ${safe(data.endYear ?? 'Presente')}`,
-    `Precio: ${safe(data.price)}`,
+    `Precio: ${safe(data.price)} · ${safe(data.sizeM2)} m²`,
     `Fianza devuelta: ${safe(data.depositReturned)}`,
     '',
     `Notas: casero ${safe(data.ownerScore)} · vivienda ${safe(data.propertyScore)} · edificio ${safe(data.buildingScore)} · zona ${safe(data.areaScore)}`,

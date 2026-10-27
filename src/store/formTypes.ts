@@ -43,6 +43,7 @@ export type FormDataType = {
   // null = still living there
   endYear?: number | null;
   price?: number;
+  sizeM2?: number;
   depositReturned?: DepositReturned;
 
   ownerScore?: Score;
@@ -70,6 +71,7 @@ export const initialFormData: FormDataType = {
   startYear: undefined,
   endYear: undefined,
   price: undefined,
+  sizeM2: undefined,
   depositReturned: undefined,
   ownerScore: undefined,
   propertyScore: undefined,

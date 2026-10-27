@@ -7,11 +7,11 @@ const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from({ length: CURRENT_YEAR - 1999 }, (_, i) => CURRENT_YEAR - i);
 const STILL_LIVING = 'now';
 
-// Since, until (or still living there) and monthly rent.
+// Since, until (or still living there), monthly rent and optional size.
 const StayFields = ({ errors }: { errors: ReviewField[] }) => {
   const { t } = useTranslations();
   const { formData, updateFormData } = useFormContext();
-  const { startYear, endYear, price } = formData;
+  const { startYear, endYear, price, sizeM2 } = formData;
 
   const changeEnd = (value: string) => {
     if (value === STILL_LIVING) {
@@ -64,6 +64,19 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
           value={price ?? ''}
           onChange={e => updateFormData({ price: e.target.value ? Number(e.target.value) : undefined })}
           className={underlineInput(errors.includes('price'))}
+        />
+      </label>
+      <label className="flex w-28 flex-col gap-1.5">
+        <span className={smallLabel}>{t('addReview.v2.stay.size')}</span>
+        <input
+          type="number"
+          inputMode="numeric"
+          min={10}
+          max={1000}
+          placeholder={t('addReview.v2.stay.sizePlaceholder')}
+          value={sizeM2 ?? ''}
+          onChange={e => updateFormData({ sizeM2: e.target.value ? Number(e.target.value) : undefined })}
+          className={underlineInput(false)}
         />
       </label>
       {(errors.includes('startYear') || errors.includes('price')) && (

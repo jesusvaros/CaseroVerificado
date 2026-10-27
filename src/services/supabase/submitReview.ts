@@ -23,6 +23,7 @@ export async function submitReview(formData: FormDataType): Promise<string> {
     p_area_score: formData.areaScore ?? null,
     p_opinion: formData.opinion,
     p_tags: formData.tags?.length ? formData.tags : null,
+    p_size_m2: formData.sizeM2 ?? null,
   });
 
   if (error) throw error;
