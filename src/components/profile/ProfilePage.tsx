@@ -1,279 +1,86 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabaseWrapper } from '../../services/supabase/client';
-import { getAddressStep1Data } from '../../services/supabase/GetSubmitStep1';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import PageSEO from '../../seo/PageSEO';
 import { useAuth } from '../../store/auth/hooks';
-import toast from 'react-hot-toast';
+import { useFormContext } from '../../store/useFormContext';
+import { useTranslations } from '../../i18n/useTranslations';
+import { useMyReviews, type MyReview } from './useMyReviews';
+import MyReviewCard from './MyReviewCard';
 
-interface UserProfile {
-  id: string;
-  email: string;
-  created_at: string;
-}
-
-interface AddressStep1 {
-  id: string;
-  review_session_id: string;
-  street?: string;
-  number?: string;
-  city?: string;
-  postal_code?: string;
-  province?: string;
-  created_at: string;
-}
-
-interface UserReview {
-  id: string;
-  user_id: string;
-  displayAddress?: string;
-  created_at: string;
-  updated_at?: string;
-  status?: string;
-  address?: AddressStep1[];
-  validated?: boolean;
-  completed?: boolean;
-  nextIncompleteStep?: number;
-  step1_completed?: boolean;
-  step2_completed?: boolean;
-  step3_completed?: boolean;
-  step4_completed?: boolean;
-  step5_completed?: boolean;
-}
-
-const ProfilePage: React.FC = () => {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [userReviews, setUserReviews] = useState<UserReview[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+// /profile: the signed-in user's reviews, grouped by what happened to them.
+const ProfilePage = () => {
+  const { t } = useTranslations();
   const navigate = useNavigate();
-  // Use the auth context
-  const { user, isLoading: authLoading, logout } = useAuth();
+  const { user, isLoading, logout } = useAuth();
+  const { updateFormData } = useFormContext();
+  const { reviews, error } = useMyReviews(user?.id);
 
   useEffect(() => {
-    // Wait for auth to load
-    if (authLoading) return;
-    
-    const fetchUserData = async () => {
-      setLoading(true);
-      const client = supabaseWrapper.getClient();
-      
-      if (!client || !user) {
-        navigate('/');
-        return;
-      }
+    if (!isLoading && !user) navigate('/');
+  }, [isLoading, user, navigate]);
 
-      // Use user from auth context instead of fetching again
-      setUserProfile({
-        id: user.id,
-        email: user.email || '',
-        created_at: user.created_at || ''
-      });
-
-      try {
-        // Get review sessions and address data in a single batch
-        const [sessionsResponse] = await Promise.all([
-          client
-            .from('review_sessions')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('step1_completed', true)
-        ]);
-
-        if (sessionsResponse.error) {
-          throw sessionsResponse.error;
-        }
-
-        const sessions: UserReview[] = (sessionsResponse.data || []) as UserReview[];
-
-        if (sessions.length === 0) {
-          // No reviews found
-          setUserReviews([]);
-          return;
-        }
-
-        // Fetch all address data in a single batch with Promise.all
-        const addressPromises = sessions.map(session => 
-          getAddressStep1Data(session.id)
-        );
-        
-        const addressResults = await Promise.all(addressPromises);
-
-        // Combine sessions with their addresses and check completion status
-        const processedReviews = sessions.map((session, index) => {
-          const addressResult = addressResults[index];
-          
-          // Check if all steps are completed
-          const allStepsCompleted = session.step1_completed && 
-                                   session.step2_completed && 
-                                   session.step3_completed && 
-                                   session.step4_completed && 
-                                   session.step5_completed;
-          
-          // Determine the next incomplete step (for redirection)
-          let nextIncompleteStep = 1;
-          if (session.step1_completed) nextIncompleteStep = 2;
-          if (session.step2_completed) nextIncompleteStep = 3;
-          if (session.step3_completed) nextIncompleteStep = 4;
-          if (session.step4_completed) nextIncompleteStep = 5;
-          
-          return {
-            ...session,
-            displayAddress: addressResult?.address_details?.street || 'Dirección no disponible',
-            validated: session.validated === true,
-            completed: allStepsCompleted,
-            nextIncompleteStep
-          };
-        });
-        
-        setUserReviews(processedReviews);
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
-        toast.error('Error al cargar los datos del perfil');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [navigate, user, authLoading]);
-
-  const handleLogout = async () => {
-    // Use the logout method from auth context
-    await logout();
-    navigate('/');
+  // Old drafts can't be resumed; start a new review with the same address instead
+  const finish = (review: MyReview) => {
+    updateFormData({
+      addressDetails: {
+        street: review.street ?? '',
+        number: review.number ?? '',
+        city: review.city ?? '',
+        postalCode: review.postalCode ?? '',
+        fullAddress: [review.street, review.number, review.city].filter(Boolean).join(' '),
+        coordinates: review.coordinates ?? undefined,
+      },
+    });
+    navigate('/add-review');
   };
 
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-200 pt-16">
-        <div className="w-full max-w-3xl rounded-lg bg-white p-8 shadow-md">
-          <p className="text-center text-gray-600">Cargando perfil...</p>
-        </div>
-      </div>
-    );
-  }
+  const sent = reviews?.filter(r => r.status !== 'draft') ?? [];
+  const drafts = reviews?.filter(r => r.status === 'draft') ?? [];
 
   return (
-    <div className="min-h-screen pt-24 gap-8 mx-auto max-w-3xl px-4">
-        <div className="mb-8 rounded-lg bg-white p-8 shadow-md">
-          <h1 className="mb-6 text-2xl font-semibold ">Mi Perfil</h1>
-          
-          {/* Personal Info Section */}
-          <div className="mb-8">
-            <h2 className="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold ">
-              Información Personal
-            </h2>
-            {userProfile && (
-              <div className="text-left">
-                <p className="text-xl font-semibold">{userProfile.email}</p>
-              </div>
-            )}
+    <div className="min-h-screen bg-mist pb-24 text-ink">
+      <PageSEO title={t('account.title')} noindex />
+      <header className="bg-forest pt-[76px] text-white">
+        <div className="mx-auto flex max-w-[960px] flex-wrap items-end justify-between gap-6 px-5 pb-10 pt-10">
+          <div className="flex flex-col gap-2">
+            <h1 className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">{t('account.title')}</h1>
+            {user?.email && <p className="text-white/70">{t('account.subtitle', { email: user.email })}</p>}
           </div>
-          
-          {/* My Reviews Section */}
-          <div className="mb-8">
-            <h2 className="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold ">
-              Mis Reseñas
-            </h2>
-            {userReviews.length > 0 ? (
-              <div className="space-y-4">
-                {userReviews.map((review) => {
-                  const isIncomplete = !review.completed;
-                  const isPendingValidation = review.completed && !review.validated;
-                  const isValidated = review.completed && review.validated;
-                  return (
-                    <article
-                      key={review.id}
-                      className="rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-[#4A5E32] hover:shadow-sm"
-                      onClick={() => {
-                        if (isIncomplete) {
-                          navigate(`/add-review?step=${review.nextIncompleteStep}`);
-                        } else {
-                          navigate(`/review/${review.id}`);
-                        }
-                      }}
-                      role="button"
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="min-w-0 flex-1">
-                          <header className="flex flex-wrap items-center gap-2">
-                            <h3 className="mr-1 truncate font-medium text-black">
-                              {review.displayAddress}
-                            </h3>
-                            {/* Status badges */}
-                            {isPendingValidation && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-[rgb(225,245,110)] px-2 py-0.5 text-xs font-medium text-black">
-                                <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-                                Pendiente de validación
-                              </span>
-                            )}
-                            {isIncomplete && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-0.5 text-xs font-medium text-black ring-1 ring-orange-200">
-                                <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-                                Incompleta
-                              </span>
-                            )}
-                            {isValidated && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-black ring-1 ring-green-200">
-                                <span className="h-2 w-2 rounded-full bg-green-500"></span>
-                                Validada
-                              </span>
-                            )}
-                          </header>
-                          <time className="block text-sm text-black" dateTime={new Date(review.created_at).toISOString()}>
-                            {new Date(review.created_at).toLocaleDateString('es-ES')}
-                          </time>
-                        </div>
-                        <aside className="shrink-0 rounded-full bg-[rgb(225,245,110)] p-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </aside>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-gray-600">No has creado ninguna reseña todavía.</p>
-            )}
-          </div>
-          
-          {/* Logout Section */}
-          <div>
+          <div className="flex flex-wrap gap-3">
+            <Link to="/add-review" className="rounded-full bg-lime px-6 py-3 font-bold text-forest transition-colors hover:bg-white">{t('account.writeAnother')}</Link>
             <button
-              onClick={handleLogout}
-              className="flex w-full items-center justify-center rounded-lg bg-[#4A5E32] px-6 py-3 text-white transition-colors hover:bg-[#5A6E42] focus:outline-none focus:ring-2 focus:ring-[#4A5E32] focus:ring-offset-2"
+              type="button"
+              onClick={async () => {
+                await logout();
+                navigate('/');
+              }}
+              className="rounded-full border border-white/30 px-6 py-3 font-bold text-white transition-colors hover:bg-white/10"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
-              Cerrar Sesión
+              {t('account.logout')}
             </button>
           </div>
         </div>
-      
+      </header>
+
+      <main className="mx-auto flex max-w-[960px] flex-col gap-4 px-5 pt-8">
+        {error && <p className="rounded-xl bg-coral-soft p-4 text-coral-ink">{t('account.loadError')}</p>}
+        {!reviews && !error && <div className="h-40 animate-pulse rounded-2xl bg-white" aria-busy="true" />}
+        {reviews && sent.length === 0 && (
+          <div className="flex flex-col items-start gap-4 rounded-2xl bg-white p-8">
+            <p className="text-lg">{t('account.empty')}</p>
+            <Link to="/add-review" className="rounded-full bg-forest px-6 py-3 font-bold text-white hover:bg-brand">{t('account.emptyCta')}</Link>
+          </div>
+        )}
+        {sent.map(review => <MyReviewCard key={review.id} review={review} onFinish={finish} />)}
+        {drafts.length > 0 && (
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm font-bold text-ink-muted">{t('account.drafts', { count: drafts.length })}</summary>
+            <div className="mt-4 flex flex-col gap-3">
+              {drafts.map(review => <MyReviewCard key={review.id} review={review} onFinish={finish} />)}
+            </div>
+          </details>
+        )}
+      </main>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { sendEmailOtp, signInWithGoogle } from '../../services/auth/loginService
 import type { LoginStatus } from '../../services/auth/loginService';
 import { trackUmamiEvent } from '../../utils/analytics';
 import { useTranslations } from '../../i18n/useTranslations';
+import GoogleIcon from './GoogleIcon';
 
 interface LoginContentProps {
   onClose?: () => void;
@@ -16,6 +17,8 @@ interface LoginContentProps {
   showInfo?: boolean;
   onUserLoggedIn?: (user: User) => void;
   redirectToHomeIfNoSession?: boolean;
+  // 'review': last step of the review form; 'account': signing in from the header
+  variant?: 'review' | 'account';
 }
 
 const LoginContent: React.FC<LoginContentProps> = ({ 
@@ -25,6 +28,7 @@ const LoginContent: React.FC<LoginContentProps> = ({
   showInfo = true,
   onUserLoggedIn,
   redirectToHomeIfNoSession = true,
+  variant = 'review',
 }) => {
   const { t } = useTranslations();
   const { formData, updateFormData } = useFormContext();
@@ -104,22 +108,22 @@ const LoginContent: React.FC<LoginContentProps> = ({
     }
   }, [user]);
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const email = formData.contactEmail?.trim() ?? '';
 
-    if (!formData.contactEmail) {
+  const handleEmailLogin = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus('error');
-      setErrorMessage(t('addReview.login.invalidEmail'));
+      setErrorMessage(t('auth.invalidEmail'));
       return;
     }
-
     setStatus('loading');
+    setIsEditingEmail(false);
     trackUmamiEvent('login:email-submit');
-    const result = await sendEmailOtp(formData.contactEmail);
-    
+    const result = await sendEmailOtp(email);
     if (!result.success) {
       setStatus('error');
-      setErrorMessage(result.error || t('addReview.login.sendLinkError'));
+      setErrorMessage(t('auth.sendError'));
     } else {
       setStatus('link-sent');
       setResendTimer(30);
@@ -132,153 +136,109 @@ const LoginContent: React.FC<LoginContentProps> = ({
     await signInWithGoogle();
   };
 
-  return (
-    <>
-      {showTitle && (
-        <h2 className="mb-3 text-3xl font-bold text-gray-800">{t('addReview.login.title')}</h2>
-      )}
+  const linkSent = status === 'link-sent' && !isEditingEmail;
 
-      {showInfo && (
-        <div className="mb-4 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-base text-amber-800">
-          <p className="mb-1 font-semibold">{t('addReview.login.infoTitle')}</p>
-          <ul className="ml-4 list-disc space-y-1">
-            <li>{t('addReview.login.infoItem1')}</li>
-            <li>{t('addReview.login.infoItem2')}</li>
-            <li>{t('addReview.login.infoItem3')}</li>
-          </ul>
+  return (
+    <div className="flex flex-col gap-6 text-ink">
+      {showTitle && (
+        <div className="flex flex-col gap-2 pr-10">
+          <h2 className="font-display text-[28px] font-extrabold leading-tight tracking-tight">
+            {linkSent ? t('auth.sentTitle') : t(variant === 'review' ? 'auth.reviewTitle' : 'auth.accountTitle')}
+          </h2>
+          {!linkSent && <p className="text-ink-soft">{t(variant === 'review' ? 'auth.reviewSubtitle' : 'auth.accountSubtitle')}</p>}
         </div>
       )}
 
-      {status === 'idle' || status === 'error' ? (
+      {linkSent ? (
+        <div className="flex flex-col items-start gap-4">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-lime text-forest" aria-hidden="true">
+            <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 7l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </span>
+          <p className="text-[17px] leading-relaxed">{t('auth.sentText', { email })}</p>
+          {/@gmail\.com$/i.test(email) && (
+            <a href="https://mail.google.com/mail/u/0/#search/caserook" target="_blank" rel="noreferrer" className="rounded-full bg-forest px-6 py-3 font-bold text-white transition-colors hover:bg-brand">
+              {t('auth.openGmail')}
+            </a>
+          )}
+          <p className="text-sm text-ink-muted">{t('auth.spamHint')}</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
+            <button
+              type="button"
+              disabled={!canResend}
+              onClick={() => {
+                trackUmamiEvent('login:resend-link');
+                void handleEmailLogin();
+              }}
+              className="text-brand hover:text-forest disabled:cursor-default disabled:text-ink-muted"
+            >
+              {canResend ? t('auth.resend') : t('auth.resendIn', { seconds: resendTimer })}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                trackUmamiEvent('login:change-email');
+                setIsEditingEmail(true);
+              }}
+              className="text-ink-soft hover:text-ink"
+            >
+              {t('auth.changeEmail')}
+            </button>
+          </div>
+        </div>
+      ) : (
         <>
-          <form onSubmit={handleEmailLogin} className="mb-3">
-            <div className="mb-4">
-              <label 
-                htmlFor="contactEmail" 
-                className="mb-1 block text-base font-medium text-gray-700"
-              >
-                {t('addReview.login.emailLabel')}
-              </label>
-              <input
-                type="email"
-                id="contactEmail"
-                value={formData.contactEmail || ''}
-                onChange={e => updateFormData({ contactEmail: e.target.value })}
-                required
-                className="w-full rounded-lg border p-3 text-base focus:outline-none focus:ring-2 focus:ring-[rgb(74,94,50)]"
-                placeholder={t('addReview.login.emailPlaceholder')}
-              />
-            </div>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="flex h-12 w-full items-center justify-center gap-3 rounded-full border-[1.5px] border-line bg-white font-bold transition-colors hover:border-ink-muted"
+          >
+            <GoogleIcon />
+            {t('auth.google')}
+          </button>
 
-            {status === 'error' && (
-              <p className="mb-2 text-base text-red-600">
-                {errorMessage || t('addReview.login.sendLinkError')}
-              </p>
-            )}
+          <div className="flex items-center gap-3 text-sm text-ink-muted">
+            <span className="h-px flex-1 bg-line" />
+            {t('auth.orEmail')}
+            <span className="h-px flex-1 bg-line" />
+          </div>
 
+          <form onSubmit={handleEmailLogin} noValidate className="flex flex-col gap-3">
+            <input
+              type="email"
+              autoComplete="email"
+              aria-label={t('auth.emailPlaceholder')}
+              value={formData.contactEmail || ''}
+              onChange={e => updateFormData({ contactEmail: e.target.value })}
+              placeholder={t('auth.emailPlaceholder')}
+              className={`h-12 w-full rounded-full border-[1.5px] bg-white px-5 text-base focus:border-brand focus:outline-none focus:ring-0 ${status === 'error' ? 'border-coral' : 'border-line'}`}
+            />
+            {status === 'error' && <p className="px-2 text-sm text-coral-ink">{errorMessage}</p>}
             <button
               type="submit"
-              className="mb-2 w-full rounded-lg bg-[rgb(74,94,50)] py-2.5 text-base text-white hover:bg-[rgb(60,76,40)]"
+              disabled={status === 'loading'}
+              className="h-12 w-full rounded-full bg-forest font-bold text-white transition-colors hover:bg-brand disabled:opacity-60"
             >
-              {t('addReview.login.validateByEmail')}
+              {status === 'loading' ? t('auth.sending') : t('auth.sendLink')}
             </button>
           </form>
-        </>
-      ) : status === 'loading' ? (
-        <p className="text-center text-base text-gray-600">{t('addReview.login.sendingLink')}</p>
-      ) : (
-        <div className="mb-3 rounded-md bg-gray-50 p-4 text-base text-gray-700">
-          {isEditingEmail ? (
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                setIsEditingEmail(false);
-                handleEmailLogin(e);
-              }}
-              className="space-y-2"
-            >
-              <input
-                type="email"
-                className="w-full rounded-lg border p-2.5 text-base"
-                value={formData.contactEmail}
-                onChange={e => updateFormData({ contactEmail: e.target.value })}
-              />
-              <button
-                type="submit"
-                className="w-full rounded bg-[rgb(74,94,50)] py-2.5 text-base text-white hover:bg-[rgb(60,76,40)]"
-              >
-                {t('addReview.login.sendNewLink')}
-              </button>
-            </form>
-          ) : (
-            <>
-              <p className="mb-2 text-base">
-                {t('addReview.login.linkSentPrefix')}{' '}
-                <span className="font-semibold">{formData.contactEmail}</span>.
-              </p>
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={() => {
-                    trackUmamiEvent('login:change-email');
-                    setIsEditingEmail(true);
-                  }}
-                  className="text-base text-blue-600 underline hover:text-blue-800"
-                >
-                  {t('addReview.login.changeEmail')}
-                </button>
-                <button
-                  onClick={() => {
-                    trackUmamiEvent('login:resend-link');
-                    handleEmailLogin({ preventDefault: () => {} } as React.FormEvent);
-                  }}
-                  disabled={!canResend}
-                  className={`text-base ${canResend ? 'text-blue-600 hover:text-blue-800' : 'text-gray-400 cursor-not-allowed'}`}
-                >
-                  {canResend
-                    ? t('addReview.login.resendLink')
-                    : t('addReview.login.resendIn', { seconds: resendTimer })}
-                </button>
-              </div>
-            </>
+
+          {showInfo && (
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-soft">
+              {(['private', 'noPassword', 'edit'] as const).map(point => (
+                <li key={point} className="flex items-center gap-1.5">
+                  <svg className="h-4 w-4 text-brand" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 10.5l4 4 8-9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {t(`auth.points.${point}`)}
+                </li>
+              ))}
+            </ul>
           )}
-        </div>
+        </>
       )}
-
-      <div className="my-2 mb-4 flex items-center justify-center">
-        <span className="mx-2 text-sm text-gray-500">{t('addReview.login.or')}</span>
-      </div>
-
-      <button
-        onClick={handleGoogleLogin}
-        className="flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100"
-      >
-        <svg
-          className="mr-2 h-5 w-5"
-          viewBox="0 0 533.5 544.3"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            fill="#4285F4"
-            d="M533.5 278.4c0-17.4-1.4-34.2-4-50.4H272v95.4h146.9c-6.3 34-25.2 62.8-53.7 82v68h86.8c50.8-46.8 80.5-115.7 80.5-195z"
-          />
-          <path
-            fill="#34A853"
-            d="M272 544.3c72.6 0 133.6-24 178.1-65.6l-86.8-68c-24.1 16.2-55 25.8-91.3 25.8-70 0-129.4-47.2-150.7-110.2H32.4v69.2C76.4 482.8 168.5 544.3 272 544.3z"
-          />
-          <path
-            fill="#FBBC05"
-            d="M121.3 326.3c-10.2-30-10.2-62.5 0-92.5V164.6H32.4c-40.5 80.4-40.5 175.1 0 255.6l88.9-69.5z"
-          />
-          <path
-            fill="#EA4335"
-            d="M272 107.7c39.5-.6 77.4 14.5 106.2 41.8l79.2-79.2C413.3 24.3 346.2-.4 272 0 168.5 0 76.4 61.5 32.4 164.6l88.9 69.2C142.6 154.9 202 107.7 272 107.7z"
-          />
-        </svg>
-        <span className="font-medium text-gray-700">{t('addReview.login.continueWithGoogle')}</span>
-      </button>
-    </>
+    </div>
   );
 };
 

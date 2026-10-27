@@ -773,5 +773,61 @@
     "saleNote": "Average appraised value, {{period}}. Source: Ministry of Housing.",
     "deals": "Homes sold in the last year",
     "dealsNote": "Sales up to {{period}}. Source: Ministry of Housing."
+  },
+  "auth": {
+    "reviewTitle": "Last step: confirm your email",
+    "reviewSubtitle": "This keeps fake reviews out. Your email is never published.",
+    "accountTitle": "Sign in to CaseroOk",
+    "accountSubtitle": "To see your reviews and know when they go live. No password.",
+    "points": {
+      "private": "Your email is never published",
+      "noPassword": "No password",
+      "edit": "You can follow your review's status"
+    },
+    "google": "Continue with Google",
+    "orEmail": "or with your email",
+    "emailPlaceholder": "you@email.com",
+    "sendLink": "Send me the link",
+    "sending": "Sending…",
+    "sentTitle": "Check your inbox",
+    "sentText": "We sent a link to {{email}}. Open it on this same device to sign in.",
+    "openGmail": "Open Gmail",
+    "spamHint": "Not there? Check spam or promotions.",
+    "resend": "Resend link",
+    "resendIn": "Resend in {{seconds}} s",
+    "changeEmail": "Use another email",
+    "invalidEmail": "Enter a valid email.",
+    "sendError": "We could not send the link. Please try again.",
+    "close": "Close"
+  },
+  "account": {
+    "menuReviews": "Your reviews",
+    "menuNew": "Write another review",
+    "menuAdmin": "Admin panel",
+    "menuLogout": "Sign out",
+    "signIn": "Sign in",
+    "title": "Your reviews",
+    "subtitle": "Signed in as {{email}}",
+    "writeAnother": "Write another review",
+    "logout": "Sign out",
+    "empty": "You have not written any reviews yet.",
+    "emptyCta": "Write the first one",
+    "status": {
+      "published": "Published",
+      "pending": "Under review",
+      "rejected": "Not published",
+      "draft": "Unfinished"
+    },
+    "pendingHint": "We check it by hand, usually within a day or two.",
+    "rejectedReason": "Reason: {{reason}}",
+    "draftHint": "You started this review and did not send it.",
+    "view": "View review",
+    "viewAddress": "View the address",
+    "continue": "Finish it",
+    "lived": "{{from}} – {{to}}",
+    "now": "now",
+    "perMonth": "€{{price}}/month",
+    "drafts": "Unfinished ({{count}})",
+    "loadError": "We could not load your reviews."
   }
 }
