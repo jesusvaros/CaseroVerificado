@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { User } from '@supabase/supabase-js';
 import LoginContent from './LoginContent';
 import { umamiEventProps } from '../../utils/analytics';
@@ -24,7 +25,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose, showInfo = true, s
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  return (
+  // Portal: the header's backdrop-blur would otherwise trap this fixed overlay inside it
+  return createPortal(
     <div className="fixed inset-0 z-[1100] flex items-end justify-center bg-forest/50 backdrop-blur-sm sm:items-center sm:px-6" onClick={onClose}>
       <div
         role="dialog"
@@ -45,7 +47,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose, showInfo = true, s
         </button>
         <LoginContent onClose={onClose} showTitle={showTitle} showInfo={showInfo} variant={variant} {...rest} />
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
