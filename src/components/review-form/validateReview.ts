@@ -1,6 +1,6 @@
 import type { FormDataType } from '../../store/formTypes';
 
-export type ReviewField = 'address' | 'number' | 'startYear' | 'price' | 'ownerScore' | 'propertyScore' | 'deposit' | 'opinion';
+export type ReviewField = 'address' | 'number' | 'startYear' | 'price' | 'ownerScore' | 'propertyScore' | 'deposit' | 'opinion' | 'terms';
 
 export const MIN_OPINION_LENGTH = 30;
 
@@ -17,6 +17,7 @@ export function validateReview(data: FormDataType): ReviewField[] {
   if (!data.propertyScore) errors.push('propertyScore');
   if (!data.depositReturned) errors.push('deposit');
   if ((data.opinion?.trim().length ?? 0) < MIN_OPINION_LENGTH) errors.push('opinion');
+  if (!data.acceptTerms) errors.push('terms');
 
   return errors;
 }

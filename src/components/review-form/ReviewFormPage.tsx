@@ -16,6 +16,7 @@ import StayFields from './StayFields';
 import ScoreRow from './ScoreRow';
 import DepositChoice from './DepositChoice';
 import TagPicker from './TagPicker';
+import TermsConsent from './TermsConsent';
 import { sectionTitle } from './fieldStyles';
 import { MIN_OPINION_LENGTH, validateReview, type ReviewField } from './validateReview';
 
@@ -133,6 +134,8 @@ const ReviewFormPage = () => {
               <span className="text-sm text-coral-ink">{t('addReview.v2.errors.opinion', { min: MIN_OPINION_LENGTH })}</span>
             )}
           </label>
+
+          <TermsConsent checked={Boolean(formData.acceptTerms)} onChange={acceptTerms => updateFormData({ acceptTerms })} hasError={errors.includes('terms')} />
 
           <div className="flex flex-col gap-3">
             <button

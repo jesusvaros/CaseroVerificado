@@ -341,11 +341,20 @@
         "scores": "Pon nota al casero y a la vivienda.",
         "deposit": "Elige una respuesta sobre la fianza.",
         "opinion": "Cuéntalo con un poco más de detalle (mínimo {{min}} caracteres).",
-        "saveFailed": "No se pudo guardar la opinión. Inténtalo de nuevo en unos minutos."
+        "saveFailed": "No se pudo guardar la opinión. Inténtalo de nuevo en unos minutos.",
+        "terms": "Acepta las condiciones de uso para enviar la opinión."
       },
       "tags": {
         "title": "¿Algo a destacar?",
         "hint": "Opcional. Toca lo que aplique."
+      },
+      "terms": {
+        "moderation": "Revisamos cada opinión a mano antes de publicarla. No publicamos insultos, contenido vejatorio, acusaciones sin base ni datos personales (nombres, teléfonos, DNI). Si una opinión los incluye, la editamos o la rechazamos. Cualquiera, también el casero, puede escribirnos para que revisemos o retiremos una opinión publicada.",
+        "acceptStart": "He leído y acepto las",
+        "termsLink": "condiciones de uso",
+        "and": "y las",
+        "practicesLink": "buenas prácticas",
+        "acceptEnd": ". Lo que cuento es mi experiencia real y es veraz."
       }
     }
   },

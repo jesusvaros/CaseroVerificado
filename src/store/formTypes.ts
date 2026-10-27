@@ -53,6 +53,7 @@ export type FormDataType = {
   buildingScore?: Score;
   areaScore?: Score;
   opinion?: string;
+  acceptTerms?: boolean;
   tags?: import('../components/review-form/reviewTags').ReviewTag[];
 
   // Contact Information (Modal)
