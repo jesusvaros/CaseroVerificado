@@ -829,5 +829,43 @@
     "perMonth": "{{price}} €/mes",
     "drafts": "Sin terminar ({{count}})",
     "loadError": "No hemos podido cargar tus opiniones."
+  },
+  "explorer": {
+    "open": "Ver los datos",
+    "title": "Los datos detrás de este precio",
+    "close": "Cerrar",
+    "loading": "Cargando el histórico…",
+    "none": "No hay histórico oficial para esta zona.",
+    "chartTitle": "Precio mediano del alquiler, 2011–2024",
+    "chartHint": "€/m² al mes en pisos. Pasa el dedo o el ratón por el gráfico para ver cada año.",
+    "series": {
+      "section": "Esta zona",
+      "district": "Distrito",
+      "municipality": "Municipio"
+    },
+    "summary": "En {{year}}, la mediana fue de {{p50}} €/m² con {{n}} contratos declarados.",
+    "change": "{{change}} desde {{from}}",
+    "tableTitle": "Año a año",
+    "tableLevel": "Datos de:",
+    "cols": {
+      "year": "Año",
+      "contracts": "Contratos",
+      "median": "€/m²",
+      "range": "Rango 25–75 %",
+      "month": "€/mes",
+      "size": "m²"
+    },
+    "housesTitle": "Pisos y casas en {{place}}",
+    "flats": "Pisos",
+    "houses": "Casas",
+    "housesText": "{{flats}} €/mes de mediana en pisos y {{houses}} €/mes en casas ({{year}}).",
+    "fewTitle": "¿Por qué solo {{n}} contratos?",
+    "fewText": "Son los alquileres que se declararon a Hacienda en esa zona ese año. Con tan pocos, un par de pisos caros o baratos mueven mucho la mediana: compárala con el distrito y el municipio en el gráfico.",
+    "sourcesTitle": "De dónde salen estos datos",
+    "sourceSerpavi": "SERPAVI, del Ministerio de Vivienda: precios de los contratos de alquiler declarados en el IRPF, agregados por sección censal, distrito y municipio. Hacienda no publica los contratos uno a uno, así que no podemos enseñar cuáles son.",
+    "sourceIpva": "Índice de precios de vivienda en alquiler del INE, para la variación anual.",
+    "sourceMarket": "Fianzas depositadas (Generalitat Valenciana) e INCASÒL (Catalunya) para los contratos de 2026, donde existen.",
+    "sourceLink": "Ver la fuente",
+    "download": "Descargar el histórico de la provincia (JSON)"
   }
 }

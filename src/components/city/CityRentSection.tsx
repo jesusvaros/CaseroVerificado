@@ -30,7 +30,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
           <CityRentMap areas={rent.areas} breaks={breaks} reviewPoints={points} selectedId={selectedId} onSelect={setSelectedId} />
           {selected && (
             <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:w-80">
-              <CityAreaCard area={selected} reviews={reviewCounts.get(selected.id) ?? 0} level={rent.level} />
+              <CityAreaCard area={selected} reviews={reviewCounts.get(selected.id) ?? 0} level={rent.level} cumun={rent.cumun} city={rent.name} />
             </div>
           )}
         </div>

@@ -829,5 +829,43 @@
     "perMonth": "€{{price}}/month",
     "drafts": "Unfinished ({{count}})",
     "loadError": "We could not load your reviews."
+  },
+  "explorer": {
+    "open": "See the data",
+    "title": "The data behind this price",
+    "close": "Close",
+    "loading": "Loading history…",
+    "none": "There is no official history for this area.",
+    "chartTitle": "Median rent, 2011–2024",
+    "chartHint": "€/m² per month for flats. Hover or tap the chart to see each year.",
+    "series": {
+      "section": "This area",
+      "district": "District",
+      "municipality": "Municipality"
+    },
+    "summary": "In {{year}} the median was €{{p50}}/m² across {{n}} declared contracts.",
+    "change": "{{change}} since {{from}}",
+    "tableTitle": "Year by year",
+    "tableLevel": "Data for:",
+    "cols": {
+      "year": "Year",
+      "contracts": "Contracts",
+      "median": "€/m²",
+      "range": "25–75 % range",
+      "month": "€/month",
+      "size": "m²"
+    },
+    "housesTitle": "Flats and houses in {{place}}",
+    "flats": "Flats",
+    "houses": "Houses",
+    "housesText": "€{{flats}}/month median for flats and €{{houses}}/month for houses ({{year}}).",
+    "fewTitle": "Why only {{n}} contracts?",
+    "fewText": "They are the rentals declared to the tax office in that area that year. With so few, a couple of cheap or expensive flats move the median a lot: compare it with the district and municipality in the chart.",
+    "sourcesTitle": "Where this data comes from",
+    "sourceSerpavi": "SERPAVI, from the Ministry of Housing: rents from contracts declared in income tax returns, aggregated by census section, district and municipality. The tax office does not publish individual contracts, so we cannot show which ones they are.",
+    "sourceIpva": "INE rental price index, for the yearly change.",
+    "sourceMarket": "Deposits lodged (Generalitat Valenciana) and INCASÒL (Catalonia) for 2026 contracts, where available.",
+    "sourceLink": "See the source",
+    "download": "Download the province history (JSON)"
   }
 }

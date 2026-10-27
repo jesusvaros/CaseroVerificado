@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ZoneData } from '../../services/publicData/rentZones';
 import { useTranslations } from '../../i18n/useTranslations';
+import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
 
 const euros = (value: number) => `${Math.round(value).toLocaleString('es-ES')} €`;
 
@@ -15,6 +16,7 @@ const RentCalculator = ({ zone }: { zone: ZoneData }) => {
   const [year, p25m2, p50m2, p75m2, , typicalM2] = zone.rent!;
   const [m2, setM2] = useState(String(typicalM2 && typicalM2 > 0 ? Math.round(typicalM2) : 60));
   const [asked, setAsked] = useState('');
+  const [exploring, setExploring] = useState(false);
 
   const meters = Number(m2) > 0 ? Number(m2) : 60;
   const p25 = (p25m2 ?? p50m2) * meters;
@@ -56,6 +58,12 @@ const RentCalculator = ({ zone }: { zone: ZoneData }) => {
         </p>
       )}
       <span className="text-xs text-[#6B7465]">{t(`addressData.rent.source.${zone.rentLevel}`, { year })}</span>
+      <button type="button" onClick={() => setExploring(true)} className="w-fit text-sm font-bold text-brand hover:text-forest">
+        {t('explorer.open')} →
+      </button>
+      {exploring && (
+        <ZoneDataExplorer municipality={zone.municipalityCode} section={zone.section} place={zone.municipalityName} onClose={() => setExploring(false)} />
+      )}
     </section>
   );
 };
