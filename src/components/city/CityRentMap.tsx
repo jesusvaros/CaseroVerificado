@@ -64,7 +64,7 @@ const CityRentMap = ({ areas, colors, reviewPoints, onSelectReview, selectedId, 
         id: 'areas-fill',
         type: 'fill',
         source: 'areas',
-        paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 0.95, 0.75] },
+        paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 0.95, 0.85] },
       });
       instance.addLayer({
         id: 'areas-line',
