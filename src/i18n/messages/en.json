@@ -190,7 +190,8 @@
         "eyebrow": "What tenants say",
         "title": "The landlord, the flat and the deposit, rated.",
         "text": "Every review rates the landlord, the home, the building and the area. And it answers what you really want to know: did they get their deposit back?",
-        "sample": "Example of an address rating."
+        "sample": "Example of an address rating.",
+        "cta": "Read reviews by city →"
       },
       "rent": {
         "eyebrow": "Official reference rent",
@@ -198,7 +199,10 @@
         "text": "Enter the size of the flat and we show where the rent falls against the area, with the Ministry of Housing index.",
         "asked": "Asking {{amount}}",
         "median": "median {{amount}}",
-        "caption": "Example with real data: 60 m² in Madrid (SERPAVI 2024). Each address gets its own area."
+        "caption": "Example with real data: 60 m² in Madrid (SERPAVI 2024). Each address gets its own area.",
+        "searchPlaceholder": "Type the flat's address",
+        "cta": "Check the price",
+        "city": "See prices by neighbourhood in Madrid →"
       },
       "building": {
         "eyebrow": "Cadastre data",

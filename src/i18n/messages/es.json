@@ -190,7 +190,8 @@
         "eyebrow": "Lo que cuentan los inquilinos",
         "title": "El casero, el piso y la fianza, con nota.",
         "text": "Cada opinión puntúa al casero, la vivienda, el edificio y la zona. Y responde a lo que de verdad quieres saber: si te devolvieron la fianza.",
-        "sample": "Ejemplo de cómo se ve la nota de una dirección."
+        "sample": "Ejemplo de cómo se ve la nota de una dirección.",
+        "cta": "Leer opiniones por ciudad →"
       },
       "rent": {
         "eyebrow": "Precio de referencia oficial",
@@ -198,7 +199,10 @@
         "text": "Mete los metros del piso y te enseñamos dónde cae el precio frente a la zona, con el índice del Ministerio de Vivienda.",
         "asked": "Te piden {{amount}}",
         "median": "mediana {{amount}}",
-        "caption": "Ejemplo con datos reales: 60 m² en Madrid (SERPAVI 2024). En cada dirección se calcula para su zona."
+        "caption": "Ejemplo con datos reales: 60 m² en Madrid (SERPAVI 2024). En cada dirección se calcula para su zona.",
+        "searchPlaceholder": "Escribe la dirección del piso",
+        "cta": "Comprobar precio",
+        "city": "Ver precios por barrio en Madrid →"
       },
       "building": {
         "eyebrow": "Datos del Catastro",

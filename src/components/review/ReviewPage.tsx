@@ -200,7 +200,7 @@ const ReviewPage = () => {
           setIsValidated(reviewSession.validated);
   
           if (!reviewSession.validated && !isOwnReview) {
-            navigate('/map');
+            navigate('/opiniones');
             return;
           }
   
