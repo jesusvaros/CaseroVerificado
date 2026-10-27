@@ -5,8 +5,16 @@ import { useModeration, type PendingReview } from './useModeration';
 
 const DEPOSIT: Record<string, string> = { true: 'Fianza devuelta', partial: 'Fianza en parte', false: 'Fianza no devuelta', ongoing: 'Sigue viviendo allí' };
 
-const ReviewCard = ({ review, onApprove, onReject }: { review: PendingReview; onApprove: () => Promise<void>; onReject: (reason: string) => Promise<void> }) => {
+interface CardProps {
+  review: PendingReview;
+  onApprove: () => Promise<void>;
+  onReject: (reason: string) => Promise<void>;
+  onDelete: () => Promise<void>;
+}
+
+const ReviewCard = ({ review, onApprove, onReject, onDelete }: CardProps) => {
   const [reason, setReason] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [busy, setBusy] = useState(false);
   const a = review.address_details;
   const address = a?.fullAddress || [a?.street, a?.number, a?.city].filter(Boolean).join(' ') || 'Sin dirección';
@@ -40,9 +48,19 @@ const ReviewCard = ({ review, onApprove, onReject }: { review: PendingReview; on
         <button type="button" disabled={busy} onClick={() => run(onApprove, 'Publicada')} className="rounded-full bg-forest px-6 py-2.5 font-bold text-white hover:bg-brand disabled:opacity-50">
           Publicar
         </button>
-        <input value={reason} onChange={e => setReason(e.target.value)} placeholder="Motivo para rechazar (lo recibe el autor)" className="min-w-[260px] flex-1 rounded-full border border-line px-4 py-2.5 text-sm focus:border-brand focus:outline-none" />
-        <button type="button" disabled={busy || !reason.trim()} onClick={() => run(() => onReject(reason.trim()), 'Rechazada')} className="rounded-full border border-coral px-6 py-2.5 font-bold text-coral-ink hover:bg-coral-soft disabled:opacity-40">
+        <input value={reason} onChange={e => setReason(e.target.value)} placeholder="Motivo del rechazo (opcional)" className="min-w-[260px] flex-1 rounded-full border border-line px-4 py-2.5 text-sm focus:border-brand focus:outline-none" />
+        <button type="button" disabled={busy} onClick={() => run(() => onReject(reason), 'Rechazada')} className="rounded-full border border-coral px-6 py-2.5 font-bold text-coral-ink hover:bg-coral-soft disabled:opacity-40">
           Rechazar
+        </button>
+        {/* Two clicks instead of a browser confirm dialog */}
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => (confirmDelete ? run(onDelete, 'Borrada') : setConfirmDelete(true))}
+          onBlur={() => setConfirmDelete(false)}
+          className={`rounded-full px-5 py-2.5 text-sm font-bold disabled:opacity-40 ${confirmDelete ? 'bg-coral text-white' : 'text-ink-muted hover:text-coral-ink'}`}
+        >
+          {confirmDelete ? 'Pulsa otra vez para borrar' : 'Borrar'}
         </button>
       </div>
     </article>
@@ -50,14 +68,20 @@ const ReviewCard = ({ review, onApprove, onReject }: { review: PendingReview; on
 };
 
 const ModerationTab = () => {
-  const { reviews, error, approve, reject } = useModeration();
+  const { reviews, error, approve, reject, remove } = useModeration();
   if (error) return <p className="text-coral-ink">{error}</p>;
   if (!reviews) return <p className="text-ink-muted">Cargando…</p>;
   if (reviews.length === 0) return <p className="rounded-2xl bg-mist p-8 text-center text-ink-muted">No hay opiniones pendientes.</p>;
   return (
     <div className="flex flex-col gap-5">
       {reviews.map(r => (
-        <ReviewCard key={r.review_session_id} review={r} onApprove={() => approve(r.review_session_id)} onReject={reason => reject(r.review_session_id, reason)} />
+        <ReviewCard
+          key={r.review_session_id}
+          review={r}
+          onApprove={() => approve(r.review_session_id)}
+          onReject={reason => reject(r.review_session_id, reason)}
+          onDelete={() => remove(r.review_session_id)}
+        />
       ))}
     </div>
   );

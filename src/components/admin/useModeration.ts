@@ -43,18 +43,15 @@ export function useModeration() {
     setReviews(prev => prev?.filter(r => r.review_session_id !== id) ?? null);
   };
 
-  // Rejection goes through the reject-review edge function, which also emails the author.
-  const reject = async (id: string, reason: string) => {
-    const client = supabaseWrapper.getClient();
-    const { data } = await client!.auth.getSession();
-    const resp = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reject-review`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${data.session?.access_token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ review_session_id: id, rejection_reason: reason }),
-    });
-    if (!resp.ok) throw new Error((await resp.text()) || 'No se pudo rechazar');
+  const run = async (fn: 'reject_review' | 'delete_review', args: Record<string, unknown>, id: string) => {
+    const { error: rpcError } = await supabaseWrapper.getClient()!.rpc(fn, args);
+    if (rpcError) throw new Error(rpcError.message);
     setReviews(prev => prev?.filter(r => r.review_session_id !== id) ?? null);
   };
 
-  return { reviews, error, approve, reject };
+  // Both RPCs are admin-only in the database
+  const reject = (id: string, reason: string) => run('reject_review', { p_session_id: id, p_reason: reason }, id);
+  const remove = (id: string) => run('delete_review', { p_session_id: id }, id);
+
+  return { reviews, error, approve, reject, remove };
 }
