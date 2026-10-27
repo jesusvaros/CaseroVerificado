@@ -8,7 +8,6 @@ import Header from './components/Header';
 import PageSEO from './seo/PageSEO';
 import HomePage from './components/landing/HomePage';
 import SiteFooter from './components/SiteFooter';
-import MapView from './components/MapView';
 import ReviewFormPage from './components/review-form/ReviewFormPage';
 import AuthCallback from './components/AuthCallback';
 import ReviewPage from './components/review/ReviewPage';
@@ -47,7 +46,7 @@ function LegacyLocaleBlogRedirect() {
 function App() {
   const location = useLocation();
   const { t } = useTranslations();
-  const isGrayPage = location.pathname.includes('/review/') || location.pathname === '/profile' || location.pathname === '/map';
+  const isGrayPage = location.pathname.includes('/review/') || location.pathname === '/profile';
 
   useEffect(() => {
     trackEvent('app:loaded', { timestamp: new Date().toISOString() });
@@ -88,12 +87,7 @@ function App() {
               <ReviewPage />
             </>
           } />
-          <Route path="/map" element={
-            <>
-              <PageSEO title={t('seo.mapTitle')} description={t('seo.mapDescription')} />
-              <MapView />
-            </>
-          } />
+          <Route path="/map" element={<Navigate to="/opiniones" replace />} />
           <Route path="/opiniones" element={<CityReviewsIndexPage />} />
           <Route path="/opiniones/:countrySlug/:citySlug" element={<CityReviewsPage />} />
           <Route path="/opiniones/:citySlug" element={<CityReviewsPage />} />

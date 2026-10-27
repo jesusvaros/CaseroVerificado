@@ -238,7 +238,6 @@ async function generateSitemap() {
 
   const staticEntries = [
     { path: '/', changefreq: 'daily', priority: '1.0', lastmod: today },
-    { path: '/map', changefreq: 'weekly', priority: '0.8', lastmod: today },
     { path: '/opiniones', changefreq: 'daily', priority: '0.7', lastmod: today },
     { path: '/blog', changefreq: 'daily', priority: '0.7', lastmod: today },
     { path: '/datos', changefreq: 'monthly', priority: '0.4', lastmod: today },
