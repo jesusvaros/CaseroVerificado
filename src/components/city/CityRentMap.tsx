@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { CityArea } from '../../services/publicData/cityRent';
-import { rentColor } from './rentScale';
 import { useTranslations } from '../../i18n/useTranslations';
 
 interface CityRentMapProps {
   areas: CityArea[];
-  breaks: number[];
+  // Fill colour per area, indexed like `areas` (price or trend scale)
+  colors: string[];
   reviewPoints: [number, number][];
   selectedId: number | null;
   onSelect: (id: number | null) => void;
@@ -24,7 +24,7 @@ function bounds(areas: CityArea[]): maplibregl.LngLatBounds {
 
 // Choropleth of the reference rent per area, drawn with MapLibre directly (not through Leaflet)
 // so the colours are a single paint expression and hover/selection use feature state.
-const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: CityRentMapProps) => {
+const CityRentMap = ({ areas, colors, reviewPoints, selectedId, onSelect }: CityRentMapProps) => {
   const { t } = useTranslations();
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
@@ -51,7 +51,7 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
     map.current = instance;
 
     // Same colours as the list next to the map
-    const features = areas.map(a => ({ ...a, properties: { ...a.properties, color: rentColor(a.properties.p50, breaks) } }));
+    const features = areas.map((a, i) => ({ ...a, properties: { ...a.properties, color: colors[i] } }));
 
     instance.on('load', () => {
       // The container may have been laid out after the map was created
@@ -95,6 +95,13 @@ const CityRentMap = ({ areas, breaks, reviewPoints, selectedId, onSelect }: City
     // The map is built once per city; selection is synced below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [areas]);
+
+  // Switching between price and trend repaints the same shapes
+  useEffect(() => {
+    const source = map.current?.getSource('areas') as maplibregl.GeoJSONSource | undefined;
+    source?.setData({ type: 'FeatureCollection', features: areas.map((a, i) => ({ ...a, properties: { ...a.properties, color: colors[i] } })) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [colors]);
 
   useEffect(() => {
     const instance = map.current;

@@ -3,6 +3,7 @@ import { useTranslations } from '../../i18n/useTranslations';
 import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
 import type { CityArea } from '../../services/publicData/cityRent';
 import { perM2 } from './rentScale';
+import { formatChange } from './trendScale';
 
 // What the map shows for the tapped area: rent per m², a 60 m² estimate and how many reviews it has.
 const FEW_CONTRACTS = 50;
@@ -13,9 +14,10 @@ interface Props {
   level: 'barrio' | 'section';
   cumun: string;
   city: string;
+  trend?: { change: number | null; from: number; to: number } | null;
 }
 
-const CityAreaCard = ({ area, reviews, level, cumun, city }: Props) => {
+const CityAreaCard = ({ area, reviews, level, cumun, city, trend }: Props) => {
   const { t } = useTranslations();
   const [exploring, setExploring] = useState(false);
   const { name, district, p25, p50, p75, n } = area.properties;
@@ -35,6 +37,11 @@ const CityAreaCard = ({ area, reviews, level, cumun, city }: Props) => {
         </>
       ) : (
         <span className="text-sm text-ink-muted">{t('cityPage.noData')}</span>
+      )}
+      {trend?.change != null && (
+        <span className={`text-sm font-bold ${trend.change > 0 ? 'text-coral-ink' : 'text-[#2F5FC4]'}`}>
+          {t('cityPage.trend.card', { change: formatChange(trend.change), from: trend.from, to: trend.to })}
+        </span>
       )}
       <span className="text-sm text-ink-muted">
         {reviews === 0 ? t('cityPage.noReviews') : t(reviews === 1 ? 'cityPage.oneReview' : 'cityPage.reviews', { count: reviews })}

@@ -63,9 +63,9 @@ npx mapshaper@0.6.102 bcn/0301100100_UNITATS_ADM_POLIGONS.json -filter "TIPUS_UA
 cd -
 
 python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/madrid.geojson 28079 public/data/zonas \
-  public/data/ciudades/madrid.json "barrios del Ayuntamiento de Madrid (CC BY 4.0)"
+  public/data/ciudades/madrid.json "barrios del Ayuntamiento de Madrid (CC BY 4.0)" public/data/historico
 python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/barcelona.geojson 08019 public/data/zonas \
-  public/data/ciudades/barcelona.json "barris de l'Ajuntament de Barcelona (CC BY 4.0)"
+  public/data/ciudades/barcelona.json "barris de l'Ajuntament de Barcelona (CC BY 4.0)" public/data/historico
 ```
 
 ## Rebuild the municipality index

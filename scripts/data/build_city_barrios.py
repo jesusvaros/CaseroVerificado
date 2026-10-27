@@ -5,7 +5,10 @@ neighbourhood that contains its centroid, and the neighbourhood gets the contrac
 sections' percentiles. That is an approximation (the Ministry does not publish neighbourhood medians),
 and the page says so.
 
-    python3 -I scripts/data/build_city_barrios.py BARRIOS.geojson CUMUN public/data/zonas OUT.json "Attribution"
+    python3 -I scripts/data/build_city_barrios.py BARRIOS.geojson CUMUN public/data/zonas OUT.json "Attribution" [public/data/historico]
+
+With the history directory, each neighbourhood also gets `h`: its contract-weighted median per year
+(2011-2024, null when no section had data), so the city page can show how it changed.
 
 BARRIOS.geojson must be WGS84 with id, name and district properties (see scripts/data/README.md).
 """
@@ -60,19 +63,23 @@ def weighted(values, weights):
     return round(sum(v * w for v, w in zip(values, weights)) / total, 2) if total else None
 
 
-def main(barrios_path, cumun, zones_dir, out_path, attribution):
+def main(barrios_path, cumun, zones_dir, out_path, attribution, history_dir=None):
     barrios = json.load(open(barrios_path))
     zones = json.load(open('%s/%s.json' % (zones_dir, cumun[:2])))
     sections = [f for f in zones['features'] if f['properties']['s'].startswith(cumun)]
+    history = json.load(open('%s/%s.json' % (history_dir, cumun[:2]))) if history_dir else None
 
     assigned = {b['properties']['id']: [] for b in barrios['features']}
+    members = {b['properties']['id']: [] for b in barrios['features']}
     unassigned = 0
     for section in sections:
         x, y = representative_point(section['geometry'])
         barrio = next((b for b in barrios['features'] if contains(b['geometry'], x, y)), None)
         if barrio is None:
             unassigned += 1
-        elif section['properties']['r']:
+            continue
+        members[barrio['properties']['id']].append(section['properties']['s'])
+        if section['properties']['r']:
             assigned[barrio['properties']['id']].append(section['properties']['r'])
 
     for barrio in barrios['features']:
@@ -85,6 +92,12 @@ def main(barrios_path, cumun, zones_dir, out_path, attribution):
             'n': sum(weights) if rents else 0,
             'sections': len(rents),
         })
+        if history:
+            years = len(history['years'])
+            series = [history['s'].get(code, {}).get('vc') or [None] * years for code in members[barrio['properties']['id']]]
+            barrio['properties']['h'] = [
+                weighted([p[i][1] for p in series if p[i]], [p[i][0] or 1 for p in series if p[i]]) for i in range(years)
+            ]
 
     municipality = zones['municipalities'][cumun]
     doc = {
@@ -93,6 +106,7 @@ def main(barrios_path, cumun, zones_dir, out_path, attribution):
         'name': municipality['name'],
         'municipality': municipality,
         'source': 'SERPAVI (Ministerio de Vivienda y Agenda Urbana), %s' % attribution,
+        'years': history['years'] if history else None,
         'features': barrios['features'],
     }
     with open(out_path, 'w') as f:
@@ -103,4 +117,4 @@ def main(barrios_path, cumun, zones_dir, out_path, attribution):
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:6])
+    main(*sys.argv[1:7])
