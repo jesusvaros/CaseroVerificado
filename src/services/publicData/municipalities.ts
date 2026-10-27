@@ -1,18 +1,18 @@
 import { slugify } from '../../utils/slugify';
 
-// Every municipality with an official reference rent (public/data/municipios.json,
-// built by scripts/data/build_municipality_index.py).
+// Every Spanish municipality (public/data/municipios.json, built by scripts/data/build_municipality_index.py).
+// p50 is null for villages with too few contracts for an official reference rent.
 
 export interface Municipality {
   slug: string;
   name: string;
   cumun: string;
-  p50: number;
+  p50: number | null;
   contracts: number;
 }
 
 interface IndexFile {
-  municipalities: [string, string, string, number, number][];
+  municipalities: ([string, string, string] | [string, string, string, number, number])[];
   aliases: Record<string, string>;
 }
 
@@ -23,7 +23,7 @@ function loadIndex() {
     .then(res => (res.ok ? (res.json() as Promise<IndexFile>) : { municipalities: [], aliases: {} }))
     .catch(() => ({ municipalities: [], aliases: {} }) as IndexFile)
     .then(file => {
-      const list = file.municipalities.map(([slug, name, cumun, p50, contracts]) => ({ slug, name, cumun, p50, contracts }));
+      const list = file.municipalities.map(([slug, name, cumun, p50 = null, contracts = 0]) => ({ slug, name, cumun, p50, contracts }));
       return { list, bySlug: new Map(list.map(m => [m.slug, m])), aliases: file.aliases };
     });
   return index;

@@ -66,7 +66,7 @@ const CitySearch = ({ dark = false }: { dark?: boolean }) => {
                 className={`flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left ${i === active ? 'bg-mist' : 'hover:bg-mist'}`}
               >
                 <span className="font-semibold">{m.name}</span>
-                <span className="text-sm text-ink-muted">{m.p50.toLocaleString('es-ES')} €/m²</span>
+                {m.p50 != null && <span className="text-sm text-ink-muted">{m.p50.toLocaleString('es-ES')} €/m²</span>}
               </button>
             </li>
           ))}

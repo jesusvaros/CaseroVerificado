@@ -9,7 +9,7 @@ import CitySearch from '../components/city/CitySearch';
 
 const TOP = 30;
 
-// /opiniones: search any of the 2,601 municipalities with official rent data, or pick a big city.
+// /opiniones: search any of Spain's municipalities (2,601 have official rent data), or pick a big city.
 export default function CityReviewsIndexPage() {
   const { t } = useTranslations();
   const [cities, setCities] = useState<Municipality[]>([]);
@@ -51,7 +51,7 @@ export default function CityReviewsIndexPage() {
                 <Link to={`/opiniones/espana/${city.slug}`} className="group flex items-baseline justify-between gap-3 border-b border-line py-4">
                   <span className="font-semibold group-hover:text-brand">{city.name}</span>
                   <span className="shrink-0 text-sm text-ink-muted">
-                    <strong className="font-display text-base text-ink">{city.p50.toLocaleString('es-ES')} €/m²</strong>
+                    <strong className="font-display text-base text-ink">{city.p50?.toLocaleString('es-ES')} €/m²</strong>
                     {reviews > 0 && <span className="ml-2 text-brand">· {t(reviews === 1 ? 'cityPage.oneReview' : 'cityPage.reviews', { count: reviews })}</span>}
                   </span>
                 </Link>

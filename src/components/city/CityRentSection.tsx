@@ -35,6 +35,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
           )}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 text-sm text-ink-muted">
+          {breaks.length > 0 && (
           <div className="flex items-center gap-2">
             <span>{breaks.length ? perM2(breaks[0]) : t('cityPage.cheaper')}</span>
             <span className="flex overflow-hidden rounded-full">
@@ -44,10 +45,13 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
             </span>
             <span>{breaks.length ? perM2(breaks[breaks.length - 1]) : t('cityPage.pricier')}</span>
           </div>
-          <span className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full border-2 border-white bg-forest ring-1 ring-forest" />
-            {t('cityPage.reviewDot')}
-          </span>
+          )}
+          {points.length > 0 && (
+            <span className="flex items-center gap-2">
+              <span className="h-3 w-3 rounded-full border-2 border-white bg-forest ring-1 ring-forest" />
+              {t('cityPage.reviewDot')}
+            </span>
+          )}
         </div>
         <p className="text-xs text-[#6B7465]">
           {t(rent.level === 'barrio' ? 'cityPage.sourceBarrio' : 'cityPage.sourceSection', { source: rent.source })}
@@ -59,7 +63,18 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
           {rent.level === 'barrio' ? (
             <CityAreaList areas={rent.areas} breaks={breaks} reviewCounts={reviewCounts} selectedId={selectedId} onSelect={setSelectedId} />
           ) : (
-            <p className="text-lg text-ink-soft">{t('cityPage.sectionsHint')}</p>
+            <div className="flex flex-col items-start gap-6">
+              <p className="text-lg text-ink-soft">{t(breaks.length ? 'cityPage.sectionsHint' : 'cityPage.noOfficialRent', { city: rent.name })}</p>
+              {reviews.length === 0 && (
+                <div className="flex flex-col items-start gap-4 rounded-3xl bg-mist p-7">
+                  <h2 className="font-display text-2xl font-extrabold tracking-tight">{t('cityPage.firstTitle', { city: rent.name })}</h2>
+                  <p className="text-ink-soft">{t('cityPage.firstText')}</p>
+                  <Link to="/add-review" className="rounded-full bg-forest px-6 py-3 font-bold text-white transition-colors hover:bg-brand">
+                    {t('cityPage.firstCta')}
+                  </Link>
+                </div>
+              )}
+            </div>
           )}
         </div>
         <aside className="flex min-w-0 flex-[1_1_320px] flex-col gap-8">

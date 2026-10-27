@@ -5,6 +5,7 @@ import MapView from '../components/MapView';
 import CityRentHero from '../components/city/CityRentHero';
 import CityRentSection from '../components/city/CityRentSection';
 import CityQuotes from '../components/city/CityQuotes';
+import CitySearch from '../components/city/CitySearch';
 import { useCityRent } from '../components/city/useCityRent';
 import { canonicalCitySlug, findMunicipality } from '../services/publicData/municipalities';
 import { useTranslations } from '../i18n/useTranslations';
@@ -212,49 +213,13 @@ export default function CityReviewsPage() {
         }
         noindex={status === 'not-found'}
       />
-      {status !== 'ready' && (
-      <main className="mx-auto max-w-6xl px-6 pt-28 pb-24">
-        {status === 'loading' ? (
-          <section className="rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
-            <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">
-              {t('cityReviews.city.badge')}
-            </p>
-            <h1 className="mt-2 text-3xl font-semibold text-gray-900">
-              {t('cityReviews.city.loading.title', { city: fallbackCityName })}
-            </h1>
-            <p className="mt-4 text-gray-600">{t('cityReviews.city.loading.description')}</p>
-          </section>
-        ) : null}
-
-        {status === 'not-found' ? (
-          <section className="rounded-2xl border border-gray-200 bg-white p-12 text-center shadow-sm">
-            <p className="text-sm font-medium uppercase tracking-wide text-emerald-700">
-              {t('cityReviews.city.badge')}
-            </p>
-            <h1 className="mt-2 text-3xl font-semibold text-gray-900">
-              {t('cityReviews.city.notFound.title', { city: fallbackCityName })}
-            </h1>
-            <p className="mt-4 text-gray-600">
-              {t('cityReviews.city.notFound.description')}
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link
-                to="/map"
-                className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                {t('cityReviews.city.notFound.mapCta')}
-              </Link>
-              <Link
-                to="/opiniones"
-                className="rounded-full border border-emerald-700 px-5 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
-              >
-                {t('cityReviews.city.notFound.citiesCta')}
-              </Link>
-            </div>
-          </section>
-        ) : null}
-
-      </main>
+      {status === 'loading' && <div className="min-h-screen bg-white pt-24" aria-busy="true" />}
+      {status === 'not-found' && (
+        <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-5 pt-24 text-center text-ink">
+          <h1 className="font-display text-3xl font-extrabold">{t('cityReviews.city.notFound.title', { city: fallbackCityName })}</h1>
+          <CitySearch />
+          <Link to="/opiniones" className="font-bold text-brand underline underline-offset-4">{t('cityReviews.city.notFound.citiesCta')}</Link>
+        </div>
       )}
       {status === 'ready' ? (
         <div className="bg-white pb-24 text-ink">
