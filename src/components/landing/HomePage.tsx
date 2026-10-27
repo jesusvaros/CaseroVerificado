@@ -7,6 +7,7 @@ import HomeBuilding from './HomeBuilding';
 import HomeQuote from './HomeQuote';
 import HomeGuides from './HomeGuides';
 import HomeClosing from './HomeClosing';
+import DataSourcesNote from '../data-sources/DataSourcesNote';
 
 // Home page, section by section as in the "1 · Landing" design.
 const HomePage = () => {
@@ -21,6 +22,7 @@ const HomePage = () => {
       <HomeBuilding building={building} />
       <HomeQuote review={quote} />
       <HomeGuides />
+      <DataSourcesNote sources={['reviews', 'serpavi', 'catastro', 'tensioned']} className="pb-24" />
       <HomeClosing />
     </div>
   );

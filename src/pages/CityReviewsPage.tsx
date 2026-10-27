@@ -6,6 +6,7 @@ import CityRentHero from '../components/city/CityRentHero';
 import CityRentSection from '../components/city/CityRentSection';
 import CityQuotes from '../components/city/CityQuotes';
 import CitySearch from '../components/city/CitySearch';
+import DataSourcesNote from '../components/data-sources/DataSourcesNote';
 import { useCityRent } from '../components/city/useCityRent';
 import { canonicalCitySlug, findMunicipality } from '../services/publicData/municipalities';
 import { useTranslations } from '../i18n/useTranslations';
@@ -257,6 +258,7 @@ export default function CityReviewsPage() {
             </div>
           )}
           <CityQuotes city={fallbackCityName} reviews={reviews} />
+          <DataSourcesNote sources={['reviews', 'serpavi', 'deposits', 'sales', 'ipva', 'tensioned']} className="pt-20" />
         </div>
       ) : null}
     </>

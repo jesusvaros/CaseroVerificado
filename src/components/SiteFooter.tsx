@@ -5,6 +5,7 @@ import { umamiEventProps } from '../utils/analytics';
 
 const LINKS = [
   { to: '/opiniones', key: 'footer.opinionsByCity', event: 'footer:opiniones' },
+  { to: '/datos', key: 'footer.data', event: 'footer:datos' },
   { to: '/aviso-legal', key: 'footer.legalNotice', event: 'footer:aviso-legal' },
   { to: '/politica-privacidad', key: 'footer.privacyPolicy', event: 'footer:privacidad' },
   { to: '/cookies', key: 'footer.cookiesPolicy', event: 'footer:cookies' },
@@ -21,7 +22,7 @@ const SiteFooter = () => {
       <div className="mx-auto flex max-w-[1320px] flex-col gap-6">
         <div className="flex flex-wrap items-center justify-between gap-5">
           <span className="font-display text-xl font-extrabold text-white">CaseroOk</span>
-          <span>{t('footer.dataSources')}</span>
+          <Link to="/datos" className="hover:text-white">{t('footer.dataSources')}</Link>
         </div>
         <nav className="flex flex-wrap gap-x-[18px] gap-y-2">
           <Link className="text-lime hover:text-white" to={buildBlogListPath(locale)} {...umamiEventProps('footer:blog')}>
