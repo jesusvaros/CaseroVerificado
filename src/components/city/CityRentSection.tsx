@@ -6,7 +6,7 @@ import type { PublicReview } from '../../services/supabase/publicReviews';
 import CityRentMap from './CityRentMap';
 import CityAreaCard from './CityAreaCard';
 import CityAreaList from './CityAreaList';
-import { RENT_COLORS, perM2, rentColor } from './rentScale';
+import { RENT_COLORS, perM2, rentColor, rentRange } from './rentScale';
 import { TREND_COLORS, formatChange, trendColor, trendThresholds, type TrendPeriod } from './trendScale';
 import { useCityTrends } from './useCityTrends';
 import TrendList from './TrendList';
@@ -38,6 +38,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
     [rent, breaks, showTrend, trends, period]
   );
   const lastYear = trends.years[trends.years.length - 1];
+  const range = useMemo(() => rentRange(rent.areas.map(a => a.properties.p50).filter((v): v is number => v != null)), [rent]);
   const chip = (active: boolean) => `rounded-full px-4 py-2 text-sm font-bold transition-colors ${active ? 'bg-forest text-white' : 'bg-mist text-ink-soft hover:text-ink'}`;
 
   return (
@@ -106,13 +107,13 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
             </div>
           ) : breaks.length > 0 && (
           <div className="flex items-center gap-2">
-            <span>{breaks.length ? perM2(breaks[0]) : t('cityPage.cheaper')}</span>
+            <span>{range ? perM2(range[0]) : t('cityPage.cheaper')}</span>
             <span className="flex overflow-hidden rounded-full">
               {RENT_COLORS.map(color => (
-                <span key={color} className="h-3 w-8" style={{ background: color }} />
+                <span key={color} className="h-3 w-7" style={{ background: color }} />
               ))}
             </span>
-            <span>{breaks.length ? perM2(breaks[breaks.length - 1]) : t('cityPage.pricier')}</span>
+            <span>{range ? perM2(range[1]) : t('cityPage.pricier')}</span>
           </div>
           )}
           {points.length > 0 && (
