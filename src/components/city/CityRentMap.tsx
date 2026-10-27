@@ -3,12 +3,14 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { CityArea } from '../../services/publicData/cityRent';
 import { useTranslations } from '../../i18n/useTranslations';
+import type { ReviewPoint } from './reviewPoints';
 
 interface CityRentMapProps {
   areas: CityArea[];
   // Fill colour per area, indexed like `areas` (price or trend scale)
   colors: string[];
-  reviewPoints: [number, number][];
+  reviewPoints: ReviewPoint[];
+  onSelectReview: (id: number) => void;
   selectedId: number | null;
   onSelect: (id: number | null) => void;
 }
@@ -24,7 +26,7 @@ function bounds(areas: CityArea[]): maplibregl.LngLatBounds {
 
 // Choropleth of the reference rent per area, drawn with MapLibre directly (not through Leaflet)
 // so the colours are a single paint expression and hover/selection use feature state.
-const CityRentMap = ({ areas, colors, reviewPoints, selectedId, onSelect }: CityRentMapProps) => {
+const CityRentMap = ({ areas, colors, reviewPoints, onSelectReview, selectedId, onSelect }: CityRentMapProps) => {
   const { t } = useTranslations();
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
@@ -75,15 +77,27 @@ const CityRentMap = ({ areas, colors, reviewPoints, selectedId, onSelect }: City
       });
       instance.addSource('reviews', {
         type: 'geojson',
-        data: { type: 'FeatureCollection', features: reviewPoints.map(([lng, lat]) => ({ type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: [lng, lat] } })) },
+        data: { type: 'FeatureCollection', features: reviewPoints.map(p => ({ type: 'Feature', id: p.id, properties: { count: p.reviews.length }, geometry: { type: 'Point', coordinates: [p.lng, p.lat] } })) },
       });
       instance.addLayer({
         id: 'reviews',
         type: 'circle',
         source: 'reviews',
-        paint: { 'circle-radius': 6, 'circle-color': '#0E3B26', 'circle-stroke-width': 2, 'circle-stroke-color': '#FFFFFF' },
+        paint: { 'circle-radius': ['case', ['>', ['get', 'count'], 1], 8, 6], 'circle-color': '#0E3B26', 'circle-stroke-width': 2, 'circle-stroke-color': '#FFFFFF' },
       });
-      instance.on('click', 'areas-fill', e => onSelect((e.features?.[0]?.id as number | undefined) ?? null));
+      // Invisible wider circle so the dots are easy to hit with a finger
+      instance.addLayer({ id: 'reviews-hit', type: 'circle', source: 'reviews', paint: { 'circle-radius': 16, 'circle-opacity': 0 } });
+      instance.on('click', 'reviews-hit', e => {
+        const id = e.features?.[0]?.id;
+        if (typeof id === 'number') onSelectReview(id);
+      });
+      instance.on('mouseenter', 'reviews-hit', () => (instance.getCanvas().style.cursor = 'pointer'));
+      instance.on('mouseleave', 'reviews-hit', () => (instance.getCanvas().style.cursor = ''));
+      instance.on('click', 'areas-fill', e => {
+        // A tap on a review dot opens the review, not the area underneath
+        if (instance.queryRenderedFeatures(e.point, { layers: ['reviews-hit'] }).length) return;
+        onSelect((e.features?.[0]?.id as number | undefined) ?? null);
+      });
       instance.on('mouseenter', 'areas-fill', () => (instance.getCanvas().style.cursor = 'pointer'));
       instance.on('mouseleave', 'areas-fill', () => (instance.getCanvas().style.cursor = ''));
     });
