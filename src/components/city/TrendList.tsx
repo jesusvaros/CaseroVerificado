@@ -35,7 +35,7 @@ const TrendList = ({ areas, changes, period, selectedId, onSelect }: Props) => {
                 <span className="h-3.5 w-3.5 shrink-0 rounded-full" style={{ background: trendColor(change, period) }} />
                 <span className="min-w-0 flex-1 truncate font-semibold">{label(area)}</span>
                 {area.properties.p50 != null && <span className="text-sm text-ink-muted">{perM2(area.properties.p50)}</span>}
-                <span className={`w-20 text-right font-bold ${change > 0 ? 'text-coral-ink' : change < 0 ? 'text-[#2F5FC4]' : ''}`}>
+                <span className={`w-24 shrink-0 whitespace-nowrap text-right font-bold ${change > 0 ? 'text-coral-ink' : change < 0 ? 'text-[#2F5FC4]' : ''}`}>
                   {change > 0 ? '▲' : change < 0 ? '▼' : ''} {formatChange(change)}
                 </span>
               </button>
