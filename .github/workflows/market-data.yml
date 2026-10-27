@@ -36,14 +36,24 @@ jobs:
             | python -c "import json,sys; print(next(r['url'] for r in json.load(sys.stdin)['result']['resources'] if r['format'].upper() == 'CSV'))")
           curl -fsSL -A "$UA" -o gva.csv "$CSV"
           curl -fsSL -o incasol.json "https://analisi.transparenciacatalunya.cat/resource/qww9-bvhh.json?\$where=ambit_territorial='Municipi'%20AND%20any>='$((YEAR - 1))'&\$limit=50000"
+          # History for the data explorer: every INCASÒL year and every Valencian deposit file since 2020
+          curl -fsSL -o incasol_all.json "https://analisi.transparenciacatalunya.cat/resource/qww9-bvhh.json?\$where=ambit_territorial='Municipi'&\$limit=200000"
+          cp gva.csv "gva_$YEAR.csv"
+          for Y in $(seq 2020 $((YEAR - 1))); do
+            URL=$(curl -fsSL "https://dadesobertes.gva.es/api/3/action/package_show?id=viv-reg-fia-$Y" \
+              | python -c "import json,sys; print(next(r['url'] for r in json.load(sys.stdin)['result']['resources'] if r['format'].upper() == 'CSV'))")
+            curl -fsSL -A "$UA" -o "gva_$Y.csv" "$URL"
+          done
 
       - name: Build
-        run: python -I scripts/data/build_market.py /tmp/market public/data/zonas public/data/mercado
+        run: |
+          python -I scripts/data/build_market.py /tmp/market public/data/zonas public/data/mercado
+          python -I scripts/data/build_market_history.py /tmp/market public/data/mercado-historico
 
       # A monthly commit also keeps the repository active, so GitHub does not pause this schedule
       - name: Commit
         run: |
-          git add public/data/mercado
+          git add public/data/mercado public/data/mercado-historico
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0

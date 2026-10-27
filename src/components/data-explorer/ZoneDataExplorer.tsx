@@ -5,6 +5,7 @@ import { getRentHistory, type RentHistory } from '../../services/publicData/rent
 import HistoryChart, { type Series } from './HistoryChart';
 import HistoryTable from './HistoryTable';
 import DataSources from './DataSources';
+import NewContractsSection from './NewContractsSection';
 
 type Level = 'section' | 'district' | 'municipality';
 // Validated for colour-blind separation; every line also carries its name at the end
@@ -17,7 +18,15 @@ const latest = (values?: (readonly (number | null)[] | null)[]) => {
 };
 
 // "Ver los datos": the official history behind a reference rent, from simple to detailed.
-const ZoneDataExplorer = ({ municipality, section, place, onClose }: { municipality: string; section?: string | null; place: string; onClose: () => void }) => {
+interface Props {
+  municipality: string;
+  section?: string | null;
+  postalCode?: string | null;
+  place: string;
+  onClose: () => void;
+}
+
+const ZoneDataExplorer = ({ municipality, section, postalCode, place, onClose }: Props) => {
   const { t } = useTranslations();
   const [history, setHistory] = useState<RentHistory | null | undefined>(undefined);
   const [level, setLevel] = useState<Level | null>(null);
@@ -80,10 +89,12 @@ const ZoneDataExplorer = ({ municipality, section, place, onClose }: { municipal
               </div>
             )}
 
+            <NewContractsSection municipality={municipality} postalCode={postalCode} place={place} />
+
             <section className="flex flex-col gap-2">
               <h3 className="font-display text-xl font-extrabold">{t('explorer.chartTitle')}</h3>
               <p className="text-sm text-ink-muted">{t('explorer.chartHint')}</p>
-              <HistoryChart years={history!.years} series={series} />
+              <HistoryChart labels={history!.years} series={series} />
             </section>
 
             <details className="group rounded-2xl border border-line p-5">

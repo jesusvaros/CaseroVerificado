@@ -6,6 +6,7 @@ Static files under `public/data/`, served by Vercel next to the app. They are re
 |---|---|---|
 | `zonas/<province>.json` | Reference rents per census section, district and municipality: [SERPAVI](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi) (Ministerio de Vivienda y Agenda Urbana). Section shapes: INE 2021 census sections, the ones SERPAVI uses. Annual change: INE rental price index (IPVA, table 59060). | Once a year, when SERPAVI publishes (around March or April). |
 | `historico/<province>.json` | SERPAVI history 2011–2024 per municipality, district and census section (flats; houses for municipalities and districts), from the same SERPAVI file. Loaded only when someone opens "Ver los datos". Built by `build_rent_history.py`. | With `zonas/`, once a year. |
+| `mercado-historico/<province>.json` | Rent in new contracts year by year: INCASÒL yearly average since 2007 (Catalonia) and the median Valencian deposit since 2020, by municipality and postcode. The current year is partial. Built by `build_market_history.py`. | Monthly, by `.github/workflows/market-data.yml`. |
 | `tensionadas.json` | Stressed rental markets declared under Ley 12/2023, from the [Ministry list](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi/consultar-zonas-de-mercado-residencial-tensionado). | Every quarter, after each BOE resolution. |
 
 Building facts are not stored: the app asks the Catastro services directly (see `src/services/publicData/catastro.ts`).

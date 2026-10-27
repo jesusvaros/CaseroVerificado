@@ -2,11 +2,14 @@ import { useTranslations } from '../../i18n/useTranslations';
 import type { CityRent } from '../../services/publicData/cityRent';
 import CitySearch from './CitySearch';
 import type { MarketData } from '../../services/publicData/market';
+import { useState } from 'react';
+import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
 
 const CityRentHero = ({ city, region, rent, market }: { city: string; region: string | null; rent: CityRent | null; market: MarketData | null }) => {
   const { t } = useTranslations();
   const median = rent?.rent?.[2];
   const change = rent?.ipva?.[1];
+  const [exploring, setExploring] = useState(false);
 
   return (
     <section className="bg-forest pt-20 text-white">
@@ -15,9 +18,15 @@ const CityRentHero = ({ city, region, rent, market }: { city: string; region: st
           {region && <span className="text-sm text-[#9FC3A5]">{region}</span>}
           <h1 className="font-display text-5xl font-extrabold leading-none tracking-tight md:text-6xl">{t('cityPage.title', { city })}</h1>
           <p className="text-lg leading-relaxed text-[#CFE5C6]">{t(rent?.level === 'barrio' ? 'cityPage.subtitle' : median ? 'cityPage.subtitleZones' : 'cityPage.subtitleNoRent')}</p>
-          <div className="pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-2">
             <CitySearch dark />
+            {rent && (
+              <button type="button" onClick={() => setExploring(true)} className="rounded-full border border-white/30 px-5 py-2.5 text-sm font-bold text-white hover:bg-white/10">
+                {t('explorer.cityOpen')} →
+              </button>
+            )}
           </div>
+          {exploring && rent && <ZoneDataExplorer municipality={rent.cumun} place={rent.name} onClose={() => setExploring(false)} />}
         </div>
         {(median || market) && (
           <div className="flex flex-wrap gap-x-12 gap-y-6">
