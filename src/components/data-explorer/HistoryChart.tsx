@@ -10,15 +10,24 @@ export interface Series {
 const W = 640;
 const H = 240;
 const PAD = { top: 16, right: 92, bottom: 28, left: 40 };
-const fmt = (v: number) => v.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-// Median €/m² per year for up to three areas, with a crosshair tooltip and direct labels at the line ends.
-const HistoryChart = ({ years, series }: { years: number[]; series: Series[] }) => {
+interface Props {
+  labels: (string | number)[];
+  series: Series[];
+  unit?: string;
+  decimals?: number;
+}
+
+// One value per period for up to three areas, with a crosshair tooltip and direct labels at the line ends.
+const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props) => {
+  const years = labels;
+  const fmt = (v: number) => v.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   const [hover, setHover] = useState<number | null>(null);
   const all = series.flatMap(s => s.values).filter((v): v is number => v != null);
   if (all.length === 0) return null;
-  const min = Math.floor(Math.min(...all) - 0.5);
-  const max = Math.ceil(Math.max(...all) + 0.5);
+  const pad = (Math.max(...all) - Math.min(...all)) * 0.1 || 1;
+  const min = Math.floor(Math.min(...all) - pad);
+  const max = Math.ceil(Math.max(...all) + pad);
   const x = (i: number) => PAD.left + (i / (years.length - 1)) * (W - PAD.left - PAD.right);
   const y = (v: number) => PAD.top + (1 - (v - min) / (max - min || 1)) * (H - PAD.top - PAD.bottom);
   const ticks = Array.from({ length: 4 }, (_, i) => min + ((max - min) * i) / 3);
@@ -59,7 +68,7 @@ const HistoryChart = ({ years, series }: { years: number[]; series: Series[] }) 
             <text x={PAD.left - 8} y={y(t) + 4} textAnchor="end" className="fill-[#6B7465] text-[11px]">{fmt(t)}</text>
           </g>
         ))}
-        {years.map((yr, i) => (i % 2 === 1 || i === years.length - 1) && (
+        {years.map((yr, i) => (years.length <= 8 || i % 2 === 1 || i === years.length - 1) && (
           <text key={yr} x={x(i)} y={H - 8} textAnchor="middle" className="fill-[#6B7465] text-[11px]">{yr}</text>
         ))}
         {hover != null && <line x1={x(hover)} x2={x(hover)} y1={PAD.top} y2={H - PAD.bottom} stroke="#10180F" strokeOpacity={0.25} />}
@@ -86,7 +95,7 @@ const HistoryChart = ({ years, series }: { years: number[]; series: Series[] }) 
             <div key={s.key} className="flex items-center gap-2 whitespace-nowrap">
               <span className="h-2.5 w-2.5 rounded-full" style={{ background: s.color }} />
               <span className="text-ink-soft">{s.label}</span>
-              <strong className="ml-auto pl-3">{s.values[hover] != null ? `${fmt(s.values[hover]!)} €/m²` : '–'}</strong>
+              <strong className="ml-auto pl-3">{s.values[hover] != null ? `${fmt(s.values[hover]!)} ${unit}` : '–'}</strong>
             </div>
           ))}
         </div>

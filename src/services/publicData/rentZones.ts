@@ -23,6 +23,7 @@ export interface ZoneData {
   rentLevel: RentLevel | null;
   // INE rental price index, annual change (%) for the municipality
   ipva: [number, number] | null;
+  postalCode: string | null;
 }
 
 const files = new Map<string, Promise<ZoneFile | null>>();
@@ -92,5 +93,6 @@ export async function getZoneData(lat: number, lng: number, postalCode?: string 
     rent,
     rentLevel,
     ipva: municipality?.ipva ?? null,
+    postalCode: postalCode?.trim() || null,
   };
 }

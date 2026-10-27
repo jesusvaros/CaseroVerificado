@@ -849,6 +849,7 @@
   },
   "explorer": {
     "open": "Ver los datos",
+    "cityOpen": "Ver la evolución",
     "title": "Los datos detrás de este precio",
     "close": "Cerrar",
     "loading": "Cargando el histórico…",
@@ -883,6 +884,16 @@
     "sourceIpva": "Índice de precios de vivienda en alquiler del INE, para la variación anual.",
     "sourceMarket": "Fianzas depositadas (Generalitat Valenciana) e INCASÒL (Catalunya) para los contratos de 2026, donde existen.",
     "sourceLink": "Ver la fuente",
-    "download": "Descargar el histórico de la provincia (JSON)"
+    "download": "Descargar el histórico de la provincia (JSON)",
+    "market": {
+      "title": "Contratos nuevos: lo más reciente",
+      "summary": "En {{year}}, los contratos nuevos rondan {{eur}} €/mes ({{n}} contratos).",
+      "change": "{{change}} respecto a {{year}}",
+      "postcode": "CP {{cp}}",
+      "note": {
+        "catalonia": "Renta media de los contratos con fianza depositada en el INCASÒL (Generalitat de Catalunya). * Año en curso: hasta el último trimestre publicado.",
+        "valencia": "Mediana de las fianzas depositadas en la Generalitat Valenciana; la fianza legal es un mes de alquiler. * Año en curso: fianzas depositadas hasta hoy."
+      }
+    }
   }
 }

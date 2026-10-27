@@ -62,7 +62,7 @@ const RentCalculator = ({ zone }: { zone: ZoneData }) => {
         {t('explorer.open')} →
       </button>
       {exploring && (
-        <ZoneDataExplorer municipality={zone.municipalityCode} section={zone.section} place={zone.municipalityName} onClose={() => setExploring(false)} />
+        <ZoneDataExplorer municipality={zone.municipalityCode} section={zone.section} postalCode={zone.postalCode} place={zone.municipalityName} onClose={() => setExploring(false)} />
       )}
     </section>
   );
