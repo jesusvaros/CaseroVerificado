@@ -9,6 +9,8 @@ export interface CityArea {
   id: number;
   geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
   properties: { key: string; name: string | null; district: string | null; p25: number | null; p50: number | null; p75: number | null; n: number };
+  // Median €/m² per year (see CityRent.years); barrios ship it, census sections load it on demand
+  history?: (number | null)[];
 }
 
 export interface CityRent {
@@ -18,6 +20,7 @@ export interface CityRent {
   rent: RentValues | null;
   ipva: [number, number] | null;
   source: string;
+  years: number[] | null;
   areas: CityArea[];
 }
 
@@ -37,7 +40,7 @@ async function fetchJson<T>(path: string): Promise<T | null> {
 export async function getCityRent(citySlug: string): Promise<CityRent | null> {
   const canonical = (await findMunicipality(citySlug))?.slug ?? citySlug;
   if (CITY_FILES.has(canonical)) {
-    const file = await fetchJson<{ name: string; cumun: string; municipality: Municipality; source: string; features: { geometry: CityArea['geometry']; properties: { id: string; name: string; district: string; p25: number | null; p50: number | null; p75: number | null; n: number } }[] }>(
+    const file = await fetchJson<{ name: string; cumun: string; municipality: Municipality; source: string; features: { geometry: CityArea['geometry']; properties: { id: string; name: string; district: string; p25: number | null; p50: number | null; p75: number | null; n: number; h?: (number | null)[] } }[]; years?: number[] | null }>(
       `/data/ciudades/${canonical}.json`
     );
     if (file) {
@@ -48,11 +51,13 @@ export async function getCityRent(citySlug: string): Promise<CityRent | null> {
         rent: file.municipality.r,
         ipva: file.municipality.ipva,
         source: file.source,
+        years: file.years ?? null,
         areas: file.features.map((f, i) => ({
           type: 'Feature',
           id: i,
           geometry: f.geometry,
           properties: { key: f.properties.id, name: f.properties.name, district: f.properties.district, p25: f.properties.p25, p50: f.properties.p50, p75: f.properties.p75, n: f.properties.n },
+          history: f.properties.h,
         })),
       };
     }
@@ -74,6 +79,7 @@ export async function getCityRent(citySlug: string): Promise<CityRent | null> {
     rent: municipality.r,
     ipva: municipality.ipva,
     source: 'SERPAVI (Ministerio de Vivienda y Agenda Urbana)',
+    years: null,
     areas: zones.features
       .filter(f => f.properties.s.startsWith(cumun))
       .map((f, i) => {
