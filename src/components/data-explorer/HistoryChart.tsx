@@ -13,7 +13,7 @@ export interface Series {
 
 const W = 640;
 const H = 240;
-const PAD = { top: 16, right: 92, bottom: 28, left: 40 };
+const PAD = { top: 16, right: 128, bottom: 28, left: 40 };
 
 interface Props {
   labels: (string | number)[];
