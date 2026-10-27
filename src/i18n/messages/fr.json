@@ -295,8 +295,6 @@
     "section2Bullet1": "Nous ne stockons pas de données personnelles en clair (nom, téléphone, email).",
     "section2Bullet2": "Nous stockons uniquement un hash irréversible (ex. SHA-256) de données normalisées (ex. téléphone ou email normalisé).",
     "section2Bullet3": "Le hash est calculé sur votre appareil (frontend ou extension) et seul le hash est envoyé, jamais la donnée originale.",
-    "section2Lead3Strong": "Données d’usage/analytique (uniquement avec consentement) :",
-    "section2Lead3": "pages vues et événements agrégés.",
     "section3Title": "3) Origine des données",
     "section3Body1": "Contribution volontaire de l’utilisateur lors de la publication de son avis.",
     "section3Body2": "Extension navigateur (Chrome/Firefox) : capte uniquement les informations visibles sur des pages comme Idealista ; calcule le hash localement et interroge le backend avec ce hash. Elle ne réalise pas de scraping massif ni de téléchargement de données personnelles en clair.",
@@ -327,16 +325,9 @@
     "section1Title": "Utilisons-nous des cookies ?",
     "section1Bullet1Strong": "Cookies techniques/nécessaires :",
     "section1Bullet1": "indispensables au fonctionnement du site (session, sécurité, préférences de base).",
-    "section1Bullet2Strong": "Cookies d’analytique (optionnels) :",
-    "section1Bullet2": "uniquement si vous donnez votre consentement dans la bannière ; ils servent à mesurer l’usage et améliorer l’expérience.",
-    "section1Body": "Nous n’utilisons pas de cookies pour afficher des données personnelles.",
-    "section2Title": "Gestion du consentement",
-    "section2Prefix": "Lors de votre première visite, nous affichons une bannière pour accepter, refuser ou configurer les cookies non essentiels. Vous pouvez modifier votre choix dans",
-    "cookieSettingsLink": "Configurer les cookies",
     "section3Title": "Comment gérer les cookies dans votre navigateur",
     "section3Body": "Vous pouvez autoriser, bloquer ou supprimer les cookies depuis les paramètres de votre navigateur.",
-    "section4Title": "Fournisseurs",
-    "section4Body": "Si vous activez l’analytique, nous pourrons utiliser {{analyticsProvider}}."
+    "section4Title": "Fournisseurs"
   },
   "termsOfUse": {
     "seoTitle": "Conditions d’utilisation | CaseroOk",

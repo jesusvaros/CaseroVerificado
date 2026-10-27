@@ -7,7 +7,6 @@ export const LEGAL_META = {
   projectName: 'CaseroOk',
   jurisdictionCity: 'Sevilla',
   hostingProvider: 'Vercel',
-  analyticsProvider: 'Plausible',
+  analyticsProvider: 'PostHog, Umami, Vercel Analytics y una medición propia',
   logsRetentionDays: '90 días',
-  cookieSettingsPath: '/cookies', // Ruta donde el usuario puede configurar cookies
 };

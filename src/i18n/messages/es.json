@@ -457,7 +457,7 @@
     }
   },
   "legalCommon": {
-    "lastUpdated": "Última actualización: 19/08/2025"
+    "lastUpdated": "Última actualización: 28/10/2026"
   },
   "legalHub": {
     "seoTitle": "Términos y Condiciones | CaseroOk",
@@ -505,8 +505,8 @@
     "section2Bullet1": "No guardamos datos personales en claro (nombre, teléfono, email).",
     "section2Bullet2": "Guardamos únicamente un hash irreversible (p. ej. SHA-256) de datos normalizados (ej.: teléfono normalizado o email normalizado).",
     "section2Bullet3": "El hash se calcula en tu dispositivo (frontend o extensión) y solo se envía el hash, nunca el dato original.",
-    "section2Lead3Strong": "Datos de uso/analítica (solo si habilitas analítica con consentimiento):",
-    "section2Lead3": "páginas vistas, eventos agregados.",
+    "section2Lead3Strong": "Datos de uso (agregados y sin cookies):",
+    "section2Lead3": "páginas vistas y eventos, sin identificarte.",
     "section3Title": "3) Origen de los datos",
     "section3Body1": "Aportación voluntaria del usuario al publicar su reseña.",
     "section3Body2": "Extensión de navegador (Chrome/Firefox): capta únicamente información visible en páginas como Idealista; calcula el hash localmente y consulta el backend con ese hash. No realiza scraping masivo ni descarga datos personales en claro.",
@@ -537,16 +537,16 @@
     "section1Title": "¿Usamos cookies?",
     "section1Bullet1Strong": "Cookies técnicas/necesarias:",
     "section1Bullet1": "imprescindibles para que la web funcione (sesión, seguridad, preferencias básicas).",
-    "section1Bullet2Strong": "Cookies de analítica (opcionales):",
-    "section1Bullet2": "solo si das tu consentimiento en el banner; se usan para medir uso y mejorar la experiencia.",
-    "section1Body": "No usamos cookies para mostrar datos personales.",
-    "section2Title": "Gestión del consentimiento",
-    "section2Prefix": "En tu primera visita mostramos un banner para aceptar, rechazar o configurar cookies no esenciales. Puedes cambiar tu elección en",
+    "section1Bullet2Strong": "Medición de uso sin cookies:",
+    "section1Bullet2": "contamos visitas y uso de la web de forma agregada, sin guardar cookies ni identificadores en tu navegador.",
+    "section1Body": "No usamos cookies publicitarias ni de seguimiento entre sitios.",
+    "section2Title": "¿Por qué no hay banner de cookies?",
+    "section2Prefix": "Porque solo guardamos en tu navegador lo técnicamente imprescindible, como mantener tu sesión iniciada, y eso no requiere consentimiento.",
     "cookieSettingsLink": "Configurar cookies",
     "section3Title": "Cómo gestionar cookies en tu navegador",
     "section3Body": "Puedes permitir, bloquear o eliminar cookies desde la configuración de tu navegador.",
     "section4Title": "Proveedores",
-    "section4Body": "Si activas analítica, podremos usar {{analyticsProvider}}."
+    "section4Body": "Para medir el uso de forma agregada y sin cookies usamos {{analyticsProvider}}."
   },
   "termsOfUse": {
     "seoTitle": "Condiciones de Uso | CaseroOk",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabaseWrapper } from '../../services/supabase/client';
 import { AuthContext } from './context';
+import { excludeThisBrowser } from '../../services/siteEvents';
 
 // Provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -36,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const userEmail = data.user.email;
           // This should match the admin email in the Edge Function
           setIsAdmin(userEmail === 'xjesusvr@gmail.com');
+          if (userEmail === 'xjesusvr@gmail.com') excludeThisBrowser();
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error desconocido');
@@ -56,6 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(session.user);
             // Check if user is admin
             setIsAdmin(session.user.email === 'xjesusvr@gmail.com');
+            if (session.user.email === 'xjesusvr@gmail.com') excludeThisBrowser();
           } else {
             setUser(null);
             setIsAdmin(false);

@@ -295,8 +295,6 @@
     "section2Bullet1": "Não guardamos dados pessoais em claro (nome, telefone, email).",
     "section2Bullet2": "Guardamos apenas um hash irreversível (ex.: SHA-256) de dados normalizados (ex.: telefone ou email normalizado).",
     "section2Bullet3": "O hash é calculado no seu dispositivo (frontend ou extensão) e apenas o hash é enviado, nunca o dado original.",
-    "section2Lead3Strong": "Dados de uso/analítica (apenas com consentimento):",
-    "section2Lead3": "páginas vistas e eventos agregados.",
     "section3Title": "3) Origem dos dados",
     "section3Body1": "Contribuição voluntária do utilizador ao publicar a sua avaliação.",
     "section3Body2": "Extensão de navegador (Chrome/Firefox): capta apenas informação visível em páginas como Idealista; calcula o hash localmente e consulta o backend com esse hash. Não faz scraping massivo nem descarrega dados pessoais em claro.",
@@ -327,16 +325,9 @@
     "section1Title": "Usamos cookies?",
     "section1Bullet1Strong": "Cookies técnicos/necessários:",
     "section1Bullet1": "indispensáveis para o funcionamento do site (sessão, segurança, preferências básicas).",
-    "section1Bullet2Strong": "Cookies de analítica (opcionais):",
-    "section1Bullet2": "apenas se der consentimento no banner; são usados para medir utilização e melhorar a experiência.",
-    "section1Body": "Não usamos cookies para mostrar dados pessoais.",
-    "section2Title": "Gestão do consentimento",
-    "section2Prefix": "Na sua primeira visita mostramos um banner para aceitar, rejeitar ou configurar cookies não essenciais. Pode alterar a sua escolha em",
-    "cookieSettingsLink": "Configurar cookies",
     "section3Title": "Como gerir cookies no navegador",
     "section3Body": "Pode permitir, bloquear ou eliminar cookies nas definições do seu navegador.",
-    "section4Title": "Fornecedores",
-    "section4Body": "Se ativar analítica, poderemos usar {{analyticsProvider}}."
+    "section4Title": "Fornecedores"
   },
   "termsOfUse": {
     "seoTitle": "Termos de Uso | CaseroOk",

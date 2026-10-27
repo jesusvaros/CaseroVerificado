@@ -23,13 +23,7 @@ export default function PoliticaCookies() {
       <p className="text-gray-700 mb-6">{t('cookiesPolicy.section1Body')}</p>
 
       <h2 className="text-xl font-semibold mb-2">{t('cookiesPolicy.section2Title')}</h2>
-      <p className="text-gray-700 mb-6">
-        {t('cookiesPolicy.section2Prefix')}{' '}
-        <a href={LEGAL_META.cookieSettingsPath} className="text-[rgb(74,94,50)] underline">
-          {t('cookiesPolicy.cookieSettingsLink')}
-        </a>
-        .
-      </p>
+      <p className="text-gray-700 mb-6">{t('cookiesPolicy.section2Prefix')}</p>
 
       <h2 className="text-xl font-semibold mb-2">{t('cookiesPolicy.section3Title')}</h2>
       <p className="text-gray-700 mb-6">{t('cookiesPolicy.section3Body')}</p>

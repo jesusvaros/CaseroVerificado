@@ -295,8 +295,6 @@
     "section2Bullet1": "Wir speichern keine personenbezogenen Daten im Klartext (Name, Telefon, E-Mail).",
     "section2Bullet2": "Wir speichern nur einen irreversiblen Hash (z. B. SHA-256) normalisierter Daten (z. B. normalisierte Telefonnummer oder E-Mail).",
     "section2Bullet3": "Der Hash wird auf deinem Gerät berechnet (Frontend oder Erweiterung) und nur der Hash wird übertragen, nie der Originalwert.",
-    "section2Lead3Strong": "Nutzungs-/Analysedaten (nur mit Einwilligung):",
-    "section2Lead3": "Seitenaufrufe und aggregierte Ereignisse.",
     "section3Title": "3) Herkunft der Daten",
     "section3Body1": "Freiwillige Angabe durch den Nutzer beim Veröffentlichen einer Bewertung.",
     "section3Body2": "Browser-Erweiterung (Chrome/Firefox): erfasst nur sichtbare Informationen auf Seiten wie Idealista; berechnet den Hash lokal und fragt das Backend mit diesem Hash ab. Kein Massenscraping und kein Download personenbezogener Daten im Klartext.",
@@ -327,16 +325,9 @@
     "section1Title": "Verwenden wir Cookies?",
     "section1Bullet1Strong": "Technische/notwendige Cookies:",
     "section1Bullet1": "für den Betrieb der Website erforderlich (Sitzung, Sicherheit, grundlegende Einstellungen).",
-    "section1Bullet2Strong": "Analyse-Cookies (optional):",
-    "section1Bullet2": "nur mit deiner Einwilligung im Banner; sie dienen der Nutzungsanalyse und Verbesserung der Erfahrung.",
-    "section1Body": "Wir verwenden Cookies nicht zur Anzeige personenbezogener Daten.",
-    "section2Title": "Einwilligungsverwaltung",
-    "section2Prefix": "Beim ersten Besuch zeigen wir ein Banner zum Akzeptieren, Ablehnen oder Konfigurieren nicht notwendiger Cookies. Deine Auswahl kannst du ändern unter",
-    "cookieSettingsLink": "Cookies konfigurieren",
     "section3Title": "Cookies im Browser verwalten",
     "section3Body": "Du kannst Cookies in den Einstellungen deines Browsers zulassen, blockieren oder löschen.",
-    "section4Title": "Anbieter",
-    "section4Body": "Wenn du Analyse aktivierst, können wir {{analyticsProvider}} verwenden."
+    "section4Title": "Anbieter"
   },
   "termsOfUse": {
     "seoTitle": "Nutzungsbedingungen | CaseroOk",
