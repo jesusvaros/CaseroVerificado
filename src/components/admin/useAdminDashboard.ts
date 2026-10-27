@@ -14,6 +14,9 @@ export interface OutreachContact {
   sent_at: string | null;
   replied_at: string | null;
   notes: string | null;
+  last_message: string | null;
+  thread_url: string | null;
+  synced_at: string | null;
   visitors: number;
   sessions: number;
   forms: number;

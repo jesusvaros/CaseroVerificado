@@ -47,8 +47,15 @@ const OutreachTab = ({ contacts, onUpdate }: Props) => {
     });
   };
 
+  const lastSync = contacts.map(c => c.synced_at).filter(Boolean).sort().pop();
+
   return (
     <div className="flex flex-col gap-6">
+      <p className="text-sm text-ink-muted">
+        {lastSync
+          ? `El correo se revisa solo cada 15 minutos. Última revisión: ${new Date(lastSync).toLocaleString('es-ES')}.`
+          : 'La revisión automática del correo todavía no se ha ejecutado.'}
+      </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <AdminStat value={total.sent} label="Enviados" hint={`de ${contacts.length} contactos`} />
         <AdminStat value={pct(total.replied, total.sent)} label="Responden" hint={`${total.replied} respuestas · ${total.interested} interesados`} accent />
@@ -89,6 +96,12 @@ const OutreachTab = ({ contacts, onUpdate }: Props) => {
                   <div className="font-semibold">{c.org}</div>
                   <div className="text-xs text-ink-muted">{[c.city, c.kind, c.channel].filter(Boolean).join(' · ')}</div>
                   <div className="text-xs text-ink-muted">?ref={c.ref}</div>
+                  {c.last_message && (
+                    <p className="mt-2 max-w-sm rounded-lg bg-mist p-2 text-xs italic text-ink-soft">
+                      “{c.last_message}”
+                      {c.thread_url && <a href={c.thread_url} target="_blank" rel="noreferrer" className="ml-1 not-italic font-bold text-brand">Abrir hilo →</a>}
+                    </p>
+                  )}
                 </td>
                 <td className="px-4 py-3">
                   <select
