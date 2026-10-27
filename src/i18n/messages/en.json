@@ -709,10 +709,14 @@
     "barrioNote": "price estimated from its census sections",
     "cheaper": "Cheaper",
     "pricier": "Pricier",
-    "reviewDot": "Published review",
+    "reviewDot": "Published review (tap to read it)",
     "sourceBarrio": "Median rent per m² for flats, averaged over each neighbourhood's census sections weighted by number of contracts. Source: {{source}}.",
     "sourceSection": "Median rent per m² for flats in each census section. Source: {{source}}.",
     "sectionsHint": "Tap an area on the map to see its reference rent. For a specific address, search it on the home page.",
+    "dot": {
+      "open": "See the address and its reviews",
+      "deposit": "{{x}} of {{y}} got the full deposit back"
+    },
     "trend": {
       "modePrice": "Price",
       "modeTrend": "How it changed",

@@ -10,6 +10,8 @@ import { RENT_COLORS, perM2, rentColor } from './rentScale';
 import { TREND_COLORS, formatChange, trendColor, trendThresholds, type TrendPeriod } from './trendScale';
 import { useCityTrends } from './useCityTrends';
 import TrendList from './TrendList';
+import ReviewPointCard from './ReviewPointCard';
+import { groupReviewPoints } from './reviewPoints';
 import TenantUnionLink from '../address/TenantUnionLink';
 
 interface CityRentSectionProps {
@@ -23,7 +25,9 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
   const { t } = useTranslations();
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const selected = rent.areas.find(a => a.id === selectedId) ?? null;
-  const points = reviews.filter(r => r.lat != null && r.lng != null).map(r => [r.lng!, r.lat!] as [number, number]);
+  const points = useMemo(() => groupReviewPoints(reviews), [reviews]);
+  const [reviewPointId, setReviewPointId] = useState<number | null>(null);
+  const reviewPoint = points.find(p => p.id === reviewPointId) ?? null;
   const province = rent.cumun.slice(0, 2);
   const [mode, setMode] = useState<'price' | 'trend'>('price');
   const [period, setPeriod] = useState<TrendPeriod>(5);
@@ -56,7 +60,25 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
           </div>
         )}
         <div className="relative">
-          <CityRentMap areas={rent.areas} colors={colors} reviewPoints={points} selectedId={selectedId} onSelect={setSelectedId} />
+          <CityRentMap
+            areas={rent.areas}
+            colors={colors}
+            reviewPoints={points}
+            onSelectReview={id => {
+              setSelectedId(null);
+              setReviewPointId(id);
+            }}
+            selectedId={selectedId}
+            onSelect={id => {
+              setReviewPointId(null);
+              setSelectedId(id);
+            }}
+          />
+          {reviewPoint && (
+            <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:w-80">
+              <ReviewPointCard point={reviewPoint} onClose={() => setReviewPointId(null)} />
+            </div>
+          )}
           {selected && (
             <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:w-80">
               <CityAreaCard
