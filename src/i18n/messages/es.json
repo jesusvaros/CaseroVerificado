@@ -850,7 +850,21 @@
   },
   "explorer": {
     "open": "Ver los datos",
+    "since": "desde",
     "cityOpen": "Ver la evolución",
+    "sectionTitle": "Zona censal de {{place}}",
+    "channels": {
+      "title": "Evolución por fuente",
+      "together": "Juntos",
+      "shortPostcode": "Nuevos · CP",
+      "shortMunicipality": "Nuevos · municipio",
+      "separate": "Separados",
+      "marketPostcode": "Contratos nuevos · CP {{cp}}",
+      "marketMunicipality": "Contratos nuevos · municipio",
+      "indexNote": "Juntos, cada línea se muestra como índice: {{year}} = 100. Así se comparan €/m² y €/mes en un mismo gráfico sin mezclar unidades.",
+      "sameUnitNote": "Todas las líneas en {{unit}}.",
+      "legend": "Línea continua: precio de referencia del Ministerio (contratos declarados, hasta 2024). Línea discontinua: contratos nuevos (fianzas). * Año en curso."
+    },
     "title": "Los datos detrás de este precio",
     "close": "Cerrar",
     "loading": "Cargando el histórico…",
@@ -863,6 +877,7 @@
       "municipality": "Municipio"
     },
     "summary": "En {{year}}, la mediana fue de {{p50}} €/m² con {{n}} contratos declarados.",
+    "areaSummary": "En {{year}}, la mediana en {{name}} fue de {{p50}} €/m²{{change}}.",
     "change": "{{change}} desde {{from}}",
     "tableTitle": "Año a año",
     "tableLevel": "Datos de:",

@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslations } from '../../i18n/useTranslations';
 import { getRentHistory, type RentHistory } from '../../services/publicData/rentHistory';
-import HistoryChart, { type Series } from './HistoryChart';
 import HistoryTable from './HistoryTable';
 import DataSources from './DataSources';
-import NewContractsSection from './NewContractsSection';
+import NewContractsSummary from './NewContractsSummary';
+import ChannelsPanel from './ChannelsPanel';
+import { buildChannels } from './channels';
+import { getMarketHistory, type MarketHistory } from '../../services/publicData/marketHistory';
 
 type Level = 'section' | 'district' | 'municipality';
-// Validated for colour-blind separation; every line also carries its name at the end
-const COLORS: Record<Level, string> = { section: '#1F7A4D', district: '#3B6FD4', municipality: '#C2742A' };
 const FEW = 50;
 
 const latest = (values?: (readonly (number | null)[] | null)[]) => {
@@ -23,32 +23,45 @@ interface Props {
   section?: string | null;
   postalCode?: string | null;
   place: string;
+  // The clicked area when it is ours (a barrio): its name and median €/m² per year
+  area?: { name: string; values: (number | null)[] } | null;
   onClose: () => void;
 }
 
-const ZoneDataExplorer = ({ municipality, section, postalCode, place, onClose }: Props) => {
+const ZoneDataExplorer = ({ municipality, section, postalCode, place, area, onClose }: Props) => {
   const { t } = useTranslations();
   const [history, setHistory] = useState<RentHistory | null | undefined>(undefined);
+  const [market, setMarket] = useState<MarketHistory | null>(null);
   const [level, setLevel] = useState<Level | null>(null);
 
   useEffect(() => {
     void getRentHistory(municipality, section).then(setHistory);
+    void getMarketHistory(municipality, postalCode).then(setMarket);
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [municipality, section, onClose]);
+  }, [municipality, section, postalCode, onClose]);
 
   const levels = history
     ? (['section', 'district', 'municipality'] as Level[]).filter(l => history[l]?.vc?.some(Boolean))
     : [];
   const active = level ?? levels[0] ?? null;
   const median = (l: Level, p: number[] | null) => (p ? (l === 'section' ? p[1] : p[2]) : null);
-  const series: Series[] = levels.map(l => ({
-    key: l,
-    label: t(`explorer.series.${l}`),
-    color: COLORS[l],
-    values: history![l]!.vc!.map(p => median(l, p as number[] | null)),
-  }));
+  const channels = buildChannels(t, history ?? null, market, area ? { label: area.name, values: area.values } : null, postalCode);
+  const title = area?.name ?? (section ? t('explorer.sectionTitle', { place }) : place);
+  const areaSummary = (() => {
+    if (!area || !history) return null;
+    const last = area.values.reduce<number>((acc, v, i) => (v != null ? i : acc), -1);
+    const first = area.values.findIndex(v => v != null);
+    if (last < 0) return null;
+    const pct = first < last ? ((area.values[last]! - area.values[first]!) / area.values[first]!) * 100 : null;
+    return {
+      name: area.name,
+      year: history.years[last],
+      p50: area.values[last]!.toLocaleString('es-ES'),
+      change: pct == null ? '' : ` (${pct > 0 ? '+' : ''}${Math.round(pct)} % ${t('explorer.since')} ${history.years[first]})`,
+    };
+  })();
 
   const head = active && history ? latest(history[active]!.vc) : null;
   const headMedian = head && active ? median(active, head.v as number[]) : null;
@@ -65,8 +78,9 @@ const ZoneDataExplorer = ({ municipality, section, postalCode, place, onClose }:
         <button type="button" onClick={onClose} aria-label={t('explorer.close')} className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full text-ink-muted hover:bg-mist hover:text-ink">
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
-        <p className="text-sm font-bold uppercase tracking-wide text-brand">{place}</p>
-        <h2 className="mt-1 pr-10 font-display text-3xl font-extrabold tracking-tight">{t('explorer.title')}</h2>
+        <p className="text-sm font-bold uppercase tracking-wide text-brand">{t('explorer.title')}</p>
+        <h2 className="mt-1 pr-10 font-display text-3xl font-extrabold tracking-tight">{title}</h2>
+        {title !== place && <p className="mt-1 text-ink-muted">{place}</p>}
 
         {history === undefined && <p className="mt-6 text-ink-muted">{t('explorer.loading')}</p>}
         {history !== undefined && levels.length === 0 && <p className="mt-6 text-ink-muted">{t('explorer.none')}</p>}
@@ -74,8 +88,10 @@ const ZoneDataExplorer = ({ municipality, section, postalCode, place, onClose }:
         {levels.length > 0 && head && headMedian != null && (
           <div className="mt-6 flex flex-col gap-8">
             <p className="text-lg">
-              {t('explorer.summary', { year: history!.years[head.i], p50: headMedian.toLocaleString('es-ES'), n: (head.v[0] ?? 0).toLocaleString('es-ES') })}
-              {change != null && (
+              {areaSummary
+                ? t('explorer.areaSummary', areaSummary)
+                : t('explorer.summary', { year: history!.years[head.i], p50: headMedian.toLocaleString('es-ES'), n: (head.v[0] ?? 0).toLocaleString('es-ES') })}
+              {!areaSummary && change != null && (
                 <strong className={change > 0 ? ' text-coral-ink' : ' text-forest'}>
                   {' '}{t('explorer.change', { change: `${change > 0 ? '+' : ''}${Math.round(change)} %`, from: history!.years[first] })}
                 </strong>
@@ -89,13 +105,9 @@ const ZoneDataExplorer = ({ municipality, section, postalCode, place, onClose }:
               </div>
             )}
 
-            <NewContractsSection municipality={municipality} postalCode={postalCode} place={place} />
+            {market && <NewContractsSummary market={market} />}
 
-            <section className="flex flex-col gap-2">
-              <h3 className="font-display text-xl font-extrabold">{t('explorer.chartTitle')}</h3>
-              <p className="text-sm text-ink-muted">{t('explorer.chartHint')}</p>
-              <HistoryChart labels={history!.years} series={series} />
-            </section>
+            {channels.length > 0 && <ChannelsPanel channels={channels} />}
 
             <details className="group rounded-2xl border border-line p-5">
               <summary className="cursor-pointer font-display text-lg font-extrabold">{t('explorer.tableTitle')}</summary>

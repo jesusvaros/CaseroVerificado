@@ -5,11 +5,15 @@ export interface Series {
   label: string;
   color: string;
   values: (number | null)[];
+  // Dashed lines mark a different source (new contracts) next to SERPAVI
+  dashed?: boolean;
+  // Shorter name for the label at the end of the line
+  short?: string;
 }
 
 const W = 640;
 const H = 240;
-const PAD = { top: 16, right: 92, bottom: 28, left: 40 };
+const PAD = { top: 16, right: 128, bottom: 28, left: 40 };
 
 interface Props {
   labels: (string | number)[];
@@ -19,6 +23,11 @@ interface Props {
 }
 
 // One value per period for up to three areas, with a crosshair tooltip and direct labels at the line ends.
+const endLabel = (s: Series) => {
+  const text = s.short ?? s.label;
+  return text.length > 13 ? `${text.slice(0, 12)}…` : text;
+};
+
 const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props) => {
   const years = labels;
   const fmt = (v: number) => v.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
@@ -73,7 +82,7 @@ const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props)
         ))}
         {hover != null && <line x1={x(hover)} x2={x(hover)} y1={PAD.top} y2={H - PAD.bottom} stroke="#10180F" strokeOpacity={0.25} />}
         {series.map(s => (
-          <path key={s.key} d={path(s.values)} fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+          <path key={s.key} d={path(s.values)} fill="none" stroke={s.color} strokeWidth={2} strokeDasharray={s.dashed ? '6 4' : undefined} strokeLinejoin="round" strokeLinecap="round" />
         ))}
         {hover != null &&
           series.map(s => s.values[hover] != null && (
@@ -81,7 +90,7 @@ const HistoryChart = ({ labels, series, unit = '€/m²', decimals = 1 }: Props)
           ))}
         {ends.map(e => (
           <text key={e.s.key} x={x(e.i) + 8} y={e.y + 4} className="text-[12px] font-bold" fill="#10180F">
-            <tspan fill={e.s.color}>●</tspan> {e.s.label}
+            <tspan fill={e.s.color}>●</tspan> {endLabel(e.s)}
           </text>
         ))}
       </svg>
