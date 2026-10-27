@@ -66,7 +66,7 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
           className={underlineInput(errors.includes('price'))}
         />
       </label>
-      <label className="flex w-28 flex-col gap-1.5">
+      <label className="flex w-36 flex-col gap-1.5">
         <span className={smallLabel}>{t('addReview.v2.stay.size')}</span>
         <input
           type="number"

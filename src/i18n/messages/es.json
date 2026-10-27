@@ -15,6 +15,8 @@
   },
   "header": {
     "writeReview": "Escribir opinión",
+    "writeReviewShort": "Opinar",
+    "menu": "Menú",
     "blog": "Blog",
     "blogAria": "Blog",
     "userProfileAria": "Perfil de usuario",
@@ -108,7 +110,7 @@
         "titleHighlight": "antes",
         "titleEnd": "de pagar la fianza.",
         "subtitle": "Opiniones anónimas de inquilinos sobre pisos y caseros de toda España. Gratis y sin anuncios.",
-        "searchPlaceholder": "Calle y número del piso",
+        "searchPlaceholder": "Calle y número",
         "searchCta": "Buscar",
         "lived": "¿Viviste en esa dirección?",
         "livedCta": "Escribe tu opinión",
@@ -374,7 +376,8 @@
     "originalSource": "Fuente original",
     "shareTitle": "¿Quieres compartir tu experiencia?",
     "shareDescription": "En CaseroOk transformamos noticias y vivencias reales en recursos prácticos para inquilinos. Si quieres contribuir con tu historia, puedes publicar una opinión anónima en minutos.",
-    "shareCta": "Escribir una opinión"
+    "shareCta": "Escribir una opinión",
+    "keepReading": "Sigue leyendo"
   },
   "cityReviews": {
     "index": {
@@ -428,10 +431,10 @@
         "description": "Cargando detalles y mapa…"
       },
       "notFound": {
-        "title": "No encontramos reseñas en {{city}}",
+        "title": "No encontramos {{city}}",
         "description": "Aún no tenemos opiniones públicas para esta ubicación. Puedes explorar todas las reseñas en el mapa general o volver al listado de ciudades disponibles.",
         "mapCta": "Ver mapa completo",
-        "citiesCta": "Ver ciudades con opiniones"
+        "citiesCta": "Ver todas las ciudades"
       },
       "ready": {
         "title": "Opiniones sobre alquiler en {{city}}",
@@ -710,6 +713,13 @@
     "sourceBarrio": "Mediana del alquiler por m² de vivienda colectiva, media de las secciones censales de cada barrio ponderada por número de contratos. Fuente: {{source}}.",
     "sourceSection": "Mediana del alquiler por m² de vivienda colectiva en cada sección censal. Fuente: {{source}}.",
     "sectionsHint": "Toca una zona del mapa para ver su precio de referencia. Para una dirección concreta, búscala en la portada.",
+    "noOfficialRent": "{{city}} tiene muy pocos contratos registrados para que el Ministerio publique un precio de referencia. Las opiniones de quien ha vivido aquí son la mejor pista.",
+    "firstTitle": "¿Has vivido de alquiler en {{city}}?",
+    "firstText": "Todavía nadie ha opinado aquí. Tres minutos, anónimo, y ayudas a quien vaya a alquilar después.",
+    "firstCta": "Escribir la primera opinión",
+    "salesYear": "viviendas vendidas en el último año (hasta {{period}})",
+    "subtitleZones": "Cuánto cuesta cada zona según el índice oficial, qué cuentan los inquilinos y qué derechos tienes aquí.",
+    "subtitleNoRent": "Qué cuentan los inquilinos, cuánto se vende y qué derechos tienes aquí.",
     "listTitle": "Barrios, del más caro al más barato",
     "asideTitle": "Si alquilas en {{city}}",
     "depositTitle": "Tu fianza",
@@ -734,7 +744,7 @@
     "seoTitle": "Alquiler por ciudades: precios oficiales y opiniones | CaseroOk",
     "seoDescription": "Precio de referencia del alquiler por barrios y zonas en 2.601 municipios de España, con opiniones de inquilinos.",
     "title": "¿Dónde vas a alquilar?",
-    "subtitle": "Precio oficial por zonas en 2.601 municipios, opiniones de inquilinos y tus derechos en cada sitio.",
+    "subtitle": "Precio oficial por zonas en 2.601 municipios, opiniones de inquilinos y tus derechos en todos los de España.",
     "listTitle": "Los mercados de alquiler más grandes",
     "source": "Mediana del alquiler por m² de vivienda colectiva en 2024. Fuente: SERPAVI (Ministerio de Vivienda y Agenda Urbana)."
   },

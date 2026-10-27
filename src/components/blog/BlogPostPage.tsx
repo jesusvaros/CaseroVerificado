@@ -1,35 +1,18 @@
 import React from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   computeReadingMinutes as estimateReadingMinutes,
   findBlogPostBySlug,
   type StaticBlogPost,
 } from '../../blog/posts';
-import {
-  normalizeBlogCountryCode,
-} from '../../blog/countryBlogs';
 import { getRelatedPostsBatch } from '../../blog/relatedPosts';
 import { resolveLocale } from '../../i18n/config';
 import { buildBlogListPath, buildBlogPostPath } from '../../i18n/routing';
 import { useTranslations } from '../../i18n/useTranslations';
-import { useDetectedCountryCode } from '../../services/location/useDetectedCountryCode';
 import PageSEO from '../../seo/PageSEO';
 import RelatedLinksCard from './RelatedLinksCard';
-
-function formatDate(dateString: string | null, dateLocale: string) {
-  if (!dateString) return null;
-  try {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat(dateLocale, {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(date);
-  } catch (error) {
-    console.error('formatDate error', error);
-    return null;
-  }
-}
+import GuideCover from './GuideCover';
+import { guideTopic } from './guideTopics';
 
 type ContentBlock = {
   type: 'paragraph' | 'heading' | 'list' | 'ordered-list' | 'divider';
@@ -65,7 +48,7 @@ function processInlineMarkdown(text: string): React.ReactNode[] {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="break-words text-emerald-700 underline hover:text-emerald-900"
+          className="break-words text-brand underline underline-offset-2 hover:text-forest"
         >
           {linkText ?? bareUrl}
         </a>
@@ -130,7 +113,7 @@ function computeReadingMinutes(post: StaticBlogPost | null) {
 
 function renderBlock(block: ContentBlock, index: number) {
   if (block.type === 'divider') {
-    return <hr key={`divider-${index}`} className="my-8 border-gray-300" />;
+    return <hr key={`divider-${index}`} className="my-8 border-line" />;
   }
 
   if (block.type === 'heading') {
@@ -140,10 +123,10 @@ function renderBlock(block: ContentBlock, index: number) {
         key={`heading-${index}`}
         className={
           block.level === 2
-            ? 'mt-10 text-3xl font-semibold text-gray-900'
+            ? 'mt-12 font-display text-[28px] font-extrabold leading-tight tracking-tight text-ink'
             : block.level === 3
-              ? 'mt-8 text-2xl font-semibold text-gray-900'
-              : 'mt-6 text-xl font-semibold text-gray-900'
+              ? 'mt-9 font-display text-[22px] font-extrabold tracking-tight text-ink'
+              : 'mt-7 text-lg font-bold text-ink'
         }
       >
         {processInlineMarkdown(block.content[0])}
@@ -152,7 +135,7 @@ function renderBlock(block: ContentBlock, index: number) {
   }
   if (block.type === 'ordered-list') {
     return (
-      <ol key={`ordered-list-${index}`} className="my-6 list-decimal pl-6 text-gray-800">
+      <ol key={`ordered-list-${index}`} className="my-6 list-decimal pl-6 marker:font-bold marker:text-brand">
         {block.content.map((item, idx) => (
           <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
         ))}
@@ -161,7 +144,7 @@ function renderBlock(block: ContentBlock, index: number) {
   }
   if (block.type === 'list') {
     return (
-      <ul key={`list-${index}`} className="my-6 list-disc pl-6 text-gray-800">
+      <ul key={`list-${index}`} className="my-6 list-disc pl-6 marker:text-brand">
         {block.content.map((item, idx) => (
           <li key={idx} className="mb-2">{processInlineMarkdown(item)}</li>
         ))}
@@ -176,173 +159,62 @@ function renderBlock(block: ContentBlock, index: number) {
 }
 
 export default function BlogPostPage() {
-  const [searchParams] = useSearchParams();
   const { slug = '', locale: routeLocale } = useParams<{ slug: string; locale?: string }>();
-  const { locale, dateLocale, t } = useTranslations();
+  const { locale, t } = useTranslations();
   const blogLocale = resolveLocale(routeLocale ?? locale);
-  const requestedCountryCode = normalizeBlogCountryCode(searchParams.get('country'));
-  const { countryCode: detectedCountryCode, countryResolved } = useDetectedCountryCode();
-  const detectedBlogCountryCode = normalizeBlogCountryCode(detectedCountryCode);
-  const activeCountryCode =
-    requestedCountryCode ?? detectedBlogCountryCode ?? 'ES';
-  const isCountryPending = !requestedCountryCode && !countryResolved && !detectedBlogCountryCode;
-
-  const post = isCountryPending
-    ? null
-    : findBlogPostBySlug(slug, blogLocale, activeCountryCode) ?? null;
-
+  const post = findBlogPostBySlug(slug, blogLocale, 'ES') ?? null;
   const readingMinutes = computeReadingMinutes(post);
-  const publishedLabel = formatDate(post?.publishedAt ?? null, dateLocale);
-  const blocks = post ? parseContent(post.content) : [];
-  const seoTitle = post?.seoTitle ?? post?.title ?? t('blogPost.seoFallbackTitle');
-  const seoDescription = post?.seoDescription ?? post?.summary ?? undefined;
+  const blogPath = buildBlogListPath(blogLocale);
 
-  const relatedPosts = post
-    ? getRelatedPostsBatch(post, {
-      top: 3,
-      middle: 3,
-      bottom: 6,
-    })
-    : { top: [], middle: [], bottom: [] };
+  if (!post) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-5 pt-24 text-center text-ink">
+        <PageSEO title={t('blogPost.notFoundTitle')} noindex />
+        <h1 className="font-display text-3xl font-extrabold">{t('blogPost.notFoundTitle')}</h1>
+        <p className="text-ink-soft">{t('blogPost.notFoundDescription')}</p>
+        <Link to={blogPath} className="font-bold text-brand underline underline-offset-4">{t('blogPost.viewAllArticles')}</Link>
+      </div>
+    );
+  }
 
-  const notFound = !isCountryPending && !post;
-  const blogListSearch = activeCountryCode ? `?country=${activeCountryCode}` : '';
-  const blogListPathWithScope = `${buildBlogListPath(blogLocale)}${blogListSearch}`;
-  const canonicalPath = `${buildBlogPostPath(blogLocale, post ? post.slug : slug)}${blogListSearch}`;
+  const blocks = parseContent(post.content);
+  const related = getRelatedPostsBatch(post, { top: 0, middle: 0, bottom: 3 }).bottom;
 
   return (
-    <>
+    <div className="bg-white text-ink">
       <PageSEO
-        title={seoTitle}
-        description={seoDescription}
-        canonicalPath={canonicalPath}
-        noindex={notFound}
+        title={post.seoTitle ?? post.title}
+        description={post.seoDescription ?? post.summary}
+        canonicalPath={buildBlogPostPath(blogLocale, post.slug)}
       />
-      <main className="mx-auto mt-28 max-w-3xl px-6 pb-0 sm:pb-24">
-        <nav className="mb-6 text-sm text-gray-500">
-          <Link to="/" className="text-gray-500 hover:text-gray-700">{t('blogPost.breadcrumbHome')}</Link>
-          <span className="mx-2 text-gray-400">/</span>
-          <Link to={blogListPathWithScope} className="text-gray-500 hover:text-gray-700">{t('blogPost.breadcrumbBlog')}</Link>
-          {post ? (
-            <>
-              <span className="mx-2 text-gray-400">/</span>
-              <span className="text-gray-700">{post.title}</span>
-            </>
-          ) : null}
-        </nav>
+      <header className="bg-forest pt-16 text-white">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-10 px-5 pb-14 pt-12 md:grid-cols-[1fr_340px] md:px-[5%]">
+          <div className="flex flex-col gap-4">
+            <Link to={blogPath} className="text-sm font-semibold text-lime hover:underline">← {t('home.v3.guides.title')}</Link>
+            <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] md:text-[52px]">{post.title}</h1>
+            {post.summary && <p className="max-w-2xl text-lg text-white/75">{post.summary}</p>}
+            <span className="text-sm text-white/60">
+              {guideTopic(post.slug).label}
+              {readingMinutes ? ` · ${t('blogPost.readingTime', { minutes: readingMinutes })}` : ''}
+            </span>
+          </div>
+          <GuideCover slug={post.slug} size="hero" onDark className="hidden aspect-square rounded-3xl md:flex" />
+        </div>
+      </header>
 
-        {isCountryPending ? (
-          <section className="rounded-xl border border-gray-200 bg-white p-8 text-center text-gray-700">
-            <p>{t('blogList.loading')}</p>
-          </section>
-        ) : null}
+      <main className="mx-auto max-w-[720px] px-5 pb-20 pt-6 text-[18px] leading-[1.7] text-ink-soft">
+        {blocks.map(renderBlock)}
 
-        {notFound ? (
-          <section className="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-red-700">
-            <h1 className="text-2xl font-semibold">{t('blogPost.notFoundTitle')}</h1>
-            <p className="mt-3 text-base text-red-600">{t('blogPost.notFoundDescription')}</p>
-            <Link
-              to={blogListPathWithScope}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            >
-              {t('blogPost.viewAllArticles')}
-            </Link>
-          </section>
-        ) : null}
-
-        {post ? (
-          <article className="bg-white">
-            <header className="mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">{t('blogPost.blogLabel')}</p>
-              <h1 className="mt-4 text-4xl font-bold text-gray-900">{post.title}</h1>
-              <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-gray-500">
-                {publishedLabel ? <span>{t('blogPost.publishedOn', { date: publishedLabel })}</span> : null}
-                {readingMinutes ? <span>• {t('blogPost.readingTime', { minutes: readingMinutes })}</span> : null}
-                {post.sourceUrl ? (
-                  <a
-                    href={post.sourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800"
-                  >
-                    {t('blogPost.originalSource')}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 11l3-3m0 0l-3-3m3 3H8a4 4 0 00-4 4v8" />
-                    </svg>
-                  </a>
-                ) : null}
-              </div>
-            </header>
-
-            {post.heroImageUrl ? (
-              <figure className="mb-8 overflow-hidden rounded-3xl bg-gray-100">
-                <img src={post.heroImageUrl} alt={post.title} className="w-full object-cover" />
-              </figure>
-            ) : null}
-
-            <section className="text-lg leading-relaxed text-gray-800">
-              {post.summary ? <p className="text-xl leading-relaxed text-gray-600">{post.summary}</p> : null}
-
-              <RelatedLinksCard
-                posts={relatedPosts.top}
-                countryCode={activeCountryCode}
-                mobileOnly={true}
-              />
-              <div className="hidden sm:block">
-                <RelatedLinksCard
-                  posts={relatedPosts.top}
-                  countryCode={activeCountryCode}
-                />
-              </div>
-
-              {blocks.map((block, index) => {
-                if (index === Math.floor(blocks.length / 2)) {
-                  return (
-                    <React.Fragment key={`middle-related-${index}`}>
-                      <RelatedLinksCard
-                        posts={relatedPosts.middle}
-                        countryCode={activeCountryCode}
-                        className="my-12"
-                        mobileOnly={true}
-                      />
-                      <div className="hidden sm:block">
-                        <RelatedLinksCard
-                          posts={relatedPosts.middle}
-                          countryCode={activeCountryCode}
-                          className="my-12"
-                        />
-                      </div>
-                      {renderBlock(block, index)}
-                    </React.Fragment>
-                  );
-                }
-
-                return renderBlock(block, index);
-              })}
-            </section>
-
-            <RelatedLinksCard
-              posts={relatedPosts.bottom}
-              countryCode={activeCountryCode}
-              className="mt-8"
-            />
-
-            <footer className="mt-8 rounded-3xl bg-emerald-50 p-8 text-gray-800">
-              <h2 className="text-xl font-semibold text-emerald-900">{t('blogPost.shareTitle')}</h2>
-              <p className="mt-2 text-gray-700">{t('blogPost.shareDescription')}</p>
-              <Link
-                to="/add-review"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                {t('blogPost.shareCta')}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </Link>
-            </footer>
-          </article>
-        ) : null}
+        <aside className="mt-14 flex flex-col items-start gap-3 rounded-3xl bg-lime p-8 text-forest">
+          <h2 className="font-display text-2xl font-extrabold">{t('blogPost.shareTitle')}</h2>
+          <p className="text-[17px] text-forest/80">{t('blogPost.shareDescription')}</p>
+          <Link to="/add-review" className="mt-2 rounded-full bg-forest px-6 py-3 font-bold text-white transition-colors hover:bg-brand">
+            {t('blogPost.shareCta')}
+          </Link>
+        </aside>
       </main>
-    </>
+
+      <RelatedLinksCard posts={related} />
+    </div>
   );
 }

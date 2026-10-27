@@ -14,7 +14,7 @@ const CityRentHero = ({ city, region, rent, market }: { city: string; region: st
         <div className="flex max-w-2xl flex-col gap-3">
           {region && <span className="text-sm text-[#9FC3A5]">{region}</span>}
           <h1 className="font-display text-5xl font-extrabold leading-none tracking-tight md:text-6xl">{t('cityPage.title', { city })}</h1>
-          <p className="text-lg leading-relaxed text-[#CFE5C6]">{t('cityPage.subtitle')}</p>
+          <p className="text-lg leading-relaxed text-[#CFE5C6]">{t(rent?.level === 'barrio' ? 'cityPage.subtitle' : median ? 'cityPage.subtitleZones' : 'cityPage.subtitleNoRent')}</p>
           <div className="pt-2">
             <CitySearch dark />
           </div>
@@ -26,6 +26,9 @@ const CityRentHero = ({ city, region, rent, market }: { city: string; region: st
             )}
             {median && <Stat value={`${median.toLocaleString('es-ES')} €`} label={t('cityPage.medianPerM2', { year: rent!.rent![0] })} accent={!market?.rent} />}
             {market?.sale && <Stat value={`${market.sale[0].toLocaleString('es-ES')} €`} label={t('cityPage.salePerM2', { period: market.sale[2] })} />}
+            {!median && !market?.sale && market?.deals && (
+              <Stat value={market.deals[1].toLocaleString('es-ES')} label={t('cityPage.salesYear', { period: market.deals[2] })} />
+            )}
             {change != null && <Stat value={`${change > 0 ? '+' : ''}${change.toLocaleString('es-ES')} %`} label={t('cityPage.yearChange', { year: rent!.ipva![0] })} />}
           </div>
         )}

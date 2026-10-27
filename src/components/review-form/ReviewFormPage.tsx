@@ -82,8 +82,8 @@ const ReviewFormPage = () => {
   return (
     <div className="flex min-h-screen flex-wrap bg-white text-ink">
       <ReviewFormAside />
-      <main className="min-w-0 max-w-[820px] flex-[999_1_560px] px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
-        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-12">
+      <main className="min-w-0 flex-[999_1_560px] px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
+        <form onSubmit={handleSubmit} noValidate className="flex max-w-[680px] flex-col gap-12">
           <div className="flex flex-col gap-6">
             <AddressSection errors={errors} />
             <StayFields errors={errors} />

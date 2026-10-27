@@ -15,6 +15,8 @@
   },
   "header": {
     "writeReview": "Write a review",
+    "writeReviewShort": "Review",
+    "menu": "Menu",
     "blog": "Blog",
     "blogAria": "Blog",
     "userProfileAria": "User profile",
@@ -374,7 +376,8 @@
     "originalSource": "Original source",
     "shareTitle": "Want to share your experience?",
     "shareDescription": "At CaseroOk we turn news and real stories into practical resources for tenants. If you want to contribute your story, you can post an anonymous review in minutes.",
-    "shareCta": "Write a review"
+    "shareCta": "Write a review",
+    "keepReading": "Keep reading"
   },
   "cityReviews": {
     "index": {
@@ -428,10 +431,10 @@
         "description": "Loading details and map…"
       },
       "notFound": {
-        "title": "We could not find reviews in {{city}}",
+        "title": "We could not find {{city}}",
         "description": "We do not have public reviews for this location yet. You can explore all reviews on the main map or return to the city list.",
         "mapCta": "View full map",
-        "citiesCta": "View cities with reviews"
+        "citiesCta": "View all cities"
       },
       "ready": {
         "title": "Rental reviews in {{city}}",
@@ -710,6 +713,13 @@
     "sourceBarrio": "Median rent per m² for flats, averaged over each neighbourhood's census sections weighted by number of contracts. Source: {{source}}.",
     "sourceSection": "Median rent per m² for flats in each census section. Source: {{source}}.",
     "sectionsHint": "Tap an area on the map to see its reference rent. For a specific address, search it on the home page.",
+    "noOfficialRent": "{{city}} has too few registered contracts for the Ministry to publish a reference rent. Reviews from people who lived here are the best guide.",
+    "firstTitle": "Have you rented in {{city}}?",
+    "firstText": "Nobody has reviewed a place here yet. Three minutes, anonymous, and you help whoever rents next.",
+    "firstCta": "Write the first review",
+    "salesYear": "homes sold in the last year (to {{period}})",
+    "subtitleZones": "What each area costs according to the official index, what tenants say and what your rights are here.",
+    "subtitleNoRent": "What tenants say, how much is sold and what your rights are here.",
     "listTitle": "Neighbourhoods, most to least expensive",
     "asideTitle": "If you rent in {{city}}",
     "depositTitle": "Your deposit",
