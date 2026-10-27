@@ -57,7 +57,9 @@ const AuthCallback = () => {
       const sessionIdBack = await getSessionIdBack();
 
       const url = new URL(window.location.href);
-      const sessionIdUrl = url.searchParams.get("sessionId") ?? undefined;
+      // Links sent outside the review form carry "null" or "undefined" as text
+      const rawSessionId = url.searchParams.get("sessionId");
+      const sessionIdUrl = rawSessionId && !["null", "undefined"].includes(rawSessionId) ? rawSessionId : undefined;
 
       const sessionId = sessionIdUrl || sessionIdBack;
 
@@ -123,7 +125,7 @@ const AuthCallback = () => {
         } else {
           toast.success('Sesión iniciada correctamente');
         }
-        navigate('/');
+        navigate(user ? '/profile' : '/');
       }
     };
 
@@ -131,8 +133,9 @@ const AuthCallback = () => {
   }, [navigate, user, isLoading, processingComplete]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <p className="text-center text-sm text-gray-600">Confirmando sesión…</p>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white text-ink" aria-busy="true">
+      <span className="h-10 w-10 animate-spin rounded-full border-4 border-lime border-t-forest" />
+      <p className="font-semibold">Confirmando sesión…</p>
     </div>
   );
 };

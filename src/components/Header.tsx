@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../store/auth/hooks';
-import LoginContent from './ui/LoginContent';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logoUrl from '../assets/logo_coloreado.svg';
 import { trackEvent } from '../utils/analytics';
-import toast from 'react-hot-toast';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from '../i18n/useTranslations';
+import AccountMenu from './AccountMenu';
 
 const NAV = [
   { to: '/opiniones', key: 'header.nav.cities', event: 'nav:cities' },
@@ -71,7 +69,7 @@ const Header: React.FC = () => {
             <span className="md:hidden">{t('header.writeReviewShort')}</span>
             <span className="hidden md:inline">{t('header.writeReview')}</span>
           </Link>
-          <LoginDropdown dark={dark} />
+          <AccountMenu dark={dark} />
           <button
             type="button"
             onClick={() => setMenuOpen(open => !open)}
@@ -100,135 +98,6 @@ const Header: React.FC = () => {
         </nav>
       )}
     </header>
-  );
-};
-
-// Login Dropdown Component
-const LoginDropdown: React.FC<{ dark: boolean }> = ({ dark }) => {
-  const { user, logout } = useAuth();
-  const { t } = useTranslations();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleLogout = async () => {
-    await logout();
-    setIsDropdownOpen(false);
-    navigate('/');
-  };
-
-  const handleResetForm = () => {
-    // Eliminar tokens del formulario del localStorage
-    localStorage.removeItem('reviewSessionId');
-    localStorage.removeItem('reviewSessionIdBack');
-    
-    // También eliminar cualquier token de usuario de review
-    Object.keys(localStorage).forEach(key => {
-      if (key.startsWith('reviewUserId:')) {
-        localStorage.removeItem(key);
-      }
-    });
-    
-    // Limpiar cualquier estado adicional del formulario en el storage
-    Object.keys(localStorage).forEach(key => {
-      if (key.startsWith('form_') || key.startsWith('step_') || key.startsWith('review_') || key.startsWith('formData_')) {
-        localStorage.removeItem(key);
-      }
-    });
-    
-    // Enviar evento personalizado para que el formulario lo escuche y se resetee
-    window.dispatchEvent(new CustomEvent('resetReviewForm'));
-    
-    // Trackear evento de reset
-    trackEvent('review:form-reset', {
-      authenticated: true,
-      userEmail: user?.email
-    });
-    
-    setIsDropdownOpen(false);
-    navigate('/add-review');
-    
-    // Mostrar toast de confirmación
-    toast.success(t('header.resetFormSuccess'));
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button
-        onClick={toggleDropdown}
-        className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors ${
-          dark ? 'border border-[#5E8A6E] text-white hover:bg-forest-600' : 'border border-line text-ink hover:bg-mist'
-        }`}
-        aria-expanded={isDropdownOpen}
-        aria-label={user ? t('header.userProfileAria') : t('header.loginAria')}
-      >
-        {user ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-          </svg>
-        )}
-      </button>
-
-      {isDropdownOpen && (
-        <div className="absolute right-0 top-12 z-50 w-80 rounded-lg bg-white p-4 shadow-lg">
-          {user ? (
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#1F7A4D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span className="font-medium">{user.email}</span>
-              </div>
-              <Link 
-                to="/profile"
-                onClick={() => setIsDropdownOpen(false)}
-                className="mt-2 w-full rounded bg-[#1F7A4D] px-4 py-2 text-center text-white transition-colors hover:bg-[#0E3B26]"
-              >
-                {t('header.myProfile')}
-              </Link>
-              <button
-                onClick={handleResetForm}
-                className="mt-2 w-full rounded bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-orange-600"
-              >
-                {t('header.newReview')}
-              </button>
-              <button
-                onClick={handleLogout}
-                className="mt-2 w-full rounded bg-[#1F7A4D] px-4 py-2 text-white transition-colors hover:bg-[#0E3B26]"
-              >
-                {t('header.logout')}
-              </button>
-            </div>
-          ) : (
-            <div className="p-2">
-              <LoginContent onClose={() => setIsDropdownOpen(false)} showTitle={false} showInfo={false} />
-            </div>
-          )}
-        </div>
-      )}
-    </div>
   );
 };
 

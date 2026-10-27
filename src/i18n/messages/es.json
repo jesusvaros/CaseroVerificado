@@ -773,5 +773,61 @@
     "saleNote": "Valor tasado medio, {{period}}. Fuente: Ministerio de Vivienda.",
     "deals": "Viviendas vendidas en el último año",
     "dealsNote": "Compraventas hasta el {{period}}. Fuente: Ministerio de Vivienda."
+  },
+  "auth": {
+    "reviewTitle": "Último paso: confirma tu email",
+    "reviewSubtitle": "Así evitamos opiniones falsas. Tu email nunca se publica.",
+    "accountTitle": "Entra en CaseroOk",
+    "accountSubtitle": "Para ver tus opiniones y saber cuándo se publican. Sin contraseña.",
+    "points": {
+      "private": "Tu email nunca se publica",
+      "noPassword": "Sin contraseña",
+      "edit": "Podrás ver el estado de tu opinión"
+    },
+    "google": "Continuar con Google",
+    "orEmail": "o con tu email",
+    "emailPlaceholder": "tu@email.com",
+    "sendLink": "Enviarme el enlace",
+    "sending": "Enviando…",
+    "sentTitle": "Revisa tu correo",
+    "sentText": "Te hemos enviado un enlace a {{email}}. Ábrelo en este mismo dispositivo para entrar.",
+    "openGmail": "Abrir Gmail",
+    "spamHint": "¿No llega? Mira en spam o promociones.",
+    "resend": "Reenviar enlace",
+    "resendIn": "Reenviar en {{seconds}} s",
+    "changeEmail": "Usar otro email",
+    "invalidEmail": "Escribe un email válido.",
+    "sendError": "No hemos podido enviar el enlace. Inténtalo de nuevo.",
+    "close": "Cerrar"
+  },
+  "account": {
+    "menuReviews": "Tus opiniones",
+    "menuNew": "Escribir otra opinión",
+    "menuAdmin": "Panel de administración",
+    "menuLogout": "Cerrar sesión",
+    "signIn": "Entrar",
+    "title": "Tus opiniones",
+    "subtitle": "Con la cuenta {{email}}",
+    "writeAnother": "Escribir otra opinión",
+    "logout": "Cerrar sesión",
+    "empty": "Todavía no has escrito ninguna opinión.",
+    "emptyCta": "Escribir la primera",
+    "status": {
+      "published": "Publicada",
+      "pending": "En revisión",
+      "rejected": "No publicada",
+      "draft": "Sin terminar"
+    },
+    "pendingHint": "La revisamos a mano, normalmente en uno o dos días.",
+    "rejectedReason": "Motivo: {{reason}}",
+    "draftHint": "Empezaste esta opinión y no la enviaste.",
+    "view": "Ver opinión",
+    "viewAddress": "Ver la dirección",
+    "continue": "Terminarla",
+    "lived": "{{from}} – {{to}}",
+    "now": "hoy",
+    "perMonth": "{{price}} €/mes",
+    "drafts": "Sin terminar ({{count}})",
+    "loadError": "No hemos podido cargar tus opiniones."
   }
 }
