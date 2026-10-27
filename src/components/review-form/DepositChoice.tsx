@@ -23,10 +23,10 @@ const DepositChoice = ({ value, onChange, hasError = false }: DepositChoiceProps
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(option)}
-            className={`rounded-full px-5 py-3 font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+            className={`rounded-full border-[1.5px] px-5 py-3 font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
               selected
-                ? 'bg-lime text-forest'
-                : `border-[1.5px] bg-white text-ink hover:border-brand ${hasError ? 'border-coral' : 'border-[#C9D2BC]'}`
+                ? 'border-lime bg-lime text-forest'
+                : `bg-white text-ink hover:border-brand ${hasError ? 'border-coral' : 'border-[#C9D2BC]'}`
             }`}
           >
             {t(`addReview.v2.deposit.options.${option}`)}

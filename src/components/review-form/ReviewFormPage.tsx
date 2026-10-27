@@ -16,6 +16,7 @@ import StayFields from './StayFields';
 import ScoreRow from './ScoreRow';
 import DepositChoice from './DepositChoice';
 import TagPicker from './TagPicker';
+import TermsConsent from './TermsConsent';
 import { sectionTitle } from './fieldStyles';
 import { MIN_OPINION_LENGTH, validateReview, type ReviewField } from './validateReview';
 
@@ -83,9 +84,9 @@ const ReviewFormPage = () => {
   const opinionError = errors.includes('opinion');
 
   return (
-    <div className="flex min-h-screen flex-wrap bg-white text-ink">
+    <div className="flex min-h-screen flex-col bg-white text-ink lg:grid lg:grid-cols-[5fr_7fr]">
       <ReviewFormAside />
-      <main className="min-w-0 flex-[999_1_560px] px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
+      <main className="min-w-0 px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
         <form onSubmit={handleSubmit} noValidate className="flex max-w-[680px] flex-col gap-12">
           <div className="flex flex-col gap-6">
             <AddressSection errors={errors} />
@@ -133,6 +134,8 @@ const ReviewFormPage = () => {
               <span className="text-sm text-coral-ink">{t('addReview.v2.errors.opinion', { min: MIN_OPINION_LENGTH })}</span>
             )}
           </label>
+
+          <TermsConsent checked={Boolean(formData.acceptTerms)} onChange={acceptTerms => updateFormData({ acceptTerms })} hasError={errors.includes('terms')} />
 
           <div className="flex flex-col gap-3">
             <button

@@ -26,11 +26,11 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {/* Own row, so the year, rent and size fields keep lining up as before */}
-      <div className="flex w-full flex-col gap-1.5">
+    <div className="flex flex-wrap gap-x-4 gap-y-6">
+      {/* Own row, styled like the deposit choice, so the year, rent and size fields keep lining up */}
+      <div className="flex w-full flex-col gap-2.5">
         <span className={smallLabel}>{t('addReview.v2.stay.typeLabel')}</span>
-        <div className="flex w-full gap-1 rounded-full bg-mist p-1 sm:w-fit" role="radiogroup" aria-label={t('addReview.v2.stay.typeLabel')}>
+        <div className="flex flex-wrap gap-2.5" role="radiogroup" aria-label={t('addReview.v2.stay.typeLabel')}>
           {(['whole', 'room'] as const).map(type => (
             <button
               key={type}
@@ -38,7 +38,9 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
               role="radio"
               aria-checked={rentalType === type}
               onClick={() => updateFormData({ rentalType: type })}
-              className={`flex-1 rounded-full px-5 py-2 text-sm font-bold transition-colors sm:flex-none ${rentalType === type ? 'bg-forest text-white' : 'text-ink-soft hover:text-ink'}`}
+              className={`rounded-full border-[1.5px] px-5 py-2.5 font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+                rentalType === type ? 'border-lime bg-lime text-forest' : 'border-[#C9D2BC] bg-white text-ink hover:border-brand'
+              }`}
             >
               {t(`addReview.v2.stay.${type}`)}
             </button>
@@ -73,7 +75,7 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
         </select>
       </label>
       <label id="review-field-price" className="flex w-36 flex-col gap-1.5">
-        <span className={smallLabel}>{t(rentalType === 'room' ? 'addReview.v2.stay.rentRoom' : 'addReview.v2.stay.rent')}</span>
+        <span className={smallLabel}>{t('addReview.v2.stay.rent')}</span>
         <input
           type="number"
           inputMode="numeric"
@@ -85,7 +87,7 @@ const StayFields = ({ errors }: { errors: ReviewField[] }) => {
         />
       </label>
       <label className="flex w-36 flex-col gap-1.5">
-        <span className={smallLabel}>{t(rentalType === 'room' ? 'addReview.v2.stay.sizeRoom' : 'addReview.v2.stay.size')}</span>
+        <span className={smallLabel}>{t('addReview.v2.stay.size')}</span>
         <input
           type="number"
           inputMode="numeric"

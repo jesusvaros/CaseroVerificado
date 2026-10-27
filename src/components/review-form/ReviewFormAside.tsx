@@ -7,9 +7,9 @@ const ReviewFormAside = () => {
   const { t } = useTranslations();
 
   return (
-    <aside className="min-w-0 flex-[1_1_380px] bg-forest px-5 pb-14 pt-28 text-white md:px-[5%] lg:max-w-[560px] lg:pt-32">
+    <aside className="min-w-0 bg-forest px-5 pb-14 pt-28 text-white md:px-[5%] lg:pt-32">
       {/* Stays in view while the form scrolls */}
-      <div className="flex flex-col gap-10 lg:sticky lg:top-32">
+      <div className="flex flex-col gap-10 lg:sticky lg:top-32 lg:ml-auto lg:max-w-[460px]">
         <h1 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight md:text-6xl">
           {t('addReview.v2.aside.titleStart')} <span className="text-lime">{t('addReview.v2.aside.titleHighlight')}</span>
         </h1>
