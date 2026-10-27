@@ -5,6 +5,7 @@ Static files under `public/data/`, served by Vercel next to the app. They are re
 | File | Source | Refresh |
 |---|---|---|
 | `zonas/<province>.json` | Reference rents per census section, district and municipality: [SERPAVI](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi) (Ministerio de Vivienda y Agenda Urbana). Section shapes: INE 2021 census sections, the ones SERPAVI uses. Annual change: INE rental price index (IPVA, table 59060). | Once a year, when SERPAVI publishes (around March or April). |
+| `historico/<province>.json` | SERPAVI history 2011–2024 per municipality, district and census section (flats; houses for municipalities and districts), from the same SERPAVI file. Loaded only when someone opens "Ver los datos". Built by `build_rent_history.py`. | With `zonas/`, once a year. |
 | `tensionadas.json` | Stressed rental markets declared under Ley 12/2023, from the [Ministry list](https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi/consultar-zonas-de-mercado-residencial-tensionado). | Every quarter, after each BOE resolution. |
 
 Building facts are not stored: the app asks the Catastro services directly (see `src/services/publicData/catastro.ts`).
@@ -26,6 +27,7 @@ npx mapshaper@0.6.102 shp/SECC_CE_20210101_INE_WM.shp encoding=utf8 -proj wgs84 
   -split CPRO -o sections/ format=geojson precision=0.00001
 cd -
 python3 -I scripts/data/build_rent_zones.py /tmp/serpavi/serpavi.xlsx /tmp/serpavi/sections /tmp/serpavi/ipva.json public/data/zonas
+python3 -I scripts/data/build_rent_history.py /tmp/serpavi/serpavi.xlsx public/data/historico
 ```
 
 Keep the 2021 sections even when INE publishes newer ones: SERPAVI codes its data on the 2021 sectioning.

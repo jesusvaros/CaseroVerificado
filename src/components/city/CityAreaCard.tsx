@@ -1,12 +1,23 @@
+import { useState } from 'react';
 import { useTranslations } from '../../i18n/useTranslations';
+import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
 import type { CityArea } from '../../services/publicData/cityRent';
 import { perM2 } from './rentScale';
 
 // What the map shows for the tapped area: rent per m², a 60 m² estimate and how many reviews it has.
 const FEW_CONTRACTS = 50;
 
-const CityAreaCard = ({ area, reviews, level }: { area: CityArea; reviews: number; level: 'barrio' | 'section' }) => {
+interface Props {
+  area: CityArea;
+  reviews: number;
+  level: 'barrio' | 'section';
+  cumun: string;
+  city: string;
+}
+
+const CityAreaCard = ({ area, reviews, level, cumun, city }: Props) => {
   const { t } = useTranslations();
+  const [exploring, setExploring] = useState(false);
   const { name, district, p25, p50, p75, n } = area.properties;
 
   return (
@@ -29,6 +40,13 @@ const CityAreaCard = ({ area, reviews, level }: { area: CityArea; reviews: numbe
         {reviews === 0 ? t('cityPage.noReviews') : t(reviews === 1 ? 'cityPage.oneReview' : 'cityPage.reviews', { count: reviews })}
         {level === 'barrio' && ' · ' + t('cityPage.barrioNote')}
       </span>
+      {/* Barrios are our own aggregation, so their history is the municipality's */}
+      <button type="button" onClick={() => setExploring(true)} className="mt-1 w-fit text-sm font-bold text-brand hover:text-forest">
+        {t('explorer.open')} →
+      </button>
+      {exploring && (
+        <ZoneDataExplorer municipality={cumun} section={level === 'section' ? area.properties.key : null} place={name ?? city} onClose={() => setExploring(false)} />
+      )}
     </div>
   );
 };
