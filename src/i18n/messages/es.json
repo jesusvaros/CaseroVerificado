@@ -308,9 +308,7 @@
         "sizePlaceholder": "60 m²",
         "typeLabel": "Qué alquilabas",
         "whole": "Piso entero",
-        "room": "Una habitación",
-        "rentRoom": "Alquiler de tu habitación",
-        "sizeRoom": "Metros del piso (opcional)"
+        "room": "Una habitación"
       },
       "scores": {
         "title": "Ponle nota",

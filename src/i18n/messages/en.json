@@ -308,9 +308,7 @@
         "sizePlaceholder": "60 m²",
         "typeLabel": "What you rented",
         "whole": "Whole flat",
-        "room": "A room",
-        "rentRoom": "Rent for your room",
-        "sizeRoom": "Flat size (optional)"
+        "room": "A room"
       },
       "scores": {
         "title": "Rate it",
