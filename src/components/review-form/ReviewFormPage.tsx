@@ -83,9 +83,9 @@ const ReviewFormPage = () => {
   const opinionError = errors.includes('opinion');
 
   return (
-    <div className="flex min-h-screen flex-wrap bg-white text-ink">
+    <div className="flex min-h-screen flex-col bg-white text-ink lg:grid lg:grid-cols-[5fr_7fr]">
       <ReviewFormAside />
-      <main className="min-w-0 flex-[999_1_560px] px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
+      <main className="min-w-0 px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
         <form onSubmit={handleSubmit} noValidate className="flex max-w-[680px] flex-col gap-12">
           <div className="flex flex-col gap-6">
             <AddressSection errors={errors} />
