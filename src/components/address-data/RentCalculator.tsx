@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ZoneData } from '../../services/publicData/rentZones';
 import { useTranslations } from '../../i18n/useTranslations';
 import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
@@ -17,6 +17,14 @@ const RentCalculator = ({ zone }: { zone: ZoneData }) => {
   const [m2, setM2] = useState(String(typicalM2 && typicalM2 > 0 ? Math.round(typicalM2) : 60));
   const [asked, setAsked] = useState('');
   const [exploring, setExploring] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Arriving from the home comparator (#precio): bring the calculator into view, ready to type the rent.
+  useEffect(() => {
+    if (window.location.hash !== '#precio') return;
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('calc-rent')?.focus({ preventScroll: true });
+  }, []);
 
   const meters = Number(m2) > 0 ? Number(m2) : 60;
   const p25 = (p25m2 ?? p50m2) * meters;
@@ -27,7 +35,7 @@ const RentCalculator = ({ zone }: { zone: ZoneData }) => {
   const verdict = askedValue == null ? null : askedValue > p75 ? 'high' : askedValue < p25 ? 'low' : 'normal';
 
   return (
-    <section className="flex flex-col gap-4">
+    <section id="precio" ref={sectionRef} className="flex scroll-mt-24 flex-col gap-4">
       <h2 className="font-display text-2xl font-extrabold tracking-tight">{t('addressData.rent.title')}</h2>
       <div className="relative mt-8 h-[18px] rounded-full bg-[linear-gradient(90deg,#EAF8D2,#C8F169_40%,#FFB199_75%,#FF6B4A)]">
         <span className="absolute -top-2.5 h-[38px] w-[3px] -translate-x-1/2 rounded bg-ink" style={{ left: `${markerPosition(marker, p25, p50, p75)}%` }} />

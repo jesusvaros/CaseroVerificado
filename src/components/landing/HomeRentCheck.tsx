@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import AddressAutocomplete from '../ui/AddressAutocomplete';
+import { useHomeAddressSearch } from '../../hooks/useHomeAddressSearch';
 import { useTranslations } from '../../i18n/useTranslations';
+import { umamiEventProps } from '../../utils/analytics';
 import SectionIntro from './SectionIntro';
 import Reveal from './Reveal';
 
@@ -10,6 +14,7 @@ const METERS = 60;
 const HomeRentCheck = () => {
   const { t } = useTranslations();
   const [rent, setRent] = useState<[number, number, number] | null>(null);
+  const { address, selectAddress, search } = useHomeAddressSearch();
 
   useEffect(() => {
     fetch('/data/ciudades/madrid.json')
@@ -44,8 +49,36 @@ const HomeRentCheck = () => {
           </div>
         )}
         <span className="text-xs text-[#6B7465]">{t('home.v3.rent.caption')}</span>
+        <Link to="/opiniones/espana/madrid" className="text-sm font-bold text-brand hover:text-forest">
+          {t('home.v3.rent.city')}
+        </Link>
       </div>
-      <SectionIntro eyebrow={t('home.v3.rent.eyebrow')} eyebrowColor="#E8890C" title={t('home.v3.rent.title')}>
+      <SectionIntro
+        eyebrow={t('home.v3.rent.eyebrow')}
+        eyebrowColor="#E8890C"
+        title={t('home.v3.rent.title')}
+        action={
+          // Same search as the hero, but it lands on the address's rent calculator.
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              search('#precio');
+            }}
+            className="flex max-w-[520px] items-center gap-2 rounded-full border-[1.5px] border-line bg-white py-1.5 pl-5 pr-1.5"
+          >
+            <div className="min-w-0 flex-1">
+              <AddressAutocomplete onSelect={selectAddress} value={address} placeholder={t('home.v3.rent.searchPlaceholder')} hideLabel bare />
+            </div>
+            <button
+              type="submit"
+              className="shrink-0 rounded-full bg-ink px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-forest focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              {...umamiEventProps('home:rent-check')}
+            >
+              {t('home.v3.rent.cta')}
+            </button>
+          </form>
+        }
+      >
         {t('home.v3.rent.text')}
       </SectionIntro>
     </Reveal>

@@ -7,6 +7,7 @@ import { showErrorToast } from '../components/ui/toast/toastUtils';
 import { initializeSession } from '../services/sessionManager';
 import { useTranslations } from '../i18n/useTranslations';
 import { addressPath } from '../utils/addressPath';
+import { slugify } from '../utils/slugify';
 
 // Address search shared by the home hero: open the map at an address or start a review for it.
 export function useHomeAddressSearch() {
@@ -31,8 +32,9 @@ export function useHomeAddressSearch() {
     });
   };
 
-  // A full address (street and number) opens its page; a street or a city opens the map there.
-  const search = () => {
+  // A full address (street and number) opens its page; a street or a city opens that city's page.
+  // `hash` jumps to a section of the address page, e.g. '#precio' for the rent calculator.
+  const search = (hash = '') => {
     if (!hasSelection || !formData.addressDetails?.coordinates) {
       showErrorToast(t('home.input.selectAddressError'));
       return;
@@ -44,7 +46,11 @@ export function useHomeAddressSearch() {
     if (path && c) {
       const params = new URLSearchParams({ lat: String(lat), lng: String(lng), street: c.road ?? '', number: c.house_number ?? '', city: city ?? '' });
       if (c.postcode) params.set('cp', c.postcode);
-      navigate(`${path}?${params}`);
+      navigate(`${path}?${params}${hash}`);
+      return;
+    }
+    if (city) {
+      navigate(`/opiniones/espana/${slugify(city)}`);
       return;
     }
     navigate(`/map?lat=${lat}&lng=${lng}&q=${encodeURIComponent(address)}`);
