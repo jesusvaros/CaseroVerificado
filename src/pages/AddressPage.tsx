@@ -12,6 +12,7 @@ import AddressReviewList from '../components/address/AddressReviewList';
 import TenantUnionLink from '../components/address/TenantUnionLink';
 import AddressPublicDataView from '../components/address-data/AddressPublicDataView';
 import { trackEvent } from '../utils/analytics';
+import DataSourcesNote from '../components/data-sources/DataSourcesNote';
 
 // Public page of one address: tenant reviews plus official rent, building and stressed-market data.
 const AddressPage = () => {
@@ -95,6 +96,7 @@ const AddressPage = () => {
           <TenantUnionLink province={provinceFromPostalCode(location.postalCode)} />
         </aside>
       </div>
+      <DataSourcesNote sources={['reviews', 'serpavi', 'deposits', 'sales', 'catastro', 'tensioned']} className="pb-24" />
     </div>
   );
 };

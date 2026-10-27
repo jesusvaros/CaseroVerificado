@@ -34,6 +34,7 @@
   "footer": {
     "blog": "Blog",
     "opinionsByCity": "Reviews by city",
+    "data": "Where the data comes from",
     "termsAndConditions": "Terms and Conditions",
     "legalNotice": "Legal notice",
     "privacyPolicy": "Privacy policy",
@@ -895,5 +896,74 @@
         "valencia": "Median deposit lodged with the Generalitat Valenciana; the legal deposit is one month's rent. * Current year: deposits lodged so far."
       }
     }
+  },
+  "dataNote": {
+    "title": "Where this data comes from",
+    "official": "The figures on this page are public, official data. Official data arrives late: the Ministry's reference rent goes up to 2024.",
+    "more": "How we work with the data",
+    "reviewsTitle": "Your review is the most up-to-date data",
+    "reviewsText": "What tenants say is the only thing that is current. The more reviews there are, with rent and size, the better we know what is happening on each street today, not two years ago.",
+    "cta": "Write a review"
+  },
+  "dataSources": {
+    "reviews": {
+      "short": "Tenant reviews",
+      "name": "Tenant reviews on CaseroOk",
+      "freshness": "Current",
+      "what": "What people who rented say: landlord, home, deposit, rent paid and size. Every review is checked by hand before it is published and we never show names or emails.",
+      "limits": "There are still few. It is the only source that covers what happens today on any street, so every review counts."
+    },
+    "serpavi": {
+      "short": "Ministry of Housing (SERPAVI)",
+      "name": "Reference rent (SERPAVI)",
+      "freshness": "Yearly · latest 2024",
+      "what": "The Ministry of Housing computes rent per m² from contracts declared to the tax office, by census section, district and municipality, with history since 2011.",
+      "limits": "It lags a year and a half, mixes new and old contracts, and where there are few contracts the figure is only a guide. Individual contracts are not published."
+    },
+    "deposits": {
+      "short": "Deposits (Valencia and Catalonia)",
+      "name": "Rental deposits lodged",
+      "freshness": "Monthly · 2026",
+      "what": "The Generalitat Valenciana publishes every deposit lodged with its postcode (since 2020) and INCASÒL publishes the average rent of new contracts in Catalonia (since 2007). It is the closest thing to knowing what is signed today.",
+      "limits": "Only available in those two regions. A deposit equals one month's rent; the current year is incomplete."
+    },
+    "sales": {
+      "short": "Sales and appraised value",
+      "name": "Home sales and appraised value",
+      "freshness": "Quarterly · 2026",
+      "what": "The Ministry of Housing publishes how many homes are sold in each municipality and their appraised value per m².",
+      "limits": "Appraised value only exists for municipalities over 25,000 inhabitants."
+    },
+    "ipva": {
+      "short": "INE (rent index)",
+      "name": "Rental price index (INE)",
+      "freshness": "Yearly · latest 2024",
+      "what": "Yearly change in rent per municipality, computed by INE from tax data.",
+      "limits": "It measures change, not prices, and has the same lag as SERPAVI."
+    },
+    "catastro": {
+      "short": "Land registry (Catastro)",
+      "name": "Catastro",
+      "freshness": "Live",
+      "what": "Year built, number of homes, floor area and use of each building, looked up live from the Dirección General del Catastro.",
+      "limits": "It describes the building, not its condition or upkeep."
+    },
+    "tensioned": {
+      "short": "Stressed areas (BOE)",
+      "name": "Stressed rental markets",
+      "freshness": "Each BOE resolution",
+      "what": "Municipalities declared stressed markets under Ley 12/2023, with the rent limits that come with it.",
+      "limits": "The list changes with each resolution; we update it every quarter."
+    }
+  },
+  "dataPage": {
+    "seoTitle": "Where the data comes from | CaseroOk",
+    "seoDescription": "The official sources CaseroOk uses, how often they update and why tenant reviews are the most current data.",
+    "title": "Where the data comes from",
+    "intro": "CaseroOk combines public, official data with what tenants say. Here is every source, what it covers, how often it updates and its limits.",
+    "source": "See the source",
+    "methodTitle": "How we handle it",
+    "method": "We download the data as published, join it by municipality, postcode and census section, and serve it as static files so the site is fast and free. We never change the figures; when an area has few contracts, we say so. The whole process is public.",
+    "code": "See the code that processes the data"
   }
 }

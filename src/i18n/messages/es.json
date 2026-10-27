@@ -34,6 +34,7 @@
   "footer": {
     "blog": "Blog",
     "opinionsByCity": "Opiniones por ciudad",
+    "data": "De dónde salen los datos",
     "termsAndConditions": "Términos y Condiciones",
     "legalNotice": "Aviso Legal",
     "privacyPolicy": "Política de Privacidad",
@@ -895,5 +896,74 @@
         "valencia": "Mediana de las fianzas depositadas en la Generalitat Valenciana; la fianza legal es un mes de alquiler. * Año en curso: fianzas depositadas hasta hoy."
       }
     }
+  },
+  "dataNote": {
+    "title": "De dónde salen estos datos",
+    "official": "Las cifras de esta página son datos públicos y oficiales. Los oficiales llegan con retraso: el precio de referencia del Ministerio va por 2024.",
+    "more": "Cómo trabajamos con los datos",
+    "reviewsTitle": "Tu opinión es el dato más actual",
+    "reviewsText": "Lo que cuentan los inquilinos es lo único al día. Cuantas más opiniones haya, con alquiler y metros, mejor sabremos qué pasa en cada calle hoy, no hace dos años.",
+    "cta": "Escribir una opinión"
+  },
+  "dataSources": {
+    "reviews": {
+      "short": "Opiniones de inquilinos",
+      "name": "Opiniones de inquilinos en CaseroOk",
+      "freshness": "Al día",
+      "what": "Lo que cuentan quienes han vivido de alquiler: casero, vivienda, fianza, alquiler pagado y metros. Cada opinión se revisa a mano antes de publicarse y nunca mostramos nombres ni emails.",
+      "limits": "Todavía hay pocas. Es la única fuente que cubre lo que pasa hoy en cualquier calle, por eso cada opinión cuenta."
+    },
+    "serpavi": {
+      "short": "Ministerio de Vivienda (SERPAVI)",
+      "name": "Precio de referencia del alquiler (SERPAVI)",
+      "freshness": "Anual · último dato 2024",
+      "what": "El Ministerio de Vivienda calcula el alquiler por m² a partir de los contratos declarados a Hacienda, por sección censal, distrito y municipio, con histórico desde 2011.",
+      "limits": "Llega con año y medio de retraso, mezcla contratos nuevos y antiguos, y en zonas con pocos contratos la cifra es solo orientativa. Hacienda no publica los contratos uno a uno."
+    },
+    "deposits": {
+      "short": "Fianzas (Comunitat Valenciana y Cataluña)",
+      "name": "Fianzas de alquiler depositadas",
+      "freshness": "Mensual · 2026",
+      "what": "La Generalitat Valenciana publica cada fianza depositada con su código postal (desde 2020) e INCASÒL publica el alquiler medio de los contratos nuevos en Cataluña (desde 2007). Es lo más parecido a saber cuánto se firma hoy.",
+      "limits": "Solo existe en esas dos comunidades. La fianza equivale a un mes de alquiler; el año en curso está incompleto."
+    },
+    "sales": {
+      "short": "Compraventas y valor tasado",
+      "name": "Compraventas y valor tasado de la vivienda",
+      "freshness": "Trimestral · 2026",
+      "what": "El Ministerio de Vivienda publica cuántas viviendas se venden en cada municipio y su valor tasado por m².",
+      "limits": "El valor tasado solo existe para municipios de más de 25.000 habitantes."
+    },
+    "ipva": {
+      "short": "INE (índice de alquiler)",
+      "name": "Índice de precios de vivienda en alquiler (INE)",
+      "freshness": "Anual · último dato 2024",
+      "what": "Variación anual del alquiler por municipio, calculada por el INE con datos de Hacienda.",
+      "limits": "Mide cambios, no precios, y llega con el mismo retraso que SERPAVI."
+    },
+    "catastro": {
+      "short": "Catastro",
+      "name": "Catastro",
+      "freshness": "Al consultar",
+      "what": "Año de construcción, número de viviendas, superficie y uso de cada edificio, consultados en el momento a la Dirección General del Catastro.",
+      "limits": "Describe el edificio, no su estado ni su mantenimiento."
+    },
+    "tensioned": {
+      "short": "Zonas tensionadas (BOE)",
+      "name": "Zonas de mercado residencial tensionado",
+      "freshness": "Cada resolución del BOE",
+      "what": "Los municipios declarados zona tensionada según la Ley 12/2023, con los límites de renta que eso implica.",
+      "limits": "La lista cambia con cada resolución; la actualizamos cada trimestre."
+    }
+  },
+  "dataPage": {
+    "seoTitle": "De dónde salen los datos | CaseroOk",
+    "seoDescription": "Las fuentes oficiales que usa CaseroOk, cada cuánto se actualizan y por qué las opiniones de inquilinos son el dato más actual.",
+    "title": "De dónde salen los datos",
+    "intro": "CaseroOk junta datos públicos y oficiales con lo que cuentan los inquilinos. Aquí está cada fuente, qué cubre, cada cuánto se actualiza y sus límites.",
+    "source": "Ver la fuente",
+    "methodTitle": "Cómo los tratamos",
+    "method": "Descargamos los datos tal como los publican, los cruzamos por municipio, código postal y sección censal, y los servimos como archivos estáticos para que la web sea rápida y gratis. No modificamos las cifras; cuando una zona tiene pocos contratos, lo decimos. Todo el proceso es público.",
+    "code": "Ver el código que procesa los datos"
   }
 }

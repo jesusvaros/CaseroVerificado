@@ -6,6 +6,7 @@ import { getPublicReviews } from '../services/supabase/publicReviews';
 import { canonicalCitySlug, topMunicipalities, type Municipality } from '../services/publicData/municipalities';
 import { getReviewCitySlug } from '../utils/locationReviewRouting';
 import CitySearch from '../components/city/CitySearch';
+import DataSourcesNote from '../components/data-sources/DataSourcesNote';
 
 const TOP = 30;
 
@@ -61,6 +62,7 @@ export default function CityReviewsIndexPage() {
         </ol>
         <p className="mt-6 text-xs text-[#6B7465]">{t('cityIndex.source')}</p>
       </section>
+      <DataSourcesNote sources={['reviews', 'serpavi', 'deposits', 'sales']} className="pb-24" />
     </div>
   );
 }

@@ -241,6 +241,7 @@ async function generateSitemap() {
     { path: '/map', changefreq: 'weekly', priority: '0.8', lastmod: today },
     { path: '/opiniones', changefreq: 'daily', priority: '0.7', lastmod: today },
     { path: '/blog', changefreq: 'daily', priority: '0.7', lastmod: today },
+    { path: '/datos', changefreq: 'monthly', priority: '0.4', lastmod: today },
     { path: '/aviso-legal', changefreq: 'yearly', priority: '0.2', lastmod: today },
     { path: '/politica-privacidad', changefreq: 'yearly', priority: '0.2', lastmod: today },
     { path: '/cookies', changefreq: 'yearly', priority: '0.2', lastmod: today },
