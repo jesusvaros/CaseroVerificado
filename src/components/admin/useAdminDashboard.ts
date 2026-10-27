@@ -24,7 +24,7 @@ export interface OutreachContact {
 export interface Dashboard {
   days: number;
   totals: { sessions: number; visitors: number; forms_opened: number; reviews_submitted: number };
-  reviews: { published: number; pending: number; rejected: number };
+  reviews: { published: number; hidden: number; pending: number; rejected: number };
   daily: { day: string; sessions: number; reviews: number }[];
   sources: { source: string; sessions: number }[];
   pages: { path: string; sessions: number }[];

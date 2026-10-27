@@ -51,7 +51,7 @@ const OverviewTab = ({ data }: { data: Dashboard }) => {
         <AdminStat value={totals.sessions} label="Visitas" hint={`últimos ${data.days} días`} />
         <AdminStat value={totals.forms_opened} label="Abrieron el formulario" hint={`${pct(totals.forms_opened, totals.sessions)} de las visitas`} />
         <AdminStat value={totals.reviews_submitted} label="Opiniones enviadas" hint={`${pct(totals.reviews_submitted, totals.forms_opened)} de quien abre el formulario`} accent />
-        <AdminStat value={reviews.published} label="Publicadas en total" hint={`${reviews.pending} pendientes · ${reviews.rejected} rechazadas`} />
+        <AdminStat value={reviews.published} label="Opiniones visibles" hint={`${reviews.pending} por moderar · ${reviews.hidden} ocultas · ${reviews.rejected} rechazadas`} />
       </div>
       <Daily daily={data.daily} />
       <div className="grid gap-6 lg:grid-cols-2">

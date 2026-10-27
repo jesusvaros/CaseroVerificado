@@ -11,6 +11,8 @@ const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   defaults: '2025-11-30',
   autocapture: false, // Disable autocapture to prevent duplicate events
+  // No cookies or localStorage: the site has no consent banner, so analytics must not store anything
+  persistence: 'memory',
 } as const
 
 // Inicializar PostHog

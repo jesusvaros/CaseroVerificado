@@ -295,8 +295,6 @@
     "section2Bullet1": "We do not store personal data in plain text (name, phone, email).",
     "section2Bullet2": "We store only an irreversible hash (e.g., SHA-256) of normalized data (e.g., normalized phone or email).",
     "section2Bullet3": "The hash is computed on your device (frontend or extension) and only the hash is sent, never the original value.",
-    "section2Lead3Strong": "Usage/analytics data (only if analytics is enabled with consent):",
-    "section2Lead3": "page views and aggregated events.",
     "section3Title": "3) Data source",
     "section3Body1": "Voluntary user submission when posting a review.",
     "section3Body2": "Browser extension (Chrome/Firefox): only captures information visible on pages such as Idealista; computes the hash locally and queries the backend with that hash. It does not perform mass scraping or download personal data in plain text.",
@@ -327,16 +325,9 @@
     "section1Title": "Do we use cookies?",
     "section1Bullet1Strong": "Technical/necessary cookies:",
     "section1Bullet1": "essential for the website to work (session, security, basic preferences).",
-    "section1Bullet2Strong": "Analytics cookies (optional):",
-    "section1Bullet2": "only if you give consent in the banner; used to measure usage and improve the experience.",
-    "section1Body": "We do not use cookies to display personal data.",
-    "section2Title": "Consent management",
-    "section2Prefix": "On your first visit we show a banner to accept, reject, or configure non-essential cookies. You can change your choice at",
-    "cookieSettingsLink": "Configure cookies",
     "section3Title": "How to manage cookies in your browser",
     "section3Body": "You can allow, block, or delete cookies from your browser settings.",
-    "section4Title": "Providers",
-    "section4Body": "If you enable analytics, we may use {{analyticsProvider}}."
+    "section4Title": "Providers"
   },
   "termsOfUse": {
     "seoTitle": "Terms of Use | CaseroOk",
