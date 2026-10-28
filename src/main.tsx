@@ -13,6 +13,9 @@ const options = {
   autocapture: false, // Disable autocapture to prevent duplicate events
   // No cookies or localStorage: the site has no consent banner, so analytics must not store anything
   persistence: 'memory',
+  // No session replay or surveys: recording what a visitor does is not aggregate measurement and would need consent
+  disable_session_recording: true,
+  disable_surveys: true,
 } as const
 
 // Inicializar PostHog
