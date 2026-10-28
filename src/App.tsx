@@ -50,7 +50,7 @@ function App() {
 
   useEffect(() => {
     trackEvent('app:loaded', { timestamp: new Date().toISOString() });
-    trackSessionStart();
+    void trackSessionStart();
   }, []);
 
   return (

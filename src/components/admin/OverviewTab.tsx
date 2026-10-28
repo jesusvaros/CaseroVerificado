@@ -45,10 +45,17 @@ const Daily = ({ daily }: { daily: Dashboard['daily'] }) => {
 
 const OverviewTab = ({ data }: { data: Dashboard }) => {
   const { totals, reviews } = data;
+  // Measurement started on a given day: a range reaching further back shows the same numbers
+  const firstDay = data.daily[0]?.day;
+  const rangeStart = new Date(Date.now() - data.days * 86_400_000).toISOString().slice(0, 10);
+  const span = data.days === 1 ? 'últimas 24 h' : `últimos ${data.days} días`;
+  const rangeHint = firstDay && firstDay > rangeStart
+    ? `${span} · datos desde el ${new Date(firstDay).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}`
+    : span;
   return (
     <div className="flex flex-col gap-6">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <AdminStat value={totals.sessions} label="Visitas" hint={`últimos ${data.days} días`} />
+        <AdminStat value={totals.sessions} label="Visitas" hint={rangeHint} />
         <AdminStat value={totals.forms_opened} label="Abrieron el formulario" hint={`${pct(totals.forms_opened, totals.sessions)} de las visitas`} />
         <AdminStat value={totals.reviews_submitted} label="Opiniones enviadas" hint={`${pct(totals.reviews_submitted, totals.forms_opened)} de quien abre el formulario`} accent />
         <AdminStat value={reviews.published} label="Opiniones visibles" hint={`${reviews.pending} por moderar · ${reviews.hidden} ocultas · ${reviews.rejected} rechazadas`} />
