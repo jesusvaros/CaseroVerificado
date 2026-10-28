@@ -1,7 +1,8 @@
 /**
  * CaseroOk outreach sync: runs inside the outreach Gmail account (Google Apps Script) every
  * 15 minutes and reports, for each contact in outreach_contacts, when we wrote to them, whether
- * anyone replied in that thread and whether the email bounced. See README.md for the set-up.
+ * anyone replied (in that thread or in a new one), whether the reply was automatic and whether the
+ * email bounced. See README.md for the set-up.
  *
  * Script properties (Project settings > Script properties), never committed:
  *   SUPABASE_ANON_KEY      the public anon key of the project
@@ -19,34 +20,73 @@ function sync() {
   console.log(`checked ${targets.length} contacts, updated ${changed}`);
 }
 
+// Free mailboxes: a sender on the same domain is not the same organisation
+const SHARED_DOMAINS = /^(gmail|googlemail|hotmail|outlook|live|yahoo|icloud|protonmail|proton)\./;
+const AUTO_REPLY = /respuesta autom[aá]tica|resposta autom[aà]tica|auto.?reply|automatic reply|out of office|fuera de la oficina/i;
+
 function inspect_(target) {
   const email = target.email.toLowerCase();
   const update = { ref: target.ref };
-  const threads = GmailApp.search(`in:sent to:${email}`, 0, 10);
   let sentAt = null;
   let reply = null;
+  let autoReply = null;
+  const consider = (message, thread) => {
+    const from = message.getFrom().toLowerCase();
+    if (/mailer-daemon|postmaster/.test(from) || from.includes(ME)) return;
+    const found = { date: message.getDate(), text: message.getPlainBody(), thread: thread.getId() };
+    if (isAutoReply_(message)) {
+      if (!autoReply || found.date > autoReply.date) autoReply = found;
+    } else if (!reply || found.date > reply.date) {
+      // Anyone else in the thread counts: replies often come from a person, not the shared address
+      reply = found;
+    }
+  };
+
+  const threads = GmailApp.search(`in:sent to:${email}`, 0, 10);
   for (const thread of threads) {
     for (const message of thread.getMessages()) {
-      const from = message.getFrom().toLowerCase();
-      if (from.includes(ME)) {
+      if (message.getFrom().toLowerCase().includes(ME)) {
         if (message.getTo().toLowerCase().includes(email) && (!sentAt || message.getDate() < sentAt)) sentAt = message.getDate();
-      } else if (!/mailer-daemon|postmaster/.test(from) && (!reply || message.getDate() > reply.date)) {
-        // Anyone else in the thread counts: replies often come from a person, not the shared address
-        reply = { date: message.getDate(), text: message.getPlainBody(), thread: thread.getId() };
+      } else {
+        consider(message, thread);
       }
     }
   }
+
+  if (sentAt) {
+    // Answers that start a new thread (auto-replies often change the subject, e.g. "Benvinguda! Re: ...")
+    const after = Utilities.formatDate(sentAt, 'UTC', 'yyyy/MM/dd');
+    const domain = email.split('@')[1];
+    const senders = SHARED_DOMAINS.test(domain) ? email : `${email} OR @${domain}`;
+    const seen = new Set(threads.map(thread => thread.getId()));
+    for (const thread of GmailApp.search(`from:(${senders}) -in:sent after:${after}`, 0, 10)) {
+      if (seen.has(thread.getId())) continue;
+      for (const message of thread.getMessages()) if (message.getDate() > sentAt) consider(message, thread);
+    }
+  }
+
   if (sentAt) update.sent_at = sentAt.toISOString();
   if (reply) {
     update.replied_at = reply.date.toISOString();
     update.message = firstLines_(reply.text);
     update.thread_url = `https://mail.google.com/mail/#all/${reply.thread}`;
+  } else if (autoReply) {
+    // Shown on the contact, but it stays "Enviado": nobody has actually answered yet
+    update.message = `Respuesta automática: ${firstLines_(autoReply.text)}`;
+    update.thread_url = `https://mail.google.com/mail/#all/${autoReply.thread}`;
   }
   if (sentAt && !reply) {
     const after = Utilities.formatDate(sentAt, 'UTC', 'yyyy/MM/dd');
     update.bounced = GmailApp.search(`from:(mailer-daemon OR postmaster) "${email}" after:${after}`, 0, 1).length > 0;
   }
   return update;
+}
+
+function isAutoReply_(message) {
+  const header = name => (message.getHeader(name) || '').toLowerCase();
+  if (/auto-(replied|generated)/.test(header('Auto-Submitted'))) return true;
+  if (header('X-Autoreply') || header('X-Autorespond') || /auto_reply/.test(header('Precedence'))) return true;
+  return AUTO_REPLY.test(message.getSubject()) || AUTO_REPLY.test(message.getPlainBody().slice(0, 600));
 }
 
 // The reply itself, without the quoted email underneath.

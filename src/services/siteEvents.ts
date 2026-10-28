@@ -9,12 +9,16 @@ type SiteEvent = 'session_start' | 'review_form_opened' | 'review_submitted';
 
 const REF_PATTERN = /^[a-z0-9-]{1,60}$/;
 const NO_TRACK_KEY = 'caserook:no-track';
+const ADMIN_EMAIL = 'xjesusvr@gmail.com';
+// Search engines and link previews run the page's JavaScript too; Vercel Analytics drops them, so do we
+const BOT_UA = /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|whatsapp|bytespider|petalbot|gptbot|claude|perplexity/i;
 
 const visitor = typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : null;
 let ref: string | null = null;
 let started = false;
 
 function noTrack() {
+  if (navigator.webdriver || BOT_UA.test(navigator.userAgent)) return true;
   try {
     return window.localStorage.getItem(NO_TRACK_KEY) === '1';
   } catch {
@@ -45,10 +49,14 @@ export function trackSiteEvent(event: SiteEvent) {
     });
 }
 
-// Once per visit, on the landing page.
-export function trackSessionStart() {
+// Once per visit, on the landing page. Waits for the stored login (read locally, no request) so the
+// admin's own visits are skipped from the very first page, not only after the auth provider loads.
+export async function trackSessionStart() {
   if (started) return;
   started = true;
+  if (new URLSearchParams(window.location.search).has('notrack')) excludeThisBrowser();
+  const { data } = (await supabaseWrapper.getClient()?.auth.getSession()) ?? { data: null };
+  if (data?.session?.user.email === ADMIN_EMAIL) excludeThisBrowser();
   trackSiteEvent('session_start');
 }
 

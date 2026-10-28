@@ -14,7 +14,7 @@ const TABS = [
 ] as const;
 type Tab = (typeof TABS)[number]['id'];
 
-const RANGES = [7, 30, 90];
+const RANGES = [1, 7, 30, 90];
 
 // /admin: traffic and reviews, outreach success and the moderation queue. Data access is
 // enforced in the database (is_admin); this check only avoids showing an empty shell.
@@ -60,7 +60,7 @@ const AdminPage = () => {
             <div className="mb-4 flex gap-1 rounded-full bg-white/10 p-1">
               {RANGES.map(r => (
                 <button key={r} type="button" onClick={() => setDays(r)} className={`rounded-full px-4 py-1.5 text-sm font-bold ${days === r ? 'bg-lime text-forest' : 'text-white/80'}`}>
-                  {r} días
+                  {r === 1 ? '24 h' : `${r} días`}
                 </button>
               ))}
             </div>

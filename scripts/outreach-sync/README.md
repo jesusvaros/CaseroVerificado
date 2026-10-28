@@ -5,8 +5,10 @@
 shared secret:
 
 - **Enviado**: there is a message we sent to the contact's address (its date becomes `sent_at`).
-- **Respondió**: someone other than us wrote in that thread (the first lines are stored, with a
-  link to the thread).
+- **Respondió**: someone other than us wrote in that thread, or in a new thread from the contact's
+  address or domain after we wrote (the first lines are stored, with a link to the thread).
+- **Respuesta automática**: an out-of-office or "we're saturated" auto-reply. Its text shows on the
+  contact, but the status stays "Enviado" until a person answers.
 - **Rebotó**: a delivery failure mentioning the address arrived after we wrote.
 
 "Interesado" and "No interesado" stay manual in `/admin?tab=contactos`; the sync never overwrites them.
