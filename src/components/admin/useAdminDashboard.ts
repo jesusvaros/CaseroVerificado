@@ -27,7 +27,10 @@ export interface OutreachContact {
 export interface Dashboard {
   days: number;
   totals: { sessions: number; visitors: number; forms_opened: number; reviews_submitted: number };
-  reviews: { published: number; hidden: number; pending: number; rejected: number };
+  reviews: { published: number; hidden: number; pending: number; unclaimed: number; rejected: number };
+  // Visitors who reached each review form step (site_events name -> count)
+  funnel: Record<string, number>;
+  blocking_fields: { field: string; visitors: number }[];
   daily: { day: string; sessions: number; reviews: number }[];
   sources: { source: string; sessions: number }[];
   pages: { path: string; sessions: number }[];

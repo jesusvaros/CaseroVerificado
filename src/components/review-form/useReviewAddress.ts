@@ -27,11 +27,12 @@ export function useReviewAddress() {
   const { formData, updateFormData } = useFormContext();
   const details: AddressDetails = formData.addressDetails || {};
 
-  // The home search stores the raw autocomplete result; turn it into street + number here.
+  // The home search stores the raw autocomplete result; turn it into street + number here. It is
+  // cleared once applied, so a newly searched address replaces the one in a saved draft.
   const prefill = formData.addressAutocompleteResult;
   useEffect(() => {
-    if (prefill && !details.components?.road) {
-      updateFormData({ addressDetails: resultToAddressDetails(prefill, details) });
+    if (prefill) {
+      updateFormData({ addressDetails: resultToAddressDetails(prefill), addressAutocompleteResult: undefined });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefill]);

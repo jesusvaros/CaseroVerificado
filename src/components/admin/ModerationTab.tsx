@@ -18,6 +18,7 @@ const ReviewCard = ({ review, onApprove, onReject, onDelete }: CardProps) => {
   const [busy, setBusy] = useState(false);
   const a = review.address_details;
   const address = a?.fullAddress || [a?.street, a?.number, a?.city].filter(Boolean).join(' ') || 'Sin dirección';
+  const unclaimed = review.user_id === null;
 
   const run = async (action: () => Promise<void>, done: string) => {
     setBusy(true);
@@ -36,6 +37,11 @@ const ReviewCard = ({ review, onApprove, onReject, onDelete }: CardProps) => {
         <h3 className="font-display text-xl font-extrabold">{address}</h3>
         <span className="text-sm text-ink-muted">{new Date(review.created_at).toLocaleString('es-ES')}</span>
       </header>
+      {unclaimed && (
+        <p className="rounded-xl bg-coral-soft px-4 py-3 text-sm text-coral-ink">
+          <strong>Sin email.</strong> La envió pero no confirmó su email, así que no se puede publicar. Si vuelve a entrar desde este navegador y confirma, pasará a pendiente.
+        </p>
+      )}
       <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
         {SCORE_LABELS.map(([key, label]) => review[key] != null && <span key={key}>{label}: <strong>{review[key]}</strong></span>)}
         {review.price != null && <span>{review.price} €/mes{review.rental_type === 'room' ? ' (habitación)' : ''}{review.size_m2 ? ` · ${review.size_m2} m²` : ''}</span>}
@@ -45,7 +51,7 @@ const ReviewCard = ({ review, onApprove, onReject, onDelete }: CardProps) => {
       {review.tags?.length ? <div className="flex flex-wrap gap-2">{review.tags.map(t => <span key={t} className="rounded-full bg-mist px-3 py-1 text-xs font-semibold">{t.replace(/_/g, ' ')}</span>)}</div> : null}
       <p className="whitespace-pre-line rounded-xl bg-mist p-4 leading-relaxed">{review.owner_opinion || 'Sin texto'}</p>
       <div className="flex flex-wrap items-center gap-3">
-        <button type="button" disabled={busy} onClick={() => run(onApprove, 'Publicada')} className="rounded-full bg-forest px-6 py-2.5 font-bold text-white hover:bg-brand disabled:opacity-50">
+        <button type="button" disabled={busy || unclaimed} onClick={() => run(onApprove, 'Publicada')} className="rounded-full bg-forest px-6 py-2.5 font-bold text-white hover:bg-brand disabled:opacity-50">
           Publicar
         </button>
         <input value={reason} onChange={e => setReason(e.target.value)} placeholder="Motivo del rechazo (opcional)" className="min-w-[260px] flex-1 rounded-full border border-line px-4 py-2.5 text-sm focus:border-brand focus:outline-none" />

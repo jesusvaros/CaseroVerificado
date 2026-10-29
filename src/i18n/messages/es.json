@@ -355,6 +355,10 @@
         "and": "y las",
         "practicesLink": "buenas prácticas",
         "acceptEnd": ". Lo que cuento es mi experiencia real y es veraz."
+      },
+      "draft": {
+        "restored": "Hemos recuperado lo que dejaste a medias.",
+        "startOver": "Empezar de cero"
       }
     }
   },
