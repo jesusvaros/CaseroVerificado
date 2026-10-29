@@ -355,6 +355,10 @@
         "and": "and the",
         "practicesLink": "good practices",
         "acceptEnd": ". What I describe is my real experience and it is true."
+      },
+      "draft": {
+        "restored": "We restored what you left half done.",
+        "startOver": "Start over"
       }
     }
   },

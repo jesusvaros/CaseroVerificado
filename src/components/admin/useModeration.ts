@@ -18,9 +18,11 @@ export interface PendingReview {
   tags: string[] | null;
   owner_opinion: string | null;
   status: string | null;
+  // null: sent without confirming an email, so it cannot be published
+  user_id: string | null;
 }
 
-// Completed reviews waiting for a decision (get_review_sessions_for_moderation is admin-only).
+// Completed reviews waiting for a decision, unconfirmed ones last (get_review_sessions_for_moderation is admin-only).
 export function useModeration() {
   const [reviews, setReviews] = useState<PendingReview[] | null>(null);
   const [error, setError] = useState<string | null>(null);

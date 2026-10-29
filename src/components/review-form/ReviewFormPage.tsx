@@ -8,7 +8,7 @@ import { submitReview } from '../../services/supabase/submitReview';
 import { notifyReviewCompleted } from '../../services/telegram';
 import { showErrorToast } from '../ui/toast/toastUtils';
 import { trackEvent } from '../../utils/analytics';
-import { trackSiteEvent } from '../../services/siteEvents';
+import { markReviewAwaitingLogin, trackReviewConfirmed, trackSiteEvent, trackSiteEventOnce } from '../../services/siteEvents';
 import ContactModal from '../ui/ContactModal';
 import ReviewFormAside from './ReviewFormAside';
 import AddressSection from './AddressSection';
@@ -24,7 +24,8 @@ const ReviewFormPage = () => {
   const { t } = useTranslations();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { formData, updateFormData, resetForm } = useFormContext();
+  const { formData, updateFormData, resetForm, hasRestoredDraft } = useFormContext();
+  const [showDraftNotice, setShowDraftNotice] = useState(hasRestoredDraft);
   const [errors, setErrors] = useState<ReviewField[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -37,6 +38,13 @@ const ReviewFormPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Form funnel for the admin: which steps people reach (nothing of what they write is sent)
+  useEffect(() => {
+    if (formData.addressDetails?.street) trackSiteEventOnce('review_address_set');
+    if (formData.ownerScore && formData.propertyScore) trackSiteEventOnce('review_scores_set');
+    if ((formData.opinion?.trim().length ?? 0) >= 20) trackSiteEventOnce('review_opinion_started');
+  }, [formData.addressDetails?.street, formData.ownerScore, formData.propertyScore, formData.opinion]);
+
   // Re-check live once the user has tried to send, so errors clear as they are fixed.
   useEffect(() => {
     if (errors.length > 0) setErrors(validateReview(formData));
@@ -46,7 +54,8 @@ const ReviewFormPage = () => {
   const finish = (sessionId: string, userId: string) => {
     void notifyReviewCompleted(sessionId, userId, formData).catch(e => console.warn('Telegram notification failed', e));
     setIsLoginOpen(false);
-    trackSiteEvent('review_submitted');
+    if (user) trackSiteEvent('review_submitted');
+    else trackReviewConfirmed();
     navigate(`/review/${sessionId}`);
     resetForm();
   };
@@ -55,7 +64,9 @@ const ReviewFormPage = () => {
     event.preventDefault();
     const found = validateReview(formData);
     setErrors(found);
+    trackSiteEventOnce('review_submit_clicked');
     if (found.length > 0) {
+      trackSiteEvent('review_submit_invalid', found.join(','));
       trackEvent('review:submit-error', { errors: found, errorCount: found.length });
       document.getElementById(`review-field-${found[0]}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -66,10 +77,13 @@ const ReviewFormPage = () => {
       await initializeSession(user?.id);
       const sessionId = await submitReview(formData);
       trackEvent('review:form-submitted', { authenticated: !!user, depositReturned: formData.depositReturned });
+      trackSiteEventOnce('review_saved');
       if (user) {
         finish(sessionId, user.id);
       } else {
         trackEvent('review:login-modal-open');
+        trackSiteEventOnce('review_login_shown');
+        markReviewAwaitingLogin();
         setIsLoginOpen(true);
       }
     } catch (error) {
@@ -88,6 +102,21 @@ const ReviewFormPage = () => {
       <ReviewFormAside />
       <main className="min-w-0 px-5 pb-20 pt-10 md:px-[6%] lg:pt-32">
         <form onSubmit={handleSubmit} noValidate className="flex max-w-[680px] flex-col gap-12">
+          {showDraftNotice && (
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-mist px-5 py-4 text-sm">
+              <span>{t('addReview.v2.draft.restored')}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  resetForm();
+                  setShowDraftNotice(false);
+                }}
+                className="font-bold text-brand underline-offset-2 hover:underline"
+              >
+                {t('addReview.v2.draft.startOver')}
+              </button>
+            </div>
+          )}
           <div className="flex flex-col gap-6">
             <AddressSection errors={errors} />
             <StayFields errors={errors} />

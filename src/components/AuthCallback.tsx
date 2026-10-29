@@ -4,6 +4,8 @@ import { supabaseWrapper } from '../services/supabase/client';
 import { useAuth } from '../store/auth/hooks';
 import toast from 'react-hot-toast';
 import { getSessionIdBack } from '../services/sessionManager';
+import { trackReviewConfirmed } from '../services/siteEvents';
+import { useFormContext } from '../store/useFormContext';
 
 /**
  * AuthCallback handles the redirection coming from Supabase OAuth / Magic-Link.
@@ -15,6 +17,7 @@ import { getSessionIdBack } from '../services/sessionManager';
  */
 const AuthCallback = () => {
   const navigate = useNavigate();
+  const { resetForm } = useFormContext();
   // We don't need searchParams anymore
   const { user, isLoading } = useAuth();
   const [processingComplete, setProcessingComplete] = useState(false);
@@ -92,6 +95,8 @@ const AuthCallback = () => {
             
             // If all steps are completed, navigate to the review page
             if (step1_completed && step2_completed && step3_completed && step4_completed && step5_completed) {
+              trackReviewConfirmed();
+              resetForm();
               navigate(`/review/${sessionId}`);
               return;
             }
@@ -130,7 +135,7 @@ const AuthCallback = () => {
     };
 
     completeLogin();
-  }, [navigate, user, isLoading, processingComplete]);
+  }, [navigate, user, isLoading, processingComplete, resetForm]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white text-ink" aria-busy="true">

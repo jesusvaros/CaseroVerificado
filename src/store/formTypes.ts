@@ -6,6 +6,8 @@ export interface FormContextType {
   formData: FormDataType;
   updateFormData: (data: Partial<FormDataType>) => void;
   resetForm: () => void;
+  // The form opened with a draft saved in this browser from an earlier visit
+  hasRestoredDraft: boolean;
 }
 
 export type Score = 1 | 2 | 3 | 4 | 5;

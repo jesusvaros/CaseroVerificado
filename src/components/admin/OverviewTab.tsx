@@ -21,6 +21,51 @@ const BarList = ({ title, rows }: { title: string; rows: { label: string; value:
   );
 };
 
+const FUNNEL: [string, string][] = [
+  ['review_form_opened', 'Abren el formulario'],
+  ['review_address_set', 'Ponen la dirección'],
+  ['review_scores_set', 'Ponen nota'],
+  ['review_opinion_started', 'Escriben la opinión'],
+  ['review_submit_clicked', 'Pulsan Enviar'],
+  ['review_saved', 'Se guarda'],
+  ['review_login_shown', 'Les pedimos el email'],
+  ['review_submitted', 'Confirman el email'],
+];
+
+const FIELDS: Record<string, string> = {
+  address: 'Dirección', number: 'Número', startYear: 'Año de entrada', price: 'Alquiler', ownerScore: 'Nota del casero',
+  propertyScore: 'Nota de la vivienda', deposit: 'Fianza', opinion: 'Opinión (muy corta)', terms: 'Casilla de condiciones',
+};
+
+// Where people drop out of the review form, step by step, and which fields stop them at "Enviar".
+const Funnel = ({ funnel, blocking }: { funnel: Dashboard['funnel']; blocking: Dashboard['blocking_fields'] }) => {
+  const opened = funnel.review_form_opened ?? 0;
+  return (
+    <section className="flex flex-col gap-3 rounded-2xl border border-line bg-white p-5">
+      <h3 className="font-display text-lg font-extrabold">Formulario de opinión, paso a paso</h3>
+      {opened === 0 && <p className="text-sm text-ink-muted">Nadie ha abierto el formulario en este periodo.</p>}
+      {opened > 0 && FUNNEL.map(([event, label]) => {
+        const n = funnel[event] ?? 0;
+        return (
+          <div key={event} className="flex items-center gap-3 text-sm">
+            <span className="w-44 shrink-0 truncate">{label}</span>
+            <span className="h-2.5 flex-1 overflow-hidden rounded bg-mist">
+              <span className="block h-full rounded bg-brand-light" style={{ width: `${(n / opened) * 100}%` }} />
+            </span>
+            <strong className="w-10 text-right">{n}</strong>
+            <span className="w-12 text-right text-ink-muted">{pct(n, opened)}</span>
+          </div>
+        );
+      })}
+      {blocking.length > 0 && (
+        <p className="text-sm text-ink-muted">
+          Les frena al enviar: {blocking.map(b => `${FIELDS[b.field] ?? b.field} (${b.visitors})`).join(' · ')}
+        </p>
+      )}
+    </section>
+  );
+};
+
 // Sessions per day as columns, reviews as lime dots on top.
 const Daily = ({ daily }: { daily: Dashboard['daily'] }) => {
   const max = Math.max(1, ...daily.map(d => d.sessions));
@@ -58,9 +103,10 @@ const OverviewTab = ({ data }: { data: Dashboard }) => {
         <AdminStat value={totals.sessions} label="Visitas" hint={rangeHint} />
         <AdminStat value={totals.forms_opened} label="Abrieron el formulario" hint={`${pct(totals.forms_opened, totals.sessions)} de las visitas`} />
         <AdminStat value={totals.reviews_submitted} label="Opiniones enviadas" hint={`${pct(totals.reviews_submitted, totals.forms_opened)} de quien abre el formulario`} accent />
-        <AdminStat value={reviews.published} label="Opiniones visibles" hint={`${reviews.pending} por moderar · ${reviews.hidden} ocultas · ${reviews.rejected} rechazadas`} />
+        <AdminStat value={reviews.published} label="Opiniones visibles" hint={`${reviews.pending} por moderar · ${reviews.unclaimed} sin email · ${reviews.hidden} ocultas · ${reviews.rejected} rechazadas`} />
       </div>
       <Daily daily={data.daily} />
+      <Funnel funnel={data.funnel ?? {}} blocking={data.blocking_fields ?? []} />
       <div className="grid gap-6 lg:grid-cols-2">
         <BarList title="De dónde llegan" rows={data.sources.map(s => ({ label: s.source, value: s.sessions }))} />
         <BarList title="Páginas de entrada" rows={data.pages.map(p => ({ label: p.path, value: p.sessions }))} />
