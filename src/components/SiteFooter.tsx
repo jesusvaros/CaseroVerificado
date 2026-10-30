@@ -5,6 +5,7 @@ import { umamiEventProps } from '../utils/analytics';
 
 const LINKS = [
   { to: '/opiniones', key: 'footer.opinionsByCity', event: 'footer:opiniones' },
+  { to: '/calculadora-subida-alquiler', key: 'footer.rentUpdate', event: 'footer:calculadora' },
   { to: '/datos', key: 'footer.data', event: 'footer:datos' },
   { to: '/aviso-legal', key: 'footer.legalNotice', event: 'footer:aviso-legal' },
   { to: '/politica-privacidad', key: 'footer.privacyPolicy', event: 'footer:privacidad' },

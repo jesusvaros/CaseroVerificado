@@ -28,7 +28,8 @@
     "nav": {
       "cities": "Ciudades",
       "prices": "Precios por barrio",
-      "guides": "Guías"
+      "guides": "Guías",
+      "rentUpdate": "Subida del alquiler"
     }
   },
   "footer": {
@@ -42,7 +43,8 @@
     "termsOfUse": "Condiciones de Uso",
     "goodPractices": "Buenas Prácticas",
     "disclaimer": "Todas las opiniones son anónimas y reflejan experiencias personales, no declaraciones de hechos ni asesoramiento legal.",
-    "dataSources": "Datos: Dirección General del Catastro, Ministerio de Vivienda (SERPAVI), INE."
+    "dataSources": "Datos: Dirección General del Catastro, Ministerio de Vivienda (SERPAVI), INE.",
+    "rentUpdate": "Calculadora de subida del alquiler"
   },
   "home": {
     "hero": {
@@ -1002,5 +1004,78 @@
     "methodTitle": "Cómo los tratamos",
     "method": "Descargamos los datos tal como los publican, los cruzamos por municipio, código postal y sección censal, y los servimos como archivos estáticos para que la web sea rápida y gratis. No modificamos las cifras; cuando una zona tiene pocos contratos, lo decimos. Todo el proceso es público.",
     "code": "Ver el código que procesa los datos"
+  },
+  "rentUpdate": {
+    "seoTitle": "¿Cuánto me pueden subir el alquiler? Calculadora 2026 | CaseroOk",
+    "seoDescription": "Calcula gratis la subida máxima legal de tu alquiler con el IRAV del INE y el tope del 2 % hasta 2027. Para contratos de vivienda en España.",
+    "title": "¿Cuánto te pueden subir el alquiler?",
+    "intro": "Pon las fechas de tu contrato y lo que pagas. Te decimos la subida máxima que permite la ley y si lo que te piden la supera.",
+    "pendingDecree": "El tope del 2 % viene del Real Decreto-ley 29/2026, en vigor desde el 8 de octubre de 2026. El Congreso tiene que convalidarlo a principios de noviembre; si lo tumba, actualizaremos la calculadora ese mismo día.",
+    "form": {
+      "clause": "¿Tu contrato dice que la renta se actualiza cada año?",
+      "clauseOptions": {
+        "yes": "Sí",
+        "no": "No dice nada"
+      },
+      "clauseHint": "Búscalo en la cláusula de renta o de actualización: suele mencionar el IPC, el IRAV o una actualización anual.",
+      "signed": "Fecha de firma del contrato",
+      "update": "Fecha de la subida",
+      "updateHint": "El día en que el contrato cumple otro año. La rellenamos con el próximo aniversario.",
+      "rent": "Lo que pagas ahora al mes",
+      "asked": "Lo que te piden (opcional)",
+      "askedHint": "La nueva renta mensual que te ha comunicado el casero.",
+      "tensioned": "¿El piso está en una zona tensionada?",
+      "tensionedOptions": {
+        "no": "No",
+        "yes": "Sí",
+        "unknown": "No lo sé"
+      },
+      "tensionedHint": "Cómo saber si tu zona es tensionada"
+    },
+    "result": {
+      "maxLabel": "Renta máxima tras la subida",
+      "perMonth": "al mes",
+      "increase": "Te pueden subir como mucho {{amount}} al mes ({{pct}}).",
+      "over": "Te piden {{amount}} al mes más de lo que permite la ley.",
+      "ok": "Lo que te piden está dentro del límite legal.",
+      "why": {
+        "irav": "Es el IRAV de {{month}} ({{irav}}), el último que había publicado el INE en la fecha de la subida. La ley no deja que la actualización anual lo supere.",
+        "extraordinary": "Hasta el 31 de diciembre de 2027, si no firmáis un nuevo acuerdo, la subida no puede pasar del 2 %, aunque el IRAV de {{month}} sea del {{irav}}."
+      },
+      "agreement": "Si aceptas por escrito otra subida, vale lo pactado, pero nunca por encima del IRAV. Nadie te obliga a firmarla.",
+      "estimated": "El IRAV del mes que te corresponde aún no está publicado, así que usamos el último disponible. Vuelve a comprobarlo cuando llegue la fecha.",
+      "tensioned": "En zona tensionada: si tu renta ya supera el índice de referencia del Ministerio para tu piso, en las subidas hasta finales de 2027 no te pueden subir nada. Compruébalo buscando tu dirección en CaseroOk.",
+      "rdl8": "Entre el 22 de marzo y el 29 de abril de 2026 estuvo en vigor un tope del 2 % (Real Decreto-ley 8/2026) que el Congreso no convalidó. Si te notificaron la subida en esas fechas, consulta a un sindicato de inquilinas o a la OMIC.",
+      "whatToDo": "Qué hacer: contesta por escrito con este cálculo, pide la certificación del INE y sigue pagando la renta que no se discute. Si insiste, consulta a un sindicato de inquilinas o a la OMIC.",
+      "noClause": {
+        "title": "No te pueden subir la renta",
+        "text": "Si el contrato no prevé ninguna actualización, la renta se queda igual mientras dure (artículo 18.1 de la Ley de Arrendamientos Urbanos)."
+      },
+      "beforeFirstYear": {
+        "title": "Aún no toca subida",
+        "text": "La renta solo se puede actualizar cuando el contrato cumple cada año. Revisa la fecha de la subida."
+      },
+      "tooOld": {
+        "title": "Fecha fuera de la calculadora",
+        "text": "Calculamos subidas desde enero de 2025. Para fechas anteriores, mira la guía sobre la actualización anual de la renta."
+      },
+      "contractOnly": {
+        "title": "Manda lo que diga tu contrato",
+        "text": "Tu contrato es anterior al 26 de mayo de 2023 y la subida cae antes del 8 de octubre de 2026, así que se aplica el índice de la cláusula (normalmente el IPC) sin el tope del IRAV. Las subidas desde el 8 de octubre de 2026 sí tienen ese tope."
+      }
+    },
+    "share": {
+      "title": "¿Cuánto pagas tú? Ayuda a tu barrio",
+      "text": "Los datos oficiales de alquiler llegan con años de retraso. Si compartes de forma anónima cuánto pagas y cuánto te han subido, quien busque piso en tu zona sabrá el precio real. Son un par de minutos.",
+      "cta": "Compartir lo que pago"
+    },
+    "disclaimer": "Información general, no asesoramiento legal. Para tu caso concreto, consulta a un sindicato de inquilinas, a la OMIC o a un abogado.",
+    "iravUpdated": "Último IRAV publicado: {{month}}, {{value}} %.",
+    "sources": {
+      "lau": "Ley de Arrendamientos Urbanos",
+      "rdl": "Real Decreto-ley 29/2026",
+      "ine": "IRAV en el INE",
+      "guide": "Guía: la actualización anual de la renta"
+    }
   }
 }
