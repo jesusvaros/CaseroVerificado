@@ -148,7 +148,10 @@ const ReviewFormPage = () => {
           </fieldset>
 
           <label id="review-field-opinion" className="flex flex-col gap-3">
-            <span className={sectionTitle}>{t('addReview.v2.opinion.title')}</span>
+            <span className="flex flex-col">
+              <span className={sectionTitle}>{t('addReview.v2.opinion.title')}</span>
+              <span className="text-sm text-[#8A9384]">{t('addReview.v2.optional')}</span>
+            </span>
             <span className="text-ink-muted">{t('addReview.v2.opinion.hint')}</span>
             <textarea
               rows={6}

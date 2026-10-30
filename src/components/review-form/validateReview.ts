@@ -16,7 +16,9 @@ export function validateReview(data: FormDataType): ReviewField[] {
   if (!data.ownerScore) errors.push('ownerScore');
   if (!data.propertyScore) errors.push('propertyScore');
   if (!data.depositReturned) errors.push('deposit');
-  if ((data.opinion?.trim().length ?? 0) < MIN_OPINION_LENGTH) errors.push('opinion');
+  // The opinion is optional, but a written one needs some detail
+  const opinionLength = data.opinion?.trim().length ?? 0;
+  if (opinionLength > 0 && opinionLength < MIN_OPINION_LENGTH) errors.push('opinion');
   if (!data.acceptTerms) errors.push('terms');
 
   return errors;

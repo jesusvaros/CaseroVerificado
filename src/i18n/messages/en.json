@@ -331,7 +331,7 @@
       },
       "opinion": {
         "title": "What should the next tenant know?",
-        "hint": "Stick to facts, no insults or personal data. It gets published sooner and protects you.",
+        "hint": "If you'd rather not write, you can send it without text: the rent and the scores already help. If you write, stick to facts, no insults or personal data.",
         "placeholder": "How the landlord handled repairs, rent increases, how moving out went…"
       },
       "submit": "Send review",
@@ -342,7 +342,7 @@
         "stay": "Add the year you moved in and the monthly rent.",
         "scores": "Rate the landlord and the home.",
         "deposit": "Choose an answer about the deposit.",
-        "opinion": "Add a bit more detail (at least {{min}} characters).",
+        "opinion": "If you write an opinion, add a bit more detail (at least {{min}} characters).",
         "saveFailed": "The review could not be saved. Please try again in a few minutes.",
         "terms": "Accept the terms of use to send your review."
       },
@@ -780,7 +780,17 @@
     "searchLabel": "Search another city",
     "searchPlaceholder": "Another city or town…",
     "currentRent": "monthly rent in new contracts ({{period}})",
-    "salePerM2": "€/m² sale, appraised value ({{period}})"
+    "salePerM2": "€/m² sale, appraised value ({{period}})",
+    "tenantRent": {
+      "title": "What tenants pay in {{city}}",
+      "median": "median monthly rent, from {{count}} shared flats",
+      "perM2": "per m² per month",
+      "above": "{{pct}} % above the official price per m² ({{year}}).",
+      "below": "{{pct}} % below the official price per m² ({{year}}).",
+      "note": "Whole flats rented since {{year}}, shared anonymously by the tenants themselves. Official data arrives years late; this is now.",
+      "few": "Official rent data arrives years late. Once {{min}} tenants share what they pay here, you will see today's real price next to the official one. {{count}} of {{min}} so far.",
+      "cta": "Share what I pay"
+    }
   },
   "cityIndex": {
     "seoTitle": "Rent by city: official prices and reviews | CaseroOk",
