@@ -5,6 +5,7 @@ name: Market data
 on:
   schedule:
     - cron: '0 6 5 * *' # 5th of every month, 06:00 UTC
+    - cron: '0 6 17 * *' # and the 17th, after the INE publishes the monthly IRAV
   workflow_dispatch:
 
 permissions:
@@ -39,6 +40,8 @@ jobs:
           # History for the data explorer: every INCASÒL year and every Valencian deposit file since 2020
           curl -fsSL -o incasol_all.json "https://analisi.transparenciacatalunya.cat/resource/qww9-bvhh.json?\$where=ambit_territorial='Municipi'&\$limit=200000"
           cp gva.csv "gva_$YEAR.csv"
+          # IRAV, the yearly rent update cap, for /calculadora-subida-alquiler
+          curl -fsSL -o irav.json 'https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/72975?nult=120'
           for Y in $(seq 2020 $((YEAR - 1))); do
             URL=$(curl -fsSL "https://dadesobertes.gva.es/api/3/action/package_show?id=viv-reg-fia-$Y" \
               | python -c "import json,sys; print(next(r['url'] for r in json.load(sys.stdin)['result']['resources'] if r['format'].upper() == 'CSV'))")
@@ -49,11 +52,12 @@ jobs:
         run: |
           python -I scripts/data/build_market.py /tmp/market public/data/zonas public/data/mercado
           python -I scripts/data/build_market_history.py /tmp/market public/data/mercado-historico
+          python -I scripts/data/build_irav.py /tmp/market/irav.json public/data/irav.json
 
       # A monthly commit also keeps the repository active, so GitHub does not pause this schedule
       - name: Commit
         run: |
-          git add public/data/mercado public/data/mercado-historico
+          git add public/data/mercado public/data/mercado-historico public/data/irav.json
           if git diff --cached --quiet; then
             echo "No changes"
             exit 0

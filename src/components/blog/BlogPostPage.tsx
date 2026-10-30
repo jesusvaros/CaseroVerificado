@@ -20,8 +20,9 @@ type ContentBlock = {
   content: string[];
 };
 
-// Supports **bold**, [text](https://url) and bare https:// URLs, so guide sources render as links.
-const INLINE_PATTERN = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+[^\s).,;:])/;
+// Supports **bold**, [text](https://url), [text](/path) for pages of the site and bare https:// URLs,
+// so guide sources render as links.
+const INLINE_PATTERN = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*)\)|(https?:\/\/[^\s)]+[^\s).,;:])/;
 
 function processInlineMarkdown(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
@@ -42,16 +43,17 @@ function processInlineMarkdown(text: string): React.ReactNode[] {
       parts.push(<strong key={`bold-${key++}`}>{bold}</strong>);
     } else {
       const href = linkUrl ?? bareUrl;
+      const linkClass = 'break-words text-brand underline underline-offset-2 hover:text-forest';
       parts.push(
-        <a
-          key={`link-${key++}`}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="break-words text-brand underline underline-offset-2 hover:text-forest"
-        >
-          {linkText ?? bareUrl}
-        </a>
+        href.startsWith('/') ? (
+          <Link key={`link-${key++}`} to={href} className={linkClass}>
+            {linkText}
+          </Link>
+        ) : (
+          <a key={`link-${key++}`} href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+            {linkText ?? bareUrl}
+          </a>
+        )
       );
     }
     currentText = currentText.substring(match.index + whole.length);

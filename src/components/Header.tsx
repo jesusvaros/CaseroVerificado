@@ -9,6 +9,7 @@ import AccountMenu from './AccountMenu';
 const NAV = [
   { to: '/opiniones', key: 'header.nav.cities', event: 'nav:cities' },
   { to: '/opiniones/espana/madrid', key: 'header.nav.prices', event: 'nav:prices' },
+  { to: '/calculadora-subida-alquiler', key: 'header.nav.rentUpdate', event: 'nav:rent-update' },
   { to: '/blog', key: 'header.nav.guides', event: 'nav:guides' },
 ];
 

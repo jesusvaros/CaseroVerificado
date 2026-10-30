@@ -58,6 +58,10 @@ Supongamos un contrato con cláusula de actualización según el IRAV, una renta
 
 Si el IRAV real fuera inferior al 2 %, el tope sería ese IRAV. Repite el cálculo siempre con el dato oficial del mes que corresponda.
 
+## Calcúlalo en un minuto
+
+Con la [calculadora de subida del alquiler](/calculadora-subida-alquiler) pones la fecha de tu contrato, lo que pagas y lo que te piden, y te dice el máximo legal con el último IRAV publicado.
+
 ## Qué hacer paso a paso
 
 1. **Lee la cláusula de actualización** de tu contrato y anota la fecha en que se cumple cada año.

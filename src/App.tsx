@@ -26,6 +26,7 @@ import CityReviewsIndexPage from './pages/CityReviewsIndexPage';
 import CityReviewsPage from './pages/CityReviewsPage';
 import AddressPage from './pages/AddressPage';
 import DataPage from './components/data-sources/DataPage';
+import RentUpdatePage from './components/rent-update/RentUpdatePage';
 import UmamiTracker from './components/analytics/UmamiTracker';
 import ScrollToTop from './components/ScrollToTop';
 import { useTranslations } from './i18n/useTranslations';
@@ -106,6 +107,7 @@ function App() {
           <Route path="/admin/moderate" element={<Navigate to="/admin?tab=moderacion" replace />} />
           {/* Legal routes */}
           <Route path="/datos" element={<DataPage />} />
+          <Route path="/calculadora-subida-alquiler" element={<RentUpdatePage />} />
           <Route path="/aviso-legal" element={<><PageSEO title={t('legalNotice.seoTitle')} description={t('legalNotice.seoDescription')} /><AvisoLegal /></>} />
           <Route path="/politica-privacidad" element={<><PageSEO title={t('privacyPolicy.seoTitle')} description={t('privacyPolicy.seoDescription')} /><PoliticaPrivacidad /></>} />
           <Route path="/cookies" element={<><PageSEO title={t('cookiesPolicy.seoTitle')} description={t('cookiesPolicy.seoDescription')} /><PoliticaCookies /></>} />

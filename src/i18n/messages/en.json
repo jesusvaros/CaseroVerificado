@@ -28,7 +28,8 @@
     "nav": {
       "cities": "Cities",
       "prices": "Prices by area",
-      "guides": "Guides"
+      "guides": "Guides",
+      "rentUpdate": "Rent increase"
     }
   },
   "footer": {
@@ -42,7 +43,8 @@
     "termsOfUse": "Terms of use",
     "goodPractices": "Best practices",
     "disclaimer": "All reviews are anonymous and reflect personal experiences, not statements of fact or legal advice.",
-    "dataSources": "Data: Spanish cadastre (Dirección General del Catastro), Ministry of Housing (SERPAVI), INE."
+    "dataSources": "Data: Spanish cadastre (Dirección General del Catastro), Ministry of Housing (SERPAVI), INE.",
+    "rentUpdate": "Rent increase calculator"
   },
   "home": {
     "hero": {
@@ -1002,5 +1004,78 @@
     "methodTitle": "How we handle it",
     "method": "We download the data as published, join it by municipality, postcode and census section, and serve it as static files so the site is fast and free. We never change the figures; when an area has few contracts, we say so. The whole process is public.",
     "code": "See the code that processes the data"
+  },
+  "rentUpdate": {
+    "seoTitle": "How much can my rent go up? Spain 2026 calculator | CaseroOk",
+    "seoDescription": "Work out the legal maximum for your yearly rent update in Spain with the INE IRAV index and the 2 % cap until 2027.",
+    "title": "How much can your rent go up?",
+    "intro": "Enter your contract dates and what you pay. We show the highest update the law allows and whether what you are asked goes over it.",
+    "pendingDecree": "The 2 % cap comes from Real Decreto-ley 29/2026, in force since 8 October 2026. Congress has to validate it in early November; if it is rejected, we will update the calculator that day.",
+    "form": {
+      "clause": "Does your contract say the rent is updated every year?",
+      "clauseOptions": {
+        "yes": "Yes",
+        "no": "It says nothing"
+      },
+      "clauseHint": "Look for the rent or update clause: it usually mentions the IPC, the IRAV or a yearly update.",
+      "signed": "Contract signing date",
+      "update": "Update date",
+      "updateHint": "The day the contract turns another year. We fill in the next anniversary.",
+      "rent": "What you pay now per month",
+      "asked": "What you are asked (optional)",
+      "askedHint": "The new monthly rent your landlord told you.",
+      "tensioned": "Is the flat in a stressed rental market?",
+      "tensionedOptions": {
+        "no": "No",
+        "yes": "Yes",
+        "unknown": "I don't know"
+      },
+      "tensionedHint": "How to know if your area is a stressed market"
+    },
+    "result": {
+      "maxLabel": "Highest rent after the update",
+      "perMonth": "per month",
+      "increase": "Your rent can go up by {{amount}} a month at most ({{pct}}).",
+      "over": "You are asked {{amount}} a month more than the law allows.",
+      "ok": "What you are asked is within the legal limit.",
+      "why": {
+        "irav": "It is the IRAV for {{month}} ({{irav}}), the latest the INE had published on the update date. The law does not let the yearly update exceed it.",
+        "extraordinary": "Until 31 December 2027, unless you sign a new agreement, the update cannot exceed 2 %, even though the IRAV for {{month}} is {{irav}}."
+      },
+      "agreement": "If you accept a different update in writing, the agreement applies, but never above the IRAV. Nobody can make you sign it.",
+      "estimated": "The IRAV for your month is not published yet, so we use the latest one. Check again when the date comes.",
+      "tensioned": "In a stressed market: if your rent is already above the Ministry reference index for your flat, updates until the end of 2027 cannot raise it at all. Check it by searching your address on CaseroOk.",
+      "rdl8": "From 22 March to 29 April 2026 a 2 % cap was in force (Real Decreto-ley 8/2026) that Congress did not validate. If your update was notified in those dates, ask a tenants' union or the OMIC.",
+      "whatToDo": "What to do: reply in writing with this calculation, ask for the INE certificate and keep paying the undisputed rent. If the landlord insists, ask a tenants' union or the OMIC.",
+      "noClause": {
+        "title": "Your rent cannot go up",
+        "text": "If the contract has no update clause, the rent stays the same for as long as it lasts (article 18.1 of the Ley de Arrendamientos Urbanos)."
+      },
+      "beforeFirstYear": {
+        "title": "No update yet",
+        "text": "Rent can only be updated when the contract turns each year. Check the update date."
+      },
+      "tooOld": {
+        "title": "Date outside the calculator",
+        "text": "We calculate updates from January 2025. For earlier dates, see the guide on the yearly rent update."
+      },
+      "contractOnly": {
+        "title": "Your contract decides",
+        "text": "Your contract predates 26 May 2023 and the update falls before 8 October 2026, so the clause index applies (usually the IPC) without the IRAV cap. Updates from 8 October 2026 do have that cap."
+      }
+    },
+    "share": {
+      "title": "What do you pay? Help your neighbourhood",
+      "text": "Official rent data arrives years late. If you share anonymously what you pay and how much it went up, people looking for a flat in your area will know the real price. It takes a couple of minutes.",
+      "cta": "Share what I pay"
+    },
+    "disclaimer": "General information, not legal advice. For your own case, ask a tenants' union, the OMIC or a lawyer.",
+    "iravUpdated": "Latest IRAV published: {{month}}, {{value}} %.",
+    "sources": {
+      "lau": "Ley de Arrendamientos Urbanos",
+      "rdl": "Real Decreto-ley 29/2026",
+      "ine": "IRAV at the INE",
+      "guide": "Guide: the yearly rent update"
+    }
   }
 }
