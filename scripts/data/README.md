@@ -44,7 +44,7 @@ python3 -I scripts/data/build_tensioned_zones.py /tmp/zonas.html public/data/zon
 
 Names the script cannot match are printed as `UNMATCHED`; add them to `MANUAL` with their INE code.
 
-## Rebuild the neighbourhood maps (Madrid and Barcelona)
+## Rebuild the neighbourhood maps (Madrid, Barcelona and Sevilla)
 
 Other cities show census sections straight from `zonas/<province>.json`; only cities with official neighbourhood shapes get a file in `public/data/ciudades/` (listed in `CITY_FILES` in `src/services/publicData/cityRent.ts`).
 
@@ -68,6 +68,14 @@ python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/madrid.geojson 28079 
   public/data/ciudades/madrid.json "barrios del Ayuntamiento de Madrid (CC BY 4.0)" public/data/historico
 python3 -I scripts/data/build_city_barrios.py /tmp/serpavi/barcelona.geojson 08019 public/data/zonas \
   public/data/ciudades/barcelona.json "barris de l'Ajuntament de Barcelona (CC BY 4.0)" public/data/historico
+
+# Sevilla: 109 barrios, Ayuntamiento de Sevilla (IDE Sevilla), CC BY 4.0. Two shapes share the name Villegas: dissolve merges them
+curl -o sevilla_raw.geojson 'https://services1.arcgis.com/hcmP7kr0Cx3AcTJk/arcgis/rest/services/Barrios_de_Sevilla/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=geojson'
+python3 -I scripts/data/sevilla_barrio_names.py sevilla_raw.geojson sevilla_named.geojson
+npx mapshaper@0.6.102 sevilla_named.geojson -dissolve fields=name copy-fields=district -each "id=name" -filter-fields id,name,district \
+  -simplify 20% planar keep-shapes -clean -o sevilla.geojson format=geojson precision=0.00001
+python3 -I scripts/data/build_city_barrios.py sevilla.geojson 41091 public/data/zonas \
+  public/data/ciudades/sevilla.json "barrios del Ayuntamiento de Sevilla (CC BY 4.0)" public/data/historico
 ```
 
 ## Rebuild the municipality index

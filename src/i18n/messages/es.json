@@ -789,7 +789,10 @@
       "below": "Un {{pct}} % por debajo del precio oficial por m² ({{year}}).",
       "note": "Pisos enteros alquilados desde {{year}}, contados por los propios inquilinos de forma anónima. Los datos oficiales llegan con años de retraso; estos son de ahora.",
       "few": "Los datos oficiales de alquiler llegan con años de retraso. Cuando {{min}} inquilinos compartan aquí lo que pagan, verás el precio real de ahora junto al oficial. Llevamos {{count}} de {{min}}.",
-      "cta": "Compartir lo que pago"
+      "cta": "Compartir lo que pago",
+      "areaPerM2": "Inquilinos de CaseroOk: {{value}} ({{count}} pisos)",
+      "areaRent": "Inquilinos de CaseroOk: {{value}} € al mes ({{count}} pisos)",
+      "listLabel": "según inquilinos"
     }
   },
   "cityIndex": {
