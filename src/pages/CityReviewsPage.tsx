@@ -5,6 +5,7 @@ import MapView from '../components/MapView';
 import CityRentHero from '../components/city/CityRentHero';
 import CityRentSection from '../components/city/CityRentSection';
 import CityQuotes from '../components/city/CityQuotes';
+import CityTenantRent from '../components/city/CityTenantRent';
 import CitySearch from '../components/city/CitySearch';
 import DataSourcesNote from '../components/data-sources/DataSourcesNote';
 import { useCityRent } from '../components/city/useCityRent';
@@ -257,6 +258,7 @@ export default function CityReviewsPage() {
                 )}
             </div>
           )}
+          <CityTenantRent city={fallbackCityName} reviews={reviews} officialPerM2={rent?.rent?.[2] ?? null} officialYear={rent?.rent?.[0] ?? null} />
           <CityQuotes city={fallbackCityName} reviews={reviews} />
           <DataSourcesNote sources={['reviews', 'serpavi', 'deposits', 'sales', 'ipva', 'tensioned']} className="pt-20" />
         </div>

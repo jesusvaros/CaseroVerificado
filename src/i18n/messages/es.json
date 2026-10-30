@@ -331,7 +331,7 @@
       },
       "opinion": {
         "title": "¿Qué debería saber el próximo inquilino?",
-        "hint": "Cuenta hechos, no insultos ni datos personales. Así se publica antes y te protege a ti.",
+        "hint": "Si no te apetece escribir, puedes enviarla sin texto: el precio y las notas ya ayudan. Si escribes, cuenta hechos, no insultos ni datos personales.",
         "placeholder": "Cómo respondía el casero a las averías, si hubo subidas, cómo fue la salida…"
       },
       "submit": "Enviar opinión",
@@ -342,7 +342,7 @@
         "stay": "Indica desde qué año y cuánto pagabas al mes.",
         "scores": "Pon nota al casero y a la vivienda.",
         "deposit": "Elige una respuesta sobre la fianza.",
-        "opinion": "Cuéntalo con un poco más de detalle (mínimo {{min}} caracteres).",
+        "opinion": "Si escribes una opinión, cuéntalo con un poco más de detalle (mínimo {{min}} caracteres).",
         "saveFailed": "No se pudo guardar la opinión. Inténtalo de nuevo en unos minutos.",
         "terms": "Acepta las condiciones de uso para enviar la opinión."
       },
@@ -780,7 +780,17 @@
     "searchLabel": "Buscar otra ciudad",
     "searchPlaceholder": "Ver otra ciudad o pueblo…",
     "currentRent": "alquiler al mes en contratos nuevos ({{period}})",
-    "salePerM2": "€/m² de venta, valor tasado ({{period}})"
+    "salePerM2": "€/m² de venta, valor tasado ({{period}})",
+    "tenantRent": {
+      "title": "Lo que pagan los inquilinos en {{city}}",
+      "median": "alquiler mensual mediano, de {{count}} pisos compartidos",
+      "perM2": "al mes por m²",
+      "above": "Un {{pct}} % por encima del precio oficial por m² ({{year}}).",
+      "below": "Un {{pct}} % por debajo del precio oficial por m² ({{year}}).",
+      "note": "Pisos enteros alquilados desde {{year}}, contados por los propios inquilinos de forma anónima. Los datos oficiales llegan con años de retraso; estos son de ahora.",
+      "few": "Los datos oficiales de alquiler llegan con años de retraso. Cuando {{min}} inquilinos compartan aquí lo que pagan, verás el precio real de ahora junto al oficial. Llevamos {{count}} de {{min}}.",
+      "cta": "Compartir lo que pago"
+    }
   },
   "cityIndex": {
     "seoTitle": "Alquiler por ciudades: precios oficiales y opiniones | CaseroOk",
