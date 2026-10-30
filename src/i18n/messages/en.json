@@ -789,7 +789,10 @@
       "below": "{{pct}} % below the official price per m² ({{year}}).",
       "note": "Whole flats rented since {{year}}, shared anonymously by the tenants themselves. Official data arrives years late; this is now.",
       "few": "Official rent data arrives years late. Once {{min}} tenants share what they pay here, you will see today's real price next to the official one. {{count}} of {{min}} so far.",
-      "cta": "Share what I pay"
+      "cta": "Share what I pay",
+      "areaPerM2": "CaseroOk tenants: {{value}} ({{count}} flats)",
+      "areaRent": "CaseroOk tenants: {{value}} € a month ({{count}} flats)",
+      "listLabel": "per tenants"
     }
   },
   "cityIndex": {

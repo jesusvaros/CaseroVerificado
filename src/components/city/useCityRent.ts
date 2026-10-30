@@ -26,16 +26,17 @@ export function useCityRent(citySlug: string | undefined, reviews: PublicReview[
 
   const breaks = useMemo(() => rentBreaks((rent?.areas ?? []).map(a => a.properties.p50).filter((v): v is number => v != null)), [rent]);
 
-  // Reviews per area, counted in the browser so new reviews show up without rebuilding the data
-  const reviewCounts = useMemo(() => {
-    const counts = new Map<number, number>();
+  // Reviews per area, grouped in the browser so new reviews show up without rebuilding the data
+  const areaReviews = useMemo(() => {
+    const byArea = new Map<number, PublicReview[]>();
     for (const review of reviews) {
       if (review.lat == null || review.lng == null) continue;
       const area = rent?.areas.find(a => containsPoint(a.geometry as unknown as Geometry, review.lng!, review.lat!));
-      if (area) counts.set(area.id, (counts.get(area.id) ?? 0) + 1);
+      if (area) byArea.set(area.id, [...(byArea.get(area.id) ?? []), review]);
     }
-    return counts;
+    return byArea;
   }, [rent, reviews]);
+  const reviewCounts = useMemo(() => new Map([...areaReviews].map(([id, list]) => [id, list.length])), [areaReviews]);
 
-  return { rent, market, breaks, reviewCounts };
+  return { rent, market, breaks, reviewCounts, areaReviews };
 }

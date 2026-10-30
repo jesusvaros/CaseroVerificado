@@ -24,7 +24,7 @@ export interface CityRent {
   areas: CityArea[];
 }
 
-const CITY_FILES = new Set(['madrid', 'barcelona']);
+const CITY_FILES = new Set(['madrid', 'barcelona', 'sevilla']);
 
 interface Municipality {
   name: string;

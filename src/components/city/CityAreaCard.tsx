@@ -4,6 +4,7 @@ import ZoneDataExplorer from '../data-explorer/ZoneDataExplorer';
 import type { CityArea } from '../../services/publicData/cityRent';
 import { perM2 } from './rentScale';
 import { formatChange } from './trendScale';
+import type { TenantRent } from './tenantRent';
 
 // What the map shows for the tapped area: rent per m², a 60 m² estimate and how many reviews it has.
 const FEW_CONTRACTS = 50;
@@ -11,13 +12,15 @@ const FEW_CONTRACTS = 50;
 interface Props {
   area: CityArea;
   reviews: number;
+  // What CaseroOk tenants pay here, once there are enough rents
+  tenant?: TenantRent | null;
   level: 'barrio' | 'section';
   cumun: string;
   city: string;
   trend?: { change: number | null; from: number; to: number } | null;
 }
 
-const CityAreaCard = ({ area, reviews, level, cumun, city, trend }: Props) => {
+const CityAreaCard = ({ area, reviews, tenant, level, cumun, city, trend }: Props) => {
   const { t } = useTranslations();
   const [exploring, setExploring] = useState(false);
   const { name, district, p25, p50, p75, n } = area.properties;
@@ -37,6 +40,13 @@ const CityAreaCard = ({ area, reviews, level, cumun, city, trend }: Props) => {
         </>
       ) : (
         <span className="text-sm text-ink-muted">{t('cityPage.noData')}</span>
+      )}
+      {tenant?.rent != null && (
+        <span className="text-sm font-bold text-brand">
+          {tenant.perM2 != null
+            ? t('cityPage.tenantRent.areaPerM2', { value: perM2(tenant.perM2), count: tenant.count })
+            : t('cityPage.tenantRent.areaRent', { value: Math.round(tenant.rent).toLocaleString('es-ES'), count: tenant.count })}
+        </span>
       )}
       {trend?.change != null && (
         <span className={`text-sm font-bold ${trend.change > 0 ? 'text-coral-ink' : 'text-[#2F5FC4]'}`}>

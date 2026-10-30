@@ -13,19 +13,22 @@ import TrendList from './TrendList';
 import ReviewPointCard from './ReviewPointCard';
 import { groupReviewPoints } from './reviewPoints';
 import TenantUnionLink from '../address/TenantUnionLink';
+import { tenantRent } from './tenantRent';
 
 interface CityRentSectionProps {
   rent: CityRent;
   breaks: number[];
   reviewCounts: Map<number, number>;
+  areaReviews: Map<number, PublicReview[]>;
   reviews: PublicReview[];
 }
 
-const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectionProps) => {
+const CityRentSection = ({ rent, breaks, reviewCounts, areaReviews, reviews }: CityRentSectionProps) => {
   const { t } = useTranslations();
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const selected = rent.areas.find(a => a.id === selectedId) ?? null;
   const points = useMemo(() => groupReviewPoints(reviews), [reviews]);
+  const areaRent = useMemo(() => new Map([...areaReviews].map(([id, list]) => [id, tenantRent(list)])), [areaReviews]);
   const [reviewPointId, setReviewPointId] = useState<number | null>(null);
   const reviewPoint = points.find(p => p.id === reviewPointId) ?? null;
   const province = rent.cumun.slice(0, 2);
@@ -85,6 +88,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
               <CityAreaCard
                 area={selected}
                 reviews={reviewCounts.get(selected.id) ?? 0}
+                tenant={areaRent.get(selected.id) ?? null}
                 level={rent.level}
                 cumun={rent.cumun}
                 city={rent.name}
@@ -137,7 +141,7 @@ const CityRentSection = ({ rent, breaks, reviewCounts, reviews }: CityRentSectio
           ) : showTrend ? (
             <TrendList areas={rent.areas} changes={trends.changes} period={period} selectedId={selectedId} onSelect={setSelectedId} />
           ) : rent.level === 'barrio' ? (
-            <CityAreaList areas={rent.areas} breaks={breaks} reviewCounts={reviewCounts} selectedId={selectedId} onSelect={setSelectedId} />
+            <CityAreaList areas={rent.areas} breaks={breaks} reviewCounts={reviewCounts} areaRent={areaRent} selectedId={selectedId} onSelect={setSelectedId} />
           ) : (
             <div className="flex flex-col items-start gap-6">
               <p className="text-lg text-ink-soft">{t(breaks.length ? 'cityPage.sectionsHint' : 'cityPage.noOfficialRent', { city: rent.name })}</p>
