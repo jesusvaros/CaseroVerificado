@@ -73,6 +73,47 @@ async function getGeocodingContext(): Promise<GeocodingContext> {
   return geocodingContextPromise;
 }
 
+// Autosuggest ranks by distance to a point; the middle of Spain keeps every region in play.
+const SEARCH_CENTER = '40.2,-3.7';
+
+async function requestItems(endpoint: 'geocode' | 'autosuggest', params: Record<string, string>): Promise<HereGeocodeItem[]> {
+  // Use server-side proxy for cost control
+  const response = await fetch('/api/geocode-proxy', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ endpoint, params }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    if (data.fallback) console.warn('HERE API limit reached, using fallback behavior');
+    else console.error(`HERE ${endpoint} failed`, data);
+    return [];
+  }
+  return Array.isArray(data.items) ? data.items : [];
+}
+
+function toAddressResult(item: HereGeocodeItem): AddressResult {
+  const addr = item.address || {};
+  return {
+    formatted: addr.label,
+    geometry: {
+      lat: item.position.lat,
+      lng: item.position.lng,
+    },
+    components: {
+      road: addr.street,
+      house_number: addr.houseNumber,
+      postcode: addr.postalCode,
+      city: addr.city,
+      state: addr.state,
+      country: addr.countryName,
+    },
+    annotations: {
+      geohash: '', // HERE API doesn't provide geohash; left empty
+    },
+  } as AddressResult;
+}
+
 /**
  * Service for handling geocoding operations with the HERE API
  */
@@ -107,58 +148,13 @@ export const geocodingService = {
         });
       }
 
-      // Use server-side proxy for cost control
-      const response = await fetch('/api/geocode-proxy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          endpoint: 'geocode',
-          params,
-        })
-      });
-
-      const data = await response.json();
-
-      // Handle usage limits or errors
-      if (!response.ok) {
-        if (data.fallback) {
-          console.warn('HERE API limit reached, using fallback behavior');
-          return []; // Return empty results as fallback
-        }
-        throw new Error(data.error || 'Geocoding request failed');
-      }
-
-      if (!data.items) {
-        console.error('HERE API error or empty response', data);
-        return [];
-      }
-
-      // Map HERE items to AddressResult shape expected by the component
-      const processedResults: AddressResult[] = (data.items as HereGeocodeItem[]).map(item => {
-        const addr = item.address || {};
-        return {
-          formatted: addr.label,
-          geometry: {
-            lat: item.position.lat,
-            lng: item.position.lng,
-          },
-          components: {
-            road: addr.street,
-            house_number: addr.houseNumber,
-            postcode: addr.postalCode,
-            city: addr.city,
-            state: addr.state,
-            country: addr.countryName,
-          },
-          annotations: {
-            geohash: '', // HERE API doesn't provide geohash; left empty
-          },
-        } as AddressResult;
-      });
-
-      return processedResults;
+      // Autosuggest understands half-typed text ("Calle San Pe", "San Pedro Carm"); geocode only
+      // finds complete addresses, so it is the fallback when autosuggest has nothing to place.
+      const suggested = (await requestItems('autosuggest', { ...params, at: SEARCH_CENTER })).filter(
+        item => item.position && item.address
+      );
+      const items = suggested.length > 0 ? suggested : await requestItems('geocode', params);
+      return items.map(toAddressResult);
     } catch (err) {
       console.error('Error fetching addresses:', err);
       return [];
