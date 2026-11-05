@@ -73,9 +73,6 @@ async function getGeocodingContext(): Promise<GeocodingContext> {
   return geocodingContextPromise;
 }
 
-// Autosuggest ranks by distance to a point; the middle of Spain keeps every region in play.
-const SEARCH_CENTER = '40.2,-3.7';
-
 async function requestItems(endpoint: 'geocode' | 'autosuggest', params: Record<string, string>): Promise<HereGeocodeItem[]> {
   // Use server-side proxy for cost control
   const response = await fetch('/api/geocode-proxy', {
@@ -150,7 +147,7 @@ export const geocodingService = {
 
       // Autosuggest understands half-typed text ("Calle San Pe", "San Pedro Carm"); geocode only
       // finds complete addresses, so it is the fallback when autosuggest has nothing to place.
-      const suggested = (await requestItems('autosuggest', { ...params, at: SEARCH_CENTER })).filter(
+      const suggested = (await requestItems('autosuggest', params)).filter(
         item => item.position && item.address
       );
       const items = suggested.length > 0 ? suggested : await requestItems('geocode', params);
