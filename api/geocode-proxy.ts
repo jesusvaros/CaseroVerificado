@@ -95,6 +95,14 @@ function canMakeRequest(): { allowed: boolean; reason?: string; usage: any } {
   };
 }
 
+// Autosuggest ranks by distance to a point: the visitor's approximate position from Vercel's IP
+// geolocation, so someone in Carmona sees Carmona's streets first; the middle of Spain otherwise.
+function nearVisitor(headers: VercelRequest['headers']): string {
+  const lat = Number(headers['x-vercel-ip-latitude']);
+  const lng = Number(headers['x-vercel-ip-longitude']);
+  return Number.isFinite(lat) && Number.isFinite(lng) && (lat !== 0 || lng !== 0) ? `${lat},${lng}` : '40.2,-3.7';
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -138,6 +146,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         break;
       case 'autosuggest':
         url = `https://autosuggest.search.hereapi.com/v1/autosuggest?${new URLSearchParams({
+          at: nearVisitor(req.headers),
           ...params,
           apiKey
         })}`;

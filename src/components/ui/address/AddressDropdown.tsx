@@ -23,17 +23,20 @@ export const AddressDropdown: React.FC<AddressDropdownProps> = ({
   }
 
   const hasStreet = (result: AddressResult) => Boolean(result.components.road || result.components.park || result.components.parking);
-  // Only a town came back ("Carmona"): say what is missing instead of showing an empty list.
-  const townOnly = !allowBroadResults && !results.some(hasStreet) ? results.find(result => result.components.city) : undefined;
-  if (townOnly) {
+  // A town on its own ("Carmona") cannot be reviewed: say what is missing, above any streets found.
+  const town = !allowBroadResults ? results.find(result => !hasStreet(result) && result.components.city)?.components.city : undefined;
+  const hint = town ? (
+    <p className="px-3 py-2 text-sm text-gray-600">{t('addReview.step1.addStreetHint', { city: town })}</p>
+  ) : null;
+  if (hint && !results.some(hasStreet)) {
     return (
-      <p
-        className={`absolute left-0 right-0 z-[10000] mt-1 rounded-b-lg bg-white px-3 py-2 text-sm text-gray-600 shadow-lg ${
+      <div
+        className={`absolute left-0 right-0 z-[10000] mt-1 rounded-b-lg bg-white shadow-lg ${
           hideLabel ? 'top-[48px]' : 'top-[80px]'
         }`}
       >
-        {t('addReview.step1.addStreetHint', { city: townOnly.components.city ?? '' })}
-      </p>
+        {hint}
+      </div>
     );
   }
 
@@ -43,6 +46,7 @@ export const AddressDropdown: React.FC<AddressDropdownProps> = ({
         hideLabel ? 'top-[48px]' : 'top-[80px]'
       }`}
     >
+      {hint && <li className="border-b border-gray-100">{hint}</li>}
       {results.map((result, index) => {
         const road = result.components.road;
         const park = result.components.park;
