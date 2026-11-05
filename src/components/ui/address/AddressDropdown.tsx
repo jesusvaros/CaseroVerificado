@@ -1,5 +1,6 @@
 import React from 'react';
 import type { AddressResult } from './types';
+import { useTranslations } from '../../../i18n/useTranslations';
 
 interface AddressDropdownProps {
   results: AddressResult[];
@@ -16,8 +17,24 @@ export const AddressDropdown: React.FC<AddressDropdownProps> = ({
   onSelect,
   allowBroadResults = false,
 }) => {
+  const { t } = useTranslations();
   if (results.length === 0 || !isFocused) {
     return null;
+  }
+
+  const hasStreet = (result: AddressResult) => Boolean(result.components.road || result.components.park || result.components.parking);
+  // Only a town came back ("Carmona"): say what is missing instead of showing an empty list.
+  const townOnly = !allowBroadResults && !results.some(hasStreet) ? results.find(result => result.components.city) : undefined;
+  if (townOnly) {
+    return (
+      <p
+        className={`absolute left-0 right-0 z-[10000] mt-1 rounded-b-lg bg-white px-3 py-2 text-sm text-gray-600 shadow-lg ${
+          hideLabel ? 'top-[48px]' : 'top-[80px]'
+        }`}
+      >
+        {t('addReview.step1.addStreetHint', { city: townOnly.components.city ?? '' })}
+      </p>
+    );
   }
 
   return (

@@ -136,6 +136,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           apiKey
         })}`;
         break;
+      case 'autosuggest':
+        url = `https://autosuggest.search.hereapi.com/v1/autosuggest?${new URLSearchParams({
+          ...params,
+          apiKey
+        })}`;
+        break;
       case 'revgeocode':
         url = `https://revgeocode.search.hereapi.com/v1/revgeocode?${new URLSearchParams({
           ...params,

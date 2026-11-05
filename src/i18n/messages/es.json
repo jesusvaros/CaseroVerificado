@@ -247,7 +247,8 @@
       "addressPlaceholder": "Buscar dirección...",
       "streetNumberLabel": "Número",
       "streetNumberPlaceholder": "Número",
-      "locateMeAria": "Ubicarme"
+      "locateMeAria": "Ubicarme",
+      "addStreetHint": "Escribe también la calle, por ejemplo: Calle Real, {{city}}"
     },
     "login": {
       "title": "Guardar y validar tu opinión",
